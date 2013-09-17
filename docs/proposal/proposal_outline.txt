@@ -1,0 +1,59 @@
+– Abstract
+Note: depends on other content
+
+– The problem
+
+We will attempt to apply causal discovery methods on structural / functional connectivity data on resting state fMRI data.
+We want to provide more insight into the question whether causal discovery methods can provide a means for findin effective connectivity.
+Note: it is still unclear to us how Tom's method work and wether we need to provide a connectivity graph or a set of vertices with data.
+
+– Motivation 
+Open questions in this area. See motivation of references
+Methods for finding Effective Connectivity are relatively new and suffer from several problems.
+Ask Tom, Tom & Max.
+...
+
+– Theoretical scope
+(Bayesian) Brain Connectomics & standard methods for measuring/computing
+Hierarchical compositions of networks
+Difficulties in effective connectivity / causal discovery
+Tom C's method/software
+Which methods we will be comparing with
+How we think to overcome certain difficulties
+
+-- Data
+Max: 76 subjects, structural data and resting state fMRI data
+select 6 subjects according to some criterion
+
+– Strategy
+We will use the data (voxel or connectivity data?) and apply the causal discovery algorithm, resulting in a directed graph.
+We will look at whether this graph adds useful information: either by cross subject comparison, or by simulation. 
+No true baseline exist for connectivity data,
+We will verify this causal discovery method adaptation(yet to be named) by comparing it to existing methods for finding effective connectivity.
+We will use the data described above for comparison.
+
+ 
+
+'Interesting' properties:
+- Computational properties such as scalability
+- Graph theoretic measures
+- Properties described in 
+- BIC (?)
+- ...
+
+– Time schedule
+Available time period: week 40 - 50 (1/10 - 10/12)
+Note: we can provide a more specific time schedule as soon as we have more clarity on the methods and data
+
+– References
+* Six problems for causal inference from fMRI
+* Effective connectivity of fMRI data using ancestral graph theory: Dealing with missing regions
+* See articles in github (private repo): https://github.com/tomderuijter/research-a
+* P. Spirtes, C. Glymour, and R. Scheines. Causation, Prediction, and Search. The MIT Press, 2nd edition, 2000.
+* Article from Tom Claassen about the algorithm which will be used:
+- Learning causal network structure from multiple (in)dependence models. In Proceedings of the fifth European Workshop on Probabilistic Graphical Models, 2010.
+- Causal discovery in multiple models from different experiments. In Advances in Neural Information Processing Systems 23, pp.415-423, 2010.
+- A structure independent algorithm for causal discovery.
+- *A logical characterization of constraint-based causal discovery.
+- *A Bayesian Approach to Constraint Based Causal Inference
+- Bayesian Probabilities for Constraint-based Causal Discovery
