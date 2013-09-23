@@ -1,0 +1,204 @@
+% Needed packages
+\documentclass[a4paper, 10pt, english, twocolumn]{article}
+\usepackage[english]{babel}
+\usepackage[cm]{fullpage}
+\usepackage{cite}
+\usepackage{anysize}
+\usepackage[compact]{titlesec}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{hyperref}
+
+\usepackage{amssymb,amsmath}
+\usepackage{algorithmicx}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+
+\newcommand{\keywords}[1]{\par\noindent 
+{\bf Keywords\/}. #1}
+
+% Margins & Headers
+\marginsize{2.5cm}{2.5cm}{2cm}{1.5cm}
+\columnsep 0.4in
+\footskip 0.4in 
+\usepackage{changepage}
+
+% E-mail formatting
+\usepackage{color,hyperref}
+    \catcode`\_=11\relax
+    \newcommand\email[1]{\_email #1\q_nil}
+    \def\_email#1@#2\q_nil{
+      \href{mailto:#1@#2}{{\emailfont #1\emailampersat #2}}
+    }
+    \newcommand\emailfont{\sffamily}
+    \newcommand\emailampersat{{\color{red}\small@}}
+    \catcode`\_=8\relax 
+
+% List modifications
+\newenvironment{packed_item}{
+\begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+}{\end{itemize}}
+
+\newenvironment{packed_enum}{
+\begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+}{\end{enumerate}}
+
+% ### Mathematics ###
+\newcommand{\bpm}{\begin{pmatrix}}
+\newcommand{\epm}{\end{pmatrix}}
+
+\newcommand{\bbm}{\begin{bmatrix}}
+\newcommand{\ebm}{\end{bmatrix}}
+
+\newcommand{\bsm}{\bigl( \begin{smallmatrix}}
+\newcommand{\esm}{ \end{smallmatrix} \bigl)} 
+
+\newcommand{\mbf}{\mathbf}
+
+% ### Matrices and Vectors ###
+\newcommand{\mtx}[1]{\ensuremath{\boldsymbol{#1}}}
+\newcommand*\Let[2]{\State #1 $\gets$ #2}
+
+% ### Sets ###
+\newcommand{\set}[1]{\ensuremath{\mathcal{#1}}}
+
+% ### Other ###
+
+\newcommand{\transpose}{^{T}}
+\newcommand{\inv}{^{-1}}
+\newcommand{\pseudoinv}{^{+}}
+% ############## End Macros ##############
+
+% Title
+\title{\fontfamily{phv}\selectfont{Research A Proposal}}
+\author{
+  \textbf{Ramon Janssen} - \href{mailto:ramon.janssen@student.ru.nl}{ramon.janssen@student.ru.nl} \\
+  \textbf{Tom de Ruijter} - \href{mailto:t.deruijter@student.ru.nl}{t.deruijter@student.ru.nl}
+}
+
+\date{\fontfamily{ptm}\selectfont{\small{\bfseries{\today - Radboud
+Universiteit Nijmegen}}}\\[0.5cm]\rule{\linewidth}{0.3mm}}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Lorem Ipsum Dolor Sit Amet.
+\keywords{Keywords}
+\end{abstract}
+
+\setlength{\parindent}{0.0cm}
+\setlength{\parskip}{0.25cm}
+
+\section{Introduction}
+
+% NOTE: De delen hieronder zijn letterlijk overgenomen uit een eerder werk. Ik weet niet of we het nog nodig hebben, daarom heb ik het laten staan. We moeten het dan wel veranderen, anders pleeg ik plagiaat op mezelf.
+
+% Introductory small-talk
+%The human brain is a big network which we have yet to fully understand.
+%Different areas of this network each have their own task and function, but complexity also arises from how these are connected.
+%Our brains are a robust piece of equipment, presumably also a consequence of how different areas are interconnected, capable of adapting to continuous environmental change and learning throughout our entire lives.
+
+% Motivation
+%This is part of why it is interesting to investigate neuro-degenerative disease, which are able to cripple our usually robust networks effectively.
+%We want to learn more about our brains, as well as the diseases that target them.
+
+%Brain connectivity analysis can teach us a lot of how the human brain functions.
+%The fields of functional and structural connectivity have, presumably for that reason, gained in popularity over the past few years \cite{vandenheuvel2010}.
+
+%Problem
+% ...
+
+% Structure of the rest of proposal
+% ...
+
+\section{Theory}
+
+\subsection*{Brain connectivity}
+% Functional connectivity
+%Functional connectivity is defined as the temporal dependence of neuronal activity patterns of anatomically separated brain regions \cite{friston1993functional}.
+%An increasing body of studies successfully investigates functional connectivity by applying statistical methods on the level of co-activation of resting-state fMRI time-series between brain regions.
+%Several studies have shown that resting-state networks reflect brain connectivity in a concise way, though their exact relation remains unknown \cite{Lowe2000, doria2010, Bullmore2009}.
+%Resting state indicating that subjects are instructed to relax without thinking of something in particular, to stimulate spontaneous brain activity.
+
+% Structural connectivity
+%Similarly, there is the field of structural connectivity, which is defined as the mapping of direct anatomical brain pathways \cite{friston1994}.
+%It refers to white matter tracts, describing the millions of long-distance axons or `brain highways', connecting large groups of spatially separated brain areas.
+%In accordance with intuition, a recent study has shown that both fields are related.
+%By demonstrating that almost all functionally linked regions of the most reported resting-state networks are also structurally connected by known white matter tracts \cite{vandenheuvel2009}.
+%Also, functional connectivity is constrained by structural connectivity \cite{cabral2012}.
+%Structural connectivity is less time dependent, as it involves the mapping of anatomical connections opposing activity patterns.
+
+% Effective connectivity
+% ...
+
+\subsection*{Bayesian connectomics}
+% ...
+
+\subsection*{Causal discovery methods}
+% ...
+
+\subsection*{Data acquisition \& analysis}
+% ...
+
+%Within these areas methods are applied on connectivity patterns obtained from fMRI analysis to predict anatomical connections.
+%It is possible to obtain anatomical connectivity patterns by applying partial correlation methods to resting-state fMRI data, filtering out poly-synaptic activity. %TODO: Reference needed.
+%Another option is to apply Diffusion Tensor Imaging (DTI) to resting-state data, which maps water diffusion directions in the brain, as this is a more direct way of charting brain highways. %TODO: Reference needed.
+
+%Both methods, i.e. correlation analysis and DTI, have downsides and ideally one would hope to combine them to have the best of both worlds.
+%% Note: de onderstaande uitspraak klopt dus niet voor ons proposal
+%Such a thing is possible when using Bayesian methods. In this proposal however, we focus on frequentistic or data driven methods, as they usually provide a computational advantage without a large performance trade-off.
+%However, this also limits the amount of brain modelling we can do.
+
+% Note: bekijk even of de onderstaande sectie Ÿberhaupt wel interessant is. Ik heb het gebruikt als introductie voor mijn formele uitleg. Die laatste ontbreekt nu natuurlijk.
+
+% Brain robustness and neuro-degeneration
+%\subsection*{Brain robustness and neuro-degeneration}
+%Investigating the brain as an integrative network of interacting regions has proven to be a fruitful platform for learning more about how the brain functions.
+%Its main premise is that the brain can be modelled as a graph $G=(\set{V},E)$, $\set{V}$ being a collection of brain areas and $E$ the connections between those.
+%It provides ideas for brain robustness and forms a basis for approaching certain neuro-degenerative diseases, e.g. Alzheimer's disease (AD), as these are known to affect brain connectivity \cite{Bullmore2009, vandenheuvel2010}.
+%Several studies have shown that the brain network is organised according to an efficient \emph{small-world} organization \cite{vandenheuvel2008, vandenheuvel2010}.
+%Some of these suggest that brain connectivity is distributed according to a power-law function, possibly explaining the brain's scale-free organisation of connectivity networks.
+%Scale-free networks are renowned for their robustness against random attacks and so it forms an interesting hypotheses for modelling brain networks.
+%Even more, since scale-free organisation is susceptible to specialised attacks on hub nodes, it could be so that these hub nodes are affected in AD.
+%This idea is based on resting state fMRI data and graph analysis, as well as MEG results \cite{buckner2009, stam2009}
+
+% Note: voor onderstaande tekst geldt: kijk even kritisch of we het nodig hebben.
+
+%\subsection{Analysing connectivity}
+%Where brain data is usually available in abundant amounts, testing subjects are not.
+%This, and large cross-subject divergence makes it difficult to compare (diseased) brain area's between subjects and conclusions between studies.
+%To still pinpoint Regions of Interest (ROI) between subject, one can use so called labelling atlases, such as the Automatic Anatomical Labeling atlas, to map brain areas to known ROI's.
+%Another option is to apply a custom clustering to brain data such as attempted in \cite{craddock2012}.
+%They found this to be preferable interpretability can be sacrificed for accuracy.
+%In short, by clustering adjacency patterns of functional connectivity maps, it is also possible to obtain precise and functionally homogenous parcels within human brains.
+
+\section{Methods \& Strategy}
+%Short general introduction to both methods
+
+% Licht hier toe met welke methoden we gaan vergelijken en wat we nog meer besproken hebben in de outline.
+% - Difficulties in causal discovery
+% - Comparison methods
+% - Comparison procedure
+% - Properties
+
+\section{Discussion}
+% Short recap on:
+% - what will be covered
+% - what will not be covered
+% Short discussion about proposal and methods covered.
+
+\section{Time schedule}
+
+\bibliography{references}{}
+\addcontentsline{toc}{section}{References}
+\bibliographystyle{apalike}
+
+\end{document}
