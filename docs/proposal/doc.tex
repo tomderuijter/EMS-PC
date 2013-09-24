@@ -99,49 +99,37 @@ Lorem Ipsum Dolor Sit Amet.
 
 \section{Introduction}
 
-
-
 % vergelijking met granger causality, en andere methodes?
 % granger (Alard Roebroeck, Elia Formisano, Rainer Goebel, 2005) -> geen structural connectivity nodig (schaalt niet goed)
 % covariance structural equation modeling -> structural connectivity nodig (Roebroeck, Formisano, Goebel, 2005)
 % Multivariate autoregressive modeling (Harrison, Penny, Friston) -> Set of interaccting regions chosen beforehand (Roebroeck, Formisano, Goebel, 2005)
 % Dynamic causal modelling (Friston, Harrison, Penny, 2003) -> Set of interaccting regions chosen beforehand (Roebroeck, Formisano, Goebel, 2005)
 
-% NOTE: De delen hieronder zijn letterlijk overgenomen uit een eerder werk. Ik weet niet of we het nog nodig hebben, daarom heb ik het laten staan. We moeten het dan wel veranderen, anders pleeg ik plagiaat op mezelf.
-
 % Introductory small-talk
-%The human brain is a big network which we have yet to fully understand.
-%Different areas of this network each have their own task and function, but complexity also arises from how these are connected.
-%Our brains are a robust piece of equipment, presumably also a consequence of how different areas are interconnected, capable of adapting to continuous environmental change and learning throughout our entire lives.
+% ...
 
-% Motivation
+\paragraph{Motivation}
 The brain and particularly the human brain have been studied for hundreds of years.
-Today, the secrets of our brains still belong to the most sought-after secrets.
+Today, the secrets of our brains still are one of the most sought-after.
 The techniques however have changed.
 Today, advanced measurement methods exist that allow scientists to peek inside brains that give a coarse but broad overview without having to open a single skull.
 
 Of particular interest are causal relations between brain regions and cognitive and bodily functions.
-We have come a long way since the time of Phrenology, the pseudoscience based on the idea that cognitive ability and personality could be derived from measurements of the skull.
+We have come a long way since the time of Phrenology, the pseudoscience based on the idea that cognitive ability and personality could be derived from measurements of the skull and, post-mortem, the brain.
 The question whether brain region X is somehow connected to brain region Y is still highly relevant; it is the main question of the present-day scientific field of brain connectivity.
-
 Understanding brain structure implies understanding more about the brain as a whole.
 
-Brain connectivity also finds applications in medicine.
+Not surprisingly, brain connectivity also finds applications in medicine.
 Neuro-degenerative diseases such as Alzheimer's disease, Parkinson's disease, dementia, Amyotrophic lateral sclerosis (ALS) have all been shown to severely alter brain connectivity.
 Better methods for analysing connectivity could lead to more insight in these diseases.
 
-%This is part of why it is interesting to investigate neuro-degenerative disease, which are able to cripple our usually robust networks effectively.
-%We want to learn more about our brains, as well as the diseases that target them.
+The field of brain connectivity finds its roots in the early 1990s \cite{friston1993functional, friston1994}, though because of more recent developments in the field of Artificial Intelligence and Machine Learning it is possible to do more thorough analysis \cite{vandenheuvel2010}.
+One type of connectivity analysis involves finding causal relations between brain areas.
+However, causal analysis is also relatively new and its application in brain connectivity analysis still faces many challenges that require further research \cite{Ramsey2010}.
 
-Much progress has recently been made in the fields of structural and functional connectivity\cite{vandenheuvel2010}.
-Research has also been done on inferring effective connectivity, based on Granger causality \cite{Roebroeck2005}, multivariate autoregressive modeling \cite{Harrison2003} and dynamic causal modelling \cite{Friston2003}.
-However, many challenges are still being faced \cite{Ramsey2010}. One example of this is that not all approaches have a good schaling, and as such they cannot be applied to large datasets. Another problem is that not all methods can cope with latent variables, and wrong directive relations can be concluded.
+\paragraph{Problem statement}
+This project seeks to combine the strengths of current state-of-the-art causal discovery methods and apply them to resting state brain fMRI data in order to find new applicable methods for determining causal patterns in the human brain.
 
-%Brain connectivity analysis can teach us a lot of how the human brain functions.
-%The fields of functional and structural connectivity have, presumably for that reason, gained in popularity over the past few years \cite{vandenheuvel2010}.
-
-%Problem
-% ...
 
 % Structure of the rest of proposal
 % ...
@@ -174,14 +162,18 @@ This is an intuitive relation, and is also shown experimentally \cite{vandenheuv
 
 \subsubsection*{Effective connectivity}
 In contrast to functional and structural connectivity, effective connectivity takes into account the cause and effect of relations.
-It has been described as \"the influence one neural system exerts over another\" \cite{friston1994}.
+It has been described as ``the influence one neural system exerts over another'' \cite{friston1994}.
 Effective connectivity indicates which brain regions stimulate other regions.
 Time series need to be analysed to infer effective connectivity as cause and effect can be deduced from which event precedes which. 
 It is possible to infer effective connectivity from structural and functional connectivity.
 
+%Much progress has recently been made in the fields of structural and functional connectivity\cite{vandenheuvel2010}.
+%Research has also been done on inferring effective connectivity, based on Granger causality \cite{Roebroeck2005}, multivariate autoregressive modeling \cite{Harrison2003} and dynamic causal modelling \cite{Friston2003}.
+%However, many challenges are still being faced \cite{Ramsey2010}. One example of this is that not all approaches have a good schaling, and as such they cannot be applied to large datasets. Another problem is that not all methods can cope with latent variables, and wrong directive relations can be concluded.
 
 \subsection*{Causal discovery methods}
 % ...
+
 
 \subsection*{Data acquisition \& analysis}
 % ...
@@ -228,12 +220,6 @@ The causal discovery method which we will use is the PC-algorithm (spirtes, 2000
 % - Comparison methods
 % - Comparison procedure
 % - Properties
-
-\section{Discussion}
-% Short recap on:
-% - what will be covered
-% - what will not be covered
-% Short discussion about proposal and methods covered.
 
 \section{Time schedule}
 
