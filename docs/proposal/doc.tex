@@ -102,6 +102,10 @@ Lorem Ipsum Dolor Sit Amet.
 
 
 % vergelijking met granger causality, en andere methodes?
+% granger (Alard Roebroeck, Elia Formisano, Rainer Goebel, 2005) -> geen structural connectivity nodig (schaalt niet goed)
+% covariance structural equation modeling -> structural connectivity nodig (Roebroeck, Formisano, Goebel, 2005)
+% Multivariate autoregressive modeling (Harrison, Penny, Friston) -> Set of interaccting regions chosen beforehand (Roebroeck, Formisano, Goebel, 2005)
+% Dynamic causal modelling (Friston, Harrison, Penny, 2003) -> Set of interaccting regions chosen beforehand (Roebroeck, Formisano, Goebel, 2005)
 
 % NOTE: De delen hieronder zijn letterlijk overgenomen uit een eerder werk. Ik weet niet of we het nog nodig hebben, daarom heb ik het laten staan. We moeten het dan wel veranderen, anders pleeg ik plagiaat op mezelf.
 
@@ -128,6 +132,10 @@ Better methods for analysing connectivity could lead to more insight in these di
 
 %This is part of why it is interesting to investigate neuro-degenerative disease, which are able to cripple our usually robust networks effectively.
 %We want to learn more about our brains, as well as the diseases that target them.
+
+Much progress has recently been made in the fields of structural and functional connectivity\cite{vandenheuvel2010}.
+Research has also been done on inferring effective connectivity, based on Granger causality (Roebroeck, Formisano, Goebel, 2005), multivariate autoregressive modeling (Harrison, Penny, Friston, 2003) and dynamic causal modelling (Friston, Harrison, Penny, 2003).
+However, many challenges are still being faced. (Ramsey, Hanson, Hanson, Halchenko, Poldrack , Glymour)
 
 %Brain connectivity analysis can teach us a lot of how the human brain functions.
 %The fields of functional and structural connectivity have, presumably for that reason, gained in popularity over the past few years \cite{vandenheuvel2010}.
@@ -156,10 +164,12 @@ Better methods for analysing connectivity could lead to more insight in these di
 %Structural connectivity is less time dependent, as it involves the mapping of anatomical connections opposing activity patterns.
 
 % Effective connectivity
-% ...
+%In contrast to functional and structural connectivity, effective connectivity takes into account the cause and effect of relations.
+%It has been described as "the influence one neural system exerts over another" \cite{friston1994".
+%Effective connectivity indicates which brain regions stimulate other regions.
+%Time series need to be analysed to infer effective connectivity as cause and effect can be deduced from which event precedes which. 
+%It is possible to infer effective connectivity from structural and functional connectivity.
 
-\subsection*{Bayesian connectomics}
-% ...
 
 \subsection*{Causal discovery methods}
 % ...
@@ -201,6 +211,8 @@ Better methods for analysing connectivity could lead to more insight in these di
 
 \section{Methods \& Strategy}
 %Short general introduction to both methods
+
+The causal discovery method which we will use is the PC-algorithm (spirtes, 2000). An advantage of this algorithm is that the scaling is relatively well.
 
 % Licht hier toe met welke methoden we gaan vergelijken en wat we nog meer besproken hebben in de outline.
 % - Difficulties in causal discovery
