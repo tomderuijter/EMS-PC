@@ -124,12 +124,16 @@ Neuro-degenerative diseases such as Alzheimer's disease, Parkinson's disease, de
 Better methods for analysing connectivity could lead to more insight in these diseases.
 
 The field of brain connectivity finds its roots in the early 1990s \cite{friston1993functional, friston1994}, though because of more recent developments in the field of Artificial Intelligence and Machine Learning it is possible to do more thorough analysis \cite{vandenheuvel2010}.
-One type of connectivity analysis involves finding causal relations between brain areas.
+One type of connectivity analysis involves finding causal relations between brain areas, specifically \emph{effective connectivity}.
 However, causal analysis is also relatively new and its application in brain connectivity analysis still faces many challenges that require further research \cite{Ramsey2010}.
 
 \paragraph{Problem statement}
 This project seeks to combine the strengths of current state-of-the-art causal discovery methods and apply them to resting state brain fMRI data in order to find new applicable methods for determining causal patterns in the human brain.
+Several methods for finding effective connectivity already exist \cite{mcIntosh1994, Harrisson2003, Friston2003, Roebroeck2005}
+However using more generally applicable causal discovery methods has not been elaborated on much.
 
+We would like to know whether applying such methods, such as the approach introduced in \cite{claassen2012}, or PC-algorithm introduced in \cite{spirtes2000}, can solve some of the difficulties effective connectivity suffers from.
+% What problems? See \cite{Ramsey2010}.
 
 % Structure of the rest of proposal
 % ...
@@ -163,7 +167,7 @@ Time series need to be analysed to infer effective connectivity as cause and eff
 It is possible to infer effective connectivity from structural and functional connectivity.
 
 %Much progress has recently been made in the fields of structural and functional connectivity\cite{vandenheuvel2010}.
-%Research has also been done on inferring effective connectivity, based on Granger causality \cite{Roebroeck2005}, multivariate autoregressive modeling \cite{Harrison2003} and dynamic causal modelling \cite{Friston2003}.
+%Research has also been done on inferring effective connectivity, based on Granger causality \cite{Roebroeck2005}, Structural equation modelling \cite{mclntosh1994}, multivariate autoregressive modeling \cite{Harrison2003} and dynamic causal modelling \cite{Friston2003}.
 %However, many challenges are still being faced \cite{Ramsey2010}. One example of this is that not all approaches have a good schaling, and as such they cannot be applied to large datasets. Another problem is that not all methods can cope with latent variables, and wrong directive relations can be concluded.
 
 \subsection*{Causal discovery methods}
