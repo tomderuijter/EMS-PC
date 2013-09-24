@@ -142,7 +142,12 @@ We would like to know whether applying such methods, such as the approach introd
 
 \subsection*{Brain connectivity}
 \subsubsection*{Functional connectivity}
-Functional
+The functional connectivity describes the statistical dependance of neuronal activity of different brain regions \cite{friston1993functional}.
+This gives an insight in the organization of the brain, even though the exact functioning is still unclear.
+Functional connectivity is strongly time-dependant, as these dependancies may be short-lasting.
+The functional connectivity can be deduced from resting-state networks \cite{Lowe2000, doria2010, Bullmore2009}.
+
+
 %The Functional connectivity is defined as the temporal dependence of neuronal activity patterns of anatomically separated brain regions \cite{friston1993functional}.
 %An increasing body of studies successfully investigates functional connectivity by applying statistical methods on the level of co-activation of resting-state fMRI time-series between brain regions.
 %Several studies have shown that resting-state networks reflect brain connectivity in a concise way, though their exact relation remains unknown \cite{Lowe2000, doria2010, Bullmore2009}.
@@ -150,7 +155,9 @@ Functional
 
 \subsubsection*{Structural connectivity}
 The structural connectivity is a mapping of the physical paths in the brain, and it shows the neural connections between anatomically separated brain regions.
-This is strongly related with functional connectivity: regions can only be functionally connected if there is a physical connection between them. \cite{vandenheuvel2009}
+This is strongly related with functional connectivity: regions can only be functionally connected if there is a physical connection between them.
+This is an intuitive relation, and is also shown experimentally \cite{vandenheuvel2009}.
+
 
 %Similarly, there is the field of structural connectivity, which is defined as the mapping of direct anatomical brain pathways \cite{friston1994}.
 %It refers to white matter tracts, describing the millions of long-distance axons or `brain highways', connecting large groups of spatially separated brain areas.
@@ -171,7 +178,7 @@ It is possible to infer effective connectivity from structural and functional co
 %However, many challenges are still being faced \cite{Ramsey2010}. One example of this is that not all approaches have a good schaling, and as such they cannot be applied to large datasets. Another problem is that not all methods can cope with latent variables, and wrong directive relations can be concluded.
 
 \subsection*{Causal discovery methods}
-% ...
+The causal discovery method which we will use is the BCCD-algorithm. This algorithm finds both the structure of a network as well as the direction of the connections of this network. An advantage of this algorithm is that the scaling is relatively good. BCCD also finds probabilities of connections.
 
 
 \subsection*{Data acquisition \& analysis}
@@ -212,7 +219,7 @@ It is possible to infer effective connectivity from structural and functional co
 \section{Methods \& Strategy}
 %Short general introduction to both methods
 
-The causal discovery method which we will use is the PC-algorithm (spirtes, 2000). An advantage of this algorithm is that the scaling is relatively well. 
+
 
 % Licht hier toe met welke methoden we gaan vergelijken en wat we nog meer besproken hebben in de outline.
 % - Difficulties in causal discovery
