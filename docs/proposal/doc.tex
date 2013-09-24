@@ -99,22 +99,16 @@ Lorem Ipsum Dolor Sit Amet.
 
 \section{Introduction}
 
-
-
 % vergelijking met granger causality, en andere methodes?
 % granger (Alard Roebroeck, Elia Formisano, Rainer Goebel, 2005) -> geen structural connectivity nodig (schaalt niet goed)
 % covariance structural equation modeling -> structural connectivity nodig (Roebroeck, Formisano, Goebel, 2005)
 % Multivariate autoregressive modeling (Harrison, Penny, Friston) -> Set of interaccting regions chosen beforehand (Roebroeck, Formisano, Goebel, 2005)
 % Dynamic causal modelling (Friston, Harrison, Penny, 2003) -> Set of interaccting regions chosen beforehand (Roebroeck, Formisano, Goebel, 2005)
 
-% NOTE: De delen hieronder zijn letterlijk overgenomen uit een eerder werk. Ik weet niet of we het nog nodig hebben, daarom heb ik het laten staan. We moeten het dan wel veranderen, anders pleeg ik plagiaat op mezelf.
-
 % Introductory small-talk
-%The human brain is a big network which we have yet to fully understand.
-%Different areas of this network each have their own task and function, but complexity also arises from how these are connected.
-%Our brains are a robust piece of equipment, presumably also a consequence of how different areas are interconnected, capable of adapting to continuous environmental change and learning throughout our entire lives.
+% ...
 
-% Motivation
+\paragraph{Motivation}
 The brain and particularly the human brain have been studied for hundreds of years.
 Today, the secrets of our brains still are one of the most sought-after.
 The techniques however have changed.
@@ -130,14 +124,12 @@ Neuro-degenerative diseases such as Alzheimer's disease, Parkinson's disease, de
 Better methods for analysing connectivity could lead to more insight in these diseases.
 
 The field of brain connectivity finds its roots in the early 1990s \cite{friston1993functional, friston1994}, though because of more recent developments in the field of Artificial Intelligence and Machine Learning it is possible to do more thorough analysis \cite{vandenheuvel2010}.
-One type of connectivity analysis involves in determining these causal relations between brain areas.
-However, causal analysis still faces many challenges that require solutions \cite{ramsey2010}.
+One type of connectivity analysis involves finding causal relations between brain areas.
+However, causal analysis is also relatively new and its application in brain connectivity analysis still faces many challenges that require further research \cite{Ramsey2010}.
 
-%Brain connectivity analysis can teach us a lot of how the human brain functions.
-%The fields of functional and structural connectivity have, presumably for that reason, gained in popularity over the past few years \cite{vandenheuvel2010}.
+\paragraph{Problem statement}
+This project seeks to combine the strengths of current state-of-the-art causal discovery methods and apply them to resting state brain fMRI data in order to find new applicable methods for determining causal patterns in the human brain.
 
-%Problem
-% ...
 
 % Structure of the rest of proposal
 % ...
@@ -145,13 +137,17 @@ However, causal analysis still faces many challenges that require solutions \cit
 \section{Theory}
 
 \subsection*{Brain connectivity}
-%Functional connectivity
-%Functional connectivity is defined as the temporal dependence of neuronal activity patterns of anatomically separated brain regions \cite{friston1993functional}.
+\subsubsection*{Functional connectivity}
+Functional
+%The Functional connectivity is defined as the temporal dependence of neuronal activity patterns of anatomically separated brain regions \cite{friston1993functional}.
 %An increasing body of studies successfully investigates functional connectivity by applying statistical methods on the level of co-activation of resting-state fMRI time-series between brain regions.
 %Several studies have shown that resting-state networks reflect brain connectivity in a concise way, though their exact relation remains unknown \cite{Lowe2000, doria2010, Bullmore2009}.
 %Resting state indicating that subjects are instructed to relax without thinking of something in particular, to stimulate spontaneous brain activity.
 
-% Structural connectivity
+\subsubsection*{Structural connectivity}
+The structural connectivity is a mapping of the physical paths in the brain, and it shows the neural connections between anatomically separated brain regions.
+This is strongly related with functional connectivity: regions can only be functionally connected if there is a physical connection between them. \cite{vandenheuvel2009}
+
 %Similarly, there is the field of structural connectivity, which is defined as the mapping of direct anatomical brain pathways \cite{friston1994}.
 %It refers to white matter tracts, describing the millions of long-distance axons or `brain highways', connecting large groups of spatially separated brain areas.
 %In accordance with intuition, a recent study has shown that both fields are related.
@@ -159,16 +155,20 @@ However, causal analysis still faces many challenges that require solutions \cit
 %Also, functional connectivity is constrained by structural connectivity \cite{cabral2012}.
 %Structural connectivity is less time dependent, as it involves the mapping of anatomical connections opposing activity patterns.
 
-% Effective connectivity
-%In contrast to functional and structural connectivity, effective connectivity takes into account the cause and effect of relations.
-%It has been described as "the influence one neural system exerts over another" \cite{friston1994".
-%Effective connectivity indicates which brain regions stimulate other regions.
-%Time series need to be analysed to infer effective connectivity as cause and effect can be deduced from which event precedes which. 
-%It is possible to infer effective connectivity from structural and functional connectivity.
+\subsubsection*{Effective connectivity}
+In contrast to functional and structural connectivity, effective connectivity takes into account the cause and effect of relations.
+It has been described as ``the influence one neural system exerts over another'' \cite{friston1994}.
+Effective connectivity indicates which brain regions stimulate other regions.
+Time series need to be analysed to infer effective connectivity as cause and effect can be deduced from which event precedes which. 
+It is possible to infer effective connectivity from structural and functional connectivity.
 
+%Much progress has recently been made in the fields of structural and functional connectivity\cite{vandenheuvel2010}.
+%Research has also been done on inferring effective connectivity, based on Granger causality \cite{Roebroeck2005}, multivariate autoregressive modeling \cite{Harrison2003} and dynamic causal modelling \cite{Friston2003}.
+%However, many challenges are still being faced \cite{Ramsey2010}. One example of this is that not all approaches have a good schaling, and as such they cannot be applied to large datasets. Another problem is that not all methods can cope with latent variables, and wrong directive relations can be concluded.
 
 \subsection*{Causal discovery methods}
 % ...
+
 
 \subsection*{Data acquisition \& analysis}
 % ...
@@ -208,19 +208,13 @@ However, causal analysis still faces many challenges that require solutions \cit
 \section{Methods \& Strategy}
 %Short general introduction to both methods
 
-The causal discovery method which we will use is the PC-algorithm (spirtes, 2000). An advantage of this algorithm is that the scaling is relatively well.
+The causal discovery method which we will use is the PC-algorithm (spirtes, 2000). An advantage of this algorithm is that the scaling is relatively well. 
 
 % Licht hier toe met welke methoden we gaan vergelijken en wat we nog meer besproken hebben in de outline.
 % - Difficulties in causal discovery
 % - Comparison methods
 % - Comparison procedure
 % - Properties
-
-\section{Discussion}
-% Short recap on:
-% - what will be covered
-% - what will not be covered
-% Short discussion about proposal and methods covered.
 
 \section{Time schedule}
 
