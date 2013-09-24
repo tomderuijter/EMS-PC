@@ -134,8 +134,8 @@ Better methods for analysing connectivity could lead to more insight in these di
 %We want to learn more about our brains, as well as the diseases that target them.
 
 Much progress has recently been made in the fields of structural and functional connectivity\cite{vandenheuvel2010}.
-Research has also been done on inferring effective connectivity, based on Granger causality (Roebroeck, Formisano, Goebel, 2005), multivariate autoregressive modeling (Harrison, Penny, Friston, 2003) and dynamic causal modelling (Friston, Harrison, Penny, 2003).
-However, many challenges are still being faced. (Ramsey, Hanson, Hanson, Halchenko, Poldrack , Glymour)
+Research has also been done on inferring effective connectivity, based on Granger causality \cite{Roebroeck2005}, multivariate autoregressive modeling \cite{Harrison2003} and dynamic causal modelling \cite{Friston2003}.
+However, many challenges are still being faced \cite{Ramsey2010}. One example of this is that not all approaches have a good schaling, and as such they cannot be applied to large datasets. Another problem is that not all methods can cope with latent variables, and wrong directive relations can be concluded.
 
 %Brain connectivity analysis can teach us a lot of how the human brain functions.
 %The fields of functional and structural connectivity have, presumably for that reason, gained in popularity over the past few years \cite{vandenheuvel2010}.
@@ -149,13 +149,17 @@ However, many challenges are still being faced. (Ramsey, Hanson, Hanson, Halchen
 \section{Theory}
 
 \subsection*{Brain connectivity}
-%Functional connectivity
-%Functional connectivity is defined as the temporal dependence of neuronal activity patterns of anatomically separated brain regions \cite{friston1993functional}.
+\subsubsection*{Functional connectivity}
+Functional
+%The Functional connectivity is defined as the temporal dependence of neuronal activity patterns of anatomically separated brain regions \cite{friston1993functional}.
 %An increasing body of studies successfully investigates functional connectivity by applying statistical methods on the level of co-activation of resting-state fMRI time-series between brain regions.
 %Several studies have shown that resting-state networks reflect brain connectivity in a concise way, though their exact relation remains unknown \cite{Lowe2000, doria2010, Bullmore2009}.
 %Resting state indicating that subjects are instructed to relax without thinking of something in particular, to stimulate spontaneous brain activity.
 
-% Structural connectivity
+\subsubsection*{Structural connectivity}
+The structural connectivity is a mapping of the physical paths in the brain, and it shows the neural connections between anatomically separated brain regions.
+This is strongly related with functional connectivity: regions can only be functionally connected if there is a physical connection between them. \cite{vandenheuvel2009}
+
 %Similarly, there is the field of structural connectivity, which is defined as the mapping of direct anatomical brain pathways \cite{friston1994}.
 %It refers to white matter tracts, describing the millions of long-distance axons or `brain highways', connecting large groups of spatially separated brain areas.
 %In accordance with intuition, a recent study has shown that both fields are related.
@@ -163,12 +167,12 @@ However, many challenges are still being faced. (Ramsey, Hanson, Hanson, Halchen
 %Also, functional connectivity is constrained by structural connectivity \cite{cabral2012}.
 %Structural connectivity is less time dependent, as it involves the mapping of anatomical connections opposing activity patterns.
 
-% Effective connectivity
-%In contrast to functional and structural connectivity, effective connectivity takes into account the cause and effect of relations.
-%It has been described as "the influence one neural system exerts over another" \cite{friston1994".
-%Effective connectivity indicates which brain regions stimulate other regions.
-%Time series need to be analysed to infer effective connectivity as cause and effect can be deduced from which event precedes which. 
-%It is possible to infer effective connectivity from structural and functional connectivity.
+\subsubsection*{Effective connectivity}
+In contrast to functional and structural connectivity, effective connectivity takes into account the cause and effect of relations.
+It has been described as \"the influence one neural system exerts over another\" \cite{friston1994}.
+Effective connectivity indicates which brain regions stimulate other regions.
+Time series need to be analysed to infer effective connectivity as cause and effect can be deduced from which event precedes which. 
+It is possible to infer effective connectivity from structural and functional connectivity.
 
 
 \subsection*{Causal discovery methods}
@@ -212,7 +216,7 @@ However, many challenges are still being faced. (Ramsey, Hanson, Hanson, Halchen
 \section{Methods \& Strategy}
 %Short general introduction to both methods
 
-The causal discovery method which we will use is the PC-algorithm (spirtes, 2000). An advantage of this algorithm is that the scaling is relatively well.
+The causal discovery method which we will use is the PC-algorithm (spirtes, 2000). An advantage of this algorithm is that the scaling is relatively well. 
 
 % Licht hier toe met welke methoden we gaan vergelijken en wat we nog meer besproken hebben in de outline.
 % - Difficulties in causal discovery
