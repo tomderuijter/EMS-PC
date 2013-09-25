@@ -14,6 +14,8 @@
 \usepackage{algorithm}
 \usepackage[noend]{algpseudocode}
 
+\usepackage{pgfgantt}
+
 \newcommand{\keywords}[1]{\par\noindent 
 {\bf Keywords\/}. #1}
 
@@ -33,7 +35,7 @@
     \newcommand\emailfont{\sffamily}
     \newcommand\emailampersat{{\color{red}\small@}}
     \catcode`\_=8\relax 
-
+	
 % List modifications
 \newenvironment{packed_item}{
 \begin{itemize}
@@ -191,7 +193,7 @@ It is possible to infer effective connectivity from structural and functional co
 \subsection*{Causal discovery methods}
 The first causal method that we will use to find effective connectivity will be the PC-algorithm.
 This is a state of the art used for general causal discovery, which finds the structure and the direction of connections of this network.
-The structure of a network can also be given as input, for which the PC-algorithm can determine the directions.
+If a graph skeleton of a network is already known beforehand, this can also be used as a basis such that the PC-algorithm can determine the directions.
 Another causal discovery method is the BCCD-algorithm \cite{claassen2012}, which gives similar results as PC.
 This algorithm has some useful properties; it is based on a Bayesian approach and as such, it is robust.
 It also does not need any assumptions beforehand.
@@ -242,9 +244,12 @@ In this project, causal discovery algorithms will be applied to a dataset of fun
 For this, implementations of PC and BCCD can be used.
 PC is a widely used algorithm and as such, many implementations already exist.
 An implementation of BCCD suitable for this project also exists at the department of Intelligent Systems of the Radboud university.
+
 The datasets of structural and functional connectivity are available, so the first step of this step will be to get the implementations for the algorithms working on the dataset.
+We will first try the PC-algorithm, for which a suitable implementation still needs to be found. This will be done by using only functional connectivity data and also by providing strucural connectivity data as a graph skeleton.
+The BCCD-algorithm will be used afterwards, which will also be used with only functional data as well as with functional and structural connectivity data.
 This will result in a connectivity matrix which represents the effective connectivity.
-These results will  be evaluated by cross-subject comparison, to see whether the gained data is consistent.
+These results will then be evaluated by cross-subject comparison, to see whether the gained data is consistent.
 If it is, then this algorithm is a potentially useful algorithm for determining effective connectivity.
 As PC is a state-of-the-art algorighm \cite{spirtes2000}, and BCCD shows a good potential \cite{claassen2012}, this way of determining effective connectivity may very well be the case.
 
@@ -255,8 +260,19 @@ As PC is a state-of-the-art algorighm \cite{spirtes2000}, and BCCD shows a good 
 % - Comparison procedure
 % - Properties
 
+% week 50 is deadline voor draft, 51 is presentaties, 2 inleveren van final
 \section{Time schedule}
-
+\begin{ganttchart}{1}{10}
+\gantttitle{2011}{10} \\
+\gantttitlelist{40,...,52,1,2}{1} \\
+\ganttgroup{Group 1}{1}{7} \\
+\ganttbar{Task 1}{1}{2} \\
+\ganttlinkedbar{Task 2}{3}{7} \ganttnewline
+\ganttmilestone{Milestone}{7} \ganttnewline
+\ganttbar{Final Task}{8}{12}
+\ganttlink{elem2}{elem3}
+\ganttlink{elem3}{elem4}
+\end{ganttchart}
 
 
 \bibliography{references}{}
