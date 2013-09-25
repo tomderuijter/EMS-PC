@@ -178,11 +178,11 @@ It is possible to infer effective connectivity from structural and functional co
 %However, many challenges are still being faced \cite{Ramsey2010}. One example of this is that not all approaches have a good schaling, and as such they cannot be applied to large datasets. Another problem is that not all methods can cope with latent variables, and wrong directive relations can be concluded.
 
 \subsection*{Causal discovery methods}
-The causal discovery method which we will use is the BCCD-algorithm. This algorithm finds both the structure of a network as well as the direction of the connections of this network. An advantage of this algorithm is that the scaling is relatively good. BCCD also finds probabilities of connections.
+The causal discovery method which we will use is the BCCD-algorithm. This algorithm finds both the structure of a network as well as the direction of the connections of this network. This algorithm has some useful properties; it is based on a Bayesian approach and as such, it is robust. It also does not need any assumptions beforehand. Because of this, the algorithm performs at least as good as other causal discovery algorithms such as FCI and PC in benchmarks on representative datasets, and in some cases it performs better. BCCD also finds the reliability of found connections, giving additional information compared to PC and FCI. 
 
 
 \subsection*{Data acquisition \& analysis}
-% ...
+To find effective connectivity, structural and functional connectivity are needed. The datasets on which the causal discovery methods will be applied are DTI and fMRI-measurements of six subjects. Structural connectivity of these subjects follows directly from DTI-measurements. The functional connectivity can be extracted from these fMRI-measurement, possibly in combination with the structural connectivity. This data is already available.
 
 %Within these areas methods are applied on connectivity patterns obtained from fMRI analysis to predict anatomical connections.
 %It is possible to obtain anatomical connectivity patterns by applying partial correlation methods to resting-state fMRI data, filtering out poly-synaptic activity. %TODO: Reference needed.
@@ -218,7 +218,7 @@ The causal discovery method which we will use is the BCCD-algorithm. This algori
 
 \section{Methods \& Strategy}
 %Short general introduction to both methods
-
+In this project, causal discovery algorithms will be applied to a dataset of functional and structural connectivity, in order to find effective connectivity. For this, implementations of PC and BCCD can be used. PC is a widely used algorithm and as such, many implementations already exist. An implementation of BCCD suitable for this project also exists at the department of Intelligent Systems of the Radboud university. The datasets of structural and functional connectivity are available, so the first step of this step will be to get the implementations for the algorithms working on the dataset. This will result in a connectivity matrix which represents the effective connectivity. These results will  be evaluated by cross-subject comparison, to see whether the gained data is consistent. If it is, then this algorithm is a potentially useful algorithm for determining effective connectivity. As PC is a state-of-the-art algorighm \cite{?}, and BCCD shows a good potential \cite{}, this way of determining effective connectivity may very well be the case.
 
 
 % Licht hier toe met welke methoden we gaan vergelijken en wat we nog meer besproken hebben in de outline.
@@ -228,6 +228,8 @@ The causal discovery method which we will use is the BCCD-algorithm. This algori
 % - Properties
 
 \section{Time schedule}
+
+
 
 \bibliography{references}{}
 \addcontentsline{toc}{section}{References}
