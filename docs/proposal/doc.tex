@@ -107,9 +107,6 @@ Lorem Ipsum Dolor Sit Amet.
 % Multivariate autoregressive modeling (Harrison, Penny, Friston) -> Set of interaccting regions chosen beforehand (Roebroeck, Formisano, Goebel, 2005)
 % Dynamic causal modelling (Friston, Harrison, Penny, 2003) -> Set of interaccting regions chosen beforehand (Roebroeck, Formisano, Goebel, 2005)
 
-% Introductory small-talk
-% ...
-
 \paragraph{Motivation}
 The brain and particularly the human brain have been studied for hundreds of years.
 Today, the secrets of our brains still are one of the most sought-after.
@@ -167,30 +164,24 @@ Functional connectivity can concisely be deduced by measurement of brains in res
 Resting state indicates that subjects are instructed to relax without thinking of anything in particular, to stimulate spontaneous brain activity.
 
 \subsubsection*{Structural connectivity}
-The structural connectivity is a mapping of the physical paths in the brain, and it shows the neural connections between anatomically separated brain regions.
-This is strongly related with functional connectivity: regions can only be functionally connected if there is a physical connection between them.
-This is an intuitive relation, and is also shown experimentally \cite{vandenheuvel2009}.
-
-
-%Similarly, there is the field of structural connectivity, which is defined as the mapping of direct anatomical brain pathways \cite{friston1994}.
-%It refers to white matter tracts, describing the millions of long-distance axons or `brain highways', connecting large groups of spatially separated brain areas.
-%In accordance with intuition, a recent study has shown that both fields are related.
-%By demonstrating that almost all functionally linked regions of the most reported resting-state networks are also structurally connected by known white matter tracts \cite{vandenheuvel2009}.
-%Also, functional connectivity is constrained by structural connectivity \cite{cabral2012}.
-%Structural connectivity is less time dependent, as it involves the mapping of anatomical connections opposing activity patterns.
+Structural connectivity is defined as the mapping of anatomical - neural - paths in the brain, between anatomically separated brain regions \cite{friston1994}.
+This is strongly related with functional connectivity: regions can only be structurally connected if there is a functional relation between them.
+This is intuitive relation can be demonstrated empirically \cite{vandenheuvel2009}.
+The other way around it can be demonstrated that functional connectivity is constrained by structural connectivity \cite{cabral2012}.
+Structural connectivity is less time dependent as it involves mappings of anatomical connections opposing temporal activity patterns.
 
 \subsubsection*{Effective connectivity}
 In contrast to functional and structural connectivity, effective connectivity takes into account the cause and effect of relations.
 It has been described as ``the influence one neural system exerts over another'' \cite{friston1994}.
 Effective connectivity indicates which brain regions stimulate other regions.
 Time series need to be analysed to infer effective connectivity as cause and effect can be deduced from which event precedes which. 
-It is possible to infer effective connectivity from structural and functional connectivity.
+It is possible to infer effective connectivity from structural and functional connectivity \cite{mclntosh1994, harrison2003, friston2003, roebroeck2005}.
 
-%Much progress has recently been made in the fields of structural and functional connectivity\cite{vandenheuvel2010}.
 %Research has also been done on inferring effective connectivity, based on Granger causality \cite{Roebroeck2005}, Structural equation modelling \cite{mclntosh1994}, multivariate autoregressive modeling \cite{harrison2003} and dynamic causal modelling \cite{friston2003}.
-%However, many challenges are still being faced \cite{ramsey2010}. One example of this is that not all approaches have a good schaling, and as such they cannot be applied to large datasets. Another problem is that not all methods can cope with latent variables, and wrong directive relations can be concluded.
+%However, many challenges are still being faced \cite{ramsey2010}. One example of this is that not all approaches have a good scaling, and as such they cannot be applied to large datasets. Another problem is that not all methods can cope with latent variables, and wrong directive relations can be concluded.
 
 \subsection*{Causal discovery methods}
+<<<<<<< HEAD
 The first causal method that we will use to find effective connectivity will be the PC-algorithm.
 This is a state of the art used for general causal discovery, which finds the structure and the direction of connections of this network.
 If a graph skeleton of a network is already known beforehand, this can also be used as a basis such that the PC-algorithm can determine the directions.
@@ -200,6 +191,14 @@ It also does not need any assumptions beforehand.
 Because of this, the algorithm performs at least as good as other causal discovery algorithms such as FCI and PC in benchmarks on representative datasets, and in some cases it performs better.
 BCCD also finds the reliability of found connections, giving additional information compared to PC and FCI. 
 
+=======
+The causal discovery method which we will use is the BCCD-algorithm.
+This algorithm finds both the structure of a network as well as the direction of the connections of this network. This algorithm has some useful properties; it is a Bayesian approach and as such, it is robust against noise.
+%It also does not need any assumptions beforehand.
+The authors have shown the method to perform as good as or better than other causal discovery algorithms such as FCI and PC on representative datasets.
+As is inherent to Bayesian methods, or approximations of Bayesian methods, the resulting network graph is not a  single structure but rather a distribution over possible structures.
+Concretely, this provides an uncertainty measure over edges in the network, giving additional information compared to PC and FCI \cite{claassen2012}.
+>>>>>>> 73f760a5fcc73b327caa2182f68711851e0b8af6
 
 \subsection*{Data acquisition \& analysis}
 To find effective connectivity, structural and functional connectivity are needed.
