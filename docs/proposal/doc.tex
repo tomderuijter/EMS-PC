@@ -14,7 +14,9 @@
 \usepackage{algorithm}
 \usepackage[noend]{algpseudocode}
 
-\usepackage{pgfgantt}
+% for coloring individual cells in a table
+\usepackage[table]{xcolor}
+%\usepackage{pgfgantt}
 
 \newcommand{\keywords}[1]{\par\noindent 
 {\bf Keywords\/}. #1}
@@ -181,24 +183,14 @@ It is possible to infer effective connectivity from structural and functional co
 %However, many challenges are still being faced \cite{ramsey2010}. One example of this is that not all approaches have a good scaling, and as such they cannot be applied to large datasets. Another problem is that not all methods can cope with latent variables, and wrong directive relations can be concluded.
 
 \subsection*{Causal discovery methods}
-<<<<<<< HEAD
 The first causal method that we will use to find effective connectivity will be the PC-algorithm.
 This is a state of the art used for general causal discovery, which finds the structure and the direction of connections of this network.
 If a graph skeleton of a network is already known beforehand, this can also be used as a basis such that the PC-algorithm can determine the directions.
 Another causal discovery method is the BCCD-algorithm \cite{claassen2012}, which gives similar results as PC.
-This algorithm has some useful properties; it is based on a Bayesian approach and as such, it is robust.
-It also does not need any assumptions beforehand.
-Because of this, the algorithm performs at least as good as other causal discovery algorithms such as FCI and PC in benchmarks on representative datasets, and in some cases it performs better.
-BCCD also finds the reliability of found connections, giving additional information compared to PC and FCI. 
-
-=======
-The causal discovery method which we will use is the BCCD-algorithm.
-This algorithm finds both the structure of a network as well as the direction of the connections of this network. This algorithm has some useful properties; it is a Bayesian approach and as such, it is robust against noise.
-%It also does not need any assumptions beforehand.
+This algorithm has some useful properties; it is a Bayesian approach and as such, it is robust against noise.
 The authors have shown the method to perform as good as or better than other causal discovery algorithms such as FCI and PC on representative datasets.
 As is inherent to Bayesian methods, or approximations of Bayesian methods, the resulting network graph is not a  single structure but rather a distribution over possible structures.
-Concretely, this provides an uncertainty measure over edges in the network, giving additional information compared to PC and FCI \cite{claassen2012}.
->>>>>>> 73f760a5fcc73b327caa2182f68711851e0b8af6
+Concretely, this provides an uncertainty measure over edges in the network, giving additional information compared to PC and FCI.
 
 \subsection*{Data acquisition \& analysis}
 To find effective connectivity, structural and functional connectivity are needed.
@@ -252,6 +244,7 @@ These results will then be evaluated by cross-subject comparison, to see whether
 If it is, then this algorithm is a potentially useful algorithm for determining effective connectivity.
 As PC is a state-of-the-art algorighm \cite{spirtes2000}, and BCCD shows a good potential \cite{claassen2012}, this way of determining effective connectivity may very well be the case.
 
+Two algorithms are used, and both are applied on two different forms of data: using either functional connectivity data only, or functional and structural connectivity data. Therefore four results will be obtained. If problems arise getting one of these results, we can still obtain enough data to draw useful conclusions.
 
 % Licht hier toe met welke methoden we gaan vergelijken en wat we nog meer besproken hebben in de outline.
 % - Difficulties in causal discovery
@@ -260,18 +253,33 @@ As PC is a state-of-the-art algorighm \cite{spirtes2000}, and BCCD shows a good 
 % - Properties
 
 % week 50 is deadline voor draft, 51 is presentaties, 2 inleveren van final
-\section{Time schedule}
-\begin{ganttchart}{1}{10}
-\gantttitle{2011}{10} \\
-\gantttitlelist{40,...,52,1,2}{1} \\
-\ganttgroup{Group 1}{1}{7} \\
-\ganttbar{Task 1}{1}{2} \\
-\ganttlinkedbar{Task 2}{3}{7} \ganttnewline
-\ganttmilestone{Milestone}{7} \ganttnewline
-\ganttbar{Final Task}{8}{12}
-\ganttlink{elem2}{elem3}
-\ganttlink{elem3}{elem4}
-\end{ganttchart}
+% gantt gaf wat problemen met packages die nodig zijn om te compileren
+% \section{Time schedule}
+% \begin{ganttchart}{1}{10}
+% \gantttitle{2011}{10} \\
+% \gantttitlelist{40,...,52,1,2}{1} \\
+% \ganttgroup{Group 1}{1}{7} \\
+% \ganttbar{Task 1}{1}{2} \\
+% \ganttlinkedbar{Task 2}{3}{7} \ganttnewline
+% \ganttmilestone{Milestone}{7} \ganttnewline
+% \ganttbar{Final Task}{8}{12}
+% \ganttlink{elem2}{elem3}
+% \ganttlink{elem3}{elem4}
+% \end{ganttchart}
+
+\section{time schedule}
+For the time schedule, this project has been divided in four main parts: applying the PC-algorithm, applying the BCCD-algorithm, analysing the data (including cross-subject comparison) and writing the article. The schedule for applying the algorithm has been subdivided into applying it with functional connectivity data only, and applying it to both functional and structural connectivity data.
+
+\begin{tabular}[ht]{c || c | c | c | c | c | c | c | c | c | c |}
+\setlength{\tabcolsep}{12pt}
+\renewcommand{\arraystretch}{1.3}
+week          & 41 & 42 &  43 &  44 &  45 &  46 &  47 &  48 &  49 &  50 \tabularnewline \hline
+PC            & \multicolumn{2}{ |c| }{\cellcolor[gray]{0.9} find implementation} & \multicolumn{2}{ |c| }{\cellcolor[gray]{0.9} functional}  & \cellcolor[gray]{0.9} structural  & \multicolumn{4}{ |c| }{} & \tabularnewline \hline
+BCCD          & \multicolumn{4}{ |c| }{} & \multicolumn{2}{ |c| }{\cellcolor[gray]{0.85} functional} & \cellcolor[gray]{0.85} structural & \multicolumn{3}{ |c| }{} \tabularnewline \hline
+analysis      & \multicolumn{3}{ |c| }{} & \multicolumn{2}{ |c| }{\cellcolor[gray]{0.9} PC} & & \multicolumn{2}{ |c| }{\cellcolor[gray]{0.9} BCCD} & \multicolumn{2}{ |c| }{} \tabularnewline \hline
+write article & \multicolumn{3}{ |c| }{} & \multicolumn{7}{ |c| }{\cellcolor[gray]{0.85}}  \tabularnewline \hline
+\end{tabular}
+
 
 
 \bibliography{references}{}
