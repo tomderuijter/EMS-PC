@@ -6,6 +6,7 @@
 \usepackage{anysize}
 \usepackage[compact]{titlesec}
 \usepackage{graphicx}
+\usepackage{stfloats}
 \usepackage{listings}
 \usepackage{hyperref}
 
@@ -159,14 +160,14 @@ In the remainder of this proposal we briefly discuss some necessary background k
 %Question: should this be included?
 \subsubsection*{Functional connectivity}
 Functional connectivity describes the statistical dependance of neuronal activity between different brain regions \cite{friston1993functional}.
-It gives an insight in the organisation of the brain, even though the exact functioning is still unclear.
+It gives an insight in the organisation of the brain, even though functioning is not immediately visible.
 Functional connectivity is strongly time-dependant, as activity changes rapidly providing only a small time window to measure.
 This means measured dependencies can be the result of statistical noise.
-Functional connectivity can concisely be deduced by measurement of brains in resting-state \cite{Lowe2000, doria2010, Bullmore2009}.
-Resting state indicates that subjects are instructed to relax without thinking of anything in particular, to stimulate spontaneous brain activity.
+Functional connectivity can be deduced by fMRI measurement of brains in resting-state \cite{Lowe2000, doria2010, Bullmore2009}.
+Resting state indicates that subjects are instructed to relax without thinking of anything in particular to stimulate spontaneous brain activity.
 
 \subsubsection*{Structural connectivity}
-Structural connectivity is defined as the mapping of anatomical - neural - paths in the brain, between anatomically separated brain regions \cite{friston1994}.
+Structural connectivity is defined as the mapping of anatomical - neural - paths in the brain between different brain regions \cite{friston1994}.
 This is strongly related with functional connectivity: regions can only be structurally connected if there is a functional relation between them.
 This is intuitive relation can be demonstrated empirically \cite{vandenheuvel2009}.
 The other way around it can be demonstrated that functional connectivity is constrained by structural connectivity \cite{cabral2012}.
@@ -179,72 +180,63 @@ Effective connectivity indicates which brain regions stimulate other regions.
 Time series need to be analysed to infer effective connectivity as cause and effect can be deduced from which event precedes which. 
 It is possible to infer effective connectivity from structural and functional connectivity \cite{mclntosh1994, harrison2003, friston2003, roebroeck2005}.
 
-%Research has also been done on inferring effective connectivity, based on Granger causality \cite{Roebroeck2005}, Structural equation modelling \cite{mclntosh1994}, multivariate autoregressive modeling \cite{harrison2003} and dynamic causal modelling \cite{friston2003}.
-%However, many challenges are still being faced \cite{ramsey2010}. One example of this is that not all approaches have a good scaling, and as such they cannot be applied to large datasets. Another problem is that not all methods can cope with latent variables, and wrong directive relations can be concluded.
+Research has been done on inferring effective connectivity directly with several methods.
+The most renowned methods are Granger causality \cite{roebroeck2005}, Structural Equation Modelling \cite{mclntosh1994}, Multivariate Autoregressive Modeling \cite{harrison2003} and Dynamic Causal Modelling \cite{friston2003}.
+These are all methods dedicated to this problem and no attempt has been done from the viewpoint of causal discovery in graphs.
+These methods also suffer from similar problems of which perhaps the most important is scaling.
+Most of these methods can only handle tens of nodes in reasonable time.
 
 \subsection*{Causal discovery methods}
-The first causal method that we will use to find effective connectivity will be the PC-algorithm.
-This is a state of the art used for general causal discovery, which finds the structure and the direction of connections of this network.
-If a graph skeleton of a network is already known beforehand, this can also be used as a basis such that the PC-algorithm can determine the directions.
-Another causal discovery method is the BCCD-algorithm \cite{claassen2012}, which gives similar results as PC.
-This algorithm has some useful properties; it is a Bayesian approach and as such, it is robust against noise.
-The authors have shown the method to perform as good as or better than other causal discovery algorithms such as FCI and PC on representative datasets.
+The first causal method we will apply on brain structure data will be the PC-algorithm \cite{spirtes2000}.
+It is used to find structure, as well as causal relations between vertices in directed graphs. 
+If we already provide a graph skeleton, PC-algorithm can be used to determine directions.
+An adaptation of PC that is better adapted to finding latent variables is Fast Causal Inference \cite{spirtes2000}, though this method does not scale well to tens of variables.
+
+Another causal discovery method is the BCCD-algorithm \cite{claassen2012}, which gives similar results as PC, and is designed in an attempt to improve PC.
+This algorithm has some useful properties; it is a Bayesian approach and as such, it is more robust against noise.
+The authors have shown the method to perform as good as or better than other causal discovery algorithms such as PC on representative datasets.
 As is inherent to Bayesian methods, or approximations of Bayesian methods, the resulting network graph is not a  single structure but rather a distribution over possible structures.
-Concretely, this provides an uncertainty measure over edges in the network, giving additional information compared to PC and FCI.
+Concretely, this provides an uncertainty measure over edges in the network, giving additional information compared to PC.
+
+\begin{figure*}[bp]
+\begin{tabular}{c || c | c | c | c | c | c | c | c | c | c |}
+\setlength{\tabcolsep}{12pt}
+\renewcommand{\arraystretch}{1.3}
+Week          & 41 & 42 &  43 &  44 &  45 &  46 &  47 &  48 &  49 &  50 \tabularnewline \hline
+PC            & \multicolumn{2}{ |c| }{\cellcolor[gray]{0.9} Make implementation} & \multicolumn{2}{ |c| }{\cellcolor[gray]{0.9} Structural}  & \cellcolor[gray]{0.9} Functional & \multicolumn{4}{ |c| }{} & \tabularnewline \hline
+BCCD          & \multicolumn{4}{ |c| }{} & \multicolumn{2}{ |c| }{\cellcolor[gray]{0.85} Structural} & \cellcolor[gray]{0.85} Functional & \multicolumn{3}{ |c| }{} \tabularnewline \hline
+Analysis      & \multicolumn{3}{ |c| }{} & \multicolumn{2}{ |c| }{\cellcolor[gray]{0.9} PC} & & \multicolumn{2}{ |c| }{\cellcolor[gray]{0.9} BCCD} & \multicolumn{2}{ |c| }{} \tabularnewline \hline
+Write article & \multicolumn{3}{ |c| }{} & \multicolumn{7}{ |c| }{\cellcolor[gray]{0.85}}  \tabularnewline \hline
+\end{tabular}
+\caption{Project time table. `Structural' implies applying the given method on structural data only. `Functional' implies inferring structure with the given method first through functional data.}
+\end{figure*}
 
 \subsection*{Data acquisition \& analysis}
-To find effective connectivity, structural and functional connectivity are needed.
-The datasets on which the causal discovery methods will be applied are DTI and fMRI-measurements of six subjects. Structural connectivity of these subjects follows directly from DTI-measurements.
-The functional connectivity can be extracted from these fMRI-measurement, possibly in combination with the structural connectivity. This data is already available.
-
-%Within these areas methods are applied on connectivity patterns obtained from fMRI analysis to predict anatomical connections.
-%It is possible to obtain anatomical connectivity patterns by applying partial correlation methods to resting-state fMRI data, filtering out poly-synaptic activity. %TODO: Reference needed.
-%Another option is to apply Diffusion Tensor Imaging (DTI) to resting-state data, which maps water diffusion directions in the brain, as this is a more direct way of charting brain highways. %TODO: Reference needed.
-
-%Both methods, i.e. correlation analysis and DTI, have downsides and ideally one would hope to combine them to have the best of both worlds.
-%% Note: de onderstaande uitspraak klopt dus niet voor ons proposal
-%Such a thing is possible when using Bayesian methods. In this proposal however, we focus on frequentistic or data driven methods, as they usually provide a computational advantage without a large performance trade-off.
-%However, this also limits the amount of brain modelling we can do.
-
-% Note: bekijk even of de onderstaande sectie Ÿberhaupt wel interessant is. Ik heb het gebruikt als introductie voor mijn formele uitleg. Die laatste ontbreekt nu natuurlijk.
-
-% Brain robustness and neuro-degeneration
-%\subsection*{Brain robustness and neuro-degeneration}
-%Investigating the brain as an integrative network of interacting regions has proven to be a fruitful platform for learning more about how the brain functions.
-%Its main premise is that the brain can be modelled as a graph $G=(\set{V},E)$, $\set{V}$ being a collection of brain areas and $E$ the connections between those.
-%It provides ideas for brain robustness and forms a basis for approaching certain neuro-degenerative diseases, e.g. Alzheimer's disease (AD), as these are known to affect brain connectivity \cite{Bullmore2009, vandenheuvel2010}.
-%Several studies have shown that the brain network is organised according to an efficient \emph{small-world} organization \cite{vandenheuvel2008, vandenheuvel2010}.
-%Some of these suggest that brain connectivity is distributed according to a power-law function, possibly explaining the brain's scale-free organisation of connectivity networks.
-%Scale-free networks are renowned for their robustness against random attacks and so it forms an interesting hypotheses for modelling brain networks.
-%Even more, since scale-free organisation is susceptible to specialised attacks on hub nodes, it could be so that these hub nodes are affected in AD.
-%This idea is based on resting state fMRI data and graph analysis, as well as MEG results \cite{buckner2009, stam2009}
-
-% Note: voor onderstaande tekst geldt: kijk even kritisch of we het nodig hebben.
-
-%\subsection{Analysing connectivity}
-%Where brain data is usually available in abundant amounts, testing subjects are not.
-%This, and large cross-subject divergence makes it difficult to compare (diseased) brain area's between subjects and conclusions between studies.
-%To still pinpoint Regions of Interest (ROI) between subject, one can use so called labelling atlases, such as the Automatic Anatomical Labeling atlas, to map brain areas to known ROI's.
-%Another option is to apply a custom clustering to brain data such as attempted in \cite{craddock2012}.
-%They found this to be preferable interpretability can be sacrificed for accuracy.
-%In short, by clustering adjacency patterns of functional connectivity maps, it is also possible to obtain precise and functionally homogenous parcels within human brains.
+We will apply the mentioned methods on structural and functional data gathered from human subjects.
+We use the same functional and structural data as in Hinne et al. \cite{hinne2013}, of which we have selected the best 6 subjects based on MAP results.
+To find effective connectivity, both are needed.
+Structural connectivity of these subjects follows from DTI-measurements.
+The functional connectivity can be extracted from these fMRI-measurement, possibly in combination with the structural connectivity.
+This data is already available.
 
 \section{Methods \& Strategy}
 %Short general introduction to both methods
-In this project, causal discovery algorithms will be applied to a dataset of functional and structural connectivity, in order to find effective connectivity.
-For this, implementations of PC and BCCD can be used.
-PC is a widely used algorithm and as such, many implementations already exist.
-An implementation of BCCD suitable for this project also exists at the department of Intelligent Systems of the Radboud university.
+We use existing implementations of PC and BCCD to infer effective connectivity.
+An implementation of BCCD suitable for this project is made available by the department of Intelligent Systems at the Radboud University Nijmegen.
 
-The datasets of structural and functional connectivity are available, so the first step of this step will be to get the implementations for the algorithms working on the dataset.
-We will first try the PC-algorithm, for which a suitable implementation still needs to be found. This will be done by using only functional connectivity data and also by providing strucural connectivity data as a graph skeleton.
-The BCCD-algorithm will be used afterwards, which will also be used with only functional data as well as with functional and structural connectivity data.
-This will result in a connectivity matrix which represents effective connectivity.
-These results will then be evaluated by cross-subject comparison, to see whether the gained data is consistent.
-If it is, then this algorithm is a potentially useful algorithm for determining effective connectivity.
-As PC is a state-of-the-art algorighm \cite{spirtes2000}, and BCCD shows a good potential \cite{claassen2012}, this way of determining effective connectivity may very well be the case.
+The first step will be to get the implementations for the algorithms working on the datasets with functional and structural data.
 
-Two algorithms are used, and both are applied on two different forms of data: using either functional connectivity data only, or functional and structural connectivity data. Therefore four results will be obtained. If problems arise getting one of these results, we can still obtain enough data to draw useful conclusions.
+Firstly we will use structural networks as a basis for the algorithms, and use functional information to infer causal relations. 
+Later we will use functional information only, to infer both the network and the causal relations.
+We will compare this with the previous.
+As PC is a well-described algorithm \cite{spirtes2000} and should not be difficult to implement, so this will be done within this project.
+
+The second step is to apply the BCCD-algorithm, also to be used with and without provided network structure.
+Both methods provide a connectivity matrix representing effective connectivity.
+
+Results will then be evaluated and compared over all six subjects to see to which extent obtained networks are consistent across subjects.
+If so, we will analyse the properties and difficulties presented by Ramsey et al. \cite{ramsey2010}.
+We will conclude whether standard causal discovery methods provide a good direction of research for deriving and evaluating effective connectivity.
 
 % Licht hier toe met welke methoden we gaan vergelijken en wat we nog meer besproken hebben in de outline.
 % - Difficulties in causal discovery
@@ -252,33 +244,8 @@ Two algorithms are used, and both are applied on two different forms of data: us
 % - Comparison procedure
 % - Properties
 
-% week 50 is deadline voor draft, 51 is presentaties, 2 inleveren van final
-% gantt gaf wat problemen met packages die nodig zijn om te compileren
-% \section{Time schedule}
-% \begin{ganttchart}{1}{10}
-% \gantttitle{2011}{10} \\
-% \gantttitlelist{40,...,52,1,2}{1} \\
-% \ganttgroup{Group 1}{1}{7} \\
-% \ganttbar{Task 1}{1}{2} \\
-% \ganttlinkedbar{Task 2}{3}{7} \ganttnewline
-% \ganttmilestone{Milestone}{7} \ganttnewline
-% \ganttbar{Final Task}{8}{12}
-% \ganttlink{elem2}{elem3}
-% \ganttlink{elem3}{elem4}
-% \end{ganttchart}
-
-\section{time schedule}
-For the time schedule, this project has been divided in four main parts: applying the PC-algorithm, applying the BCCD-algorithm, analysing the data (including cross-subject comparison) and writing the article. The schedule for applying the algorithm has been subdivided into applying it with functional connectivity data only, and applying it to both functional and structural connectivity data.
-
-\begin{tabular}[ht]{c || c | c | c | c | c | c | c | c | c | c |}
-\setlength{\tabcolsep}{12pt}
-\renewcommand{\arraystretch}{1.3}
-week          & 41 & 42 &  43 &  44 &  45 &  46 &  47 &  48 &  49 &  50 \tabularnewline \hline
-PC            & \multicolumn{2}{ |c| }{\cellcolor[gray]{0.9} find implementation} & \multicolumn{2}{ |c| }{\cellcolor[gray]{0.9} functional}  & \cellcolor[gray]{0.9} structural  & \multicolumn{4}{ |c| }{} & \tabularnewline \hline
-BCCD          & \multicolumn{4}{ |c| }{} & \multicolumn{2}{ |c| }{\cellcolor[gray]{0.85} functional} & \cellcolor[gray]{0.85} structural & \multicolumn{3}{ |c| }{} \tabularnewline \hline
-analysis      & \multicolumn{3}{ |c| }{} & \multicolumn{2}{ |c| }{\cellcolor[gray]{0.9} PC} & & \multicolumn{2}{ |c| }{\cellcolor[gray]{0.9} BCCD} & \multicolumn{2}{ |c| }{} \tabularnewline \hline
-write article & \multicolumn{3}{ |c| }{} & \multicolumn{7}{ |c| }{\cellcolor[gray]{0.85}}  \tabularnewline \hline
-\end{tabular}
+\section{Time schedule}
+This project is divided into four main parts: applying the PC-algorithm, applying the BCCD-algorithm, analysing the data (including cross-subject comparison) and writing the article. The schedule for applying the algorithm has been subdivided into applying it with functional connectivity data only, and applying it to both functional and structural connectivity data.
 
 
 
