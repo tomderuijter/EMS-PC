@@ -122,7 +122,7 @@ The brain and particularly the human brain have been studied for hundreds of yea
 Today, the secrets of our brains still are one of the most sought-after.
 The techniques however have changed.
 We have come a long way since the time of Phrenology, the pseudoscience based attempting to derive cognitive ability and personality from measurements of the skull or, post-mortem, the brain.
-Today, advanced measurement methods exist that allow scientists to peek inside brains that give a coarse but broad overview without opening a single skull.
+Advanced measurement methods exist that allow scientists to peek inside brains that give a coarse but broad overview without opening a single skull.
 
 Of particular interest are causal relations between brain regions and cognitive and bodily functions.
 The question whether brain region X is somehow connected to brain region Y is still highly relevant; it is the main question of the present-day scientific field of brain connectivity.
@@ -133,15 +133,15 @@ Neuro-degenerative diseases such as Alzheimer's disease, Parkinson's disease, de
 Better methods for analysing connectivity could lead to more insight in these diseases.
 
 The field of brain connectivity finds its roots in the early 1990s \cite{friston1993functional, friston1994}, though because of more recent developments in the field of Artificial Intelligence and Machine Learning it is possible to do more thorough analysis \cite{vandenheuvel2010}.
-One type of connectivity analysis involves finding causal relations between brain areas, specifically \emph{effective connectivity}.
+One type of connectivity analysis involves finding causal relations between brain areas, specifically \emph{effective connectivity}; How does the activity of one region cause the activity of another?
 However, causal analysis is also relatively new and its application in brain connectivity analysis still faces many challenges that require further research \cite{ramsey2010}.
 
 \paragraph{Problem statement}
-This project seeks to combine the strengths of current state-of-the-art causal discovery methods and apply them to resting state brain fMRI data in order to find new applicable methods for determining causal patterns in the human brain.
+This project seeks to utilise the strengths of current state-of-the-art causal discovery methods by applying them to resting state brain fMRI data in order to find new applicable methods for determining causal patterns in the human brain.
 
 The work by \cite{ramsey2010} addresses several problems causal analysis in fMRI analysis suffers from.
-Methods in causal discovery have high computational bounds, making it nearly impossible to calculate networks with more than hundreds of nodes.
-Another import fact is fMRI Analysis indirectly measures brain activity.
+Methods in causal discovery have high computational costs, making it nearly impossible to calculate networks with more than hundreds of nodes.
+Another important fact is that fMRI Analysis indirectly measures brain activity.
 Brain models that do not account for possible latent - indirect - sources within the brain or the shortcomings of fMRI may suffer from noise or fail to capture underlying patterns.
 Solutions to this particular problem have been proposed that do account for latent sources \cite{ramsey2010, waldorp2011}.
 Another problem is the strong diversity between subjects.
@@ -149,14 +149,14 @@ Every brain is inherently different, making it non-trivial to combine subject da
 Even within a single brain it changes how different areas react over time.
 
 Several methods for finding effective connectivity already exist \cite{mclntosh1994, harrison2003, friston2003, roebroeck2005}.
-However using more generally applicable causal discovery methods has not been elaborated on much.
+However, using more generally applicable causal discovery methods has not been elaborated on much.
 Also, none of these provide a measure of uncertainty.
 It is a fact that there are errors in any graph produced.
 This is inherent to the methods and the coarseness of the measurements.
 As there is no standard baseline to compare results with, a measure of uncertainty would be highly preferable.
 A framework for such a probabilistic approach is introduced in \cite{claassen2012}.
 
-We would like to know whether applying such methods, such as the approach introduced in \cite{claassen2012}, or a standard approach such as PC-algorithm \cite{spirtes2000} can solve some of the difficulties effective connectivity suffers from.
+We would like to know whether applying such methods, such as the approach introduced in \cite{claassen2012}, or a standard approach such as the PC-algorithm \cite{spirtes2000} can solve some of the difficulties effective connectivity suffers from.
 
 % Structure of the rest of proposal
 In the remainder of this proposal we briefly discuss some necessary background knowledge on connectivity and methods, we then discuss our strategy and finally we present a time-plan overview.
@@ -167,18 +167,17 @@ In the remainder of this proposal we briefly discuss some necessary background k
 
 %Question: should this be included?
 \subsubsection*{Functional connectivity}
-Functional connectivity describes the statistical dependance of neuronal activity between different brain regions \cite{friston1993functional}.
-It gives an insight in the organisation of the brain, even though functioning is not immediately visible.
-Functional connectivity is strongly time-dependant, as activity changes rapidly providing only a small time window to measure.
+Functional connectivity describes the statistical dependence of neuronal activity between different brain regions \cite{friston1993functional}.
+This gives an insight in the organisation of the brain.
+Functional connectivity is strongly time-dependent, as activity changes rapidly providing only a low emporal resultion.
 This means measured dependencies can be the result of statistical noise.
 Functional connectivity can be deduced by fMRI measurement of brains in resting-state \cite{Lowe2000, doria2010, Bullmore2009}.
 Resting state indicates that subjects are instructed to relax without thinking of anything in particular to stimulate spontaneous brain activity.
 
 \subsubsection*{Structural connectivity}
 Structural connectivity is defined as the mapping of anatomical - neural - paths in the brain between different brain regions \cite{friston1994}.
-This is strongly related with functional connectivity: regions can only be structurally connected if there is a functional relation between them.
-This is intuitive relation can be demonstrated empirically \cite{vandenheuvel2009}.
-The other way around it can be demonstrated that functional connectivity is constrained by structural connectivity \cite{cabral2012}.
+This is strongly related with functional connectivity: regions can only be functionally connected if there is a structural relation between them \cite{cabral2012}.
+This intuitive relation can be demonstrated empirically \cite{vandenheuvel2009}.
 Structural connectivity is less time dependent as it involves mappings of anatomical connections opposing temporal activity patterns.
 
 \subsubsection*{Effective connectivity}
@@ -190,9 +189,9 @@ It is possible to infer effective connectivity from structural and functional co
 
 Research has been done on inferring effective connectivity directly with several methods.
 The most renowned methods are Granger causality \cite{roebroeck2005}, Structural Equation Modelling \cite{mclntosh1994}, Multivariate Autoregressive Modeling \cite{harrison2003} and Dynamic Causal Modelling \cite{friston2003}.
-These are all methods dedicated to this problem and no attempt has been done from the viewpoint of causal discovery in graphs.
+These are all methods dedicated to this problem.
 These methods also suffer from similar problems of which perhaps the most important is scaling.
-Most of these methods can only handle tens of nodes in reasonable time.
+Most of these methods can only handle tens of nodes in reasonable time, which becomes problematic in realistic situations with up to tens of thousands of nodes, ideally.
 
 \subsection*{Causal discovery methods}
 The first causal method we will apply on brain structure data will be the PC-algorithm \cite{spirtes2000}.
@@ -216,25 +215,27 @@ BCCD          & \multicolumn{4}{ |c| }{} & \multicolumn{2}{ |c| }{\cellcolor[gra
 Analysis      & \multicolumn{3}{ |c| }{} & \multicolumn{2}{ |c| }{\cellcolor[gray]{0.9} PC} & & \multicolumn{2}{ |c| }{\cellcolor[gray]{0.9} BCCD} & \multicolumn{2}{ |c| }{} \tabularnewline \hline
 Write article & \multicolumn{3}{ |c| }{} & \multicolumn{7}{ |c| }{\cellcolor[gray]{0.85}}  \tabularnewline \hline
 \end{tabular}
-\caption{Project time table. `Structural' implies applying the given method on structural data only. `Functional' implies inferring structure with the given method first through functional data.}
+\caption{Project time table. `Structural' implies applying the given method using structural data as a network skeleton. `Functional' implies inferring structure with the given method first through functional data.}
 \end{figure*}
 
 \subsection*{Data acquisition \& analysis}
 We will apply the mentioned methods on structural and functional data gathered from human subjects.
-We use the same functional and structural data as in Hinne et al. \cite{hinne2013}, of which we have selected the best 6 subjects based on MAP results.
+We use the same functional and structural data as in Hinne et al. \cite{hinne2013}, of which six subjects were selected.
 To find effective connectivity, both are needed.
-Structural connectivity of these subjects follows from DTI-measurements.
+Structural connectivity of these subjects can be derived from DTI-measurements, using probabilistic tractography \cite{hinne2013}.
+Functional connectivity can be extracted from fMRI-measurement, possibly in combination with the structural 
+connectivity.
 Functional connectivity can be extracted from fMRI-measurement, possibly in combination with the structural connectivity.
-This data is already available.
+
 
 \section{Methods \& Strategy}
 %Short general introduction to both methods
-We use existing implementations of PC and BCCD to infer effective connectivity.
+We use an existing implementation of BCCD to infer effective connectivity; PC will be implemented in this project.
 An implementation of BCCD suitable for this project is made available by the department of Intelligent Systems at the Radboud University Nijmegen.
 
 The first step will be to get the implementations for the algorithms working on the datasets with functional and structural data.
 
-Firstly we will use structural networks as a basis for the algorithms, and use functional information to infer causal relations. 
+Firstly we will use structural networks as a basis for the algorithms, and use functional information to infer causal relations.
 Later we will use functional information only, to infer both the network and the causal relations.
 We will compare this with the previous.
 As PC is a well-described algorithm \cite{spirtes2000} and should not be difficult to implement, so this will be done within this project.
@@ -253,7 +254,7 @@ We will conclude whether standard causal discovery methods provide a good direct
 % - Properties
 
 \section{Time schedule}
-This project is divided into four main parts: applying the PC-algorithm, applying the BCCD-algorithm, analysing the data (including cross-subject comparison) and writing the article. The schedule for applying the algorithm has been subdivided into applying it with functional connectivity data only, and applying it to both functional and structural connectivity data.
+This project is divided into four main parts: applying the PC-algorithm, applying the BCCD-algorithm, analysing the data (including cross-subject comparison) and writing the article. The schedule for applying the algorithm has been subdivided into applying it with functional connectivity using structural data as a basis, and applying it to only functional data.
 
 
 
