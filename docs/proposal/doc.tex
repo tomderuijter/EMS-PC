@@ -23,7 +23,7 @@
 {\bf Keywords\/}. #1}
 
 % Margins & Headers
-\marginsize{2.5cm}{2.5cm}{2cm}{1.5cm}
+\marginsize{2.5cm}{2.5cm}{3.0cm}{2.0cm}
 \columnsep 0.4in
 \footskip 0.4in 
 \usepackage{changepage}
@@ -125,7 +125,7 @@ We have come a long way since the time of Phrenology, the pseudoscience based at
 Advanced measurement methods exist that allow scientists to peek inside brains that give a coarse but broad overview without opening a single skull.
 
 Of particular interest are causal relations between brain regions and cognitive and bodily functions.
-The question whether brain region X is somehow connected to brain region Y is still highly relevant; it is the main question of the present-day scientific field of brain connectivity.
+The question if brain region X is functionally or structurally connected to brain region Y and whether these are causally related is still highly relevant; it is the main question of the present-day scientific field of brain connectivity.
 Understanding brain structure implies understanding more about the brain as a whole.
 
 Not surprisingly, brain connectivity also finds applications in medicine.
@@ -133,8 +133,9 @@ Neuro-degenerative diseases such as Alzheimer's disease, Parkinson's disease, de
 Better methods for analysing connectivity could lead to more insight in these diseases.
 
 The field of brain connectivity finds its roots in the early 1990s \cite{friston1993functional, friston1994}, though because of more recent developments in the field of Artificial Intelligence and Machine Learning it is possible to do more thorough analysis \cite{vandenheuvel2010}.
-One type of connectivity analysis involves finding causal relations between brain areas, specifically \emph{effective connectivity}; How does the activity of one region cause the activity of another?
-However, causal analysis is also relatively new and its application in brain connectivity analysis still faces many challenges that require further research \cite{ramsey2010}.
+One type of connectivity analysis involves finding how brain region X causes what region Y does. This is called \emph{effective connectivity}.
+More concretely: how does the measured fMRI signal, representing an underlying neuronal process, determine what other neuronal processes are activated.
+Causal analysis is also relatively new and its application in brain connectivity analysis still faces many challenges that require further research \cite{ramsey2010}.
 
 \paragraph{Problem statement}
 This project seeks to utilise the strengths of current state-of-the-art causal discovery methods by applying them to resting state brain fMRI data in order to find new applicable methods for determining causal patterns in the human brain.
@@ -142,7 +143,7 @@ This project seeks to utilise the strengths of current state-of-the-art causal d
 The work by \cite{ramsey2010} addresses several problems causal analysis in fMRI analysis suffers from.
 Methods in causal discovery have high computational costs, making it nearly impossible to calculate networks with more than hundreds of nodes.
 Another important fact is that fMRI Analysis indirectly measures brain activity.
-Brain models that do not account for possible latent - indirect - sources within the brain or the shortcomings of fMRI may suffer from noise or fail to capture underlying patterns.
+Brain models that do not account for possible latent - indirect - sources within the brain or the shortcomings of fMRI may suffer from noise, fail to capture underlying patterns or draw erroneous conclusions.
 Solutions to this particular problem have been proposed that do account for latent sources \cite{ramsey2010, waldorp2011}.
 Another problem is the strong diversity between subjects.
 Every brain is inherently different, making it non-trivial to combine subject data or even draw conclusions across subjects.
@@ -169,7 +170,7 @@ In the remainder of this proposal we briefly discuss some necessary background k
 \subsubsection*{Functional connectivity}
 Functional connectivity describes the statistical dependence of neuronal activity between different brain regions \cite{friston1993functional}.
 This gives an insight in the organisation of the brain.
-Functional connectivity is strongly time-dependent, as activity changes rapidly providing only a low emporal resultion.
+Functional connectivity is strongly time-dependent, as activity changes rapidly providing and fMRI has a low temporal resolution.
 This means measured dependencies can be the result of statistical noise.
 Functional connectivity can be deduced by fMRI measurement of brains in resting-state \cite{Lowe2000, doria2010, Bullmore2009}.
 Resting state indicates that subjects are instructed to relax without thinking of anything in particular to stimulate spontaneous brain activity.
@@ -220,13 +221,12 @@ Write article & \multicolumn{3}{ |c| }{} & \multicolumn{7}{ |c| }{\cellcolor[gra
 
 \subsection*{Data acquisition \& analysis}
 We will apply the mentioned methods on structural and functional data gathered from human subjects.
-We use the same functional and structural data as in Hinne et al. \cite{hinne2013}, of which six subjects were selected.
-To find effective connectivity, both are needed.
+We use the same functional and structural data as in Hinne et al. \cite{hinne2013}, of which six subjects were selected at random.
+To find effective connectivity, both data sources are needed.
 Structural connectivity of these subjects can be derived from DTI-measurements, using probabilistic tractography \cite{hinne2013}.
 Functional connectivity can be extracted from fMRI-measurement, possibly in combination with the structural 
 connectivity.
 Functional connectivity can be extracted from fMRI-measurement, possibly in combination with the structural connectivity.
-
 
 \section{Methods \& Strategy}
 %Short general introduction to both methods
