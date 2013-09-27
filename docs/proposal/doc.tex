@@ -102,8 +102,11 @@ Universiteit Nijmegen}}}\\[0.5cm]\rule{\linewidth}{0.3mm}}
 \maketitle
 
 \begin{abstract}
-In the field of brain research, different forms of connectivity are considered. To find effective connectivity, many different approaches have been used. In this project, we will apply causal discovery the methods of PC and BCCD to structural and functional connectivity, to infer effective connectivity. As data from multiple subjects will be used, evaluation of the result can show whether the method yields consistent results.
-\keywords{Keywords}
+We propose a new application for causal discovery methods on human brain networks in order to derive effective connectivity.
+The directive nature of effective brain networks suggest causal methods can be used.
+As current methods for effective connectivity suffer from computational difficulties and often cannot cope with latent variables, we propose an application of PC-algorithm and the Bayesian BCCD-algorithm \cite{claassen2012} to estimate effective connectivity.
+Both methods will be applied on six healthy subjects of which fMRI data and structural networks are readily available.
+\keywords{Effective connectivity, Causal Discovery}
 \end{abstract}
 
 \setlength{\parindent}{0.0cm}
@@ -135,7 +138,9 @@ Better methods for analysing connectivity could lead to more insight in these di
 The field of brain connectivity finds its roots in the early 1990s \cite{friston1993functional, friston1994}, though because of more recent developments in the field of Artificial Intelligence and Machine Learning it is possible to do more thorough analysis \cite{vandenheuvel2010}.
 One type of connectivity analysis involves finding how brain region X causes what region Y does. This is called \emph{effective connectivity}.
 More concretely: how does the measured fMRI signal, representing an underlying neuronal process, determine what other neuronal processes are activated.
-Causal analysis is also relatively new and its application in brain connectivity analysis still faces many challenges that require further research \cite{ramsey2010}.
+Research regarding effective is relatively new and its application still faces many challenges that require further research \cite{ramsey2010}.
+The directed character in effective connectivity seems similar to traditional causal relations.
+In what follows, we suggest to use causal discovery methods for deriving effective connectivity.
 
 \paragraph{Problem statement}
 This project seeks to utilise the strengths of current state-of-the-art causal discovery methods by applying them to resting state brain fMRI data in order to find new applicable methods for determining causal patterns in the human brain.
@@ -181,6 +186,24 @@ This is strongly related with functional connectivity: regions can only be funct
 This intuitive relation can be demonstrated empirically \cite{vandenheuvel2009}.
 Structural connectivity is less time dependent as it involves mappings of anatomical connections opposing temporal activity patterns.
 
+Hinne et al. \cite{hinne2013} proposed a Bayesian method for estimating structural networks based on Diffusion Weighted MRI (DWI) and probabilistic Tractography.
+The location of white-matter tracts does not become immediately clear from imagery alone.
+Other methods rely on thresholds to estimate location of said tracts.
+The proposed method results in a measure of uncertainty about where a hypothesised connection will terminate and so provides a clearly interpretable network structure as result.
+
+\begin{figure*}[bp]
+\begin{tabular}{c || c | c | c | c | c | c | c | c | c | c |}
+\setlength{\tabcolsep}{12pt}
+\renewcommand{\arraystretch}{1.3}
+Week          & 41 & 42 &  43 &  44 &  45 &  46 &  47 &  48 &  49 &  50 \tabularnewline \hline
+PC            & \multicolumn{2}{ |c| }{\cellcolor[gray]{0.9} Make implementation} & \multicolumn{2}{ |c| }{\cellcolor[gray]{0.9} Structural}  & \cellcolor[gray]{0.9} Functional & \multicolumn{4}{ |c| }{} & \tabularnewline \hline
+BCCD          & \multicolumn{4}{ |c| }{} & \multicolumn{2}{ |c| }{\cellcolor[gray]{0.85} Structural} & \cellcolor[gray]{0.85} Functional & \multicolumn{3}{ |c| }{} \tabularnewline \hline
+Analysis      & \multicolumn{3}{ |c| }{} & \multicolumn{2}{ |c| }{\cellcolor[gray]{0.9} PC} & & \multicolumn{2}{ |c| }{\cellcolor[gray]{0.9} BCCD} & \multicolumn{2}{ |c| }{} \tabularnewline \hline
+Write article & \multicolumn{3}{ |c| }{} & \multicolumn{7}{ |c| }{\cellcolor[gray]{0.85}}  \tabularnewline \hline
+\end{tabular}
+\caption{Project time table. `Structural' implies applying the given method using structural data as a network skeleton. `Functional' implies inferring structure with the given method first through functional data.}
+\end{figure*}
+
 \subsubsection*{Effective connectivity}
 In contrast to functional and structural connectivity, effective connectivity takes into account the cause and effect of relations.
 It has been described as ``the influence one neural system exerts over another'' \cite{friston1994}.
@@ -206,27 +229,13 @@ The authors have shown the method to perform as good as or better than other cau
 As is inherent to Bayesian methods, or approximations of Bayesian methods, the resulting network graph is not a  single structure but rather a distribution over possible structures.
 Concretely, this provides an uncertainty measure over edges in the network, giving additional information compared to PC.
 
-\begin{figure*}[bp]
-\begin{tabular}{c || c | c | c | c | c | c | c | c | c | c |}
-\setlength{\tabcolsep}{12pt}
-\renewcommand{\arraystretch}{1.3}
-Week          & 41 & 42 &  43 &  44 &  45 &  46 &  47 &  48 &  49 &  50 \tabularnewline \hline
-PC            & \multicolumn{2}{ |c| }{\cellcolor[gray]{0.9} Make implementation} & \multicolumn{2}{ |c| }{\cellcolor[gray]{0.9} Structural}  & \cellcolor[gray]{0.9} Functional & \multicolumn{4}{ |c| }{} & \tabularnewline \hline
-BCCD          & \multicolumn{4}{ |c| }{} & \multicolumn{2}{ |c| }{\cellcolor[gray]{0.85} Structural} & \cellcolor[gray]{0.85} Functional & \multicolumn{3}{ |c| }{} \tabularnewline \hline
-Analysis      & \multicolumn{3}{ |c| }{} & \multicolumn{2}{ |c| }{\cellcolor[gray]{0.9} PC} & & \multicolumn{2}{ |c| }{\cellcolor[gray]{0.9} BCCD} & \multicolumn{2}{ |c| }{} \tabularnewline \hline
-Write article & \multicolumn{3}{ |c| }{} & \multicolumn{7}{ |c| }{\cellcolor[gray]{0.85}}  \tabularnewline \hline
-\end{tabular}
-\caption{Project time table. `Structural' implies applying the given method using structural data as a network skeleton. `Functional' implies inferring structure with the given method first through functional data.}
-\end{figure*}
-
 \subsection*{Data acquisition \& analysis}
 We will apply the mentioned methods on structural and functional data gathered from human subjects.
-We use the same functional and structural data as in Hinne et al. \cite{hinne2013}, of which six subjects were selected at random.
-To find effective connectivity, both data sources are needed.
-Structural connectivity of these subjects can be derived from DTI-measurements, using probabilistic tractography \cite{hinne2013}.
-Functional connectivity can be extracted from fMRI-measurement, possibly in combination with the structural 
-connectivity.
-Functional connectivity can be extracted from fMRI-measurement, possibly in combination with the structural connectivity.
+For this we are largely dependent on data collected by others.
+Hinne et al. has provided fMRI time-series data and structural network data as used and derived in \cite{hinne2013}, of which six subjects were selected at random.
+We can estimate functional connectivity from fMRI-measurement in combination with structural 
+networks according to a procedure currently submitted by Hinne et al. \cite{hinne2013submitted}.
+To find effective connectivity, both structural networks and functional data is needed.
 
 \section{Methods \& Strategy}
 %Short general introduction to both methods
