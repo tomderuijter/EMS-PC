@@ -1,0 +1,108 @@
+\begin{thebibliography}{}
+
+\bibitem[Ambrogioni et~al., 2013]{hinne2013submitted}
+Ambrogioni, M. H.~L., Janssen, R., Heskes, T., and van Gerven, M.~A. (2013).
+\newblock Structurally-informed bayesian functional connectivity analysis.
+\newblock {\em Submitted}.
+
+\bibitem[Bullmore and Sporns, 2009]{Bullmore2009}
+Bullmore, E. and Sporns, O. (2009).
+\newblock Complex brain networks: graph theoretical analysis of structural and
+  functional systems.
+\newblock {\em Nat Rev Neurosci}, 10(3):186--198.
+
+\bibitem[Cabral et~al., 2012]{cabral2012}
+Cabral, J., Hugues, E., Kringelbach, M.~L., and Deco, G. (2012).
+\newblock Modeling the outcome of structural disconnection on resting-state
+  functional connectivity.
+\newblock {\em Neuroimage}, 62(3):1342--1353.
+
+\bibitem[Claassen and Heskes, 2012]{claassen2012}
+Claassen, T. and Heskes, T. (2012).
+\newblock A bayesian approach to constraint based causal inference.
+\newblock {\em arXiv preprint arXiv:1210.4866}.
+
+\bibitem[Doria et~al., 2010]{doria2010}
+Doria, V., Beckmann, C.~F., Arichi, T., Merchant, N., Groppo, M., Turkheimer,
+  F.~E., Counsell, S.~J., Murgasova, M., Aljabar, P., Nunes, R.~G., Larkman,
+  D.~J., Rees, G., and Edwards, A.~D. (2010).
+\newblock Emergence of resting state networks in the preterm human brain.
+\newblock {\em Proceedings of the National Academy of Sciences},
+  107(46):20015--20020.
+
+\bibitem[Friston et~al., 1993]{friston1993functional}
+Friston, K., Frith, C., Liddle, P., Frackowiak, R., et~al. (1993).
+\newblock Functional connectivity: the principal-component analysis of large
+  (pet) data sets.
+\newblock {\em Journal of cerebral blood flow and metabolism}, 13:5--5.
+
+\bibitem[Friston, 1994]{friston1994}
+Friston, K.~J. (1994).
+\newblock Functional and effective connectivity in neuroimaging: A synthesis.
+\newblock {\em Human Brain Mapping}, 2(1-2):56--78.
+
+\bibitem[Friston et~al., 2003]{friston2003}
+Friston, K.~J., Harrison, L., and Penny, W. (2003).
+\newblock Dynamic causal modelling.
+\newblock {\em Neuroimage}, 19(4):1273--1302.
+
+\bibitem[Harrison et~al., 2003]{harrison2003}
+Harrison, L., Penny, W.~D., and Friston, K. (2003).
+\newblock Multivariate autoregressive modeling of fmri time series.
+\newblock {\em NeuroImage}, 19(4):1477--1491.
+
+\bibitem[Hinne et~al., 2013]{hinne2013}
+Hinne, M., Heskes, T., Beckmann, C.~F., and van Gerven, M.~A. (2013).
+\newblock Bayesian inference of structural brain networks.
+\newblock {\em NeuroImage}, 66(0):543 -- 552.
+
+\bibitem[Lowe et~al., 2000]{Lowe2000}
+Lowe, M.~J., Dzemidzic, M., Lurito, J.~T., Mathews, V.~P., and Phillips, M.~D.
+  (2000).
+\newblock Correlations in low-frequency bold fluctuations reflect
+  cortico-cortical connections.
+\newblock {\em NeuroImage}, 12(5):582 -- 587.
+
+\bibitem[Mclntosh and Gonzalez-Lima, 1994]{mclntosh1994}
+Mclntosh, A. and Gonzalez-Lima, F. (1994).
+\newblock Structural equation modeling and its application to network analysis
+  in functional brain imaging.
+\newblock {\em Human Brain Mapping}, 2(1-2):2--22.
+
+\bibitem[Ramsey et~al., 2010]{ramsey2010}
+Ramsey, J.~D., Hanson, S.~J., Hanson, C., Halchenko, Y.~O., Poldrack, R.~A.,
+  and Glymour, C. (2010).
+\newblock Six problems for causal inference from fmri.
+\newblock {\em Neuroimage}, 49(2):1545--1558.
+
+\bibitem[Roebroeck et~al., 2005]{roebroeck2005}
+Roebroeck, A., Formisano, E., and Goebel, R. (2005).
+\newblock Mapping directed influence over the brain using granger causality and
+  fmri.
+\newblock {\em Neuroimage}, 25(1):230--242.
+
+\bibitem[Spirtes et~al., 2000]{spirtes2000}
+Spirtes, P., Glymour, C., and Scheines, R. (2000).
+\newblock {\em Causation, prediction, and search}, volume~81.
+\newblock The MIT Press.
+
+\bibitem[van~den Heuvel et~al., 2009]{vandenheuvel2009}
+van~den Heuvel, M.~P., Mandl, R.~C., Kahn, R.~S., and Hulshoff~Pol, H.~E.
+  (2009).
+\newblock Functionally linked resting-state networks reflect the underlying
+  structural connectivity architecture of the human brain.
+\newblock {\em Human Brain Mapping}, 30(10):3127--3141.
+
+\bibitem[van~den Heuvel and Pol, 2010]{vandenheuvel2010}
+van~den Heuvel, M.~P. and Pol, H. E.~H. (2010).
+\newblock Exploring the brain network: A review on resting-state fmri
+  functional connectivity.
+\newblock {\em European Neuropsychopharmacology}, 20(8):519 -- 534.
+
+\bibitem[Waldorp et~al., 2011]{waldorp2011}
+Waldorp, L., Christoffels, I., and van~de Ven, V. (2011).
+\newblock Effective connectivity of fmri data using ancestral graph theory:
+  Dealing with missing regions.
+\newblock {\em NeuroImage}, 54(4):2695 -- 2705.
+
+\end{thebibliography}
