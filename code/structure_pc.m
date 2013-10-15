@@ -75,3 +75,5 @@ end
 % 1 - neighbour
 % 2 - arrow
 % 3 - dot
+% one of these values at (x,y) means that this code is at node x, on the
+% connection to y
