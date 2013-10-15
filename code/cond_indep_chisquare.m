@@ -5,14 +5,14 @@ function [CI, Chi2, alpha2] = cond_indep_chisquare(X, Y, S, Data, test, alpha, n
 % [CI Chi2 Prob_Chi2] = cond_indep_chisquare(X, Y, S, Data, test, alpha, node_sizes)
 %
 % Input :
-%       Data is the data matrix, N columns * NbVar rows
+%       Data is the data matrix, N rows * NbVar columns
 %       X is the index of variable X in Data matrix
 %       Y is the index of variable Y in Data matrix
 %       S are the indexes of variables in set S
 %       alpha is the significance level (default: 0.05)
-%       test = 'pearson' for Pearson's chi2 test
-%		   'LRT' for G2 likelihood ratio test (default)
-%       node_sizes (default: max(Data'))
+%       test = 'pearson' for Pearson's chi2 test (default)
+%		   'LRT' for G2 likelihood ratio test
+%       node_sizes (default: ceil(max(Data)))
 %
 % Output :
 %       CI = test result (1=conditional independency, 0=no)
@@ -20,6 +20,7 @@ function [CI, Chi2, alpha2] = cond_indep_chisquare(X, Y, S, Data, test, alpha, n
 %
 %
 % V1.4 : 24 july 2003 (Ph. Leray - philippe.leray@univ-nantes.fr)
+% V1.5 : 15 october 2013 (T. de Ruijter - deruijter.tom@gmail.com)
 %
 %
 % Things to do :
@@ -27,11 +28,9 @@ function [CI, Chi2, alpha2] = cond_indep_chisquare(X, Y, S, Data, test, alpha, n
 % - find a better way than 'warning off/on' in tmpij, tmpijk computation
 %
 
-if nargin < 5, test = 'LRT'; end
+if nargin < 5, test = 'pearson'; end
 if nargin < 6, alpha = 0.05; end
-if nargin < 7, ns = max(Data'); end
-
-Data=Data';
+if nargin < 7, ns = ceil(max(Data)); end
 
 N = size(Data,1);
 qi=ns(S);
