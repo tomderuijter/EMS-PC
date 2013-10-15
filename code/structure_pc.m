@@ -1,12 +1,12 @@
-function [undirected_graph, sep_sets] = structure_pc(timeseries_data)
+function [undirected_graph, sepset] = structure_pc(timeseries_data)
 
 % Variable translation
 % T - number of samples
 % N - number of vertices
 % i - iteration number / set cardinality
 
-T = size(data,1);
-N = size(data,2);
+T = size(timeseries_data,1);
+N = size(timeseries_data,2);
 
 % Complete undirected graph
 undirected_graph = ones(N,N) - eye(N);
@@ -25,7 +25,7 @@ while(~kill_loop)
 		
         % a vector with the indices of neighbours of x (in
         % undirected_graph)
-		adjacent_to_x = find(undirected_graph(x,(x+1):N)); % TODO: Find is slow. Replace.
+		adjacent_to_x = find(undirected_graph(x,:)); % TODO: Find is slow. Replace.
 		
 		% cardinality of Adj(C,x)\{y} must be greater than or equal to i
 		if length(adjacent_to_x)-1 < i
@@ -34,11 +34,13 @@ while(~kill_loop)
 		
 		kill_loop = 0;
         for y = adjacent_to_x
-
+			if (y <= x)
+				continue;
+			end
 			index_y_in_adjacent = find(adjacent_to_x == y,1,'first');	
 			
 			% create initial subset 1,2,.. of length i, excluding y
-			if (index_y_in_adjacent < i)
+			if (index_y_in_adjacent <= i)
 				subset_indices = [1:(index_y_in_adjacent-1),(index_y_in_adjacent+1):i+1];
 			else
 				subset_indices = 1:i;
@@ -47,7 +49,7 @@ while(~kill_loop)
 			checking_subsets = 1;
 			while (checking_subsets) % until all subsets are checked
 				S = adjacent_to_x(subset_indices);
-				if d_separated(x, y, S)
+				if d_seperated_test(x, y, S)
 					[undirected_graph,sepset] = remove_edge(undirected_graph,x,y,sepset,S);
 					checking_subsets = 0;
 				else
