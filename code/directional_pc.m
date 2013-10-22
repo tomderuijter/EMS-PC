@@ -14,7 +14,6 @@ for x = 1 : N
 		% x_alg etc. are x, y and z as described in the algorithm
 		for z_alg = right_of_diag(right_of_diag ~= y)
 			if (undirected_graph(x,z_alg))
-				
 				x_alg = y;
 				y_alg = x;
 			elseif (undirected_graph(y,z_alg))
@@ -42,23 +41,23 @@ y = 1;
 % used to determine whether a full loop over all elements has been made
 % without an update (in that case, the loop can stop)
 x_last_update = N;
-y_last_update = N;
+y_last_update = N-1;
 zz = [x, y];
-while (x_last_update ~= x || y_last_update ~= y)
+while (~(x_last_update == x && y_last_update == y))
 	% for each undirected adjacent pair (x,y)
 	if ((directed_graph(y,x) == 1) && (directed_graph(x,y) == 1))
 		% whether an arrow x -> y or y -> x has been found
 		x_y_directed = 0;
+		% rule 1
 		if (path_from_to(x,y))
 			directed_graph(y,x) = 2;
 			x_y_directed = 1;
 		else
+			% rule 2
 			for (z = 1 : N)
 				if (z ~= x && z ~= y && (directed_graph(x,z) == 2))
-					directed_graph(x,y) = 2;
+					directed_graph(y,x) = 2;
 					x_y_directed = 1;
-					x_last_update = x;
-					y_last_update = y;
 				end
 			end
 		end
@@ -66,16 +65,11 @@ while (x_last_update ~= x || y_last_update ~= y)
 		if (x_y_directed)
 			path_from_to = find_all_paths(path_from_to);
 
-			undirected_paths(x,y) = 0;
-			undirected_paths(y,x) = 0;
-
-			
-
 			x_last_update = x;
 			y_last_update = y;
 		end
 	end
-	[x,y] = next_point_in_square(x,y,N);
+	[x,y] = next_point(x,y,N);
 	zz = [x, y];
 end
 
@@ -90,7 +84,7 @@ end
 
 end
 
-function [x, y] = next_point_in_square(x, y, N)
+function [x, y] = next_point(x, y, N)
 % gives the next point in a square of size N. Returns (x+1,y) if that is in
 % the bounds, otherwise skips to next row
 if (x < N)
@@ -104,7 +98,7 @@ else
 	end
 end
 if (x == y)
-	[x, y] = next_point_in_square(x, y, N);
+	[x, y] = next_point(x, y, N);
 end
 end
 
