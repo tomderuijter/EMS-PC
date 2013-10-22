@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/2/trunk/BNT/inference/dynamic/@hmm_inf_engine
+END
+update_engine.m
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/2/trunk/BNT/inference/dynamic/@hmm_inf_engine/update_engine.m
+END
+fwdback_twoslice.m
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/2/trunk/BNT/inference/dynamic/@hmm_inf_engine/fwdback_twoslice.m
+END
+marginal_family.m
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/2/trunk/BNT/inference/dynamic/@hmm_inf_engine/marginal_family.m
+END
+enter_evidence.m
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/2/trunk/BNT/inference/dynamic/@hmm_inf_engine/enter_evidence.m
+END
+find_mpe.m
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/2/trunk/BNT/inference/dynamic/@hmm_inf_engine/find_mpe.m
+END
+marginal_nodes.m
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/2/trunk/BNT/inference/dynamic/@hmm_inf_engine/marginal_nodes.m
+END
+hmm_inf_engine.m
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/2/trunk/BNT/inference/dynamic/@hmm_inf_engine/hmm_inf_engine.m
+END

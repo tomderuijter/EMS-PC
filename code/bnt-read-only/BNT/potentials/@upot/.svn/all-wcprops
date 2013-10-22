@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/2/trunk/BNT/potentials/@upot
+END
+marginalize_pot.m
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/2/trunk/BNT/potentials/@upot/marginalize_pot.m
+END
+display.m
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/2/trunk/BNT/potentials/@upot/display.m
+END
+upot.m
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/2/trunk/BNT/potentials/@upot/upot.m
+END
+upot_to_opt_policy.m
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/2/trunk/BNT/potentials/@upot/upot_to_opt_policy.m
+END
+multiply_by_pot.m
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/2/trunk/BNT/potentials/@upot/multiply_by_pot.m
+END
+pot_to_marginal.m
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/2/trunk/BNT/potentials/@upot/pot_to_marginal.m
+END
+divide_by_pot.m
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/2/trunk/BNT/potentials/@upot/divide_by_pot.m
+END
+approxeq_pot.m
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/2/trunk/BNT/potentials/@upot/approxeq_pot.m
+END
+normalize_pot.m
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/2/trunk/BNT/potentials/@upot/normalize_pot.m
+END

@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/2/trunk/BNT/CPDs/@tabular_CPD/Old
+END
+update_params.m
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/2/trunk/BNT/CPDs/@tabular_CPD/Old/update_params.m
+END
+sample_node.m
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/2/trunk/BNT/CPDs/@tabular_CPD/Old/sample_node.m
+END
+prob_node.m
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/2/trunk/BNT/CPDs/@tabular_CPD/Old/prob_node.m
+END
+prob_CPT.m
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/2/trunk/BNT/CPDs/@tabular_CPD/Old/prob_CPT.m
+END
+log_marg_prob_node_case.m
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/2/trunk/BNT/CPDs/@tabular_CPD/Old/log_marg_prob_node_case.m
+END
+mult_CPD_and_pi_msgs.m
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/2/trunk/BNT/CPDs/@tabular_CPD/Old/mult_CPD_and_pi_msgs.m
+END
+bayesian_score_CPD.m
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/2/trunk/BNT/CPDs/@tabular_CPD/Old/bayesian_score_CPD.m
+END
+BIC_score_CPD.m
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/2/trunk/BNT/CPDs/@tabular_CPD/Old/BIC_score_CPD.m
+END
+tabular_CPD.m
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/2/trunk/BNT/CPDs/@tabular_CPD/Old/tabular_CPD.m
+END
+sample_node_single_case.m
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/2/trunk/BNT/CPDs/@tabular_CPD/Old/sample_node_single_case.m
+END

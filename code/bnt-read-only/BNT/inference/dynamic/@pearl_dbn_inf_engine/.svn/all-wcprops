@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/2/trunk/BNT/inference/dynamic/@pearl_dbn_inf_engine
+END
+pearl_dbn_inf_engine.m
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/2/trunk/BNT/inference/dynamic/@pearl_dbn_inf_engine/pearl_dbn_inf_engine.m
+END
+enter_evidence.m
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/2/trunk/BNT/inference/dynamic/@pearl_dbn_inf_engine/enter_evidence.m
+END
+enter_soft_ev.m
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/2/trunk/BNT/inference/dynamic/@pearl_dbn_inf_engine/enter_soft_ev.m
+END
+marginal_nodes.m
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/2/trunk/BNT/inference/dynamic/@pearl_dbn_inf_engine/marginal_nodes.m
+END

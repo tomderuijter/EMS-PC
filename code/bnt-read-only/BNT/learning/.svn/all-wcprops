@@ -1,0 +1,137 @@
+K 25
+svn:wc:ra_dav:version-url
+V 35
+/svn/!svn/ver/70/trunk/BNT/learning
+END
+learn_params_em.m
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/2/trunk/BNT/learning/learn_params_em.m
+END
+learn_struct_dbn_reveal.m
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/2/trunk/BNT/learning/learn_struct_dbn_reveal.m
+END
+learn_params_dbn.m
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/2/trunk/BNT/learning/learn_params_dbn.m
+END
+CovMat.m
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/2/trunk/BNT/learning/CovMat.m
+END
+bic_score_family.m
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/2/trunk/BNT/learning/bic_score_family.m
+END
+learn_struct_K2.m
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/2/trunk/BNT/learning/learn_struct_K2.m
+END
+score_dags_wocache.m
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/66/trunk/BNT/learning/score_dags_wocache.m
+END
+mk_tetrad_data_file.m
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/2/trunk/BNT/learning/mk_tetrad_data_file.m
+END
+learn_struct_pdag_pc_constrain.m
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/2/trunk/BNT/learning/learn_struct_pdag_pc_constrain.m
+END
+compute_cooling_schedule.m
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/2/trunk/BNT/learning/compute_cooling_schedule.m
+END
+dirichlet_score_family.m
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/2/trunk/BNT/learning/dirichlet_score_family.m
+END
+learn_params.m
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/2/trunk/BNT/learning/learn_params.m
+END
+learn_struct_pdag_ic_star.m
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/2/trunk/BNT/learning/learn_struct_pdag_ic_star.m
+END
+learn_struct_mcmc.m
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/2/trunk/BNT/learning/learn_struct_mcmc.m
+END
+score_family_wocache.m
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/66/trunk/BNT/learning/score_family_wocache.m
+END
+score_dags_old.m
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/2/trunk/BNT/learning/score_dags_old.m
+END
+bayes_update_params.m
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/2/trunk/BNT/learning/bayes_update_params.m
+END
+learn_params_dbn_em.m
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/2/trunk/BNT/learning/learn_params_dbn_em.m
+END
+mcmc_sample_to_hist.m
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/2/trunk/BNT/learning/mcmc_sample_to_hist.m
+END
+kpm_learn_struct_mcmc.m
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/2/trunk/BNT/learning/kpm_learn_struct_mcmc.m
+END
+learn_struct_pdag_pc.m
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/70/trunk/BNT/learning/learn_struct_pdag_pc.m
+END
+mk_schedule.m
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/2/trunk/BNT/learning/mk_schedule.m
+END

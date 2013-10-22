@@ -1,0 +1,89 @@
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/36/trunk/BNT/potentials/@cgpot
+END
+multiply_pots.m
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/2/trunk/BNT/potentials/@cgpot/multiply_pots.m
+END
+cg_can_to_mom.m
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/2/trunk/BNT/potentials/@cgpot/cg_can_to_mom.m
+END
+cg_mom_to_can.m
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/2/trunk/BNT/potentials/@cgpot/cg_mom_to_can.m
+END
+marginalize_pot.m
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/2/trunk/BNT/potentials/@cgpot/marginalize_pot.m
+END
+set_domain_pot.m
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/2/trunk/BNT/potentials/@cgpot/set_domain_pot.m
+END
+display.m
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/2/trunk/BNT/potentials/@cgpot/display.m
+END
+domain_pot.m
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/2/trunk/BNT/potentials/@cgpot/domain_pot.m
+END
+enter_cts_evidence_pot.m
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/2/trunk/BNT/potentials/@cgpot/enter_cts_evidence_pot.m
+END
+multiply_by_pot.m
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/2/trunk/BNT/potentials/@cgpot/multiply_by_pot.m
+END
+cgpot.m
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/2/trunk/BNT/potentials/@cgpot/cgpot.m
+END
+pot_to_marginal.m
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/36/trunk/BNT/potentials/@cgpot/pot_to_marginal.m
+END
+divide_by_pot.m
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/2/trunk/BNT/potentials/@cgpot/divide_by_pot.m
+END
+normalize_pot.m
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/2/trunk/BNT/potentials/@cgpot/normalize_pot.m
+END
+enter_discrete_evidence_pot.m
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/2/trunk/BNT/potentials/@cgpot/enter_discrete_evidence_pot.m
+END

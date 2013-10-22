@@ -1,0 +1,119 @@
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/2/trunk/BNT/CPDs/@gaussian_CPD
+END
+maximize_params.m
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/2/trunk/BNT/CPDs/@gaussian_CPD/maximize_params.m
+END
+sample_node.m
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/2/trunk/BNT/CPDs/@gaussian_CPD/sample_node.m
+END
+CPD_to_scgpot.m
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/2/trunk/BNT/CPDs/@gaussian_CPD/CPD_to_scgpot.m
+END
+convert_to_table.m
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/2/trunk/BNT/CPDs/@gaussian_CPD/convert_to_table.m
+END
+convert_CPD_to_table_hidden_ps.m
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/2/trunk/BNT/CPDs/@gaussian_CPD/convert_CPD_to_table_hidden_ps.m
+END
+update_ess.m
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/2/trunk/BNT/CPDs/@gaussian_CPD/update_ess.m
+END
+reset_ess.m
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/2/trunk/BNT/CPDs/@gaussian_CPD/reset_ess.m
+END
+maximize_params_debug.m
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/2/trunk/BNT/CPDs/@gaussian_CPD/maximize_params_debug.m
+END
+gaussian_CPD.m
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/2/trunk/BNT/CPDs/@gaussian_CPD/gaussian_CPD.m
+END
+CPD_to_pi.m
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/2/trunk/BNT/CPDs/@gaussian_CPD/CPD_to_pi.m
+END
+gaussian_CPD_params_given_dps.m
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/2/trunk/BNT/CPDs/@gaussian_CPD/gaussian_CPD_params_given_dps.m
+END
+convert_to_pot.m
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/2/trunk/BNT/CPDs/@gaussian_CPD/convert_to_pot.m
+END
+adjustable_CPD.m
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/2/trunk/BNT/CPDs/@gaussian_CPD/adjustable_CPD.m
+END
+learn_params.m
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/2/trunk/BNT/CPDs/@gaussian_CPD/learn_params.m
+END
+display.m
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/2/trunk/BNT/CPDs/@gaussian_CPD/display.m
+END
+log_prob_node.m
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/2/trunk/BNT/CPDs/@gaussian_CPD/log_prob_node.m
+END
+CPD_to_lambda_msg.m
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/2/trunk/BNT/CPDs/@gaussian_CPD/CPD_to_lambda_msg.m
+END
+set_fields.m
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/2/trunk/BNT/CPDs/@gaussian_CPD/set_fields.m
+END
+get_field.m
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/2/trunk/BNT/CPDs/@gaussian_CPD/get_field.m
+END

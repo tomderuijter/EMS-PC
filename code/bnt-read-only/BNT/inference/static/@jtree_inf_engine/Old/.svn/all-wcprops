@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/2/trunk/BNT/inference/static/@jtree_inf_engine/Old
+END
+collect_evidence.m
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/2/trunk/BNT/inference/static/@jtree_inf_engine/Old/collect_evidence.m
+END
+enter_soft_evidence.m
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/2/trunk/BNT/inference/static/@jtree_inf_engine/Old/enter_soft_evidence.m
+END
+enter_evidence.m
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/2/trunk/BNT/inference/static/@jtree_inf_engine/Old/enter_evidence.m
+END
+distribute_evidence.m
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/2/trunk/BNT/inference/static/@jtree_inf_engine/Old/distribute_evidence.m
+END

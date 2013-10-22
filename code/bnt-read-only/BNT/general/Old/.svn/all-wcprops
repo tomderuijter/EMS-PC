@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 37
+/svn/!svn/ver/2/trunk/BNT/general/Old
+END
+compute_interface_nodes.m
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/2/trunk/BNT/general/Old/compute_interface_nodes.m
+END
+calc_mpe_dbn.m
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/2/trunk/BNT/general/Old/calc_mpe_dbn.m
+END
+calc_mpe_given_inf_engine.m
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/2/trunk/BNT/general/Old/calc_mpe_given_inf_engine.m
+END
+mk_gdl_graph.m
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/2/trunk/BNT/general/Old/mk_gdl_graph.m
+END
+calc_mpe_bucket.m
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/2/trunk/BNT/general/Old/calc_mpe_bucket.m
+END
+bnet_to_gdl_graph.m
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/2/trunk/BNT/general/Old/bnet_to_gdl_graph.m
+END
+calc_mpe_global.m
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/2/trunk/BNT/general/Old/calc_mpe_global.m
+END
+calc_mpe.m
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/2/trunk/BNT/general/Old/calc_mpe.m
+END

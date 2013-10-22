@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/2/trunk/BNT/potentials/@scgcpot
+END
+marginalize_pot.m
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/2/trunk/BNT/potentials/@scgcpot/marginalize_pot.m
+END
+reduce_pot.m
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/2/trunk/BNT/potentials/@scgcpot/reduce_pot.m
+END
+rescale_pot.m
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/2/trunk/BNT/potentials/@scgcpot/rescale_pot.m
+END
+normalize_pot.m
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/2/trunk/BNT/potentials/@scgcpot/normalize_pot.m
+END
+scgcpot.m
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/2/trunk/BNT/potentials/@scgcpot/scgcpot.m
+END

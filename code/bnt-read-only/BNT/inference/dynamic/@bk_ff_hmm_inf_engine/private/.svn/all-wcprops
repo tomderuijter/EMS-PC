@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/2/trunk/BNT/inference/dynamic/@bk_ff_hmm_inf_engine/private
+END
+project_joint_onto_marginals.m
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/!svn/ver/2/trunk/BNT/inference/dynamic/@bk_ff_hmm_inf_engine/private/project_joint_onto_marginals.m
+END
+combine_marginals_into_joint.m
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/!svn/ver/2/trunk/BNT/inference/dynamic/@bk_ff_hmm_inf_engine/private/combine_marginals_into_joint.m
+END
+dbn_to_hmm.m
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/2/trunk/BNT/inference/dynamic/@bk_ff_hmm_inf_engine/private/dbn_to_hmm.m
+END
+mk_hmm_obs_lik_vec.m
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/!svn/ver/2/trunk/BNT/inference/dynamic/@bk_ff_hmm_inf_engine/private/mk_hmm_obs_lik_vec.m
+END
+mk_hmm_obs_lik_vec1.m
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/!svn/ver/2/trunk/BNT/inference/dynamic/@bk_ff_hmm_inf_engine/private/mk_hmm_obs_lik_vec1.m
+END
+mk_hmm_obs_lik_mat.m
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/!svn/ver/2/trunk/BNT/inference/dynamic/@bk_ff_hmm_inf_engine/private/mk_hmm_obs_lik_mat.m
+END
+bk_ff_fb.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/2/trunk/BNT/inference/dynamic/@bk_ff_hmm_inf_engine/private/bk_ff_fb.m
+END

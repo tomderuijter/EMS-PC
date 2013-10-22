@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/2/trunk/BNT/inference/static/@stab_cond_gauss_inf_engine
+END
+marginal_difclq_nodes.m
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/!svn/ver/2/trunk/BNT/inference/static/@stab_cond_gauss_inf_engine/marginal_difclq_nodes.m
+END
+push_pot_toclique.m
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/2/trunk/BNT/inference/static/@stab_cond_gauss_inf_engine/push_pot_toclique.m
+END
+problems.txt
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/2/trunk/BNT/inference/static/@stab_cond_gauss_inf_engine/problems.txt
+END
+stab_cond_gauss_inf_engine.m
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/!svn/ver/2/trunk/BNT/inference/static/@stab_cond_gauss_inf_engine/stab_cond_gauss_inf_engine.m
+END
+enter_evidence.m
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/2/trunk/BNT/inference/static/@stab_cond_gauss_inf_engine/enter_evidence.m
+END
+push.m
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/2/trunk/BNT/inference/static/@stab_cond_gauss_inf_engine/push.m
+END
+clq_containing_nodes.m
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/2/trunk/BNT/inference/static/@stab_cond_gauss_inf_engine/clq_containing_nodes.m
+END
+README
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/2/trunk/BNT/inference/static/@stab_cond_gauss_inf_engine/README
+END
+marginal_nodes.m
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/2/trunk/BNT/inference/static/@stab_cond_gauss_inf_engine/marginal_nodes.m
+END
+marginal_singleclq_nodes.m
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/!svn/ver/2/trunk/BNT/inference/static/@stab_cond_gauss_inf_engine/marginal_singleclq_nodes.m
+END

@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/2/trunk/BNT/inference/static/@gibbs_sampling_inf_engine
+END
+enter_evidence.m
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/2/trunk/BNT/inference/static/@gibbs_sampling_inf_engine/enter_evidence.m
+END
+gibbs_sampling_inf_engine.m
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/!svn/ver/2/trunk/BNT/inference/static/@gibbs_sampling_inf_engine/gibbs_sampling_inf_engine.m
+END
+marginal_nodes.m
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/2/trunk/BNT/inference/static/@gibbs_sampling_inf_engine/marginal_nodes.m
+END

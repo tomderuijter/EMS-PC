@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/2/trunk/BNT/CPDs/@generic_CPD
+END
+adjustable_CPD.m
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/2/trunk/BNT/CPDs/@generic_CPD/adjustable_CPD.m
+END
+learn_params.m
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/2/trunk/BNT/CPDs/@generic_CPD/learn_params.m
+END
+display.m
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/2/trunk/BNT/CPDs/@generic_CPD/display.m
+END
+log_prior.m
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/2/trunk/BNT/CPDs/@generic_CPD/log_prior.m
+END
+set_clamped.m
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/2/trunk/BNT/CPDs/@generic_CPD/set_clamped.m
+END
+README
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/2/trunk/BNT/CPDs/@generic_CPD/README
+END
+generic_CPD.m
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/2/trunk/BNT/CPDs/@generic_CPD/generic_CPD.m
+END

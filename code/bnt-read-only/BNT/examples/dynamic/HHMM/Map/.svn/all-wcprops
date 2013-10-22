@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/2/trunk/BNT/examples/dynamic/HHMM/Map
+END
+disp_map_hhmm.m
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/2/trunk/BNT/examples/dynamic/HHMM/Map/disp_map_hhmm.m
+END
+mk_map_hhmm.m
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/2/trunk/BNT/examples/dynamic/HHMM/Map/mk_map_hhmm.m
+END
+learn_map.m
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/2/trunk/BNT/examples/dynamic/HHMM/Map/learn_map.m
+END
+mk_rnd_map_hhmm.m
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/2/trunk/BNT/examples/dynamic/HHMM/Map/mk_rnd_map_hhmm.m
+END
+sample_from_map.m
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/2/trunk/BNT/examples/dynamic/HHMM/Map/sample_from_map.m
+END

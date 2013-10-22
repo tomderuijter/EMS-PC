@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/2/trunk/BNT/CPDs/@tabular_kernel
+END
+convert_to_pot.m
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/2/trunk/BNT/CPDs/@tabular_kernel/convert_to_pot.m
+END
+convert_to_table.m
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/2/trunk/BNT/CPDs/@tabular_kernel/convert_to_table.m
+END
+tabular_kernel.m
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/2/trunk/BNT/CPDs/@tabular_kernel/tabular_kernel.m
+END
+set_fields.m
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/2/trunk/BNT/CPDs/@tabular_kernel/set_fields.m
+END
+get_field.m
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/2/trunk/BNT/CPDs/@tabular_kernel/get_field.m
+END

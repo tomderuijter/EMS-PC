@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/36/trunk/BNT/potentials/@scgpot
+END
+marginalize_pot.m
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/2/trunk/BNT/potentials/@scgpot/marginalize_pot.m
+END
+complement_pot.m
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/2/trunk/BNT/potentials/@scgpot/complement_pot.m
+END
+recursive_combine_pots.m
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/2/trunk/BNT/potentials/@scgpot/recursive_combine_pots.m
+END
+reduce_pot.m
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/2/trunk/BNT/potentials/@scgpot/reduce_pot.m
+END
+direct_combine_pots.m
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/2/trunk/BNT/potentials/@scgpot/direct_combine_pots.m
+END
+pot_to_marginal.m
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/36/trunk/BNT/potentials/@scgpot/pot_to_marginal.m
+END
+extension_pot.m
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/2/trunk/BNT/potentials/@scgpot/extension_pot.m
+END
+scgpot.m
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/2/trunk/BNT/potentials/@scgpot/scgpot.m
+END
+combine_pots.m
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/2/trunk/BNT/potentials/@scgpot/combine_pots.m
+END
+normalize_pot.m
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/2/trunk/BNT/potentials/@scgpot/normalize_pot.m
+END
+README
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/2/trunk/BNT/potentials/@scgpot/README
+END

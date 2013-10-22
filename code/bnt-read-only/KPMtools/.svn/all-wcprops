@@ -1,0 +1,1085 @@
+K 25
+svn:wc:ra_dav:version-url
+V 31
+/svn/!svn/ver/36/trunk/KPMtools
+END
+rectintSparse.m
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/2/trunk/KPMtools/rectintSparse.m
+END
+normalise.m
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/2/trunk/KPMtools/normalise.m
+END
+process_options.m
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/2/trunk/KPMtools/process_options.m
+END
+partition_matrix_vec.m
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/2/trunk/KPMtools/partition_matrix_vec.m
+END
+myrand.m
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/svn/!svn/ver/2/trunk/KPMtools/myrand.m
+END
+set_xtick_label.m
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/2/trunk/KPMtools/set_xtick_label.m
+END
+set_xtick_label_demo.m
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/2/trunk/KPMtools/set_xtick_label_demo.m
+END
+assertBNT.m
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/36/trunk/KPMtools/assertBNT.m
+END
+isscalarBNT.m
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/36/trunk/KPMtools/isscalarBNT.m
+END
+compute_counts.m
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/2/trunk/KPMtools/compute_counts.m
+END
+xticklabel_rotate90.m
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/2/trunk/KPMtools/xticklabel_rotate90.m
+END
+plotcov3.m
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/2/trunk/KPMtools/plotcov3.m
+END
+num2strcell.m
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/2/trunk/KPMtools/num2strcell.m
+END
+myones.m
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/svn/!svn/ver/2/trunk/KPMtools/myones.m
+END
+ind2subvMinka.m
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/2/trunk/KPMtools/ind2subvMinka.m
+END
+optimalMatchingTest.m
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/2/trunk/KPMtools/optimalMatchingTest.m
+END
+asdemo.html
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/2/trunk/KPMtools/asdemo.html
+END
+zipsave.m
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/2/trunk/KPMtools/zipsave.m
+END
+logb.m
+K 25
+svn:wc:ra_dav:version-url
+V 37
+/svn/!svn/ver/2/trunk/KPMtools/logb.m
+END
+logsumexp.m
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/2/trunk/KPMtools/logsumexp.m
+END
+rotate_xlabel.m
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/2/trunk/KPMtools/rotate_xlabel.m
+END
+plotBox.m
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/2/trunk/KPMtools/plotBox.m
+END
+nonmaxsup.m
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/2/trunk/KPMtools/nonmaxsup.m
+END
+subv2ind.m
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/2/trunk/KPMtools/subv2ind.m
+END
+sprintf_intvec.m
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/2/trunk/KPMtools/sprintf_intvec.m
+END
+strmatch_multi.m
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/2/trunk/KPMtools/strmatch_multi.m
+END
+centeringMatrix.m
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/2/trunk/KPMtools/centeringMatrix.m
+END
+unaryEncoding.m
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/2/trunk/KPMtools/unaryEncoding.m
+END
+safeStr.m
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/2/trunk/KPMtools/safeStr.m
+END
+nrows.m
+K 25
+svn:wc:ra_dav:version-url
+V 38
+/svn/!svn/ver/2/trunk/KPMtools/nrows.m
+END
+repmatC.dll
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/2/trunk/KPMtools/repmatC.dll
+END
+rnd_partition.m
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/2/trunk/KPMtools/rnd_partition.m
+END
+hungarian.m
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/2/trunk/KPMtools/hungarian.m
+END
+image_rgb.m
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/2/trunk/KPMtools/image_rgb.m
+END
+mexutil.c
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/2/trunk/KPMtools/mexutil.c
+END
+mkdirKPM.m
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/2/trunk/KPMtools/mkdirKPM.m
+END
+README.txt
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/2/trunk/KPMtools/README.txt
+END
+mexutil.h
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/2/trunk/KPMtools/mexutil.h
+END
+normaliseC.c
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/2/trunk/KPMtools/normaliseC.c
+END
+splitLongSeqIntoManyShort.m
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/2/trunk/KPMtools/splitLongSeqIntoManyShort.m
+END
+mysymsetdiff.m
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/2/trunk/KPMtools/mysymsetdiff.m
+END
+initFigures.m
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/2/trunk/KPMtools/initFigures.m
+END
+sort_evec.m
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/36/trunk/KPMtools/sort_evec.m
+END
+rectintLoopC.c
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/2/trunk/KPMtools/rectintLoopC.c
+END
+ind2subv.m
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/2/trunk/KPMtools/ind2subv.m
+END
+marg_table.m
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/2/trunk/KPMtools/marg_table.m
+END
+approx_unique.m
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/2/trunk/KPMtools/approx_unique.m
+END
+chi2inv.m
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/2/trunk/KPMtools/chi2inv.m
+END
+plotgauss2d_old.m
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/2/trunk/KPMtools/plotgauss2d_old.m
+END
+myintersect.m
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/2/trunk/KPMtools/myintersect.m
+END
+plotgauss2d.m
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/2/trunk/KPMtools/plotgauss2d.m
+END
+hsvKPM.m
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/svn/!svn/ver/2/trunk/KPMtools/hsvKPM.m
+END
+marginalize_table.m
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/2/trunk/KPMtools/marginalize_table.m
+END
+draw_ellipse.m
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/2/trunk/KPMtools/draw_ellipse.m
+END
+conf2mahal.m
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/2/trunk/KPMtools/conf2mahal.m
+END
+normaliseC.dll
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/2/trunk/KPMtools/normaliseC.dll
+END
+isequalKPM.m
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/2/trunk/KPMtools/isequalKPM.m
+END
+rectintC.m
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/2/trunk/KPMtools/rectintC.m
+END
+isposdef.m
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/2/trunk/KPMtools/isposdef.m
+END
+repmatC.c
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/2/trunk/KPMtools/repmatC.c
+END
+plot_polygon.m
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/2/trunk/KPMtools/plot_polygon.m
+END
+pick.m
+K 25
+svn:wc:ra_dav:version-url
+V 37
+/svn/!svn/ver/2/trunk/KPMtools/pick.m
+END
+asort.m
+K 25
+svn:wc:ra_dav:version-url
+V 38
+/svn/!svn/ver/2/trunk/KPMtools/asort.m
+END
+cell2matPad.m
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/2/trunk/KPMtools/cell2matPad.m
+END
+plot_ellipse.m
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/2/trunk/KPMtools/plot_ellipse.m
+END
+subv2indTest.m
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/2/trunk/KPMtools/subv2indTest.m
+END
+genpathKPM.m
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/2/trunk/KPMtools/genpathKPM.m
+END
+myunion.m
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/2/trunk/KPMtools/myunion.m
+END
+bipartiteMatchingIntProg.m
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/2/trunk/KPMtools/bipartiteMatchingIntProg.m
+END
+sqdist.m
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/svn/!svn/ver/2/trunk/KPMtools/sqdist.m
+END
+hash_del.m
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/2/trunk/KPMtools/hash_del.m
+END
+subsets1.m
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/2/trunk/KPMtools/subsets1.m
+END
+myismember.m
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/2/trunk/KPMtools/myismember.m
+END
+axis_pct.m
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/2/trunk/KPMtools/axis_pct.m
+END
+mahal2conf.m
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/2/trunk/KPMtools/mahal2conf.m
+END
+mysubset.m
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/2/trunk/KPMtools/mysubset.m
+END
+argmax.m
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/svn/!svn/ver/2/trunk/KPMtools/argmax.m
+END
+sampleUniformInts.m
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/2/trunk/KPMtools/sampleUniformInts.m
+END
+mysize.m
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/36/trunk/KPMtools/mysize.m
+END
+is_psd.m
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/svn/!svn/ver/2/trunk/KPMtools/is_psd.m
+END
+div.m
+K 25
+svn:wc:ra_dav:version-url
+V 36
+/svn/!svn/ver/2/trunk/KPMtools/div.m
+END
+bipartiteMatchingHungarian.m
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/2/trunk/KPMtools/bipartiteMatchingHungarian.m
+END
+hash_add.m
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/2/trunk/KPMtools/hash_add.m
+END
+ind2subvTest.m
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/2/trunk/KPMtools/ind2subvTest.m
+END
+installC_KPMtools.m
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/2/trunk/KPMtools/installC_KPMtools.m
+END
+montageKPM.m
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/2/trunk/KPMtools/montageKPM.m
+END
+zipload.m
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/2/trunk/KPMtools/zipload.m
+END
+bipartiteMatchingDemo.m
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/2/trunk/KPMtools/bipartiteMatchingDemo.m
+END
+factorial.m
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/2/trunk/KPMtools/factorial.m
+END
+assign_cols.m
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/2/trunk/KPMtools/assign_cols.m
+END
+logsum_test.m
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/2/trunk/KPMtools/logsum_test.m
+END
+colmult.c
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/2/trunk/KPMtools/colmult.c
+END
+myismember.m~
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/2/trunk/KPMtools/myismember.m~
+END
+asdemo.m
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/svn/!svn/ver/2/trunk/KPMtools/asdemo.m
+END
+mk_multi_index.m
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/2/trunk/KPMtools/mk_multi_index.m
+END
+logsumexpv.m
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/2/trunk/KPMtools/logsumexpv.m
+END
+suptitle.m
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/2/trunk/KPMtools/suptitle.m
+END
+hash_lookup.m
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/2/trunk/KPMtools/hash_lookup.m
+END
+ncols.m
+K 25
+svn:wc:ra_dav:version-url
+V 38
+/svn/!svn/ver/2/trunk/KPMtools/ncols.m
+END
+draw_circle.m
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/2/trunk/KPMtools/draw_circle.m
+END
+softeye.m
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/2/trunk/KPMtools/softeye.m
+END
+computeROC.m
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/2/trunk/KPMtools/computeROC.m
+END
+plotROC.m
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/2/trunk/KPMtools/plotROC.m
+END
+mult_by_table.m
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/2/trunk/KPMtools/mult_by_table.m
+END
+strsplit.m
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/2/trunk/KPMtools/strsplit.m
+END
+checkpsd.m
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/2/trunk/KPMtools/checkpsd.m
+END
+montageKPM2.m
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/2/trunk/KPMtools/montageKPM2.m
+END
+rectintLoopC.dll
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/2/trunk/KPMtools/rectintLoopC.dll
+END
+rgb2grayKPM.m
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/2/trunk/KPMtools/rgb2grayKPM.m
+END
+pca_netlab.m
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/2/trunk/KPMtools/pca_netlab.m
+END
+isemptycell.m
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/2/trunk/KPMtools/isemptycell.m
+END
+mysetdiff.m
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/2/trunk/KPMtools/mysetdiff.m
+END
+subv2indKPM.c
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/2/trunk/KPMtools/subv2indKPM.c
+END
+rand_psd.m
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/2/trunk/KPMtools/rand_psd.m
+END
+mk_stochastic.m
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/2/trunk/KPMtools/mk_stochastic.m
+END
+is_stochastic.m
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/2/trunk/KPMtools/is_stochastic.m
+END
+normalize.m
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/2/trunk/KPMtools/normalize.m
+END
+entropy.m
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/2/trunk/KPMtools/entropy.m
+END
+isvectorBNT.m
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/36/trunk/KPMtools/isvectorBNT.m
+END
+rectintSparseLoopC.dll
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/2/trunk/KPMtools/rectintSparseLoopC.dll
+END
+sample_discrete.m
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/2/trunk/KPMtools/sample_discrete.m
+END
+subv2indKPM.m
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/2/trunk/KPMtools/subv2indKPM.m
+END
+logsum.m
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/svn/!svn/ver/2/trunk/KPMtools/logsum.m
+END
+exportfig.m
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/2/trunk/KPMtools/exportfig.m
+END
+pca_kpm.m
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/2/trunk/KPMtools/pca_kpm.m
+END
+subplot2.m
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/2/trunk/KPMtools/subplot2.m
+END
+fullfileKPM.m
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/2/trunk/KPMtools/fullfileKPM.m
+END
+find_equiv_posns.m
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/2/trunk/KPMtools/find_equiv_posns.m
+END
+max_mult.c
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/2/trunk/KPMtools/max_mult.c
+END
+filepartsLast.m
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/2/trunk/KPMtools/filepartsLast.m
+END
+polygon_area.m
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/2/trunk/KPMtools/polygon_area.m
+END
+choose.m
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/svn/!svn/ver/2/trunk/KPMtools/choose.m
+END
+setdiag.m
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/2/trunk/KPMtools/setdiag.m
+END
+nchoose2.m
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/2/trunk/KPMtools/nchoose2.m
+END
+cell2num.m
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/2/trunk/KPMtools/cell2num.m
+END
+myplot.m
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/svn/!svn/ver/2/trunk/KPMtools/myplot.m
+END
+extend_domain_table.m
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/2/trunk/KPMtools/extend_domain_table.m
+END
+dirKPM.m
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/svn/!svn/ver/2/trunk/KPMtools/dirKPM.m
+END
+max_mult.m
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/2/trunk/KPMtools/max_mult.m
+END
+strmatch_substr.m
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/2/trunk/KPMtools/strmatch_substr.m
+END
+draw_ellipse_axes.m
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/2/trunk/KPMtools/draw_ellipse_axes.m
+END
+block.m
+K 25
+svn:wc:ra_dav:version-url
+V 38
+/svn/!svn/ver/2/trunk/KPMtools/block.m
+END
+plotROCkpm.m
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/2/trunk/KPMtools/plotROCkpm.m
+END
+ind2subvKPM.c
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/2/trunk/KPMtools/ind2subvKPM.c
+END
+junk.c
+K 25
+svn:wc:ra_dav:version-url
+V 37
+/svn/!svn/ver/2/trunk/KPMtools/junk.c
+END
+em_converged.m
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/2/trunk/KPMtools/em_converged.m
+END
+myrepmat.m
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/2/trunk/KPMtools/myrepmat.m
+END
+plotColors.m
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/2/trunk/KPMtools/plotColors.m
+END
+bipartiteMatchingDemoPlot.m
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/2/trunk/KPMtools/bipartiteMatchingDemoPlot.m
+END
+plot_matrix.m
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/2/trunk/KPMtools/plot_matrix.m
+END
+ind2subvKPM.m
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/2/trunk/KPMtools/ind2subvKPM.m
+END
+previewfig.m
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/2/trunk/KPMtools/previewfig.m
+END
+plotcov2.m
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/2/trunk/KPMtools/plotcov2.m
+END
+wrap.m
+K 25
+svn:wc:ra_dav:version-url
+V 37
+/svn/!svn/ver/2/trunk/KPMtools/wrap.m
+END
+rectintSparseLoopC.c
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/2/trunk/KPMtools/rectintSparseLoopC.c
+END
+plot_axis_thru_origin.m
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/2/trunk/KPMtools/plot_axis_thru_origin.m
+END
+logdet.m
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/svn/!svn/ver/2/trunk/KPMtools/logdet.m
+END
+loadcell.m
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/2/trunk/KPMtools/loadcell.m
+END
+optimalMatching.m
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/2/trunk/KPMtools/optimalMatching.m
+END
+montageKPM3.m
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/2/trunk/KPMtools/montageKPM3.m
+END
+imresizeAspect.m
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/2/trunk/KPMtools/imresizeAspect.m
+END
+subsets.m
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/2/trunk/KPMtools/subsets.m
+END
+rectintSparseC.m
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/2/trunk/KPMtools/rectintSparseC.m
+END
+sumv.m
+K 25
+svn:wc:ra_dav:version-url
+V 37
+/svn/!svn/ver/2/trunk/KPMtools/sumv.m
+END
+myreshape.m
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/2/trunk/KPMtools/myreshape.m
+END
+matprint.m
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/2/trunk/KPMtools/matprint.m
+END
+approxeq.m
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/2/trunk/KPMtools/approxeq.m
+END
+subsetsFixedSize.m
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/2/trunk/KPMtools/subsetsFixedSize.m
+END
+partitionData.m
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/2/trunk/KPMtools/partitionData.m
+END
+collapse_mog.m
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/2/trunk/KPMtools/collapse_mog.m
+END
+plotgauss1d.m
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/2/trunk/KPMtools/plotgauss1d.m
+END
+polygon_intersect.m
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/2/trunk/KPMtools/polygon_intersect.m
+END
+cross_entropy.m
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/2/trunk/KPMtools/cross_entropy.m
+END
+subplot3.m
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/2/trunk/KPMtools/subplot3.m
+END
+assignEdgeNums.m
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/2/trunk/KPMtools/assignEdgeNums.m
+END
+subv2indMinka.m
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/2/trunk/KPMtools/subv2indMinka.m
+END
+argmin.m
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/svn/!svn/ver/2/trunk/KPMtools/argmin.m
+END
+polygon_centroid.m
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/2/trunk/KPMtools/polygon_centroid.m
+END
+logsum_simple.m
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/2/trunk/KPMtools/logsum_simple.m
+END
+plotcov2New.m
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/2/trunk/KPMtools/plotcov2New.m
+END

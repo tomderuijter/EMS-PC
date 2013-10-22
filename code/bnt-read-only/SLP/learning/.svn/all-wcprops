@@ -1,0 +1,89 @@
+K 25
+svn:wc:ra_dav:version-url
+V 35
+/svn/!svn/ver/68/trunk/SLP/learning
+END
+learn_struct_mcmc.m
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/68/trunk/SLP/learning/learn_struct_mcmc.m
+END
+learn_struct_ges_EM.m
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/68/trunk/SLP/learning/learn_struct_ges_EM.m
+END
+learn_struct_EM.m
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/68/trunk/SLP/learning/learn_struct_EM.m
+END
+learn_struct_tan.m
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/68/trunk/SLP/learning/learn_struct_tan.m
+END
+learn_struct_bnpc.m
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/68/trunk/SLP/learning/learn_struct_bnpc.m
+END
+learn_struct_tan_EM.m
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/68/trunk/SLP/learning/learn_struct_tan_EM.m
+END
+mk_naive_struct.m
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/68/trunk/SLP/learning/mk_naive_struct.m
+END
+learn_struct_gs.m
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/68/trunk/SLP/learning/learn_struct_gs.m
+END
+learn_struct_hc.m
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/68/trunk/SLP/learning/learn_struct_hc.m
+END
+learn_struct_mwst.m
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/68/trunk/SLP/learning/learn_struct_mwst.m
+END
+learn_struct_gs2.m
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/68/trunk/SLP/learning/learn_struct_gs2.m
+END
+learn_struct_mwst_EM.m
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/68/trunk/SLP/learning/learn_struct_mwst_EM.m
+END
+learn_struct_pdag_pc_mod.m
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/68/trunk/SLP/learning/learn_struct_pdag_pc_mod.m
+END
+learn_struct_ges.m
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/68/trunk/SLP/learning/learn_struct_ges.m
+END

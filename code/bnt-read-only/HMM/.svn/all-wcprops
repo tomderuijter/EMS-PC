@@ -1,0 +1,173 @@
+K 25
+svn:wc:ra_dav:version-url
+V 25
+/svn/!svn/ver/2/trunk/HMM
+END
+dhmm_logprob_path.m
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/2/trunk/HMM/dhmm_logprob_path.m
+END
+dhmm_sample.m
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/svn/!svn/ver/2/trunk/HMM/dhmm_sample.m
+END
+mc_sample_endstate.m
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/2/trunk/HMM/mc_sample_endstate.m
+END
+mk_leftright_transmat.m
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/2/trunk/HMM/mk_leftright_transmat.m
+END
+dhmm_logprob_brute_force.m
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/2/trunk/HMM/dhmm_logprob_brute_force.m
+END
+mk_rightleft_transmat.m
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/2/trunk/HMM/mk_rightleft_transmat.m
+END
+mhmm_sample.m
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/svn/!svn/ver/2/trunk/HMM/mhmm_sample.m
+END
+mc_sample.m
+K 25
+svn:wc:ra_dav:version-url
+V 37
+/svn/!svn/ver/2/trunk/HMM/mc_sample.m
+END
+fwdback.m
+K 25
+svn:wc:ra_dav:version-url
+V 35
+/svn/!svn/ver/2/trunk/HMM/fwdback.m
+END
+fixed_lag_smoother.m
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/2/trunk/HMM/fixed_lag_smoother.m
+END
+mhmmParzen_train_observed.m
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/2/trunk/HMM/mhmmParzen_train_observed.m
+END
+dhmm_em.m
+K 25
+svn:wc:ra_dav:version-url
+V 35
+/svn/!svn/ver/2/trunk/HMM/dhmm_em.m
+END
+fixed_lag_smoother_demo.m
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/2/trunk/HMM/fixed_lag_smoother_demo.m
+END
+dhmm_logprob.m
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/2/trunk/HMM/dhmm_logprob.m
+END
+dhmm_em_online.m
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/2/trunk/HMM/dhmm_em_online.m
+END
+dhmm_em_demo.m
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/2/trunk/HMM/dhmm_em_demo.m
+END
+gausshmm_train_observed.m
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/2/trunk/HMM/gausshmm_train_observed.m
+END
+dhmm_sample_endstate.m
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/2/trunk/HMM/dhmm_sample_endstate.m
+END
+dhmm_em_online_demo.m
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/2/trunk/HMM/dhmm_em_online_demo.m
+END
+mhmm_em.m
+K 25
+svn:wc:ra_dav:version-url
+V 35
+/svn/!svn/ver/2/trunk/HMM/mhmm_em.m
+END
+transmat_train_observed.m
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/2/trunk/HMM/transmat_train_observed.m
+END
+viterbi_path.m
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/2/trunk/HMM/viterbi_path.m
+END
+README.txt
+K 25
+svn:wc:ra_dav:version-url
+V 36
+/svn/!svn/ver/2/trunk/HMM/README.txt
+END
+pomdp_sample.m
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/2/trunk/HMM/pomdp_sample.m
+END
+testHMM.m
+K 25
+svn:wc:ra_dav:version-url
+V 35
+/svn/!svn/ver/2/trunk/HMM/testHMM.m
+END
+mdp_sample.m
+K 25
+svn:wc:ra_dav:version-url
+V 38
+/svn/!svn/ver/2/trunk/HMM/mdp_sample.m
+END
+mhmm_logprob.m
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/2/trunk/HMM/mhmm_logprob.m
+END
+mhmm_em_demo.m
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/2/trunk/HMM/mhmm_em_demo.m
+END

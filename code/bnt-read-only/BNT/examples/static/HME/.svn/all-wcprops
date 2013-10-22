@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/2/trunk/BNT/examples/static/HME
+END
+test_data_class2.mat
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/2/trunk/BNT/examples/static/HME/test_data_class2.mat
+END
+hme_reg_plot.m
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/2/trunk/BNT/examples/static/HME/hme_reg_plot.m
+END
+HMEforMatlab.jpg
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/2/trunk/BNT/examples/static/HME/HMEforMatlab.jpg
+END
+train_data_reg.mat
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/2/trunk/BNT/examples/static/HME/train_data_reg.mat
+END
+test_data_reg.mat
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/2/trunk/BNT/examples/static/HME/test_data_reg.mat
+END
+hme_class_plot.m
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/2/trunk/BNT/examples/static/HME/hme_class_plot.m
+END
+hmemenu.m
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/2/trunk/BNT/examples/static/HME/hmemenu.m
+END
+fhme.m
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/2/trunk/BNT/examples/static/HME/fhme.m
+END
+train_data_class.mat
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/2/trunk/BNT/examples/static/HME/train_data_class.mat
+END
+hme_topobuilder.m
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/2/trunk/BNT/examples/static/HME/hme_topobuilder.m
+END
+test_data_class.mat
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/2/trunk/BNT/examples/static/HME/test_data_class.mat
+END
+README
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/2/trunk/BNT/examples/static/HME/README
+END
+gen_data.m
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/2/trunk/BNT/examples/static/HME/gen_data.m
+END

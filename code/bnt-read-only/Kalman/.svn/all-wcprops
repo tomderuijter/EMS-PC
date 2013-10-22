@@ -1,0 +1,113 @@
+K 25
+svn:wc:ra_dav:version-url
+V 28
+/svn/!svn/ver/2/trunk/Kalman
+END
+learn_kalman.m
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/2/trunk/Kalman/learn_kalman.m
+END
+kalman_forward_backward.m
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/2/trunk/Kalman/kalman_forward_backward.m
+END
+eval_AR_perf.m
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/2/trunk/Kalman/eval_AR_perf.m
+END
+learning_demo.m
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/2/trunk/Kalman/learning_demo.m
+END
+testKalman.m
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/2/trunk/Kalman/testKalman.m
+END
+kalman_update.m
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/2/trunk/Kalman/kalman_update.m
+END
+tracking_demo.m
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/2/trunk/Kalman/tracking_demo.m
+END
+kalman_filter.m
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/2/trunk/Kalman/kalman_filter.m
+END
+convert_to_lagged_form.m
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/2/trunk/Kalman/convert_to_lagged_form.m
+END
+SS_to_AR.m
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/svn/!svn/ver/2/trunk/Kalman/SS_to_AR.m
+END
+AR_to_SS.m
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/svn/!svn/ver/2/trunk/Kalman/AR_to_SS.m
+END
+smooth_update.m
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/2/trunk/Kalman/smooth_update.m
+END
+README.txt
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/svn/!svn/ver/2/trunk/Kalman/README.txt
+END
+learn_AR_diagonal.m
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/2/trunk/Kalman/learn_AR_diagonal.m
+END
+ensure_AR.m
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/2/trunk/Kalman/ensure_AR.m
+END
+kalman_smoother.m
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/2/trunk/Kalman/kalman_smoother.m
+END
+sample_lds.m
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/2/trunk/Kalman/sample_lds.m
+END
+learn_AR.m
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/svn/!svn/ver/2/trunk/Kalman/learn_AR.m
+END

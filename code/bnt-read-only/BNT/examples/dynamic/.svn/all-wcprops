@@ -1,0 +1,227 @@
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/2/trunk/BNT/examples/dynamic
+END
+kalman1.m
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/2/trunk/BNT/examples/dynamic/kalman1.m
+END
+bat1.m
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/2/trunk/BNT/examples/dynamic/bat1.m
+END
+ho1.m
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/2/trunk/BNT/examples/dynamic/ho1.m
+END
+bkff1.m
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/2/trunk/BNT/examples/dynamic/bkff1.m
+END
+kjaerulff1.m
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/2/trunk/BNT/examples/dynamic/kjaerulff1.m
+END
+reveal1.m
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/2/trunk/BNT/examples/dynamic/reveal1.m
+END
+cmp_online_inference.m
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/2/trunk/BNT/examples/dynamic/cmp_online_inference.m
+END
+mildew1.m
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/2/trunk/BNT/examples/dynamic/mildew1.m
+END
+mk_collage_from_clqs.m
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/2/trunk/BNT/examples/dynamic/mk_collage_from_clqs.m
+END
+water1.m
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/2/trunk/BNT/examples/dynamic/water1.m
+END
+water2.m
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/2/trunk/BNT/examples/dynamic/water2.m
+END
+skf_data_assoc_gmux.m
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/2/trunk/BNT/examples/dynamic/skf_data_assoc_gmux.m
+END
+filter_test1.m
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/2/trunk/BNT/examples/dynamic/filter_test1.m
+END
+chmm1.m
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/2/trunk/BNT/examples/dynamic/chmm1.m
+END
+dhmm1.m
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/2/trunk/BNT/examples/dynamic/dhmm1.m
+END
+loopy_dbn1.m
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/2/trunk/BNT/examples/dynamic/loopy_dbn1.m
+END
+ehmm1.m
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/2/trunk/BNT/examples/dynamic/ehmm1.m
+END
+ghmm1.m
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/2/trunk/BNT/examples/dynamic/ghmm1.m
+END
+fhmm_infer.m
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/2/trunk/BNT/examples/dynamic/fhmm_infer.m
+END
+mk_chmm.m
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/2/trunk/BNT/examples/dynamic/mk_chmm.m
+END
+mhmm1.m
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/2/trunk/BNT/examples/dynamic/mhmm1.m
+END
+mk_bat_dbn.m
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/2/trunk/BNT/examples/dynamic/mk_bat_dbn.m
+END
+viterbi1.m
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/2/trunk/BNT/examples/dynamic/viterbi1.m
+END
+arhmm1.m
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/2/trunk/BNT/examples/dynamic/arhmm1.m
+END
+jtree_clq_test2.m
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/2/trunk/BNT/examples/dynamic/jtree_clq_test2.m
+END
+mk_mildew_dbn.m
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/2/trunk/BNT/examples/dynamic/mk_mildew_dbn.m
+END
+mk_water_dbn.m
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/2/trunk/BNT/examples/dynamic/mk_water_dbn.m
+END
+mk_uffe_dbn.m
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/2/trunk/BNT/examples/dynamic/mk_uffe_dbn.m
+END
+scg_dbn.m
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/2/trunk/BNT/examples/dynamic/scg_dbn.m
+END
+mk_orig_bat_dbn.m
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/2/trunk/BNT/examples/dynamic/mk_orig_bat_dbn.m
+END
+jtree_clq_test.m
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/2/trunk/BNT/examples/dynamic/jtree_clq_test.m
+END
+mk_orig_water_dbn.m
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/2/trunk/BNT/examples/dynamic/mk_orig_water_dbn.m
+END
+mk_fhmm.m
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/2/trunk/BNT/examples/dynamic/mk_fhmm.m
+END
+mk_ps_from_clqs.m
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/2/trunk/BNT/examples/dynamic/mk_ps_from_clqs.m
+END
+cmp_inference_dbn.m
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/2/trunk/BNT/examples/dynamic/cmp_inference_dbn.m
+END
+cmp_learning_dbn.m
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/2/trunk/BNT/examples/dynamic/cmp_learning_dbn.m
+END
+orig_water1.m
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/2/trunk/BNT/examples/dynamic/orig_water1.m
+END

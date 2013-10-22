@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/2/trunk/BNT/CPDs/@hhmmF_CPD
+END
+hhmmF_CPD.m
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/2/trunk/BNT/CPDs/@hhmmF_CPD/hhmmF_CPD.m
+END
+maximize_params.m
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/2/trunk/BNT/CPDs/@hhmmF_CPD/maximize_params.m
+END
+update_CPT.m
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/2/trunk/BNT/CPDs/@hhmmF_CPD/update_CPT.m
+END
+update_ess.m
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/2/trunk/BNT/CPDs/@hhmmF_CPD/update_ess.m
+END
+reset_ess.m
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/2/trunk/BNT/CPDs/@hhmmF_CPD/reset_ess.m
+END
+log_prior.m
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/2/trunk/BNT/CPDs/@hhmmF_CPD/log_prior.m
+END
