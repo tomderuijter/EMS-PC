@@ -1,20 +1,18 @@
-function [undirected_graph, sepset] = structure_pc(cond_indep, N, varargin)
-
-% STRUCTURE_PC Learns the skeleton structure of a given set of nodes.
-% P = structure_pc(cond_indep, N, ...)
+function [undirected_graph, sepset] = structure_pc(timeseries_data)
 
 % Variable translation
+% T - number of samples
 % N - number of vertices
-% cond_indep - boolean function, called through
-% feval(cond_indep,x,y,S,varargs) 
-% varargs is a cell array containing optional parameters
+% i - iteration number / set cardinality
 
+T = size(timeseries_data,1);
+N = size(timeseries_data,2);
 
 % Complete undirected graph
 undirected_graph = ones(N,N) - eye(N);
 sepset = cell(N,N);
 
-i = 0; % iteration number / set cardinality
+i = 0;
 
 % TODO: Move neighbour select outside inner loop
 
@@ -51,7 +49,7 @@ while(~kill_loop)
 			checking_subsets = 1;
 			while (checking_subsets) % until all subsets are checked
 				S = adjacent_to_x(subset_indices);
-				if feval(cond_indep,x,y,S,varargin{:})
+				if d_seperated2_test(x, y, S)
 					[undirected_graph,sepset] = remove_edge(undirected_graph,x,y,sepset,S);
 					checking_subsets = 0;
 				else
@@ -77,5 +75,3 @@ end
 % 1 - neighbour
 % 2 - arrow
 % 3 - dot
-% one of these values at (x,y) means that this code is at node x, on the
-% connection to y
