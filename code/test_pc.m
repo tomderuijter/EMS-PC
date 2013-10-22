@@ -5,3 +5,4 @@ cond_indep = 'cond_indep_chisquare';
 test = 'pearson';
 
 [G,sepset] = structure_pc(cond_indep,N,data,test);
+PDAG = directional_pc(G,sepset);
