@@ -114,4 +114,5 @@ end
 % 1 - neighbour
 % 2 - arrow
 % 3 - dot
-% For example, (x,y)=1 and (y,x)=2 means y -> x
+% one of these values at (x,y) means that this code is at node x, on the
+% connection to y. For example, (x,y)=1 and (y,x)=2 means x -> y
