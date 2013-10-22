@@ -7,7 +7,7 @@ switch length(S)
 		return;
 	case 1
 		if (isequal(S,3))
-			seperated = (x == 2 && (y == 4 || y == 5));
+			seperated = (x == 2 && (y == 4 || y == 5)) || (x == 1 && y == 4);
 		elseif (isequal(S, 4))
 			seperated = (x == 2 && y == 5);
 		else
@@ -15,7 +15,7 @@ switch length(S)
 		end
 		return;
 	case 2
-		seperated = ((isequal(S,[3,5])) && x == 1 && y == 4) || (isequal(S,[1,4]) && x == 3 && y == 5);
+		seperated = isequal(S,[1,4]) && x == 3 && y == 5;
 		return;
 	case 3
 		seperated = 0;
