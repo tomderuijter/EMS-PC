@@ -1,12 +1,9 @@
-function [undirected_graph, sepset] = structure_pc(timeseries_data)
+function [undirected_graph, sepset] = structure_pc(cond_indep, N, varargin)
 
 % Variable translation
 % T - number of samples
 % N - number of vertices
 % i - iteration number / set cardinality
-
-T = size(timeseries_data,1);
-N = size(timeseries_data,2);
 
 % Complete undirected graph
 undirected_graph = ones(N,N) - eye(N);
@@ -34,9 +31,9 @@ while(~kill_loop)
 		
 		kill_loop = 0;
         for y = adjacent_to_x
-			if (y <= x)
-				continue;
-			end
+% 			if (y <= x)
+% 				continue;
+% 			end
 			index_y_in_adjacent = find(adjacent_to_x == y,1,'first');	
 			
 			% create initial subset 1,2,.. of length i, excluding y
@@ -49,7 +46,7 @@ while(~kill_loop)
 			checking_subsets = 1;
 			while (checking_subsets) % until all subsets are checked
 				S = adjacent_to_x(subset_indices);
-				if d_seperated2_test(x, y, S)
+				if feval(cond_indep, x, y, S, varargin{:})
 					[undirected_graph,sepset] = remove_edge(undirected_graph,x,y,sepset,S);
 					checking_subsets = 0;
 				else
