@@ -1,11 +1,18 @@
 function [directed_graph] = directional_pc(undirected_graph, sepset)
+
 directed_graph = undirected_graph;
 N = size(undirected_graph, 1);
 assert(N == size(undirected_graph, 2), 'input graph is not a square matrix');
+
+fprintf('Finding V-structures...');
+dtime=cputime;
+% Condition C - V structures
+i = 0;
 for x = 1 : N
 	right_of_diag = ((x+1) : N);
 	for y = right_of_diag
-		% x and y not connected -> not interesting
+		
+        % x and y not connected -> not interesting
 		if ~undirected_graph(x,y)
 			continue
 		end
@@ -21,20 +28,32 @@ for x = 1 : N
 				y_alg = y;
 			else
 				continue
-			end
+            end
+            
 			% if y is not in sepset(x,z)
 			if (~any(sepset{x_alg,z_alg} == y_alg))
 				directed_graph(x_alg, y_alg) = 2;
 				directed_graph(z_alg, y_alg) = 2;
+                i=i+1;
 			end
 		end
 	end
 end
+fprintf('Done finding V-structures: %d structures found.\n', i);
+dtime = cputime - dtime;
+fprintf('\t- Execution time : %3.2f seconds\n',dtime);
 
+% TODO: De code loopt vast op het padvinden hieronder.
+
+fprintf('Calculating paths in graph...');
 % (x,y) denotes if there is a path from x to y
 path_from_to = (directed_graph == 2).';
 path_from_to = find_all_paths(double(path_from_to));
+dtime = cputime - dtime;
+fprintf('\t- Execution time : %3.2f seconds\n',dtime);
 
+
+fprintf('Finding other directed structures...');
 % the point x,y to check for both conditions
 x = 1;
 y = 1;
@@ -70,6 +89,8 @@ while (~(x_last_update == x && y_last_update == y))
 	end
 	[x,y] = next_point(x,y,N);
 end
+dtime = cputime - dtime;
+fprintf('\t- Execution time : %3.2f seconds\n',dtime);
 
 %arrowheads_to_check = directed_graph(directed_graph == 2);
 %arrowheads_to_check_next = [];
@@ -100,15 +121,26 @@ if (x == y)
 end
 end
 
+
 function [path_from_to] = find_all_paths(path_from_to)
+
 next_order = path_from_to*path_from_to;
 to_return = path_from_to;
+
 while(any(any(next_order)))
 	to_return = to_return + next_order;
 	next_order = double(logical(next_order*path_from_to));
 end
+
 path_from_to = to_return;
+
 end
+
+
+% Given a directed graph, calculates what nodes are connected to what
+% others.
+
+
 % Graph coding
 % 0 - not connected
 % 1 - neighbour

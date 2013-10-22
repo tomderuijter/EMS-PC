@@ -8,8 +8,15 @@ fprintf('Done loading data.\n');
 C = cov(data);
 fprintf('Done calculating covariance.\n');
 
+fprintf('Calculating structure...\n');
 cond_indep = 'cond_indep_fisher_z';
+tmp=cputime;
 [G,sepset] = structure_pc(cond_indep,N,C,T);
-fprintf('Done finding structure.\n');
-PDAG = directional_pc(G,sepset);
-fprintf('Done directing arrows.\n');
+tmp=cputime-tmp;
+fprintf('\t- Execution time : %3.2f seconds\n',tmp);
+
+% fprintf('Finding causal directions...\n');
+% PDAG = directional_pc(G,sepset);
+% fprintf('Done directing arrows.\n');
+% tmp=cputime-tmp;
+% fprintf('\t- Execution time : %3.2f seconds\n',tmp);
