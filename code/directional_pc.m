@@ -105,7 +105,7 @@ next_order = path_from_to*path_from_to;
 to_return = path_from_to;
 while(any(any(next_order)))
 	to_return = to_return + next_order;
-	next_order = next_order*path_from_to;
+	next_order = double(logical(next_order*path_from_to));
 end
 path_from_to = to_return;
 end

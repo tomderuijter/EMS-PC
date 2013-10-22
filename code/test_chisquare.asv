@@ -11,7 +11,7 @@ texte{2}='independency';
 test='pearson'; % Pearson's Chi2
 %test='LRT';     % Likelihood ratio test G2
 
-
+	
 fprintf('\t\tChi2 Test for (conditional) independency\n');
 fprintf('\t\t(X, Y and Z are theoritically independant)\n');
 
