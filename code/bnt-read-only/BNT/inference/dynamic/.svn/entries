@@ -1,101 +1,0 @@
-10
-
-dir
-71
-http://bnt.googlecode.com/svn/trunk/BNT/inference/dynamic
-http://bnt.googlecode.com/svn
-
-
-
-2010-02-16T19:21:53.981100Z
-36
-mattbdunham
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-464ba914-0a9d-11df-bc4b-c3c7eeec796e
-
-@cbk_inf_engine
-dir
-
-@stable_ho_inf_engine
-dir
-
-@jtree_unrolled_dbn_inf_engine
-dir
-
-@hmm_inf_engine
-dir
-
-@kalman_inf_engine
-dir
-
-@pearl_dbn_inf_engine
-dir
-
-@bk_ff_hmm_inf_engine
-dir
-
-@frontier_inf_engine
-dir
-
-@pearl_unrolled_dbn_inf_engine
-dir
-
-CVS
-dir
-
-dummy
-file
-
-
-
-
-2013-10-15T09:05:36.000000Z
-d41d8cd98f00b204e9800998ecf8427e
-2010-01-26T18:50:20.613898Z
-2
-mattbdunham
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-0
-
-@ff_inf_engine
-dir
-
-@bk_inf_engine
-dir
-
-@jtree_dbn_inf_engine
-dir
-

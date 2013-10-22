@@ -1,116 +1,0 @@
-10
-
-dir
-71
-http://bnt.googlecode.com/svn/trunk/BNT/inference/static
-http://bnt.googlecode.com/svn
-
-
-
-2010-05-07T06:57:46.787266Z
-60
-wsun18
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-464ba914-0a9d-11df-bc4b-c3c7eeec796e
-
-@stab_cond_gauss_inf_engine
-dir
-
-@var_elim_inf_engine
-dir
-
-@pearl_inf_engine
-dir
-
-@belprop_inf_engine
-dir
-
-@global_joint_inf_engine
-dir
-
-@quickscore_inf_engine
-dir
-
-@jtree_inf_engine
-dir
-
-CVS
-dir
-
-@gaussian_inf_engine
-dir
-
-dummy
-file
-
-
-
-
-2013-10-15T09:05:38.000000Z
-d41d8cd98f00b204e9800998ecf8427e
-2010-01-26T18:50:20.613898Z
-2
-mattbdunham
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-0
-
-@belprop_fg_inf_engine
-dir
-
-@gibbs_sampling_inf_engine
-dir
-
-@enumerative_inf_engine
-dir
-
-@cond_gauss_inf_engine
-dir
-
-@jtree_sparse_inf_engine
-dir
-
-@jtree_limid_inf_engine
-dir
-
-@likelihood_weighting_inf_engine
-dir
-
-@belprop_mrf2_inf_engine
-dir
-
-@jtree_mnet_inf_engine
-dir
-

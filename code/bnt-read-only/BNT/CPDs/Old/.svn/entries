@@ -1,40 +1,0 @@
-10
-
-dir
-71
-http://bnt.googlecode.com/svn/trunk/BNT/CPDs/Old
-http://bnt.googlecode.com/svn
-
-
-
-2010-01-26T18:50:20.613898Z
-2
-mattbdunham
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-464ba914-0a9d-11df-bc4b-c3c7eeec796e
-
-@tabular_chance_node
-dir
-
-@root_gaussian_CPD
-dir
-
-@linear_gaussian_CPD
-dir
-
-CVS
-dir
-
