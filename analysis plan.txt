@@ -1,0 +1,13 @@
+Free parameters 
+- Subject number (1-6)
+- P-value acceptance (default 0.05)
+- Vertex permutation (default 1-116)
+
+Possible ideas
+- Test for smaller number of variables (1-10)
+- Average over a large amount of permutations
+- Vary independency acceptance threshold
+- How will we tackle cross-subject comparison?
+
+- Retest sepsets for unknown symmetric connections
+- Incorporate partial correlation in direction rules

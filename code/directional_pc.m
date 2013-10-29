@@ -20,9 +20,15 @@ for i=1:length(X)
     for z=Z(:)'
         if undirected_graph(x,z)==0 && ~ismember(y, sepset{x,z}) && ~ismember(y, sepset{z,x}) && ~ismember(-1,sepset{x,z})
             %fprintf('%d -> %d <- %d\n', x, y, z);
-            directed_graph(x,y) = 2; directed_graph(y,x) = 0;
-            directed_graph(z,y) = 2; directed_graph(y,z) = 0;
-            nrEdges=nrEdges+2;
+            
+            if(directed_graph(x,y) ~= 2)
+                directed_graph(x,y) = 2; directed_graph(y,x) = 0;
+                nrEdges=nrEdges+1;
+            end
+            if(directed_graph(z,y) ~= 2)
+                directed_graph(z,y) = 2; directed_graph(y,z) = 0;
+                nrEdges=nrEdges+1;
+            end
         end
     end
 end
