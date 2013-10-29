@@ -21,7 +21,7 @@ for i=1:length(X)
             %fprintf('%d -> %d <- %d\n', x, y, z);
             pdag(x,y) = 2; pdag(y,x) = 0;
             pdag(z,y) = 2; pdag(y,z) = 0;
-            nrEdges=nrEdges+1;
+            nrEdges=nrEdges+2;
         end
     end
 end
@@ -85,24 +85,4 @@ dtime = cputime - dtime;
 fprintf('\t- Execution time : %3.2f seconds\n',dtime);
 fprintf('Done finding additional edges: %d directional edges found.\n', nrEdges);
 
-end
-
-
-function C = mysetdiff(A,B)
-% MYSETDIFF Set difference of two sets of positive integers (much faster than built-in setdiff)
-% C = mysetdiff(A,B)
-% C = A \ B = { things in A that are not in B }
-
-if isempty(A)
-    C = [];
-    return;
-elseif isempty(B)
-    C = A;
-    return; 
-else % both non-empty
-    bits = zeros(1, max(max(A), max(B)));
-    bits(A) = 1;
-    bits(B) = 0;
-    C = A(logical(bits(A)));
-end
 end

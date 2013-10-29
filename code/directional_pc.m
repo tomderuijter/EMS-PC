@@ -1,105 +1,83 @@
 function [directed_graph] = directional_pc(undirected_graph, sepset)
 
-directed_graph = undirected_graph;
 N = size(undirected_graph, 1);
 assert(N == size(undirected_graph, 2), 'input graph is not a square matrix');
+directed_graph = undirected_graph;
+
 
 fprintf('Finding V-structures...');
 dtime=cputime;
-% Condition C - V structures
-i = 0;
-for x = 1 : N
-	right_of_diag = ((x+1) : N);
-	for y = right_of_diag
-		
-        % x and y not connected -> not interesting
-		if ~undirected_graph(x,y)
-			continue
-		end
-		
-		% for all elements of right_of_diag, excluding y
-		% x_alg etc. are x, y and z as described in the algorithm
-		for z_alg = right_of_diag(right_of_diag ~= y)
-			if (undirected_graph(x,z_alg))
-				x_alg = y;
-				y_alg = x;
-			elseif (undirected_graph(y,z_alg))
-			    x_alg = x;
-				y_alg = y;
-			else
-				continue
-            end
-            
-			% if y is not in sepset(x,z)
-			if (~any(sepset{x_alg,z_alg} == y_alg))
-				directed_graph(x_alg, y_alg) = 2;
-				directed_graph(z_alg, y_alg) = 2;
-                i=i+1;
-			end
-		end
-	end
+
+nrEdges=0;
+[X, Y] = find(undirected_graph);
+% We want to generate all unique triples x,y,z
+% This code generates x,y,z and z,y,x.
+for i=1:length(X)
+    x = X(i);
+    y = Y(i);
+    Z = find(undirected_graph(y,:));
+    Z = mysetdiff(Z, x);
+    for z=Z(:)'
+        if undirected_graph(x,z)==0 && ~ismember(y, sepset{x,z}) && ~ismember(y, sepset{z,x}) && ~ismember(-1,sepset{x,z})
+            %fprintf('%d -> %d <- %d\n', x, y, z);
+            directed_graph(x,y) = 2; directed_graph(y,x) = 0;
+            directed_graph(z,y) = 2; directed_graph(y,z) = 0;
+            nrEdges=nrEdges+2;
+        end
+    end
 end
-fprintf('Done finding V-structures: %d structures found.\n', i);
+fprintf('Done finding V-structures: %d directional edges found.\n', nrEdges);
 dtime = cputime - dtime;
 fprintf('\t- Execution time : %3.2f seconds\n',dtime);
 
-% TODO: De code loopt vast op het padvinden hieronder.
-
+dtime = cputime;
 fprintf('Calculating paths in graph...');
 % (x,y) denotes if there is a path from x to y
-path_from_to = (directed_graph == 2).';
-path_from_to = find_all_paths(double(path_from_to));
+path_from_to = double(directed_graph == 2);
+path_from_to = find_all_paths(path_from_to);
 dtime = cputime - dtime;
 fprintf('\t- Execution time : %3.2f seconds\n',dtime);
 
-
+dtime = cputime;
 fprintf('Finding other directed structures...');
 % the point x,y to check for both conditions
 x = 1;
 y = 1;
 % used to determine whether a full loop over all elements has been made
 % without an update (in that case, the loop can stop)
-x_last_update = N;
-y_last_update = N-1;
-while (~(x_last_update == x && y_last_update == y))
+iterations_without_updates = 0;
+while (iterations_without_updates <= N*N)
 	% for each undirected adjacent pair (x,y)
-	if ((directed_graph(y,x) == 1) && (directed_graph(x,y) == 1))
+	if directed_graph(x,y) == 1 
 		% whether an arrow x -> y or y -> x has been found
 		x_y_directed = 0;
+				
 		% rule 1
-		if (path_from_to(x,y))
-			directed_graph(x,y) = 2;
-			x_y_directed = 1;
-		else
-			% rule 2
-			for (z = 1 : N)
-				if (z ~= x && z ~= y && (directed_graph(z,x) == 2))
-					directed_graph(x,y) = 2;
-					x_y_directed = 1;
-				end
+		for z = mysetdiff(1:N,[x,y])
+			if (directed_graph(z,x) == 2 && directed_graph(z,y) == 0 && directed_graph(y,z) == 0)
+				x_y_directed = 1;
 			end
+		end
+		
+		% rule 2
+		if (path_from_to(x,y) && ~x_y_directed)
+			x_y_directed = 1;
 		end
 
 		if (x_y_directed)
-			path_from_to = find_all_paths(path_from_to);
-
-			x_last_update = x;
-			y_last_update = y;
+			directed_graph(x,y) = 2;
+			directed_graph(y,x) = 0;
+			nrEdges = nrEdges + 1;
+			path_from_to = find_all_paths(double(directed_graph==2), path_from_to);
+			iterations_without_updates = 0;
 		end
 	end
+	iterations_without_updates = iterations_without_updates + 1;
 	[x,y] = next_point(x,y,N);
 end
 dtime = cputime - dtime;
 fprintf('\t- Execution time : %3.2f seconds\n',dtime);
-
-%arrowheads_to_check = directed_graph(directed_graph == 2);
-%arrowheads_to_check_next = [];
-%arrowheads_already_checked = [];
-
-%while (~isempty(arrowheads_to_check))
-	
-%	arrowheads_already_checked = arrowheads_already_checked:arrowheads_to_check;
-%end
+fprintf('Done finding additional edges: %d directional edges found.\n', nrEdges);
 
 end
 
@@ -121,19 +99,26 @@ if (x == y)
 end
 end
 
-
-function [path_from_to] = find_all_paths(path_from_to)
-
-next_order = path_from_to*path_from_to;
-to_return = path_from_to;
-
-while(any(any(next_order)))
-	to_return = to_return + next_order;
-	next_order = double(logical(next_order*path_from_to));
+% This works because we're adding directions to our adjacency graph,
+% instead of removing.
+function [path_from_to] = find_all_paths(directed_adjacencies, path_from_to)
+% if a previous version of path_from_to is given, that can be used to determine
+% the current path_from_to. If no previous version is present, a new version is
+% created from scratch (give no parameter path_from_to)
+if (nargin < 2)
+	path_from_to = directed_adjacencies;
 end
 
-path_from_to = to_return;
+path_from_to = path_from_to * directed_adjacencies;
+prev_tmp = directed_adjacencies;
+tmp = double(logical(prev_tmp + path_from_to));
 
+while(~isequal(tmp, prev_tmp))
+	path_from_to = path_from_to * directed_adjacencies;
+	prev_tmp = tmp;
+	tmp = double(logical(tmp+ path_from_to));
+end
+path_from_to = tmp;
 end
 
 
