@@ -1,10 +1,17 @@
-nr_perms = 20;
+load('../data/data.mat');
+subjectNr = 1;
+T = size(Xs,2); % Number of data points
+N = size(Xs,3); % Number of variables
+data = reshape(Xs(subjectNr,:,:),T,N);
+C = cov(data);
+nr_perms = 2;
 
 G = zeros(N,N);
 PDAG = zeros(N,N);
 
 G_sum = zeros(N,N);
 PDAG_sum = zeros(N,N);
+
 start_time = cputime;
 for it = 1:nr_perms
 	fprintf('\t * Iteration %i\n',it);
@@ -38,3 +45,4 @@ for it = 1:nr_perms
 	PDAG_sum = PDAG_sum + PDAG;
 end
 fprintf('\t- Finished iteration.\n\t- Total execution time : %3.2f seconds\n', cputime-start_time);
+save('../data/perms.mat');

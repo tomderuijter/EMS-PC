@@ -4,6 +4,7 @@ Free parameters
 - Vertex permutation (default 1-116)
 
 Possible ideas and questions
+- How does Max’s method and partial correlation influence directionality of resulting models?
 - Test for smaller number of variables (1-10)
 - Average over a large amount of permutations
 - Vary independency acceptance threshold
