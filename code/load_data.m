@@ -14,25 +14,47 @@ perm = 1:N;
 %perm = [1:2:90 2:2:90 91:116]; % Left and right hemisphere separation.
 C_perm = C(perm,perm);
 
+
+% == TIME-SERIES == %
+
+% Find adjacency matrix given time-series data.
 fprintf('Calculating structure...\n');
 cond_indep = 'cond_indep_fisher_z';
 tmp=cputime;
-[G,sepset] = structure_pc(cond_indep,N,C_perm,T);
+[G_perm,sepset_perm] = structure_pc(cond_indep,N,C_perm,T);
 tmp=cputime-tmp;
 fprintf('\t- Execution time : %3.2f seconds\n',tmp);
 
+
+fprintf('Finding causal directions...\n');
+tmp=cputime;
+PDAG_perm = directional_pc(G_perm,sepset_perm);
+tmp=cputime-tmp;
+fprintf('Done directing arrows.\n');
+fprintf('\t- Execution time : %3.2f seconds\n',tmp);
+
+G(perm,perm) = G_perm;
+PDAG(perm,perm) = PDAG_perm;
+
+
+% == STRUCTURE == %
+
+% structure_perm = structure(perm,perm);
+% 
+% % Find seperating set given structure.
 % fprintf('Calculating seperating set given structure...\n');
 % cond_indep = 'cond_indep_fisher_z';
 % tmp=cputime;
-% [sepset2] = sepset_pc(cond_indep,N,structure,C_perm,T); 
+% [sepset2_perm] = sepset_pc(cond_indep,N,structure_perm,C_perm,T); 
 % tmp=cputime-tmp;
 % fprintf('\t- Execution time : %3.2f seconds\n',tmp);
-
-
+% 
+%
 % fprintf('Finding causal directions...\n');
-% PDAG = directional_pc(G,sepset);
-% fprintf('Done directing arrows.\n');
+% tmp=cputime;
+% PDAG2_perm = directional_pc(structure_perm,sepset2_perm);
 % tmp=cputime-tmp;
+% fprintf('Done directing arrows.\n');
 % fprintf('\t- Execution time : %3.2f seconds\n',tmp);
-
-PDAG_perm(perm,perm) = PDAG;
+% 
+% PDAG2(perm,perm) = PDAG2_perm;
