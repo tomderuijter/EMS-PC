@@ -5,7 +5,7 @@ assert(N == size(undirected_graph, 2), 'input graph is not a square matrix');
 directed_graph = undirected_graph;
 
 
-fprintf('Finding V-structures...');
+fprintf('Finding V-structures...\n');
 dtime=cputime;
 
 [directed_graph, nrEdges, nrContradictions] = find_v_structures(undirected_graph, directed_graph, sepset);
@@ -117,7 +117,7 @@ for i=1:length(X)
     Z = find(undirected_graph(y,:));
     Z = mysetdiff(Z, x);
     for z=Z(:)'
-        if undirected_graph(x,z)==0 && ~ismember_cell(y, sepset{x,z}) && ~ismember_cell(y, sepset{z,x}) && ~ismember_cell(-1,sepset{x,z})
+        if undirected_graph(x,z)==0 && ~ismember(y, sepset{x,z}) && ~ismember(y, sepset{z,x}) && ~ismember(-1,sepset{x,z})
             %fprintf('%d -> %d <- %d\n', x, y, z);
             
 			if(directed_graph(x,y) ~= 2)
@@ -138,6 +138,7 @@ end
 end
 
 function [directed_graph, nrEdges, nrContradictions] = find_v_structures(undirected_graph, directed_graph, sepset)
+dtime=cputime;
 N = size(undirected_graph, 1);
 nrEdges=0;
 nrContradictions = 0;
@@ -168,7 +169,7 @@ for x = 1 : N
 			end
 
 			% if y is not in sepset(x,z)
-			if (~ismember_cell(y_alg, sepset{x_alg,z_alg}))
+			if (~any(sepset{x_alg,z_alg} == y_alg))
 				if(directed_graph(x_alg, y_alg)~=2)
 					directed_graph(x_alg, y_alg) = 2;
 					directed_graph(y_alg, x_alg) = 0;

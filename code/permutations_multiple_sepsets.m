@@ -11,7 +11,7 @@ G = zeros(N,N);
 PDAG = zeros(N,N);
 
 G_sum_ms = zeros(N,N);
-PDAG_sum_ms_ms = zeros(N,N);
+PDAG_sum_ms = zeros(N,N);
 
 start_time = cputime;
 for it = 1:nr_perms
@@ -43,7 +43,7 @@ for it = 1:nr_perms
 	fprintf('\t- Execution time : %3.2f seconds\n',tmp);
 
 	PDAG(perm,perm) = PDAG_perm;
-	PDAG_sum_ms_ms = PDAG_sum_ms_ms + PDAG;
+	PDAG_sum_ms = PDAG_sum_ms + PDAG;
 end
 fprintf('\t- Finished iteration.\n\t- Total execution time : %3.2f seconds\n', cputime-start_time);
 save('../data/perms.mat');

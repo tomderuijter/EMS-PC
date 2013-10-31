@@ -1,17 +1,10 @@
-function [directed_graph] = directional_pc(undirected_graph, sepset)
+function [directed_graph] = directional_pc3(undirected_graph, sepset)
 
 N = size(undirected_graph, 1);
 assert(N == size(undirected_graph, 2), 'input graph is not a square matrix');
 directed_graph = undirected_graph;
 
-
-fprintf('Finding V-structures...');
-dtime=cputime;
-
-[directed_graph, nrEdges, nrContradictions] = find_v_structures(undirected_graph, directed_graph, sepset);
-fprintf('Done finding V-structures: %d directional edges found, %d contradictions found.\n', nrEdges, nrContradictions);
-dtime = cputime - dtime;
-fprintf('\t- Execution time : %3.2f seconds\n',dtime);
+[directed_graph, nrEdges] = find_v_structures(undirected_graph, directed_graph, sepset);
 
 dtime = cputime;
 fprintf('Calculating paths in graph...');
@@ -104,91 +97,9 @@ end
 path_from_to = tmp;
 end
 
-function [directed_graph, nrEdges, nrContradictions] = find_v_structures_toolbox(undirected_graph, directed_graph, sepset)
-nrEdges=0;
-nrContradictions=0;
-% v-structure-code from toolbox
-[X, Y] = find(undirected_graph);
-% We want to generate all unique triples x,y,z
-% This code generates x,y,z and z,y,x.
-for i=1:length(X)
-    x = X(i);
-    y = Y(i);
-    Z = find(undirected_graph(y,:));
-    Z = mysetdiff(Z, x);
-    for z=Z(:)'
-        if undirected_graph(x,z)==0 && ~ismember_cell(y, sepset{x,z}) && ~ismember_cell(y, sepset{z,x}) && ~ismember_cell(-1,sepset{x,z})
-            %fprintf('%d -> %d <- %d\n', x, y, z);
-            
-			if(directed_graph(x,y) ~= 2)
-                directed_graph(x,y) = 2; directed_graph(y,x) = 0;
-                nrEdges=nrEdges+1;
-			else
-				nrContradictions = nrContradictions + 1;
-			end
-			if(directed_graph(z,y) ~= 2)
-                directed_graph(z,y) = 2; directed_graph(y,z) = 0;
-                nrEdges=nrEdges+1;
-			else
-				nrContradictions = nrContradictions + 1;
-			end
-        end
-    end
-end
-end
 
-function [directed_graph, nrEdges, nrContradictions] = find_v_structures(undirected_graph, directed_graph, sepset)
-N = size(undirected_graph, 1);
-nrEdges=0;
-nrContradictions = 0;
-% own v-structure-code
-for x = 1 : N
-	right_of_diag = ((x+1) : N);
-	for y = right_of_diag
-
-		% x and y not connected -> not interesting
-		if ~undirected_graph(x,y)
-			continue
-		end
-
-		% for all elements ,excluding x and y
-		% x_alg etc. are x, y and z as described in the algorithm
-		for z_alg = 1:N
-			if z_alg == x || z_alg == y
-				continue;
-			end
-			if (undirected_graph(x,z_alg) && ~undirected_graph(y,z_alg))
-				x_alg = y;
-				y_alg = x;
-			elseif (undirected_graph(y,z_alg) && ~undirected_graph(x,z_alg))
-				x_alg = x;
-				y_alg = y;
-			else
-				continue
-			end
-
-			% if y is not in sepset(x,z)
-			if (~ismember_cell(y_alg, sepset{x_alg,z_alg}))
-				if(directed_graph(x_alg, y_alg)~=2)
-					directed_graph(x_alg, y_alg) = 2;
-					directed_graph(y_alg, x_alg) = 0;
-					nrEdges = nrEdges + 1;
-				else
-					nrContradictions = nrContradictions + 1;
-				end
-				
-				if(directed_graph(z_alg, y_alg)~=2)
-					directed_graph(z_alg, y_alg) = 2;
-					directed_graph(y_alg, z_alg) = 0;
-					nrEdges = nrEdges + 1;
-				else
-					nrContradictions = nrContradictions + 1;
-				end
-			end
-		end
-	end
-end
-end
+% Given a directed graph, calculates what nodes are connected to what
+% others.
 
 
 % Graph coding

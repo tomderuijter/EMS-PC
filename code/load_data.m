@@ -17,14 +17,13 @@ C_perm = C(perm,perm);
 % == TIME-SERIES == %
 
 % Find adjacency matrix given time-series data.
-% fprintf('Calculating structure...\n');
-% cond_indep = 'cond_indep_fisher_z';
-% alpha = 0.01;
-% tmp=cputime;
-% [G_perm,sepset_perm] = structure_pc(cond_indep,N,C_perm,T,alpha);
-% [G_perm_ms,sepset_perm_ms] = structure_pc_multiple_sepsets(cond_indep,N,C_perm,T,alpha);
-% tmp=cputime-tmp;
-% fprintf('\t- Execution time : %3.2f seconds\n',tmp);
+fprintf('Calculating structure...\n');
+cond_indep = 'cond_indep_fisher_z';
+alpha = 0.005;
+tmp=cputime;
+[G_perm,sepset_perm] = structure_pc_multiple_sepsets(cond_indep,N,C_perm,T,alpha);
+tmp=cputime-tmp;
+fprintf('\t- Execution time : %3.2f seconds\n',tmp);
 % 
 % fprintf('Finding causal directions...\n');
 % tmp=cputime;
@@ -34,7 +33,7 @@ C_perm = C(perm,perm);
 % fprintf('Done directing arrows.\n');
 % fprintf('\t- Execution time : %3.2f seconds\n',tmp);
 % 
-% G(perm,perm) = G_perm;
+G(perm,perm) = G_perm;
 % PDAG(perm,perm) = PDAG_perm;
 % 
 % G_ms(perm,perm) = G_perm_ms;
