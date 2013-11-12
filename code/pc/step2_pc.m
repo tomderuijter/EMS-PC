@@ -132,9 +132,16 @@ for x = 1 : N
                     
                     % Faithfulness addition
                     if is_faithful(x_alg,y_alg,z_alg,sepset)
-                        faithful_graph(x_alg,z_alg) = 1;
-                    elseif unfaithful_graph(x_alg, z_alg) ~= 1
-                        faithful_graph(x_alg,z_alg) = -1;
+                        faithful_graph(x_alg,y_alg) = 1;
+                        faithful_graph(z_alg,y_alg) = 1;
+                    else
+                        if faithful_graph(x_alg, y_alg) ~= 1
+                            faithful_graph(x_alg,y_alg) = -1;
+                        end
+                        
+                        if faithful_graph(z_alg, y_alg) ~= 1
+                            faithful_graph(z_alg,y_alg) = -1;
+                        end
                     end
                     
                     if (directed_graph(x_alg, y_alg) ~= 2)
@@ -160,8 +167,6 @@ for x = 1 : N
 		end
 	end
 end
-
-% faithful_graph(faithful_graph==1) = 0;
 
 end
 
