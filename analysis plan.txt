@@ -2,6 +2,15 @@ Free parameters
 - Subject number (1-6)
 - P-value acceptance (default 0.05)
 - Vertex permutation (default 1-116)
+- Multiple / Single sepsets
+- Modified / Non-modified
+- Explicit / Non-explicit
+- Time series / Provided structure
+- Faithfulness check
+
+
+Modified vs Non-modified
+
 
 Possible problems with PC:
 - Causal Markov Condition (D-seperation?) does not hold
@@ -10,9 +19,8 @@ Possible problems with PC:
 - The data is not a correct representation of the model
 
 Possible ideas and questions
+- Calculate fixed structure over large number of permutations and threshold this graph. Assume it to be true adjacency graph.
 - Does keeping structure constant and permuting before finding v-structures make a difference?
-- Add repair algorithm to PC
-- Modify PC to search over entire space of order N and not stop once one is found.
 - Data is highly temporal dependent. Average overlay of data points: 1-100, 2-101,3-102, etc.
 - How does Max’s method and partial correlation influence directionality of resulting models?
 - Test for smaller number of variables (1-10)
