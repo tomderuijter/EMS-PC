@@ -4,7 +4,7 @@ subjectNr = 1;
 T = size(Xs,2); % Number of data points
 N = size(Xs,3); % Number of variables
 data = reshape(Xs(subjectNr,:,:),T,N);
-structure = reshape(Gs(subjectNr,:,:),N,N);
+% structure = reshape(Gs(subjectNr,:,:),N,N);
 fprintf('Done loading data.\n');
 C = cov(data);
 fprintf('Done calculating covariance.\n');

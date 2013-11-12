@@ -1,15 +1,17 @@
-function [directed_graph] = directional_pc_old(undirected_graph, sepset)
+function [directed_graph] = directional_modified_pc(undirected_graph, sepset)
 
 N = size(undirected_graph, 1);
 assert(N == size(undirected_graph, 2), 'input graph is not a square matrix');
 directed_graph = undirected_graph;
 
+% turn undirected edges into bolletjes
+directed_graph = directed_graph .* 3;
 
 fprintf('Finding V-structures...');
 dtime=cputime;
 
-[directed_graph, nrEdges, nrContradictions] = find_v_structures(undirected_graph, directed_graph, sepset);
-fprintf('Done finding V-structures: %d directional edges found, %d contradictions found.\n', nrEdges, nrContradictions);
+[directed_graph, nrEdges] = find_v_structures(undirected_graph, directed_graph, sepset);
+fprintf('Done finding V-structures: %d directional edges found.\n', nrEdges);
 dtime = cputime - dtime;
 fprintf('\t- Execution time : %3.2f seconds\n',dtime);
 
@@ -30,26 +32,32 @@ y = 1;
 % without an update (in that case, the loop can stop)
 iterations_without_updates = 0;
 while (iterations_without_updates <= N*N)
-	% for each undirected adjacent pair (x,y)
-	if directed_graph(x,y) == 1 
-		% whether an arrow x -> y or y -> x has been found
+	% for each connected pair (x,y)
+	if directed_graph(x,y) ~= 0 || directed_graph(y,x) ~= 0
+		% whether an arrow x -> y has been found
 		x_y_directed = 0;
-				
+		
 		% rule 1
 		for z = mysetdiff(1:N,[x,y])
-			if (directed_graph(z,x) == 2 && directed_graph(z,y) == 0 && directed_graph(y,z) == 0)
-				x_y_directed = 1;
+			if (directed_graph(z,x) == 2 && directed_graph(y,x) ~= 2 && directed_graph(z,y) == 0 && directed_graph(y,z) == 0)
+				directed_graph(y,x) = 0;
+				% for not counting arrows twice
+				if (directed_graph(x,y) ~= 2)
+					directed_graph(x,y) = 2;
+					x_y_directed = 1;
+				end
 			end
 		end
 		
 		% rule 2
 		if (path_from_to(x,y) && ~x_y_directed)
-			x_y_directed = 1;
+			if (directed_graph(x,y) ~= 2)
+				directed_graph(x,y) = 2;
+				x_y_directed = 1;
+			end
 		end
 
 		if (x_y_directed)
-			directed_graph(x,y) = 2;
-			directed_graph(y,x) = 0;
 			nrEdges = nrEdges + 1;
 			path_from_to = find_all_paths(double(directed_graph==2), path_from_to);
 			iterations_without_updates = 0;
@@ -61,6 +69,9 @@ end
 dtime = cputime - dtime;
 fprintf('\t- Execution time : %3.2f seconds\n',dtime);
 fprintf('Done finding additional edges: %d directional edges found.\n', nrEdges);
+
+% For graphical purposes, convert dots to neighbours.
+directed_graph(directed_graph == 3) = 1;
 
 end
 
@@ -104,43 +115,9 @@ end
 path_from_to = tmp;
 end
 
-function [directed_graph, nrEdges, nrContradictions] = find_v_structures_toolbox(undirected_graph, directed_graph, sepset)
-nrEdges=0;
-nrContradictions=0;
-% v-structure-code from toolbox
-[X, Y] = find(undirected_graph);
-% We want to generate all unique triples x,y,z
-% This code generates x,y,z and z,y,x.
-for i=1:length(X)
-    x = X(i);
-    y = Y(i);
-    Z = find(undirected_graph(y,:));
-    Z = mysetdiff(Z, x);
-    for z=Z(:)'
-        if undirected_graph(x,z)==0 && ~ismember_cell(y, sepset{x,z}) && ~ismember_cell(y, sepset{z,x}) && ~ismember_cell(-1,sepset{x,z})
-            %fprintf('%d -> %d <- %d\n', x, y, z);
-            
-			if(directed_graph(x,y) ~= 2)
-                directed_graph(x,y) = 2; directed_graph(y,x) = 0;
-                nrEdges=nrEdges+1;
-			else
-				nrContradictions = nrContradictions + 1;
-			end
-			if(directed_graph(z,y) ~= 2)
-                directed_graph(z,y) = 2; directed_graph(y,z) = 0;
-                nrEdges=nrEdges+1;
-			else
-				nrContradictions = nrContradictions + 1;
-			end
-        end
-    end
-end
-end
-
-function [directed_graph, nrEdges, nrContradictions] = find_v_structures(undirected_graph, directed_graph, sepset)
+function [directed_graph, nrEdges] = find_v_structures(undirected_graph, directed_graph, sepset)
 N = size(undirected_graph, 1);
 nrEdges=0;
-nrContradictions = 0;
 % own v-structure-code
 for x = 1 : N
 	right_of_diag = ((x+1) : N);
@@ -156,8 +133,7 @@ for x = 1 : N
 		for z_alg = 1:N
 			if z_alg == x || z_alg == y
 				continue;
-            end
-            
+			end
 			if (undirected_graph(x,z_alg) && ~undirected_graph(y,z_alg))
 				x_alg = y;
 				y_alg = x;
@@ -170,20 +146,13 @@ for x = 1 : N
 
 			% if y is not in sepset(x,z)
 			if (~ismember_cell(y_alg, sepset{x_alg,z_alg}))
-				if(directed_graph(x_alg, y_alg)~=2)
+				if (directed_graph(x_alg, y_alg) ~= 2)
 					directed_graph(x_alg, y_alg) = 2;
-					directed_graph(y_alg, x_alg) = 0;
 					nrEdges = nrEdges + 1;
-				else
-					nrContradictions = nrContradictions + 1;
 				end
-				
-				if(directed_graph(z_alg, y_alg)~=2)
+				if (directed_graph(z_alg, y_alg) ~= 2)
 					directed_graph(z_alg, y_alg) = 2;
-					directed_graph(y_alg, z_alg) = 0;
 					nrEdges = nrEdges + 1;
-				else
-					nrContradictions = nrContradictions + 1;
 				end
 			end
 		end
