@@ -1,0 +1,9 @@
+probleem met sepsets m.b.t. tegenstrijdige v-structures.
+
+voorbeeldgeval (geverifieerd met debuggen):
+
+  x -- y
+  |    |
+  z`   z
+
+Hier worden twee v-structures gevonden:  x-> y <-z  en  z`-> x <-y. Kennelijk zit y dus niet in een sepset van x en y, en x niet in een sepset van z` en y. Dit is niet mogelijk uitgaande van een onderliggend model zoals pc dat aankan, d.w.z. zonder dubbele pijlen.
