@@ -1,4 +1,4 @@
-function [directed_graph] = step2_pc(undirected_graph, sepset, modified, explicit, varargin)
+function [directed_graph, faithful_graph] = step2_pc(undirected_graph, sepset, modified, explicit, varargin)
 
 % Graph coding
 % 0 - not connected
@@ -19,7 +19,7 @@ end
 fprintf('Finding V-structures...');
 dtime=cputime;
 
-[directed_graph, nrEdges] = find_v_structures(undirected_graph, directed_graph, sepset, modified, explicit, varargin{:});
+[directed_graph, nrEdges, faithful_graph, ~] = find_v_structures(undirected_graph, directed_graph, sepset, modified, explicit, varargin{:});
 fprintf('Done finding V-structures: %d directional edges found.\n', nrEdges);
 dtime = cputime - dtime;
 fprintf('\t- Execution time : %3.2f seconds\n',dtime);
@@ -92,10 +92,11 @@ end
 end
 
 
-function [directed_graph, nrEdges, nrContradictions] = find_v_structures(undirected_graph, directed_graph, sepset, modified, explicit, varargin)
+function [directed_graph, nrEdges, faithful_graph, nrContradictions] = find_v_structures(undirected_graph, directed_graph, sepset, modified, explicit, varargin)
 N = size(undirected_graph, 1);
 nrEdges=0;
 nrContradictions = 0;
+faithful_graph = zeros(N,N);
 % own v-structure-code
 for x = 1 : N
 	right_of_diag = ((x+1) : N);
@@ -128,7 +129,14 @@ for x = 1 : N
 			% if y is not in sepset(x,z)
 			if ~ismember_cell(y_alg, sepset{x_alg,z_alg})
                 if (explicit ~= 1 || explicit_dependence(sepset,x_alg,z_alg,y_alg,varargin{:}))
-                   
+                    
+                    % Faithfulness addition
+                    if is_faithful(x_alg,y_alg,z_alg,sepset)
+                        faithful_graph(x_alg,z_alg) = 1;
+                    elseif unfaithful_graph(x_alg, z_alg) ~= 1
+                        faithful_graph(x_alg,z_alg) = -1;
+                    end
+                    
                     if (directed_graph(x_alg, y_alg) ~= 2)
                         directed_graph(x_alg, y_alg) = 2;
                         if(modified ~= 1)
@@ -152,6 +160,9 @@ for x = 1 : N
 		end
 	end
 end
+
+% faithful_graph(faithful_graph==1) = 0;
+
 end
 
 % Determines whether X and Z become depedent when adding Y.
@@ -171,9 +182,9 @@ function [CD] = explicit_dependence(sepset,x,y,S,varargin)
     end
     
     % Majority vote
-    % CD = dep_count > (N_sets/2);
+    CD = dep_count > (N_sets/2);
     % CD = dep_count > 0;
-    CD = dep_count == N_sets;
+    % CD = dep_count == N_sets;
 end
 
 function [x, y] = next_point(x, y, N)
