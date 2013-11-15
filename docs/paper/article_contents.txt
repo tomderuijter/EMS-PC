@@ -1,0 +1,28 @@
+intro
+(hergebruiken en aanpassen van proposal)
+
+preliminaries
+- causal discovery (faithfullness, latent variables, order-dependency -> multiple iterations, etc.)
+- PC -> structure and direction
+
+- brain connectivity
+- methods for finding brain connectivity
+
+Methods
+- applying original pc
+  results for structure pretty good, too many v-structures (too order dependant), multiple iterations
+- applying original pc multiple sepsets
+- modified pc
+- explicit pc
+
+(- sliding window)
+(- Tom's independence test)
+- cross subject comparison
+- comparison with provided structure
+- alpha optimisation
+
+Discussion 
+- PC stability
+- PC scalability
+- bi-directional arrows
+- Analysis from probabilistic perspective
