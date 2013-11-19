@@ -1,15 +1,21 @@
 intro
-(hergebruiken en aanpassen van proposal)
+* - hergebruiken en aanpassen van proposal
 
 preliminaries
-- causal discovery (faithfullness, latent variables, order-dependency -> multiple iterations, etc.)
-- PC -> structure and direction
+- causal discovery (faithfullness, latent variables, order-dependency -> multiple iterations, etc.) (*, partially)
+- PC -> structure and direction (R)
+	Causal discovery blabla
+	Graphical models, causal discovery, bla.
+	Conditional dependence
+	PC Algorithm intuition, d-separation
+	Model assumptions, perfect map, faithfulness, causal sufficiency (closed world) with and without, bla.
+	Resulting issues, stability, scalability, complexity
 
-- brain connectivity
-- methods for finding brain connectivity
+- brain connectivity *
+- methods for finding brain connectivity *
 
-Methods
-- applying original pc
+Methods (T)
+- applying original pc 
   results for structure pretty good, too many v-structures (too order dependant), multiple iterations
 - applying original pc multiple sepsets
 - modified pc
@@ -19,10 +25,8 @@ Methods
 (- Tom's independence test)
 - cross subject comparison
 - comparison with provided structure
-- alpha optimisation
+- alpha optimisation 
 
 Discussion 
-- PC stability
-- PC scalability
-- bi-directional arrows
+- bi-directional arrows (R)
 - Analysis from probabilistic perspective
