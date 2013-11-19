@@ -2,6 +2,8 @@ function [PDAGs,Gs,Cs] = multiple_subjects(nr_perms, nr_subjects, T, explicit, m
 % for nr_subjects and T: give a negative number to take all subjects/data
 
 load('../../data/AAL_FuncData.mat');
+addpath('../pc');
+addpath('../independence');
 
 if (T <= 0 || T > size(FuncData{1},2))
 	T = size(FuncData{1},2); % Number of data points
