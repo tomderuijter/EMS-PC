@@ -1,5 +1,5 @@
 % Data max
-load('../data/data.mat');
+load('../../data/data.mat');
 subjectNr = 1;
 T = size(Xs,2); % Number of data points
 N = size(Xs,3); % Number of variables
