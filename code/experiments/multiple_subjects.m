@@ -1,4 +1,4 @@
-function [PDAGs,Gs,Cs] = multiple_subjects(nr_perms, nr_subjects, T, explicit, mult_sepsets, alpha)
+function [PDAGs,Gs,Cs] = multiple_subjects(nr_perms, nr_subjects, T, explicit, mult_sepsets, alpha, filename)
 % for nr_subjects and T: give a negative number to take all subjects/data
 
 load('../../data/AAL_FuncData.mat');
@@ -68,7 +68,7 @@ for it = 1:nr_perms
 end
 
 fprintf('finished calculations, saving...');
-save('../../data/results_multiple_subjects.mat', 'PDAGs', 'Gs', 'Cs');
+save(strcat('../../data/', filename, '.mat'), 'PDAGs', 'Gs', 'Cs');
 fprintf('\t- Finished iteration.\n\t- Total execution time : %3.2f seconds\n', cputime-start_time);
 
 end
