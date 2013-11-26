@@ -82,6 +82,19 @@
 % ### Hyphenation ###
 \hyphenation{a-na-ly-sis}
 
+% ### dots at the end of arrows and lines ###
+
+\def \orightarrow {\circ\hspace{-0.42em}\rightarrow}
+\def \oleftarrow {\leftarrow\hspace{-0.42em}\circ}
+\def \orightline {\circ\hspace{-0.16em}-}
+\def \oleftline {-\hspace{-0.16em}\circ}
+\def \oline {\circ\hspace{-0.38em}-\hspace{-0.4em}\circ}
+\def \srightarrow {\text{\textasteriskcentered}\hspace{-0.62em}\rightarrow}
+\def \sleftarrow {\leftarrow\hspace{-0.62em}\text{\textasteriskcentered}}
+\def \srightline {\text{\textasteriskcentered}\hspace{-0.16em}-}
+\def \sleftline {-\hspace{-0.16em}\text{\textasteriskcentered}}
+\def \sline {\text{\textasteriskcentered}\hspace{-0.38em}-\hspace{-0.4em}\text{\textasteriskcentered}}
+
 % ############## End Macros ##############
 
 
@@ -165,7 +178,8 @@ This is done by calculating statistical (in)dependencies between stochastic vari
 
 Such a Bayesian network can be modelled as a graph with edges which may be directed or undirected.
 Each variable is represented by a node, and correlations between variables are represented by edges between those nodes.
-A causal relation between variables $X$ and $Y$ is denoted with directed edges; $X \rightarrow Y$ implies that $X$ is a direct cause of $Y$.
+If there is an edge between two variables $X$ and $Y$, this is denoted as $X - Y$.
+A causal relation is denoted with directed edges; $X \rightarrow Y$ implies that $X$ is a direct cause of $Y$.
 It is also said that $X$ is the parent of $Y$, and $Y$ is the child of $X$. 
 When there is a directed path $X \rightarrow Z_1 \rightarrow Z_2 \dots \rightarrow Y$, $X$ is said to be an ancestor of $Y$ and $Y$ is a descendant of $X$.
 An ancestor is an (possibly indirect) cause of its descendant.
@@ -199,26 +213,37 @@ As such, $Y$ and $Z$ are independent given \{$X$\}.
 
 We define a trail as a set of edges which would make up a path if those edges would be undirected.
 We can now define directional separation, or d-separation.
-Two nodes $X$ and $Y$ are d-separated given a set of nodes $Z$ (with $X, Y \notin Z$) if there is a trail from $X$ to $Y$ for which at least one of the following holds:
+Two nodes $X$ and $Y$ are d-separated given a set of nodes $S$ (with $X, Y \notin S$) if there is a trail from $X$ to $Y$ for which at least one of the following holds:
 \begin{itemize}
-\item The trail contains a structure $a \rightarrow b \rightarrow c$ such that $b$ is in $Z$.
-\item The trail contains a structure $a \leftarrow b \rightarrow c$ such that $b$ is in $Z$.
-\item The trail contains a structure $a \rightarrow b \leftarrow c$ (in which $b$ is called a collider) such that $b$ and its descendants are not in $Z$.
+\item The trail contains a structure $a \rightarrow b \rightarrow c$ such that $b$ is in $S$.
+\item The trail contains a structure $a \leftarrow b \rightarrow c$ such that $b$ is in $S$.
+\item The trail contains a structure $a \rightarrow b \leftarrow c$ (in which $b$ is called a collider) such that $b$ and its descendants are not in $S$.
 \end{itemize}
-If $X$ and $Y$ are d-separated given $Z$, $Z$ is called a separating set of $X$ and $Y$.
+If $X$ and $Y$ are d-separated given $S$, $S$ is called a separating set of $X$ and $Y$. Every two independent variables have a separating set; if they are unconditionally independent, his is the empty set.
 
 \subsection{The PC-algorithm}
+$\srightarrow$
+$\sleftarrow$
+$\srightline$
+$\sleftline$
+$\sline$
+\cite{?}
 Whether there is a dependency between two variables can be concluded by using a statistical test.
 In this way, a graph can be inferred representing all dependencies between nodes.
 However, this only results in an undirected graph, as it does not give any information about causality.
-To derive causal relations, we can make use of conditional dependence.
-A set of rules for finding a causal relation $X \rightarrow Y$ are used in the PC-algorithm.
+A set of rules for finding a causal relation between nodes, using the undirected graph, are used in the PC-algorithm.
 
-One of those rules is based on conditional dependency given a set variables other than $X$ and $Y$, and .
+One of these rules attempts to find so-called v-structures, which are of the form $X \rightarrow Z \leftarrow Y$.
+V-structures may be found for every three nodes $X$, $Y$ and $Z$ for which $X \sline Z$, $Y \sline Z$ and in which $X$ and $Y$ are (possibly conditially) independent, .
+As $X$ and $Y$ are independent, they have a separating set $S$ (if they are unconditially independent, $S$ is the empty set).
+If $Z$ is not in $S$, then the only possible causal relation can be that of a v-structure, so the edges can be oriented as $X \srightarrow Z \sleftarrow Y$.
 
 
-
-\subsection{PC Algorithm}
+The other rules are based on arrows that have already been found.
+\begin{itemize}
+\item If there is an edge $X \sline Y$, and if there is a directed path from $X$ to $Y$, then $X \sline Y$ can be oriented as $X \srightarrow Y$.
+\item If there are edges $X \srightarrow Y$ and $Y \sleftline Z$, if the latter is not an edge $Y \sleftarrow Z$, and if $X$ and $Z$ are not connected, orient $Y \sline Z$ as $Y \rightarrow Z$. 
+\end{itemize}
 
 \subsection{Brain Connectivity}
 
