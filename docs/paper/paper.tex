@@ -282,6 +282,19 @@ Most of these methods can only handle tens of nodes in reasonable time, which be
 
 
 \section{Methods}
+The original PC algorithm assumes causal sufficiency, excluding common confounders between nodes.
+An adaptation of this algorithm by Spirtes et al. yielded Modified PC, which returns a Markov equivalence class, rather than one specific instance of it.
+In literature it is this algorithm that is usually cited.
+
+As mentioned earlier, PC Algorithm has stability problems as the final solution depends on an initial ordering of vertices.
+This problem decreases when considering Modified PC; as latent common confounders are not excluded by design bi-directional arrows occur in subgraphs where original PC would attempt to direct a single arrow in either direction depending on node ordering.
+
+In a more recent publication by Ramsey et al. \cite{ramsey2012} a weaker but still sufficient assumption for graph faithfulness in PC algorithm is introduced.
+The resulting algorithmic changes provide better results and is able to mark unshielded triples as unfaithful.
+However, this method also require a significant amount of additional conditional independence tests.
+
+Based on similar ideas, we answer whether an unshielded triple is faithful based on already done conditional independence tests. 
+
 
 \subsection*{Data acquisition \& analysis}
 We will apply the mentioned methods on structural and functional data gathered from human subjects.

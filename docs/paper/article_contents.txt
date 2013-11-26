@@ -30,3 +30,6 @@ Methods (T)
 Discussion 
 - bi-directional arrows (R)
 - Analysis from probabilistic perspective
+
+Search list:
+- Stability testing (?)
