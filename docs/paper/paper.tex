@@ -1,0 +1,150 @@
+% Needed packages
+\documentclass[a4paper, 10pt, english, twocolumn]{article}
+\usepackage[english]{babel}
+\usepackage[cm]{fullpage}
+\usepackage{cite}
+\usepackage{anysize}
+\usepackage[compact]{titlesec}
+\usepackage{graphicx}
+\usepackage{stfloats}
+\usepackage{listings}
+\usepackage{hyperref}
+
+\usepackage{amssymb,amsmath}
+\usepackage{algorithmicx}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+
+% for coloring individual cells in a table
+\usepackage[table]{xcolor}
+%\usepackage{pgfgantt}
+
+\newcommand{\keywords}[1]{\par\noindent 
+{\bf Keywords\/}. #1}
+
+% Margins & Headers
+\marginsize{2.5cm}{2.5cm}{3.0cm}{2.0cm}
+\columnsep 0.4in
+\footskip 0.4in 
+\usepackage{changepage}
+
+% E-mail formatting
+\usepackage{color,hyperref}
+    \catcode`\_=11\relax
+    \newcommand\email[1]{\_email #1\q_nil}
+    \def\_email#1@#2\q_nil{
+      \href{mailto:#1@#2}{{\emailfont #1\emailampersat #2}}
+    }
+    \newcommand\emailfont{\sffamily}
+    \newcommand\emailampersat{{\color{red}\small@}}
+    \catcode`\_=8\relax 
+	
+% List modifications
+\newenvironment{packed_item}{
+\begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+}{\end{itemize}}
+
+\newenvironment{packed_enum}{
+\begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+}{\end{enumerate}}
+
+% ### Mathematics ###
+\newcommand{\bpm}{\begin{pmatrix}}
+\newcommand{\epm}{\end{pmatrix}}
+
+\newcommand{\bbm}{\begin{bmatrix}}
+\newcommand{\ebm}{\end{bmatrix}}
+
+\newcommand{\bsm}{\bigl( \begin{smallmatrix}}
+\newcommand{\esm}{ \end{smallmatrix} \bigl)} 
+
+\newcommand{\mbf}{\mathbf}
+
+% ### Matrices and Vectors ###
+\newcommand{\mtx}[1]{\ensuremath{\boldsymbol{#1}}}
+\newcommand*\Let[2]{\State #1 $\gets$ #2}
+
+% ### Sets ###
+\newcommand{\set}[1]{\ensuremath{\mathcal{#1}}}
+
+% ### Other ###
+
+\newcommand{\transpose}{^{T}}
+\newcommand{\inv}{^{-1}}
+\newcommand{\pseudoinv}{^{+}}
+
+% ### Hyphenation ###
+\hyphenation{a-na-ly-sis}
+
+% ############## End Macros ##############
+
+
+% Title
+\title{\fontfamily{phv}\selectfont{Causal Discovery methods for Effective Connectivity}}
+\author{
+  \textbf{R. Janssen} - \href{mailto:ramon.janssen@student.ru.nl}{ramon.janssen@student.ru.nl} \\
+  \textbf{T. de Ruijter} - \href{mailto:t.deruijter@student.ru.nl}{t.deruijter@student.ru.nl}\\
+  \textbf{T. Claassen} - \href{mailto:tomc@cs.ru.nl}{tomc@cs.ru.nl}\\
+  \textbf{M. Hinne} - \href{mailto:mhinne@cs.ru.nl}{mhinne@cs.ru.nl}
+}
+
+\date{\fontfamily{ptm}\selectfont{\small{\bfseries{\today - Radboud
+Universiteit Nijmegen}}}\\[0.5cm]\rule{\linewidth}{0.3mm}}
+
+\begin{document}
+
+
+\section{Causal discovery}
+An approach for finding effective connectivity may be found in the domain of causal discovery.
+A causal discovery method uses data about events to determine which of these events are correlated, and if possible, it determines which event causes which.
+The definition of a causal relation is not trivial \cite{?} and the relevant principles will be covered in this section.
+In our context, the causal discovery methods which have been used aim at inferring a Bayesian network.
+This is done by calculating statistical (in)dependencies between stochastic variables.
+
+Such a Bayesian network can be modelled as a graph with directed edges.
+Each variable is represented by a node, and correlations between variables are represented by edges between those nodes.
+A causal relation between variables $X$ and $Y$ is denoted with a directed edge; $X \rightarrow Y$ implies that $X$ is a cause of $Y$.
+It is also said that $X$ is the parent of $Y$, and $Y$ is the child of $X$.
+A Bayesian network cannot contain cycles, as that would imply that a variable is it's own (indirect) parent and thus it's own cause.
+Ideally, a causal discovery methods finds only directed edges, resulting in a directed acyclic graph (DAG).
+In practice, however, often not all causal relations can be inferred and undirected edges are also used in a graph.
+As such, the result of a causal discovery method is a partially directed acyclic graph (PDAG).
+Image {plaatje!} shows an example of a Bayesian network.
+A causal discovery method attempts at finding a real-world Bayesian network.
+But real-world situations like a brain are immensely complex and contain an unimaginable large number of atoms, which could all function as seperate variables.
+As such, we represent our real-world, underlying Bayesian network with a much simpler model.
+Such a model contains a reduced number of variables to be able to analyse and visualize the data.
+
+An important principle for our approach is that of conditional dependence.
+The dependency of two variables might depend on the value of a third variable (or possibly even more variables).
+This principle is best demonstrated with an example.
+When two variables, such as two switches being turned off or on, both cause a light bulb to glow, the two switches might not be dependent.
+Whether one switch is turned on or off does not cause the other to switch on or off.
+However, when the light bulb is glowing, the switches do become dependent.
+If one switch is off, the other one is probably on.
+Or in other words, one switch being turned on decreases the chance of the other switch being turned on.
+In this case, we conclude that the switches are conditionally dependent given that the light bulb is turned on.
+More generally, two variables $X$ and $Y$ can be conditionally dependent on a set of other variables $S$. % het juiste latex-symbooltje vinden :(
+
+A similar principle is conditional independence. If two variables are 
+
+Whether there is a dependency between two variables can be concluded by using a statistical test.
+In this way, a graph can be inferred representing all dependencies between nodes.
+However, this only results in an undirected graph, as it does not give any information about causality.
+To derive causal relations, we can make use of conditional dependence.
+Three rules for finding causality are used in the PC-algorithm.
+One of those rules is based on conditional dependency 
+
+
+
+%\bibliography{references}{}
+%\addcontentsline{toc}{section}{References}
+%\bibliographystyle{apalike}
+
+\end{document}
