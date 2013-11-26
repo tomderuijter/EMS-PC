@@ -107,11 +107,13 @@ The definition of a causal relation is not trivial \cite{?} and the relevant pri
 In our context, the causal discovery methods which have been used aim at inferring a Bayesian network.
 This is done by calculating statistical (in)dependencies between stochastic variables.
 
-Such a Bayesian network can be modelled as a graph with directed edges.
+Such a Bayesian network can be modelled as a graph with edges which may be directed or undirected.
 Each variable is represented by a node, and correlations between variables are represented by edges between those nodes.
-A causal relation between variables $X$ and $Y$ is denoted with a directed edge; $X \rightarrow Y$ implies that $X$ is a cause of $Y$.
-It is also said that $X$ is the parent of $Y$, and $Y$ is the child of $X$.
-A Bayesian network cannot contain cycles, as that would imply that a variable is it's own (indirect) parent and thus it's own cause.
+A causal relation between variables $X$ and $Y$ is denoted with directed edges; $X \rightarrow Y$ implies that $X$ is a direct cause of $Y$.
+It is also said that $X$ is the parent of $Y$, and $Y$ is the child of $X$. 
+When there is a directed path $X \rightarrow Z_1 \rightarrow Z_2 \dots \rightarrow Y$, $X$ is said to be an ancestor of $Y$ and $Y$ is a descendant of $X$.
+An ancestor is an (possibly indirect) cause of its descendant.
+A Bayesian network cannot contain cycles, as that would imply that a variable is it's own ancestor and thus it's own cause.
 Ideally, a causal discovery methods finds only directed edges, resulting in a directed acyclic graph (DAG).
 In practice, however, often not all causal relations can be inferred and undirected edges are also used in a graph.
 As such, the result of a causal discovery method is a partially directed acyclic graph (PDAG).
@@ -132,14 +134,32 @@ Or in other words, one switch being turned on decreases the chance of the other 
 In this case, we conclude that the switches are conditionally dependent given that the light bulb is turned on.
 More generally, two variables $X$ and $Y$ can be conditionally dependent on a set of other variables $S$. % het juiste latex-symbooltje vinden :(
 
-A similar principle is conditional independence. If two variables are 
+A similar principle is conditional independence.
+If two variables are generally dependent, they can still be independent given a third variable.
+An example of this is when a variable $X$ has two children $Y$ and $Z$.
+$Y$ and $Z$ are generally dependent, as they share a common cause $X$;
+When $X$ does not vary, $Y$ and $Z$ lose their common cause and they lose their dependency.
+As such, $Y$ and $Z$ are independent given \{$X$\}. 
 
+We define a trail as a set of edges which would make up a path if those edges would be undirected.
+We can now define directional separation, or d-separation.
+Two nodes $X$ and $Y$ are d-separated given a set of nodes $Z$ (with $X, Y \notin Z$) if there is a trail from $X$ to $Y$ for which at least one of the following holds:
+\begin{itemize}
+\item The trail contains a structure $a \rightarrow b \rightarrow c$ such that $b$ is in $Z$.
+\item The trail contains a structure $a \leftarrow b \rightarrow c$ such that $b$ is in $Z$.
+\item The trail contains a structure $a \rightarrow b \leftarrow c$ (in which $b$ is called a collider) such that $b$ and its descendants are not in $Z$.
+\end{itemize}
+If $X$ and $Y$ are d-separated given $Z$, $Z$ is called a separating set of $X$ and $Y$.
+
+\subsection{The PC-algorithm}
 Whether there is a dependency between two variables can be concluded by using a statistical test.
 In this way, a graph can be inferred representing all dependencies between nodes.
 However, this only results in an undirected graph, as it does not give any information about causality.
 To derive causal relations, we can make use of conditional dependence.
-Three rules for finding causality are used in the PC-algorithm.
-One of those rules is based on conditional dependency 
+A set of rules for finding a causal relation $X \rightarrow Y$ are used in the PC-algorithm.
+
+One of those rules is based on conditional dependency given a set variables other than $X$ and $Y$, and .
+
 
 
 
