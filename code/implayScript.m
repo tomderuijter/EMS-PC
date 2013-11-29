@@ -1,2 +1,2 @@
-handle = implay(GsMean, 3);
-handle.Visual.ColorMap.MapExpression = cm; % set the colormap of implay
+handle = implay(PDAGsNorm, 3);
+handle.Visual.ColorMap.MapExpression = 'hot'; % set the colormap of implay

@@ -1,7 +1,10 @@
-GsPerm = permute(Gs, [1,4,2,3]);
+GsMean = mean(Gs,4);
+GsMean = permute(GsMean,[2,3,1]);
 
-GsMean = zeros(77,116,116); 
-for subjNr = 1: 77
-	GsMean(subjNr,:,:) = squeeze(mean(squeeze(GsPerm(subjNr,:,:,:))));
+PDAGsMean = mean(PDAGs,4);
+PDAGsMean = permute(PDAGsMean,[2,3,1]);
+
+PDAGsNorm = zeros(116,116,77);
+for n = 1:77
+    PDAGsNorm(:,:,n) = PDAGsMean(:,:,n) ./ GsMean(:,:,n);
 end
-GsMean = permute(GsMean, [2,3,1]);
