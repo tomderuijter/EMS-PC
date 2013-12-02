@@ -1,22 +1,22 @@
 function [PDAGs,Gs,Cs] = multiple_subjects(nr_perms, nr_subjects, T, explicit, mult_sepsets, alpha, filename)
 % for nr_subjects and T: give a negative number to take all subjects/data
 
-load('../../data/data.mat');
+load('../../data/AAL_FuncData.mat');
 addpath('../pc');
 addpath('../independence');
 
-if (T <= 0 || T > size(Xs,2))
-	T = size(Xs,2); % Number of data points
+if (T <= 0 || T > size(FuncData{1},2))
+	T = size(FuncData{1},2); % Number of data points
 end
 
 % Dataset reduction
-Xs = Xs(:,1:T,:);
+FuncData = cellfun(@(x)x(:,1:T), FuncData, 'UniformOutput', false);
 
-if (nr_subjects <= 0 || nr_subjects > size(Xs,1))
-	nr_subjects = size(Xs,1);
+if (nr_subjects <= 0 || nr_subjects > length(FuncData))
+	nr_subjects = length(FuncData);
 end
 
-N = size(Xs,3); % Number of variables
+N = size(FuncData{1},1); % Number of variables
 
 Cs = zeros(nr_subjects, N, N);
 Gs = zeros(nr_subjects,N,N,nr_perms);
@@ -24,8 +24,8 @@ PDAGs = zeros(nr_subjects, N,N,nr_perms);
 
 fprintf('applying zscore and calculating covariance...\n');
 for subject_nr = 1:nr_subjects
-% 	Xs(subject_nr,:,:) = zscore(squeeze(Xs(subject_nr,:,:)));
-	C = cov(squeeze(Xs(subject_nr,:,:)));
+	FuncData{subject_nr} = zscore(transpose(FuncData{subject_nr}));
+	C = cov(FuncData{subject_nr});
 	Cs(subject_nr,:,:) = C;
 end
 
@@ -59,7 +59,6 @@ for it = 1:nr_perms
 		tmp=cputime;
 		fprintf('Finding causal directions...\n');
 		modified = 1;
-
 		PDAG_perm = step2_pc(G_perm, sepset_perm, modified, explicit, 'cond_indep_fisher_z',C,T,alpha);	
 		fprintf('Done directing arrows.\n');
 		tmp=cputime-tmp;
