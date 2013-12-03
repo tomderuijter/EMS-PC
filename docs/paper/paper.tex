@@ -299,21 +299,33 @@ Most of these methods can only handle tens of nodes in reasonable time, which be
 
 
 \section{Methods}
-The original PC algorithm assumes causal sufficiency, excluding common confounders between nodes.
-An adaptation of this algorithm by Spirtes et al. yielded Modified PC, which returns a Markov equivalence class, rather than one specific instance of it.
-In literature it is this algorithm that is usually cited.
+% Different adaptations of PC
+The original PC algorithm assumes causal sufficiency, excluding the existence of common confounders between nodes.
+This seems unwanted when handling brain data, where one would expect a large amount of latent processes.
+Also measuring methods are not yet advanced enough to measure the full detail of the brain, thus skipping over details.
+In the perspective of causal inference, these missing areas can also appear as confounders.
 
-As mentioned earlier, PC Algorithm has stability problems as the final solution depends on an initial ordering of vertices.
-This problem decreases when considering Modified PC; as latent common confounders are not excluded by design bi-directional arrows occur in subgraphs where original PC would attempt to direct a single arrow in either direction depending on node ordering.
+% Modified PC
+\paragraph{Modified PC}
+To compensate for this, an adaptation of PC algorithm by Spirtes et al. returns a Markov equivalence class, rather than one specific instance of it.
+In literature it is this algorithm that is usually cited under the name PC Algorithm.
+This also makes PC algorithm more stable as the number of Markov equivalence classes is less than the number of times data can be permuted.
+However the order of vertex removal still plays a key role in the end result.
+This causal-insufficient version is named Modified PC.
 
+\paragraph{Conservative PC}
 In a more recent publication by Ramsey et al. \cite{ramsey2012} a weaker but still sufficient assumption for graph faithfulness in PC algorithm is introduced.
+Through this weaker but still adjacency-faithful assumption, the method is more cautious than PC algorithm in drawing unambiguous conclusions on causal orientations.
+That is why this method is named Conservative PC (CPC).
 The resulting algorithmic changes provide better results and is able to mark unshielded triples as unfaithful.
-However, this method also require a significant amount of additional conditional independence tests.
+However, CPC requires a significant amount of additional conditional independence tests.
 
-Based on similar ideas, we answer whether an unshielded triple is faithful based on already done conditional independence tests. 
+\paragraph{...}
+
 
 
 \subsection*{Data acquisition \& analysis}
+% TODO: vraag Max naar de details van de meetmethode en subject acquisition
 We will apply the mentioned methods on structural and functional data gathered from human subjects.
 For this we are largely dependent on data collected by others.
 Hinne et al. has provided fMRI time-series data and structural network data as used and derived in \cite{hinne2013}, of which six subjects were selected at random.
