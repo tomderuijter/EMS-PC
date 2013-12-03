@@ -313,16 +313,35 @@ This also makes PC algorithm more stable as the number of Markov equivalence cla
 However the order of vertex removal still plays a key role in the end result.
 This causal-insufficient version is named Modified PC.
 
+% Conservative PC
 \paragraph{Conservative PC}
-In a more recent publication by Ramsey et al. \cite{ramsey2012} a weaker but still sufficient assumption for graph faithfulness in PC algorithm is introduced.
+Step x in PC algorithm assigns shielded triples based on a single separating set. % TODO: Add step
+Simply put, it is assumed the single found separating set is enough to show conditional independence. 
+Ramsey et al. \cite{ramsey2012} introduce a weaker but still sufficient assumption for directing unshielded triples.
 Through this weaker but still adjacency-faithful assumption, the method is more cautious than PC algorithm in drawing unambiguous conclusions on causal orientations.
 That is why this method is named Conservative PC (CPC).
-The resulting algorithmic changes provide better results and is able to mark unshielded triples as unfaithful.
-However, CPC requires a significant amount of additional conditional independence tests.
+The resulting algorithmic changes provide better results and is able to mark incorrectly unshielded triples as unfaithful.
+Sadly, CPC requires a significant amount of additional conditional independence tests, exponential in the largest branching degree of the tested structure.
 
-\paragraph{...}
+% Multiple sepsets
+\paragraph{Multiple Separating Sets}
+The idea of CPC, to make a weaker assumption on graph faithfulness, is very potential.
+Instead of doing additional tests, one could attempt to determine causal unfaithfulness with less dependency tests.
+An adaptation to PC algorithm that would not increase the order of complexity is once a separating set is found, to test all other vertex subsets of the same order as well.
+This finds all separating sets of the lowest order without increasing complexity.
+Orienting an unshielded triple $\left<A,B,C\right>$ requires $B$ not to occur in any separating set of $(A,C)$.
+By having more than one separating set, this constraint is strengthened.
 
+% Unfaithfulness test
+One could use these additional separating sets to test oriented unshielded triples for unfaithfulness, similar to CPC.
+Apart from serving as a sanity check, this could serve as the basis of a repair algorithm for errors made by PC.
 
+% Explicit test
+A more direct way to decrease faulty orientation of an unshielded triple $\left<A,B,C\right>$ is to check whether adding $B$ to a separating set of $(A,C)$ makes the pair conditionally dependent.
+If so, the graph is likely to be more faithful to its modeled distribution.
+
+\paragraph{EMS PC}
+...
 
 \subsection*{Data acquisition \& analysis}
 % TODO: vraag Max naar de details van de meetmethode en subject acquisition
