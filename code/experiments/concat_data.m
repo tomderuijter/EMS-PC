@@ -1,5 +1,5 @@
-names = 10:10:50;
-filename = '../../data/multi-subject/mult_subjects_explicit_p';
+names = 10:10:60;
+filename = '../../data/multi-subject/mult_subjects_expl_p';
 
 new_PDAGs = [];
 new_Gs = [];
@@ -15,5 +15,5 @@ end
 
 Gs = new_Gs;
 PDAGs = new_PDAGs;
-save('../../data/multi-subject/mult_subjects_explicit.mat', 'Cs', 'Gs', 'PDAGs');
+save('../../data/multi-subject/mult_subjects_expl.mat', 'Cs', 'Gs', 'PDAGs');
 clear;
