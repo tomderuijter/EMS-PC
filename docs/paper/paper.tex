@@ -1,5 +1,5 @@
 % Needed packages
-\documentclass[a4paper, 10pt, english, twocolumn]{article}
+\documentclass[a4paper, 10pt, english, onecolumn]{article}
 \usepackage[english]{babel}
 \usepackage[cm]{fullpage}
 \usepackage{cite}
@@ -114,9 +114,13 @@ Universiteit Nijmegen}}}\\[0.5cm]\rule{\linewidth}{0.3mm}}
 
 \maketitle
 
+\setlength{\parindent}{0.0cm}
+\setlength{\parskip}{0.25cm}
+
 \begin{abstract}
 % TODO: Add abstract. Look at slides Peter to see what is asked.
 \end{abstract}
+
 
 \section{Introduction}
 
@@ -337,11 +341,12 @@ One could use these additional separating sets to test oriented unshielded tripl
 Apart from serving as a sanity check, this could serve as the basis of a repair algorithm for errors made by PC.
 
 % Explicit test
-A more direct way to decrease faulty orientation of an unshielded triple $\left<A,B,C\right>$ is to check whether adding $B$ to a separating set of $(A,C)$ makes the pair conditionally dependent.
+A more explicit way to decrease faulty orientation of an unshielded triple $\left<A,B,C\right>$ is to check whether adding $B$ to a separating set of $(A,C)$ makes the pair conditionally dependent.
 If so, the graph is likely to be more faithful to its modeled distribution.
 
-\paragraph{EMS PC}
-...
+\paragraph{EMS-PC}
+We have combined the above ideas into an adaptation of PC, which we refer to as Explicit Multiple Separating Set PC (EMS-PC).
+% TODO: Algorithmic part here.
 
 \subsection*{Data acquisition \& analysis}
 % TODO: vraag Max naar de details van de meetmethode en subject acquisition
