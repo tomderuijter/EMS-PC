@@ -207,8 +207,8 @@ More generally, two variables $X$ and $Y$ can be conditionally dependent on a se
 A similar principle is conditional independence.
 If two variables are generally dependent, they can still be independent given a third variable.
 An example of this is when a variable $X$ has two children $Y$ and $Z$.
-$Y$ and $Z$ are generally dependent, as they share a common cause $X$;
-When $X$ does not vary, $Y$ and $Z$ lose their common cause and they lose their dependency.
+$Y$ and $Z$ are generally dependent, as they share a common cause or \emph{confounder} or \emph{confounder} $X$;
+When $X$ does not vary, $Y$ and $Z$ lose their confoundernd they lose their dependency.
 As such, $Y$ and $Z$ are independent given \{$X$\}. 
 
 We define a trail as a set of edges which would make up a path if those edges would be undirected.
@@ -228,33 +228,41 @@ Assumption can be made about the model to make it easier to infer it, but this i
 
 One assumption that can be made about the model is that of causal sufficiency. 
 When it is assumed that the model fully describes the real network, so-called V-structures can be concluded. 
-When there is a structure $X - Y - Z$, in which $X$ and $Z$ are not connected, the only possible orientation of the connections is $X \rightarrow Y \leftarrow Z$. % TODO: extra uitleg?
+When there is a structure $X - Y - Z$, in which $X$ and $Z$ are not connected, the only possible orientation of the connections is $X \rightarrow Y \leftarrow Z$. % TODO: extra uitleg, d-separation?
 An approach to finding a model is therefore to find all V-structures and orient them in this way.
 
 However, it is very unlikely that all events which are relevant for the causal graph are measured; 
 even with high temporal and spatial resolutions, the entire fysiology of the brain is too complex to capture.
 Latent variables are nodes which are present in the underlying Bayesian graph, but which are not measured.
-When there is a structure $X \leftarrow L \rightarrow Y$ in which $L$ is a latent variable, an edge between $X$ and $Y$ might be found while the these two nodes have no direct ancestor/descendant-relation between them.
-A directed edge $X \rightarrow Y$ or $X \leftarrow Y$ would be erroneous, so an arrow 
 The complex reality might be very similar to a simple model based on the measured data, but it might also be very different.
 This correctness of the data is called causal faithfulness.
-As such, the way of describing V-structures might not draw false conclusions, depending on the causal faithfulness.
-When causal sufficiency is not assumed, 
+When there is a structure $X \leftarrow L \rightarrow Y$ in which $L$ is a latent variable, an edge between $X$ and $Y$ might be found while the these two nodes have no direct ancestor/descendant-relation between them;
+They might be related through a confounder, which is indicated as $X \leftrightarrow Y$.
+As such, for a V-structure for which the underlying Bayesian network has latent variables, a directed edge $X \rightarrow Y$ or $X \leftarrow Y$ would be erroneous. 
+As such, the way of describing V-structures might not draw false conclusions, depending on the causal faithfulness. 
+A weaker conclusion is that a V-structure should be oriented as $X \orightarrow Y \oleftarrow Z$, in which the circles at the end of an edge mean that the form of this end is not yet know; an arrow $\orightarrow$ might be a simple arrow $\rightarrow$ or a double arrow $\leftrightarrow$.
 
 \subsection{The PC-algorithm}
 \cite{?}
-Whether there is a dependency between two variables can be concluded by using a statistical test.
-In this way, a graph can be inferred representing all dependencies between nodes.
-However, this only results in an undirected graph, as it does not give any information about causality.
+For finding directed edges, the PC-algorithm first finds the undirected structure.
+For each two nodes $X$ and $Y$ which are not neighbours in this structure, it also finds a minimal separating set, which is the smallest set acting as a separated set.
+This is done by first assuming all nodes are connected, and then testing all pairs of nodes for independence.
+
+The independence of $X$ and $Y$ is tested given a subset of neighbours of $X$ or $Y$ (the number of neighbours decreases while edges are removed), using the fisher-test.
+If such an independence is found, this subset is a separating set of $X$ and $Y$ and they are not connected.
+If no such an independence is found, they are connected.
+To find the minimal separating set, the subsets of neighbours are traversed in order of size; the first separating set which is found, is the minimal one.
+
+After the structure and separating sets have been found, the PC-algorithm attempts to orient the edges.
 A set of rules for finding a causal relation between nodes, using the undirected graph, are used in the PC-algorithm. Multiple variations of this algorithm are described by Spirtes, Glymour and Scheines \ref{?}. For this analysis, we have used the "modified pc algorithm" which does not assume causal sufficiency, and thus is able to handle latent variables.
 
-The first of these rules attempts to find so-called v-structures, which are of the form $X \rightarrow Z \leftarrow Y$.
+The first of these rules attempts to find and orient V-structures.
 V-structures may be found for every three nodes $X$, $Y$ and $Z$ for which $X \sline Z$, $Y \sline Z$ and in which $X$ and $Y$ are (possibly conditially) independent.
 As $X$ and $Y$ are independent, they have a separating set $S$ (if they are unconditially independent, $S$ is the empty set).
 If $Z$ is not in $S$, then the only possible causal relation can be that of a v-structure, so the edges can be oriented as $X \srightarrow Z \sleftarrow Y$.
 
 
-After this rules which finds V-structures, the other rules are applied in no particular order. These rules are based on arrows that have already been found.
+After this rule which finds V-structures, the other rules are applied in no particular order. These rules are based on arrows that have already been found.
 \begin{itemize}
 \item If there is an edge $X \sline Y$, and if there is a directed path from $X$ to $Y$, then $X \sline Y$ can be oriented as $X \srightarrow Y$.
 \item If there are edges $X \srightarrow Y$ and $Y \sleftline Z$, if the latter is not an edge $Y \sleftarrow Z$, and if $X$ and $Z$ are not connected, orient $Y \sline Z$ as $Y \rightarrow Z$. 
