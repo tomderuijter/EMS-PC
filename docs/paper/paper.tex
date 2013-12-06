@@ -1,6 +1,5 @@
 % Needed packages
-%\documentclass[a4paper, 10pt, english, %twocolumn]{article}
-\documentclass[a4paper]{article}
+\documentclass[a4paper, 10pt, english, onecolumn]{article}
 \usepackage[english]{babel}
 %\usepackage[cm]{fullpage}
 \usepackage{cite}
@@ -13,6 +12,7 @@
 
 \usepackage{amssymb,amsmath}
 \usepackage{algorithmicx}
+%\usepackage{algorithmic}
 \usepackage{algorithm}
 \usepackage[noend]{algpseudocode}
 
@@ -115,9 +115,13 @@ Universiteit Nijmegen}}}\\[0.5cm]\rule{\linewidth}{0.3mm}}
 
 \maketitle
 
+\setlength{\parindent}{0.0cm}
+\setlength{\parskip}{0.25cm}
+
 \begin{abstract}
 % TODO: Add abstract. Look at slides Peter to see what is asked.
 \end{abstract}
+
 
 \section{Introduction}
 
@@ -273,6 +277,29 @@ After this rule which finds V-structures, the other rules are applied in no part
 
 \subsection{Pseudocode}
 
+%\begin{algorithm}[PC-algorithm]
+\begin{algorithmic}
+\State Starting state: connect all pairs of point in undirected graph $G$.\\
+\State n := 0
+\While{$n < |\operatorname{Adjecencies}(X)\setminus\{Y\}| $}
+  \ForAll{connected pair $X$, $Y$}
+    \ForAll{subset $S$ of $\operatorname{Adjacencies(X)}$ for which $|S| = n$}
+      \State test whether $X$ and $Y$ are d-separated given $S$ (Fisher-Z-test)
+      \If{$X$ and $Y$ are d-separated given $S$}
+        \State remove the edge $X - Y$ from G
+        \State record $S$ as the separating set of $X$ and $Y$
+        \State continue with the next pair $X$, $Y$
+      \EndIf
+    \EndForAll
+  \EndForAll
+  n := n+1
+\EndWhile
+  
+\EndWhile
+\end{algorithmic}
+%\end{algorithm}
+
+
 \subsection{Brain Connectivity}
 
 %Question: should this be included?
@@ -348,11 +375,12 @@ One could use these additional separating sets to test oriented unshielded tripl
 Apart from serving as a sanity check, this could serve as the basis of a repair algorithm for errors made by PC.
 
 % Explicit test
-A more direct way to decrease faulty orientation of an unshielded triple $\left<A,B,C\right>$ is to check whether adding $B$ to a separating set of $(A,C)$ makes the pair conditionally dependent.
+A more explicit way to decrease faulty orientation of an unshielded triple $\left<A,B,C\right>$ is to check whether adding $B$ to a separating set of $(A,C)$ makes the pair conditionally dependent.
 If so, the graph is likely to be more faithful to its modeled distribution.
 
-\paragraph{EMS PC}
-...
+\paragraph{EMS-PC}
+We have combined the above ideas into an adaptation of PC, which we refer to as Explicit Multiple Separating Set PC (EMS-PC).
+% TODO: Algorithmic part here.
 
 \subsection*{Data acquisition \& analysis}
 % TODO: vraag Max naar de details van de meetmethode en subject acquisition
