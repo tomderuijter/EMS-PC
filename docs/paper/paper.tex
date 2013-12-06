@@ -277,27 +277,48 @@ After this rule which finds V-structures, the other rules are applied in no part
 
 \subsection{Pseudocode}
 
-%\begin{algorithm}[PC-algorithm]
+The first part of the algorithm finds an undirected graph $G$. For each pair of points which are not connected in this graph, it also finds a separating set:
+
 \begin{algorithmic}
-\State Starting state: connect all pairs of point in undirected graph $G$.\\
-\State n := 0
-\While{$n < |\operatorname{Adjecencies}(X)\setminus\{Y\}| $}
-  \ForAll{connected pair $X$, $Y$}
-    \ForAll{subset $S$ of $\operatorname{Adjacencies(X)}$ for which $|S| = n$}
-      \State test whether $X$ and $Y$ are d-separated given $S$ (Fisher-Z-test)
+\Function{Structure\_PC}{$data$ used to test independence}
+\State connect all pairs of point in undirected graph $G$.
+\State $n \gets 0$
+\While{there are connected pairs $X$, $Y$ such that $n < |\operatorname{Adjecencies}(X)\setminus\{Y\}| $}
+  \ForAll{such connected pairs $X$, $Y$}
+    \ForAll{subsets $S$ of $\operatorname{Adjacencies(X)}$ for which $|S| = n$}
+      \State test whether $X$ and $Y$ are d-separated given $S$ (Fisher-Z-test on $data$)
       \If{$X$ and $Y$ are d-separated given $S$}
         \State remove the edge $X - Y$ from G
         \State record $S$ as the separating set of $X$ and $Y$
         \State continue with the next pair $X$, $Y$
       \EndIf
-    \EndForAll
-  \EndForAll
-  n := n+1
+    \EndFor
+  \EndFor
+  n \gets n+1
 \EndWhile
-  
-\EndWhile
+\Return G and the separating sets
+\EndFunction
 \end{algorithmic}
-%\end{algorithm}
+
+The second part orients edges in this graph $G$ based on the separating sets:
+
+\begin{algorithmic}
+\Function{Directional\_PC}{$G$, $sepsets$}
+ \State $\text{PDAG} \gets G$
+  \ForAll{triples $X$, $Y$, $Z$ with the structure $X - Y - Z$ in $G$ (where $X$ and $Z$ are not connected)}
+    \If{$Y$ is not in the separating set of $X$ and $Z$}
+      \State Orient $X - Y - Z$ as $X \rightarrow Y \leftarrow Z$ in $\text{PDAG}$
+    \EndIf
+  \EndFor
+  \Repeat
+    \ForAll{ordered, connected pairs $X$, $Y$}
+      %\If{there is a node $Z$ such that }
+        
+      %\EndIf
+    \EndFor
+  \Until{no more edges are oriented}
+\EndFunction
+\end{algorithmic}
 
 
 \subsection{Brain Connectivity}
