@@ -1,10 +1,10 @@
 % Needed packages
 \documentclass[a4paper, 10pt, english, onecolumn]{article}
 \usepackage[english]{babel}
-\usepackage[cm]{fullpage}
+%\usepackage[cm]{fullpage}
 \usepackage{cite}
 \usepackage{anysize}
-\usepackage[compact]{titlesec}
+%\usepackage[compact]{titlesec}
 \usepackage{graphicx}
 \usepackage{stfloats}
 \usepackage{listings}
@@ -12,6 +12,7 @@
 
 \usepackage{amssymb,amsmath}
 \usepackage{algorithmicx}
+%\usepackage{algorithmic}
 \usepackage{algorithm}
 \usepackage[noend]{algpseudocode}
 
@@ -19,14 +20,14 @@
 \usepackage[table]{xcolor}
 %\usepackage{pgfgantt}
 
-\newcommand{\keywords}[1]{\par\noindent 
-{\bf Keywords\/}. #1}
+%\newcommand{\keywords}[1]{\par\noindent 
+%{\bf Keywords\/}. #1}
 
 % Margins & Headers
-\marginsize{2.5cm}{2.5cm}{3.0cm}{2.0cm}
-\columnsep 0.4in
-\footskip 0.4in 
-\usepackage{changepage}
+%\marginsize{2.5cm}{2.5cm}{3.0cm}{2.0cm}
+%\columnsep 0.4in
+%\footskip 0.4in 
+%\usepackage{changepage}
 
 % E-mail formatting
 \usepackage{color,hyperref}
@@ -248,6 +249,8 @@ As such, the way of describing V-structures might not draw false conclusions, de
 A weaker conclusion is that a V-structure should be oriented as $X \orightarrow Y \oleftarrow Z$, in which the circles at the end of an edge mean that the form of this end is not yet know; an arrow $\orightarrow$ might be a simple arrow $\rightarrow$ or a double arrow $\leftrightarrow$.
 
 \subsection{The PC-algorithm}
+
+\subsection{Informal description}
 \cite{?}
 For finding directed edges, the PC-algorithm first finds the undirected structure.
 For each two nodes $X$ and $Y$ which are not neighbours in this structure, it also finds a minimal separating set, which is the smallest set acting as a separated set.
@@ -272,13 +275,50 @@ After this rule which finds V-structures, the other rules are applied in no part
 \item If there are edges $X \srightarrow Y$ and $Y \sleftline Z$, if the latter is not an edge $Y \sleftarrow Z$, and if $X$ and $Z$ are not connected, orient $Y \sline Z$ as $Y \rightarrow Z$. 
 \end{itemize}
 
-%TODO: pseudocode nodig? of een verwijzing naar het boek (die pseudocode is wat onduidelijk)?
+\subsection{Pseudocode}
 
-\usepackage{algorithmic}
+The first part of the algorithm finds an undirected graph $G$. For each pair of points which are not connected in this graph, it also finds a separating set:
 
-%\begin{algorithm}[PC-algorithm]
-\STATE Starting state of undirected graph G: connect all pairs of points. Set n = 0.
-\WHILE{there are connected pairs $X$, $Y$ such that |Adjecencies(G,X)\{Y}| < } 
+\begin{algorithmic}
+\Function{Structure\_PC}{$data$ used to test independence}
+\State connect all pairs of point in undirected graph $G$.
+\State $n \gets 0$
+\While{there are connected pairs $X$, $Y$ such that $n < |\operatorname{Adjecencies}(X)\setminus\{Y\}| $}
+  \ForAll{such connected pairs $X$, $Y$}
+    \ForAll{subsets $S$ of $\operatorname{Adjacencies(X)}$ for which $|S| = n$}
+      \State test whether $X$ and $Y$ are d-separated given $S$ (Fisher-Z-test on $data$)
+      \If{$X$ and $Y$ are d-separated given $S$}
+        \State remove the edge $X - Y$ from G
+        \State record $S$ as the separating set of $X$ and $Y$
+        \State continue with the next pair $X$, $Y$
+      \EndIf
+    \EndFor
+  \EndFor
+  n \gets n+1
+\EndWhile
+\Return G and the separating sets
+\EndFunction
+\end{algorithmic}
+
+The second part orients edges in this graph $G$ based on the separating sets:
+
+\begin{algorithmic}
+\Function{Directional\_PC}{$G$, $sepsets$}
+ \State $\text{PDAG} \gets G$
+  \ForAll{triples $X$, $Y$, $Z$ with the structure $X - Y - Z$ in $G$ (where $X$ and $Z$ are not connected)}
+    \If{$Y$ is not in the separating set of $X$ and $Z$}
+      \State Orient $X - Y - Z$ as $X \rightarrow Y \leftarrow Z$ in $\text{PDAG}$
+    \EndIf
+  \EndFor
+  \Repeat
+    \ForAll{ordered, connected pairs $X$, $Y$}
+      %\If{there is a node $Z$ such that }
+        
+      %\EndIf
+    \EndFor
+  \Until{no more edges are oriented}
+\EndFunction
+\end{algorithmic}
 
 \ENDWHILE
 %\end{algorithm}
