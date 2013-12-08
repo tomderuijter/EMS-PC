@@ -213,7 +213,8 @@ If two variables are generally dependent, they can still be independent given a 
 An example of this is when a variable $X$ has two children $Y$ and $Z$.
 $Y$ and $Z$ are generally dependent, as they share a common cause or \emph{confounder} or \emph{confounder} $X$;
 When $X$ does not vary, $Y$ and $Z$ lose their confoundernd they lose their dependency.
-As such, $Y$ and $Z$ are independent given \{$X$\}. 
+As such, $Y$ and $Z$ are independent given \{$X$\}.
+In real-world data, independence can be found with methods such as the Fisher-Z-test. 
 
 We define a trail as a set of edges which would make up a path if those edges would be undirected.
 We can now define directional separation, or d-separation.
@@ -252,10 +253,10 @@ For finding directed edges, the PC-algorithm first finds the undirected structur
 For each two nodes $X$ and $Y$ which are not neighbours in this structure, it also finds a minimal separating set, which is the smallest set acting as a separated set.
 This is done by first assuming all nodes are connected, and then testing all pairs of nodes for independence.
 
-The independence of $X$ and $Y$ is tested given a subset of neighbours of $X$ or $Y$ (the number of neighbours decreases while edges are removed), using the fisher-test.
+The independence of $X$ and $Y$ is tested given a subset of neighbours of $X$ or $Y$ (the number of neighbours decreases while edges are removed), using the fisher-Z-test.
 If such an independence is found, this subset is a separating set of $X$ and $Y$ and they are not connected.
 If no such an independence is found, they are connected.
-To find the minimal separating set, the subsets of neighbours are traversed in order of size; the first separating set which is found, is the minimal one.
+To find the minimal separating set, all subsets of neighbours are traversed in order of size; the first separating set which is found, is the minimal one.
 
 After the structure and separating sets have been found, the PC-algorithm attempts to orient the edges.
 A set of rules for finding a causal relation between nodes, using the undirected graph, are used in the PC-algorithm. Multiple variations of this algorithm are described by Spirtes, Glymour and Scheines \ref{?}. For this analysis, we have used the "modified pc algorithm" which does not assume causal sufficiency, and thus is able to handle latent variables.
@@ -263,8 +264,7 @@ A set of rules for finding a causal relation between nodes, using the undirected
 The first of these rules attempts to find and orient V-structures.
 V-structures may be found for every three nodes $X$, $Y$ and $Z$ for which $X \sline Z$, $Y \sline Z$ and in which $X$ and $Y$ are (possibly conditially) independent.
 As $X$ and $Y$ are independent, they have a separating set $S$ (if they are unconditially independent, $S$ is the empty set).
-If $Z$ is not in $S$, then the only possible causal relation can be that of a v-structure, so the edges can be oriented as $X \srightarrow Z \sleftarrow Y$.
-
+If $Z$ is not in $S$, then the only possible causal relation can be that of a V-structure, so the edges can be oriented as $X \srightarrow Z \sleftarrow Y$.
 
 After this rule which finds V-structures, the other rules are applied in no particular order. These rules are based on arrows that have already been found.
 \begin{itemize}
@@ -272,7 +272,16 @@ After this rule which finds V-structures, the other rules are applied in no part
 \item If there are edges $X \srightarrow Y$ and $Y \sleftline Z$, if the latter is not an edge $Y \sleftarrow Z$, and if $X$ and $Z$ are not connected, orient $Y \sline Z$ as $Y \rightarrow Z$. 
 \end{itemize}
 
+%TODO: pseudocode nodig? of een verwijzing naar het boek (die pseudocode is wat onduidelijk)?
 
+\usepackage{algorithmic}
+
+%\begin{algorithm}[PC-algorithm]
+\STATE Starting state of undirected graph G: connect all pairs of points. Set n = 0.
+\WHILE{there are connected pairs $X$, $Y$ such that |Adjecencies(G,X)\{Y}| < } 
+
+\ENDWHILE
+%\end{algorithm}
 
 \subsection{Brain Connectivity}
 
