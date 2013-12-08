@@ -93,8 +93,10 @@
 \def \srightarrow {\text{\textasteriskcentered}\hspace{-0.62em}\rightarrow}
 \def \sleftarrow {\leftarrow\hspace{-0.62em}\text{\textasteriskcentered}}
 \def \srightline {\text{\textasteriskcentered}\hspace{-0.16em}-}
-\def \sleftline {-\hspace{-0.16em}\text{\textasteriskcentered}}
+\def \sleftline {-\hspace{-0.40em}\text{\textasteriskcentered}}
 \def \sline {\text{\textasteriskcentered}\hspace{-0.38em}-\hspace{-0.4em}\text{\textasteriskcentered}}
+\def \soline {\text{\textasteriskcentered}\hspace{-0.16em}-\hspace{-0.4em}\circ}
+\def \osline {\circ\hspace{-0.38em}-\hspace{-0.16em}\text{\textasteriskcentered}}
 
 % ############## End Macros ##############
 
@@ -251,7 +253,7 @@ A weaker conclusion is that a V-structure should be oriented as $X \orightarrow 
 \subsection{The PC-algorithm}
 
 \subsection{Informal description}
-\cite{?}
+The PC algorithm as used for these experiments is the version which is modified to handle latent variables, as also described by Spirtes, Glymour and Scheines \cite{spirtes2000}, pages 165-167.
 For finding directed edges, the PC-algorithm first finds the undirected structure.
 For each two nodes $X$ and $Y$ which are not neighbours in this structure, it also finds a minimal separating set, which is the smallest set acting as a separated set.
 This is done by first assuming all nodes are connected, and then testing all pairs of nodes for independence.
@@ -277,10 +279,10 @@ After this rule which finds V-structures, the other rules are applied in no part
 
 \subsection{Pseudocode}
 
-The first part of the algorithm finds an undirected graph $G$. For each pair of points which are not connected in this graph, it also finds a separating set:
+The first part of the algorithm finds an undirected graph $G$. For each pair of points which are not connected in this graph, it also finds a separating set. $\operatorname{Adjacencies} (X)$ is defined as the set of all neighbours of $X$ in the graph G. This graph changes during the algorithm and so does $\operatorname{Adjacencies} (X)$.
 
 \begin{algorithmic}
-\Function{Structure\_PC}{$data$ used to test independence}
+\Function{Structure\_PC}{$data$}
 \State connect all pairs of point in undirected graph $G$.
 \State $n \gets 0$
 \While{there are connected pairs $X$, $Y$ such that $n < |\operatorname{Adjecencies}(X)\setminus\{Y\}| $}
@@ -294,34 +296,38 @@ The first part of the algorithm finds an undirected graph $G$. For each pair of 
       \EndIf
     \EndFor
   \EndFor
-  n \gets n+1
+  \State $n \gets n+1$
 \EndWhile
-\Return G and the separating sets
+\Return $G$ and the separating sets
 \EndFunction
 \end{algorithmic}
 
-The second part orients edges in this graph $G$ based on the separating sets:
+The second part orients edges in this graph $G$ based on the separating sets. In this pseudocode, an edge with a star at the end means that that end may be either an arrowhead, an "o" or an empty mark. When an edge is oriented as an edge with a star at the end, this denotes that this end is not changed.
 
 \begin{algorithmic}
 \Function{Directional\_PC}{$G$, $sepsets$}
- \State $\text{PDAG} \gets G$
-  \ForAll{triples $X$, $Y$, $Z$ with the structure $X - Y - Z$ in $G$ (where $X$ and $Z$ are not connected)}
+  \State $\text{PDAG} \gets G\text{, with all connections replaced by }\oline$
+  \Comment{Find and orient V-structures}
+  \ForAll{triples $X$, $Y$, $Z$ with the structure $X\sline Y \sline Z$ in $G$ (where $X$ and $Z$ are not connected)}
     \If{$Y$ is not in the separating set of $X$ and $Z$}
-      \State Orient $X - Y - Z$ as $X \rightarrow Y \leftarrow Z$ in $\text{PDAG}$
+      \State Orient $X \sline Y \sline Z$ as $X \srightarrow Y \sleftarrow Z$ in $\text{PDAG}$
     \EndIf
   \EndFor
   \Repeat
     \ForAll{ordered, connected pairs $X$, $Y$}
-      %\If{there is a node $Z$ such that }
-        
-      %\EndIf
+      \Comment{Rule 1}
+      \If{$X \osline Y$ or $X \sleftline Y$, and there is a node $Z$ such that $Z \srightarrow X$}
+        \State Orient $X \sline Y$ as $X \rightarrow Y$
+      \EndIf
+      \Comment{Rule 2}
+      \If{there is a directed path from $X$ to $Y$}
+        \State Orient $X \sline Y$ as $X \srightarrow Y$
+      \EndIf
     \EndFor
   \Until{no more edges are oriented}
+  \State \Return PDAG
 \EndFunction
 \end{algorithmic}
-
-\ENDWHILE
-%\end{algorithm}
 
 \subsection{Brain Connectivity}
 
