@@ -1,5 +1,5 @@
-% perm = [1:2:90 2:2:90 91:116];
-perm = 1:116;
+perm = [1:2:90 2:2:90 91:116];
+%perm = 1:116;
 
 G_avg = mean(Gs,4);
 G_avg = G_avg(:,perm,perm);
@@ -48,26 +48,45 @@ imagesc(Subj_avg - Subj_stddev); colorbar; axis square; title('mean-std PDAG');
 % Plot per subject mean
 h = figure; colormap(cmap);
 for i=1:6
-    subplot(2,2,1);
+    subplot(2,3,1);
     imagesc(squeeze(PDAG_avg(i,:,:)));
     title(sprintf('PDAG - Subj %d',i));
     colorbar;
     axis square;
-    subplot(2,2,2);
+    subplot(2,3,2);
     imagesc(squeeze(PDAG_avg(i,:,:)) - squeeze(PDAG_avg(i,:,:))');
     title(sprintf('ASSYM PDAG - Subj %d',i));
     colorbar;
     axis square;
-    subplot(2,2,3);
+    subplot(2,3,4);
     imagesc(squeeze(PDAG_std(i,:,:)));
     title(sprintf('STD PDAG - Subj %d',i));
     colorbar;
     axis square;
-    subplot(2,2,4);
+    subplot(2,3,5);
     imagesc(squeeze(PDAG_avg(i,:,:)) - squeeze(PDAG_std(i,:,:)));
     title(sprintf('mean - std PDAG - Subj %d',i));
     colorbar;
     axis square;
+    
+    
+    subplot(2,3,3);
+    imagesc(squeeze(G_avg(i,:,:)));
+    title(sprintf('Structure - Subj %d',i));
+    axis square;
+    colorbar;
+    
     pause;
 end
 close(h);
+
+% Plot data of Max
+load('data.mat');
+G_max = squeeze(mean(Gs, 1));
+G_max = G_max(perm, perm);
+figure;
+imagesc(G_max);
+title('structure based on DWI');
+colormap 'gray';
+colorbar;
+axis square;

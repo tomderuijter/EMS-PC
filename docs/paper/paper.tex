@@ -3,7 +3,7 @@
 \usepackage[english]{babel}
 %\usepackage[cm]{fullpage}
 \usepackage{cite}
-\usepackage{anysize}
+%\usepackage{anysize}
 %\usepackage[compact]{titlesec}
 \usepackage{graphicx}
 \usepackage{stfloats}
@@ -117,8 +117,8 @@ Universiteit Nijmegen}}}\\[0.5cm]\rule{\linewidth}{0.3mm}}
 
 \maketitle
 
-\setlength{\parindent}{0.0cm}
-\setlength{\parskip}{0.25cm}
+%\setlength{\parindent}{0.0cm}
+%\setlength{\parskip}{0.25cm}
 
 \begin{abstract}
 % TODO: Add abstract. Look at slides Peter to see what is asked.
@@ -372,10 +372,20 @@ As a final safe-guard, all unshielded triples are checked for unfaithfulness and
 
 \subsection{Pseudocode}
 \label{sec:pseudocode}
-The first part of the algorithm finds an undirected graph $G$. For each pair of points which are not connected in this graph, it also finds a separating set. $\operatorname{Adjacencies} (X)$ is defined as the set of all neighbours of $X$ in the graph $G$. This graph changes during the algorithm and so does $\operatorname{Adjacencies} (X)$.
 
+The first part of the algorithm finds an undirected graph $G$ and is described in Algorithm ~\ref{code:emsstructure}.
+For each pair of points which are not connected in this graph, it also finds a separating set. $\operatorname{Adjacencies} (X)$ is defined as the set of all neighbours of $X$ in the graph $G$.
+This graph changes during the algorithm and so does $\operatorname{Adjacencies} (X)$.
+The second part orients edges in this graph $G$ based on the separating sets, as described in Algorithm ~\ref{code:emsdirectional}.
+
+%\par\vfill\break % Omdat pseudocode veel hspace nodig heeft :(
+%\advance\hsize by 8cm % Advance page height
+%\advance\hoffset by -4cm % Shift top margin
+%\floatevery{algorithm}{\setlength\hsize{15cm}}
+%\floatevery{algorithmic}{\setlength\hsize{15cm}}
+%TODO: meer hspace geven aan algorithms, alles hierboven werkte niet
 \begin{algorithm}
-\caption{Structure PC}
+\caption{Structure EMS-PC}
 \begin{algorithmic}
 \Function{Structure\_PC}{$data$}
 \State connect all pairs of point in undirected graph $G$.
@@ -383,8 +393,8 @@ The first part of the algorithm finds an undirected graph $G$. For each pair of 
 \While{there are connected pairs $X$, $Y$ such that $n < |\operatorname{Adjecencies}(X)\setminus\{Y\}| $}
   \ForAll{such connected pairs $X$, $Y$}
     \ForAll{subsets $S$ of $\operatorname{Adjacencies(X)}$ for which $|S| = n$}
-      \Comment{(Fisher-Z-test on $data$)}
       \State test whether $X$ and $Y$ are d-separated given $S$
+      \Comment{(Fisher-Z-test on $data$)}
       \If{$X$ and $Y$ are d-separated given $S$}
         \State remove the edge $X - Y$ from G
         \State record $S$ as a separating set of $X$ and $Y$
@@ -399,9 +409,9 @@ The first part of the algorithm finds an undirected graph $G$. For each pair of 
 \label{code:emsstructure}
 \end{algorithm}
 
-The second part orients edges in this graph $G$ based on the separating sets.
+
 \begin{algorithm}
-\caption{Directional PC}
+\caption{Directional EMS-PC}
 \begin{algorithmic}
 \Function{Directional\_PC}{$G$, $sepsets$}
   \State $\text{PDAG} \gets G\text{, with all connections replaced by }\oline$
@@ -428,6 +438,10 @@ The second part orients edges in this graph $G$ based on the separating sets.
 \end{algorithmic}
 \label{code:emsdirectional}
 \end{algorithm}
+
+%\par\vfill\break % Omdat pseudocode veel hspace nodig heeft :(
+%\advance\hsize by -8cm % Retur n old margings and page height
+%\advance\hoffset by 4cm % Return old margings and page height
 
 \subsection{Experimental validation}
 % Section on how we plan on demonstrating the empirical value of research.
@@ -465,20 +479,29 @@ To achieve stability, we have run the algorithm multiple times, in which the dat
 The avarage of all iterations was used as a measure of certainty, i.e. how consistent the algorithm is for each point of data.
 
 The results from the altorithms are presented in the form of matrices.
+A connection from region $n$ to region $m$ is represented by point $(n,m)$ or $n,m$ in the matrix.
+For strucural data, this matrix is therefore symmetrical.
+In the directional data, point $(n,m)$ denotes a directed edge from $n$ to $m$.
 In such a matrix, indices 1-45 represent the brain regions of the left hemisphere, regions 45-90 represent the right hemisphere, and regions 91-116 represent regions in the cerebellum. %TODO left or right hemisphere?
 
 Modified PC and EMS-PC do not differ in finding the structure.
-The results are presented in figure ~\ref{fig:struct_full_mean} as the avarage over all six subjects.
+The results are presented in figure ~\ref{fig:struct_full_mean} as the avarage over all six subjects, with 300 iterations per subject.
 \begin{figure}[h!]
   \centering
   \includegraphics{images/struct_full_mean_gray}
   \caption{The avarage structure of all subjects}
   \label{fig:struct_full_mean}
 \end{figure}
-%TODO aantal iteraties
 In this matrix, higher values represent strong certainties of the presence of a connection.
 
-The regions which are most clearly connected are the two hemispheres, and certain regions within the cerebellum.
+\begin{figure}[h!]
+  \centering
+  \includegraphics{images/structure_max}
+  \caption{The avarage structure of all subjects, according to the DWI-measurements of Hinne et al.}
+  \label{fig:struct_mean_max}
+\end{figure}
+
+One notable difference between the results found in Hinne et al. are that connections between the the two hemispheres are clearly visible as two diagonal lines. Connections within the hemispheres are less clearly visible, as well as connections within the cerebellum.
 
 % Mod-PC
 
