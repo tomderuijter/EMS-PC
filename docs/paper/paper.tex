@@ -360,7 +360,7 @@ If so, the graph is likely to be more faithful to its modeled distribution.
 
 \paragraph{EMS-PC}
 We have combined the above ideas into an adaptation of PC, which we refer to as Explicit Multiple Separating Set PC (EMS-PC).
-Two changes have been made in this adaption with respect to modified PC as described by Spirtes et al \cite{Spirtes2000}.
+Two changes have been made in this adaption with respect to modified PC as described by Spirtes et al \cite{spirtes2000}.
 % TODO: line below is repetition of previous paragraph. Keep?
 In the algorithm as described in section ~\ref{sec:pseudocode}, the search for a separating sets for $X$ and $Y$ stops when such a set is found; instead, EMS continues the search for more separating sets of the same order.
 
@@ -368,6 +368,7 @@ Also, the condition to orient $X - Y - Z$ according to the V-structure-rule has 
 As multiple separating sets have been found instead of only one, it needs to be checked whether $Y$ is in not in \emph{any} of those sets before the V-structure can be oriented.
 Also, in addition to the original condition, $X$ and $Z$ are tested for d-separation given $\{Y\}$.
 If they are found to be conditionally dependent, the triple is oriented as as $X \srightarrow Y \sleftarrow Z$.
+As a final safe-guard, all unshielded triples are checked for unfaithfulness and marked as such if applicable using found separating sets. %TODO wat bedoel je hiermee?
 
 \subsection{Pseudocode}
 \label{sec:pseudocode}
@@ -428,14 +429,18 @@ The second part orients edges in this graph $G$ based on the separating sets.
 \label{code:emsdirectional}
 \end{algorithm}
 
-
 \subsection{Experimental validation}
 % Section on how we plan on demonstrating the empirical value of research.
 % Full description from step 1 to final data set
-Our analysis consisted of two parts, corresponding to the two different parts of PC algorithm.
+Our analysis consisted of two parts, corresponding to the structural and directional parts of PC algorithm.
 Firstly we discerned structure by using brain resting-state time series fMRI data with structure PC.
 The generated structure is the same for all variants of PC discussed and proposed, as only the first separating set is used in finding unshielded triples.
 We compared the generated structure with a Bayesian inference approach on finding structural connectivity from diffusion weighted imaging.
+Comparison between structures is done visually with an expert on brain anatomy.
+To increase the stability of found structures within subjects, we apply stability selection for different node permutations by Meinshausen and B{\"u}hlmann \cite{meinshausen2010}.
+
+The second part of our analysis is about discerning orientation within the found structure.
+We applied the directionality rules of original PC, modified PC and EMS-PC.
 
 
 
@@ -453,15 +458,25 @@ To find effective connectivity, both structural networks and functional data is 
 
 
 \section{Results}
-At first, we have applied modified PC on the strucural connectivity data of six subjects. To achieve stability, we have run the algorithm multiple times, in which the data was permuted randomly in each iteration. The avarage of all iterations was used as a measure of certainty, i.e. how consistent the algorithm is for each point of data.
+At first, we have applied modified PC on the strucural connectivity data of six subjects.
+To achieve stability, we have run the algorithm multiple times, in which the data was permuted randomly in each iteration.
+The avarage of all iterations was used as a measure of certainty, i.e. how consistent the algorithm is for each point of data.
 
 The results from the altorithms are presented in the form of matrices.
 In such a matrix, indices 1-45 represent the brain regions of the left hemisphere, regions 45-90 represent the right hemisphere, and regions 91-116 represent regions in the cerebellum. %TODO left or right hemisphere?
 
 Modified PC and EMS-PC do not differ in finding the structure.
-The results are presented in figure ~\ref{img:??} for all six subjects.
+The results are presented in figure ~\ref{fig:struct_full_mean} as the avarage over all six subjects.
+\begin{figure}[h!]
+  \centering
+  \includegraphics{images/struct_full_mean_gray}
+  \caption{The avarage structure of all subjects}
+  \label{fig:struct_full_mean}
+\end{figure}
 %TODO aantal iteraties
+In this matrix, higher values represent strong certainties of the presence of a connection.
 
+The regions which are most clearly connected are the two hemispheres, and certain regions within the cerebellum.
 
 % Mod-PC
 
