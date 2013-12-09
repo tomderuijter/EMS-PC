@@ -438,17 +438,19 @@ The generated structure is the same for all variants of PC discussed and propose
 We compared the generated structure with a Bayesian inference approach on finding structural connectivity from diffusion weighted imaging.
 Comparison between structures is done visually with an expert on brain anatomy.
 To increase the stability of found structures within subjects, we apply stability selection for different node permutations by Meinshausen and B{\"u}hlmann \cite{meinshausen2010}.
+Multi-subject comparison was done by averaging and inspecting standard deviation over subjects.
 
 The second part of our analysis is about discerning orientation within the found structure.
-We applied the directionality rules of original PC, modified PC and EMS-PC.
-
+We applied the directionality rules of original PC, modified PC and EMS-PC as mentioned above.
+Resulting connectivity patterns are visually compared by an expert for anatomical correctness.
+To compare between methods, we compare the consistency of methods to mark a specific connection as directional over permutations.
+Of specific interest here are non-symmetrical orientations.
+We again applied stability selection for a sufficiently large number of permutations per subject.
 
 
 \subsection{Data acquisition}
 % TODO: vraag Max naar de details van de meetmethode en subject acquisition
 The above analysis was conducted on the same dataset as in \cite{hinne2013structfunc}. %TODO check citation.
-The dataset consists of fMRI 
-
 We will apply the mentioned methods on structural and functional data gathered from human subjects.
 For this we are largely dependent on data collected by others.
 Hinne et al. has provided fMRI time-series data and structural network data as used and derived in \cite{hinne2013}, of which six subjects were selected at random.
