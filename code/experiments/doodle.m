@@ -48,33 +48,26 @@ imagesc(Subj_avg - Subj_stddev); colorbar; axis square; title('mean-std PDAG');
 % Plot per subject mean
 h = figure; colormap(cmap);
 for i=1:6
-    subplot(2,3,1);
+    subplot(2,2,1);
     imagesc(squeeze(PDAG_avg(i,:,:)));
     title(sprintf('PDAG - Subj %d',i));
     colorbar;
     axis square;
-    subplot(2,3,2);
+    subplot(2,2,2);
     imagesc(squeeze(PDAG_avg(i,:,:)) - squeeze(PDAG_avg(i,:,:))');
     title(sprintf('ASSYM PDAG - Subj %d',i));
     colorbar;
     axis square;
-    subplot(2,3,4);
+    subplot(2,2,3);
     imagesc(squeeze(PDAG_std(i,:,:)));
     title(sprintf('STD PDAG - Subj %d',i));
     colorbar;
     axis square;
-    subplot(2,3,5);
+    subplot(2,2,4);
     imagesc(squeeze(PDAG_avg(i,:,:)) - squeeze(PDAG_std(i,:,:)));
     title(sprintf('mean - std PDAG - Subj %d',i));
     colorbar;
     axis square;
-    
-    
-    subplot(2,3,3);
-    imagesc(squeeze(G_avg(i,:,:)));
-    title(sprintf('Structure - Subj %d',i));
-    axis square;
-    colorbar;
     
     pause;
 end
