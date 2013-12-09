@@ -416,7 +416,7 @@ If so, the graph is likely to be more faithful to its modeled distribution.
 
 \paragraph{EMS-PC}
 We have combined the above ideas into an adaptation of PC, which we refer to as Explicit Multiple Separating Set PC (EMS-PC).
-Two changes have been made in this adaption with respect to modified PC as described by Spirtes et al \cite{Spirtes2000}.
+Two changes have been made in this adaption with respect to modified PC as described by Spirtes et al \cite{spirtes2000}.
 % TODO: line below is repetition of previous paragraph. Keep?
 In the algorithm as described in section ~\ref{sec:pseudocode}, the search for a separating sets for $X$ and $Y$ stops when such a set is found; instead, EMS continues the search for more separating sets of the same order.
 
@@ -425,13 +425,20 @@ As multiple separating sets have been found instead of only one, it needs to be 
 Also, in addition to the original condition, $X$ and $Z$ are tested for d-separation given $\{Y\}$.
 If they are found to be conditionally dependent, the triple is oriented as as $X \srightarrow Y \sleftarrow Z$.
 
+As a final safe-guard, all unshielded triples are checked for unfaithfulness and marked as such if applicable using found separating sets.
+
 \subsection{Experimental validation}
 % Section on how we plan on demonstrating the empirical value of research.
 % Full description from step 1 to final data set
-Our analysis consisted of two parts, corresponding to the two different parts of PC algorithm.
+Our analysis consisted of two parts, corresponding to the structural and directional parts of PC algorithm.
 Firstly we discerned structure by using brain resting-state time series fMRI data with structure PC.
 The generated structure is the same for all variants of PC discussed and proposed, as only the first separating set is used in finding unshielded triples.
 We compared the generated structure with a Bayesian inference approach on finding structural connectivity from diffusion weighted imaging.
+Comparison between structures is done visually with an expert on brain anatomy.
+To increase the stability of found structures within subjects, we apply stability selection for different node permutations by Meinshausen and B{\"u}hlmann \cite{meinshausen2010}.
+
+The second part of our analysis is about discerning orientation within the found structure.
+We applied the directionality rules of original PC, modified PC and EMS-PC.
 
 
 
