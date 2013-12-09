@@ -264,12 +264,14 @@ If no such an independence is found, they are connected.
 To find the minimal separating set, all subsets of neighbours are traversed in order of size; the first separating set which is found, is the minimal one.
 
 After the structure and separating sets have been found, the PC-algorithm attempts to orient the edges.
+After Spirtes et al, we use a star-symbol at the end of an edge to denote that any mark may be present: an arrowhead, an "o" or an empty mark.
+When an edge is oriented as an edge with a star, this denotes that this end is not changed.
 A set of rules for finding a causal relation between nodes, using the undirected graph, are used in the PC-algorithm. Multiple variations of this algorithm are described by Spirtes, Glymour and Scheines \ref{?}. For this analysis, we have used the "modified pc algorithm" which does not assume causal sufficiency, and thus is able to handle latent variables.
 
-The first of these rules attempts to find and orient V-structures.
-V-structures may be found for every three nodes $X$, $Y$ and $Z$ for which $X \sline Z$, $Y \sline Z$ and in which $X$ and $Y$ are (possibly conditially) independent.
+The first of these rules attempts to find and orient unshielded triples.
+A triple $<X, Y, Z>$ is considered unshielded if $X \sline Z$, $Y \sline Z$ and in which $X$ and $Y$ are (possibly conditially) independent.
 As $X$ and $Y$ are independent, they have a separating set $S$ (if they are unconditially independent, $S$ is the empty set).
-If $Z$ is not in $S$, then the only possible causal relation can be that of a V-structure, so the edges can be oriented as $X \srightarrow Z \sleftarrow Y$.
+If $Z$ is not in $S$, then the only possible causal relation within this structure can be that of a so-called V-structur; the edges can be oriented as $X \srightarrow Z \sleftarrow Y$.
 
 After this rule which finds V-structures, the other rules are applied in no particular order. These rules are based on arrows that have already been found.
 \begin{itemize}
@@ -277,64 +279,6 @@ After this rule which finds V-structures, the other rules are applied in no part
 \item If there are edges $X \srightarrow Y$ and $Y \sleftline Z$, if the latter is not an edge $Y \sleftarrow Z$, and if $X$ and $Z$ are not connected, orient $Y \sline Z$ as $Y \rightarrow Z$. 
 \end{itemize}
 
-\subsection{Pseudocode}
-\label{sec:pseudocode}
-
-The first part of the algorithm finds an undirected graph $G$. For each pair of points which are not connected in this graph, it also finds a separating set. $\operatorname{Adjacencies} (X)$ is defined as the set of all neighbours of $X$ in the graph G. This graph changes during the algorithm and so does $\operatorname{Adjacencies} (X)$.
-
-\begin{algorithm}
-\caption{Structure PC}
-\begin{algorithmic}
-\Function{Structure\_PC}{$data$}
-\State connect all pairs of point in undirected graph $G$.
-\State $n \gets 0$
-\While{there are connected pairs $X$, $Y$ such that $n < |\operatorname{Adjecencies}(X)\setminus\{Y\}| $}
-  \ForAll{such connected pairs $X$, $Y$}
-    \ForAll{subsets $S$ of $\operatorname{Adjacencies(X)}$ for which $|S| = n$}
-      \Comment{(Fisher-Z-test on $data$)}
-      \State test whether $X$ and $Y$ are d-separated given $S$
-      \If{$X$ and $Y$ are d-separated given $S$}
-        \State remove the edge $X - Y$ from G
-        \State record $S$ as the separating set of $X$ and $Y$
-        \State continue with the next pair $X$, $Y$
-      \EndIf
-    \EndFor
-  \EndFor
-  \State $n \gets n+1$
-\EndWhile
-\Return $G$ and the separating sets
-\EndFunction
-\end{algorithmic}
-\end{algorithm}
-
-The second part orients edges in this graph $G$ based on the separating sets. In this pseudocode, an edge with a star at the end means that that end may be either an arrowhead, an "o" or an empty mark. When an edge is oriented as an edge with a star at the end, this denotes that this end is not changed.
-\begin{algorithm}
-\caption{Directional PC}
-\begin{algorithmic}
-\Function{Directional\_PC}{$G$, $sepsets$}
-  \State $\text{PDAG} \gets G\text{, with all connections replaced by }\oline$
-  \Comment{V-structure-rule}
-  \ForAll{triples $X$, $Y$, $Z$ with the structure $X\sline Y \sline Z$ in $G$ (where $X$ and $Z$ are not connected)}
-    \If{$Y$ is not in the separating set of $X$ and $Z$}
-      \State Orient $X \sline Y \sline Z$ as $X \srightarrow Y \sleftarrow Z$ in $\text{PDAG}$
-    \EndIf
-  \EndFor
-  \Repeat
-    \ForAll{ordered, connected pairs $X$, $Y$}
-      \Comment{Rule 1}
-      \If{$X \osline Y$ or $X \sleftline Y$, and there is a node $Z$ such that $Z \srightarrow X$}
-        \State Orient $X \sline Y$ as $X \rightarrow Y$
-      \EndIf
-      \Comment{Rule 2}
-      \If{there is a directed path from $X$ to $Y$}
-        \State Orient $X \sline Y$ as $X \srightarrow Y$
-      \EndIf
-    \EndFor
-  \Until{no more edges are oriented}
-  \State \Return PDAG
-\EndFunction
-\end{algorithmic}
-\end{algorithm}
 
 \subsection{Brain Connectivity}
 
@@ -423,6 +367,64 @@ As multiple separating sets have been found instead of only one, it needs to be 
 Also, in addition to the original condition, $X$ and $Z$ are tested for d-separation given $\{Y\}$.
 If they are found to be conditionally dependent, the triple is oriented as as $X \srightarrow Y \sleftarrow Z$.
 
+\subsection{Pseudocode}
+\label{sec:pseudocode}
+The first part of the algorithm finds an undirected graph $G$. For each pair of points which are not connected in this graph, it also finds a separating set. $\operatorname{Adjacencies} (X)$ is defined as the set of all neighbours of $X$ in the graph $G$. This graph changes during the algorithm and so does $\operatorname{Adjacencies} (X)$.
+
+\begin{algorithm}
+\caption{Structure PC}
+\begin{algorithmic}
+\Function{Structure\_PC}{$data$}
+\State connect all pairs of point in undirected graph $G$.
+\State $n \gets 0$
+\While{there are connected pairs $X$, $Y$ such that $n < |\operatorname{Adjecencies}(X)\setminus\{Y\}| $}
+  \ForAll{such connected pairs $X$, $Y$}
+    \ForAll{subsets $S$ of $\operatorname{Adjacencies(X)}$ for which $|S| = n$}
+      \Comment{(Fisher-Z-test on $data$)}
+      \State test whether $X$ and $Y$ are d-separated given $S$
+      \If{$X$ and $Y$ are d-separated given $S$}
+        \State remove the edge $X - Y$ from G
+        \State record $S$ as a separating set of $X$ and $Y$
+      \EndIf
+    \EndFor
+  \EndFor
+  \State $n \gets n+1$
+\EndWhile
+\Return $G$ and the separating sets
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+The second part orients edges in this graph $G$ based on the separating sets.
+\begin{algorithm}
+\caption{Directional PC}
+\begin{algorithmic}
+\Function{Directional\_PC}{$G$, $sepsets$}
+  \State $\text{PDAG} \gets G\text{, with all connections replaced by }\oline$
+  \Comment{V-structure-rule}
+  \ForAll{unshielded triples $<X, Y, Z>$}
+    \If{$Y$ is not in any separating set of $X$ and $Z \And X$ and $Z$ are dependent given $Y$}
+      \State Orient $X \sline Y \sline Z$ as $X \srightarrow Y \sleftarrow Z$ in $\text{PDAG}$
+    \EndIf
+  \EndFor
+  \Repeat
+    \ForAll{ordered, connected pairs $X$, $Y$}
+      \Comment{Rule 1}
+      \If{$X \osline Y$ or $X \sleftline Y$, and there is a node $Z$ such that $Z \srightarrow X$}
+        \State Orient $X \sline Y$ as $X \rightarrow Y$
+      \EndIf
+      \Comment{Rule 2}
+      \If{there is a directed path from $X$ to $Y$}
+        \State Orient $X \sline Y$ as $X \srightarrow Y$
+      \EndIf
+    \EndFor
+  \Until{no more edges are oriented}
+  \State \Return PDAG
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+
 \subsection*{Data acquisition \& analysis}
 % TODO: vraag Max naar de details van de meetmethode en subject acquisition
 We will apply the mentioned methods on structural and functional data gathered from human subjects.
@@ -434,6 +436,9 @@ To find effective connectivity, both structural networks and functional data is 
 
 
 \section{Results}
+At first, we have applied modified PC on the strucural connectivity data of six subjects.
+The results are presented in figure ~\ref{img:??}.
+In this matrix, indices 1-45 represent the brain regions of the left hemisphere, regions 45-90 represent the right hemisphere, and regions 91-116 represent regions in the cerebellum. %TODO left or right hemisphere?
 
 
 \section{Discussion}
