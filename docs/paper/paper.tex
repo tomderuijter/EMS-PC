@@ -1,9 +1,9 @@
 % Needed packages
 \documentclass[a4paper, 10pt, english, onecolumn]{article}
 \usepackage[english]{babel}
-%\usepackage[cm]{fullpage}
+\usepackage[cm]{fullpage}
 \usepackage{cite}
-%\usepackage{anysize}
+\usepackage{anysize}
 %\usepackage[compact]{titlesec}
 \usepackage{graphicx}
 \usepackage{stfloats}
@@ -24,10 +24,10 @@
 %{\bf Keywords\/}. #1}
 
 % Margins & Headers
-%\marginsize{2.5cm}{2.5cm}{3.0cm}{2.0cm}
-%\columnsep 0.4in
-%\footskip 0.4in 
-%\usepackage{changepage}
+\marginsize{2.5cm}{2.5cm}{3.0cm}{2.0cm}
+\columnsep 0.4in
+\footskip 0.4in 
+\usepackage{changepage}
 
 % E-mail formatting
 \usepackage{color,hyperref}
@@ -117,8 +117,8 @@ Universiteit Nijmegen}}}\\[0.5cm]\rule{\linewidth}{0.3mm}}
 
 \maketitle
 
-%\setlength{\parindent}{0.0cm}
-%\setlength{\parskip}{0.25cm}
+\setlength{\parindent}{0.0cm}
+\setlength{\parskip}{0.25cm}
 
 \begin{abstract}
 % TODO: Add abstract. Look at slides Peter to see what is asked.
@@ -169,7 +169,7 @@ This is inherent to the methods and the coarseness of the measurements.
 As there is no standard baseline to compare results with, a measure of uncertainty would be highly preferable.
 A framework for such a probabilistic approach is introduced in \cite{claassen2012}.
 
-We would like to know whether applying such methods, such as the approach introduced in \cite{claassen2012}, or a standard approach such as the PC-algorithm \cite{spirtes2000}, named after \textbf{P}eter Spirtes and \textbf{C}lark Glymour, can solve some of the difficulties effective connectivity suffers from.
+We would like to know whether applying such methods, such as the approach introduced in \cite{claassen2012}, or a standard approach such as the PC-algorithm \cite{spirtes2000}, named after its authors \textbf{P}eter Spirtes and \textbf{C}lark Glymour, can solve some of the difficulties effective connectivity suffers from.
 
 % Structure of the rest of proposal
 In the remainder of this proposal we briefly discuss some necessary background knowledge on connectivity and methods, we then discuss our strategy and finally we present a time-plan overview.
@@ -178,27 +178,26 @@ In the remainder of this proposal we briefly discuss some necessary background k
 
 \subsection{Causal discovery}
 An approach for finding effective connectivity may be found in the domain of causal discovery.
-A causal discovery method uses data about events to determine which of these events are correlated, and if possible, it determines which event causes which.
-The definition of a causal relation is not trivial \cite{?} and the relevant principles will be covered in this section.
-In our context, the causal discovery methods which have been used aim at inferring a Bayesian network.
-This is done by calculating statistical (in)dependencies between stochastic variables.
+A causal discovery method uses data about events to determine which of these events are correlated, and additionally, it attempts to determine which events cause which.
+The definition of a causal relation is not trivial \cite[p.20]{spirtes2000} and the relevant principles will be covered in this section.
+In our context, the causal discovery methods which have been used aim at inferring a Bayesian network or Directed Acyclic Graph (DAG).
+These can be interpreted from a probabilistic and a causal perspective.
+In our case, we consider graphs that also include non-directed edges, a so called Partial DAG (PDAG).
 
-Such a Bayesian network can be modelled as a graph with edges which may be directed or undirected.
-Each variable is represented by a node, and correlations between variables are represented by edges between those nodes.
-If there is an edge between two variables $X$ and $Y$, this is denoted as $X - Y$.
+Under the causal interpretation, a PDAG $G$ each variable is represented by a node and correlations between variables are represented by edges between those nodes.
+If such an edge exists between two variables $X$ and $Y$, this is denoted as $X - Y$.
 A causal relation is denoted with directed edges; $X \rightarrow Y$ implies that $X$ is a direct cause of $Y$.
 It is also said that $X$ is the parent of $Y$, and $Y$ is the child of $X$. 
 When there is a directed path $X \rightarrow Z_1 \rightarrow Z_2 \dots \rightarrow Y$, $X$ is said to be an ancestor of $Y$ and $Y$ is a descendant of $X$.
 An ancestor is an (possibly indirect) cause of its descendant.
-A Bayesian network cannot contain cycles, as that would imply that a variable is it's own ancestor and thus it's own cause.
-Ideally, a causal discovery methods finds only directed edges, resulting in a directed acyclic graph (DAG).
-In practice, however, often not all causal relations can be inferred and undirected edges are also used in a graph.
-As such, the result of a causal discovery method is a partially directed acyclic graph (PDAG).
-Image {plaatje!} shows an example of a Bayesian network.
+
+% TODO: Add example of a Bayesian network.
+%Image {plaatje!} shows an example of a Bayesian network.
+
 A causal discovery method attempts at finding a real-world Bayesian network.
-But real-world situations like a brain are immensely complex and contain an unimaginable large number of atoms, which could all function as seperate variables.
+The human brain is immensely complex and contains a computationally intractable amount of neurons to model.
 As such, we represent our real-world, underlying Bayesian network with a much simpler model.
-Such a model contains a reduced number of variables to be able to analyse and visualize the data.
+Such a model contains a reduced number of variables in order to remain tractable and to visually interpret model results.
 
 An important principle for our approach is that of conditional dependence.
 The dependency of two variables might depend on the value of a third variable (or possibly even more variables).
@@ -461,17 +460,17 @@ To compare between methods, we compare the consistency of methods to mark a spec
 Of specific interest here are non-symmetrical orientations.
 We again applied stability selection for a sufficiently large number of permutations per subject.
 
-
 \subsection{Data acquisition}
-% TODO: vraag Max naar de details van de meetmethode en subject acquisition
-The above analysis was conducted on the same dataset as in \cite{hinne2013structfunc}. %TODO check citation.
-We will apply the mentioned methods on structural and functional data gathered from human subjects.
-For this we are largely dependent on data collected by others.
-Hinne et al. has provided fMRI time-series data and structural network data as used and derived in \cite{hinne2013}, of which six subjects were selected at random.
-We can estimate functional connectivity from fMRI-measurement in combination with structural 
-networks according to a procedure by Hinne et al. \cite{hinne2013structfunc}.
-To find effective connectivity, both structural networks and functional data is needed.
+No explicit data acquisition was performed, instead we performed our analysis on the same data as treated by Hinne et al. in the aforementioned Bayesian structural analysis \cite{hinne2013, hinne2013structfunc}.
 
+Paraphrasing: ``six healthy volunteers were scanned for resting-state functional data and diffusion-weighted images using a Siemens Magnetom Trio 3 T system at the Donders Centre for Cognitive Neuroimaging at Radboud University in The Netherlands.
+Resting-state fMRI data were acquired at 3 Tesla by using a multi-echo echo-planar imaging (ME-EPI) sequence (voxel size 3.5 mm isotropic, matrix size 64x64, TR=2000 ms, TEs=6.9, 16.2, 25, 35 and 45 ms, 39 slices, GRAPPA factor 3, 6/8 partial Fourier).
+A total of 1030 volumes were obtained.
+Diffusion weighted images were obtained by using the DWI protocol (voxel size 2.0 isotropic, matrix size 110x110, TR=13.00 ms, TE=101 ms, 70 slices, 256 directions at b=1500 s/mm$^2$).''
+
+We did not perform explicit (pre-)processing on the functional and diffusion imaging data.
+Instead, we used the six resulting resting-state functional time series data and connectivity matrices from the Bayesian analysis as (pre-)processed by Hinne et al. \cite{hinne2013}.
+% K is de MAP estimate uit een G-Wishart distributie. Dat wil zoveel zeggen als: een distributie over alle precisiematrices die nullen hebben op de plekken waar G een 0 heeft (Hastie, Trevor; Tibshirani, Robert; Friedman, J. (2009). The Elements of Statistical Learning, voor de ge�nteresseerden). 
 
 \section{Results}
 At first, we have applied modified PC on the structural connectivity data of six subjects.
@@ -502,9 +501,10 @@ In this matrix, higher values represent strong certainties of the presence of a 
   \label{fig:struct_max}
 \end{figure}
 
+
 One notable difference between the results found in Hinne et al. is the strong connections between homological areas, visible as two diagonal lines.
 This is a known shortcoming of diffusion weighted imaging, as these connections are typically too long to measure correctly.
-These connections most likely correspond to the corpus callosum, as each region is connected with its counterpart in the other hemisphere.
+These connections most likely correspond to the corpus callosum, as each region is connected with its counterpart in the other hemisphere..
 Connections within the hemispheres are less clearly visible, as well as connections within the cerebellum.
 
 The second step of the PC-algorithm finds directions based on this structure.
@@ -551,8 +551,21 @@ These results are presented in Figures ~\ref{fig:pdag_avg_antisymmetric_mod} and
 % per proefpersoon maxima van ~0.5, maar een veel lager avarage over proefpersonen dus weinig consistentie
 
 \section{Discussion}
+% Further research
+A Bayesian network cannot contain cycles, as that would imply that a variable is it's own ancestor and thus it's own cause.
+The theory used here does not incorporate a temporal component and 
+Ideally, a causal discovery methods finds only directed edges, resulting in a directed acyclic graph (DAG).
+%In practice, however, often not all causal relations can be inferred and undirected edges are also used in a graph.
+%As such, the result of a causal discovery method is a partially directed acyclic graph (PDAG).
+As contemporary measuring techniques are too coarse and slow to model a brain at one point in time, correctly modelling variables over multiple points in time - opposing the acyclic assumption - would provide an interesting direction of further research.
+
+% TODO: Suggereren task based analysis ipv resting state voor beter causaal beeld. 
 
 \section{Conclusion}
+
+\section{Acknowledgements}
+We would like to thank Max Hinne and Tom Claassen, for without them this research would not have been viable.
+They have provided us with ideas, valuable discussion and the data to perform actual research.
 
 \bibliography{references}{}
 \addcontentsline{toc}{section}{References}
