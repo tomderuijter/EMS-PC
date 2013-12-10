@@ -101,6 +101,9 @@
 
 % ############## End Macros ##############
 
+% ### Section Formatting ###
+\usepackage[compact]{titlesec}
+\titlespacing*{\section}{4pt}{*0}{4pt}
 
 % ### Paragraph Formatting ###
 \makeatletter
@@ -134,97 +137,89 @@ Universiteit Nijmegen}}}\\[0.5cm]\rule{\linewidth}{0.3mm}}
 % TODO: Add abstract. Look at slides Peter to see what is asked.
 \end{abstract}
 
-
 \section{Introduction}
+The brain and particularly the human brain have been studied for hundreds of years.
+Today, the secrets of our brains still are one of the most sought-after.
+The techniques however have changed.
+We have come a long way since the time of Phrenology, the pseudoscience based attempting to derive cognitive ability and personality from measurements of the skull or, post-mortem, the brain.
+Advanced measurement methods exist that allow scientists to peek inside brains that give a coarse but broad overview without opening a single skull.
 
-%\paragraph{Motivation}
-%The brain and particularly the human brain have been studied for hundreds of years.
-%Today, the secrets of our brains still are one of the most sought-after.
-%The techniques however have changed.
-%We have come a long way since the time of Phrenology, the pseudoscience based attempting to derive cognitive ability and personality from measurements of the skull or, post-mortem, the brain.
-%Advanced measurement methods exist that allow scientists to peek inside brains that give a coarse but broad overview without opening a single skull.
-%
-%Of particular interest are causal relations between brain regions and cognitive and bodily functions.
-%The question if brain region X is functionally or structurally connected to brain region Y and whether these are causally related is still highly relevant; it is the main question of the present-day scientific field of brain connectivity.
-%Understanding brain structure implies understanding more about the brain as a whole.
-%
-%Not surprisingly, brain connectivity also finds applications in medicine.
-%Neuro-degenerative diseases such as Alzheimer's disease, Parkinson's disease, dementia, Amyotrophic lateral sclerosis (ALS) have all been shown to severely alter brain connectivity. %TODO: Citation needed.
-%Better methods for analysing connectivity could lead to more insight in these diseases.
-%
-%The field of brain connectivity finds its roots in the early 1990s \cite{friston1993functional, friston1994}, though because of more recent developments in the field of Artificial Intelligence and Machine Learning it is possible to do more thorough analysis \cite{vandenheuvel2010}.
-%One type of connectivity analysis involves finding how brain region X causes what region Y does. This is called \emph{effective connectivity}.
-%More concretely: how does the measured fMRI signal, representing an underlying neuronal process, determine what other neuronal processes are activated.
-%Research regarding effective is relatively new and its application still faces many challenges that require further research \cite{ramsey2010}.
-%The directed character in effective connectivity seems similar to traditional causal relations.
-%In what follows, we suggest to use causal discovery methods for deriving effective connectivity.
+Of particular interest are causal relations between brain regions and cognitive and bodily functions.
+The question if brain region X is functionally or structurally connected to brain region Y and whether these are causally related is still highly relevant; it is the main question of the present-day scientific field of brain connectivity.
+Understanding brain structure implies understanding more about the brain as a whole.
 
-%\paragraph{Problem statement}
-%This project seeks to utilise the strengths of current state-of-the-art causal discovery methods by applying them to resting state brain fMRI data in order to find new applicable methods for determining causal patterns in the human brain.
-%
-%The work by \cite{ramsey2010} addresses several problems causal analysis in fMRI analysis suffers from.
-%Methods in causal discovery have high computational costs, making it nearly impossible to calculate networks with more than hundreds of nodes.
-%Another important fact is that fMRI Analysis indirectly measures brain activity.
-%Brain models that do not account for possible latent - indirect - sources within the brain or the shortcomings of fMRI may suffer from noise, fail to capture underlying patterns or draw erroneous conclusions.
-%Solutions to this particular problem have been proposed that do account for latent sources \cite{ramsey2010, waldorp2011}.
-%Another problem is the strong diversity between subjects.
-%Every brain is inherently different, making it non-trivial to combine subject data or even draw conclusions across subjects.
-%Even within a single brain it changes how different areas react over time.
-%
-%Several methods for finding effective connectivity already exist \cite{mclntosh1994, harrison2003, friston2003, roebroeck2005}.
-%However, using more generally applicable causal discovery methods has not been elaborated on much.
-%Also, none of these provide a measure of uncertainty.
-%It is a fact that there are errors in any graph produced.
-%This is inherent to the methods and the coarseness of the measurements.
-%As there is no standard baseline to compare results with, a measure of uncertainty would be highly preferable.
-%A framework for such a probabilistic approach is introduced in \cite{claassen2012}.
-%
-We would like to know whether applying such methods, such as the approach introduced in \cite{claassen2012}, or a standard approach such as the PC-algorithm \cite{spirtes2000}, named after its authors \textbf{P}eter Spirtes and \textbf{C}lark Glymour, can solve some of the difficulties effective connectivity suffers from.
+Not surprisingly, brain connectivity also finds applications in medicine.
+Neuro-degenerative diseases such as Alzheimer's disease, Parkinson's disease, dementia, Amyotrophic lateral sclerosis (ALS) have all been shown to severely alter brain connectivity. %TODO: Citation needed.
+Better methods for analysing connectivity could lead to more insight in these diseases.
+
+The field of brain connectivity finds its roots in the early 1990s \cite{friston1993functional, friston1994}, though because of more recent developments in the field of Artificial Intelligence and Machine Learning it is possible to do more thorough analysis \cite{vandenheuvel2010}.
+One type of connectivity analysis involves finding how brain region X causes what region Y does. This is called \emph{effective connectivity}.
+More concretely: how does the measured fMRI signal, representing an underlying neuronal process, determine what other neuronal processes are activated.
+Research regarding effective is relatively new and its application still faces many challenges that require further research \cite{ramsey2010}.
+The directed character in effective connectivity seems similar to traditional causal relations.
+In what follows, we suggest to use causal discovery methods for deriving effective connectivity.
+
+\subsection{Problem statement}
+This work seeks to utilise the strengths of current state-of-the-art causal discovery methods by applying them to resting state brain fMRI data in order to find new applicable methods for determining causal patterns in the human brain.
+
+The work by \cite{ramsey2010} addresses several problems causal analysis in fMRI analysis suffers from.
+Methods in causal discovery have high computational costs, making it nearly impossible to calculate networks with more than hundreds of nodes.
+Another important fact is that fMRI Analysis indirectly measures brain activity.
+Brain models that do not account for possible latent - indirect - sources within the brain or the shortcomings of fMRI may suffer from noise, fail to capture underlying patterns or draw erroneous conclusions.
+Solutions to this particular problem have been proposed that do account for latent sources \cite{ramsey2010, waldorp2011}.
+Another problem is the strong diversity between subjects.
+Every brain is inherently different, making it non-trivial to combine subject data or even draw conclusions across subjects.
+Even within a single brain it changes how different areas react over time.
+
+Several methods for finding effective connectivity already exist \cite{mclntosh1994, harrison2003, friston2003, roebroeck2005}.
+However, using more generally applicable causal discovery methods has not been elaborated on much.
+Also, none of these provide a measure of uncertainty.
+It is a fact that there are errors in any graph produced.
+This is inherent to the methods and the coarseness of the measurements.
+As there is no standard baseline to compare results with, a measure of uncertainty would be highly preferable.
+A framework for such a probabilistic approach is introduced in \cite{claassen2012}.
+
+We would like to know whether applying a standard approach such as the PC-algorithm \cite{spirtes2000}, named after its authors \textbf{P}eter Spirtes and \textbf{C}lark Glymour, can solve some of the difficulties effective connectivity suffers from.
 
 %% Structure of the rest of proposal
-%In the remainder of this proposal we briefly discuss some necessary background knowledge on connectivity and methods, we then discuss our strategy and finally we present a time-plan overview.
+In the remainder of this work we discuss necessary knowledge on connectivity and causal inference.
+We then discuss our strategy and present and reflect on results.
 
-\section{Theory}
+\section{Brain Connectivity}
+The brain is connected in a way too complicated for contemporary measurement techniques to discover.
+That is why several kinds of connectivity are considered.
 
-%\subsection{Brain Connectivity}
-%
-%Question: should this be included?
-%\subsubsection{Functional connectivity}
-%Functional connectivity describes the statistical dependence of neuronal activity between different brain regions \cite{friston1993functional}.
-%This gives an insight in the organisation of the brain.
-%Functional connectivity is strongly time-dependent, as activity changes rapidly providing and fMRI has a low temporal resolution.
-%This means measured dependencies can be the result of statistical noise.
-%Functional connectivity can be deduced by fMRI measurement of brains in resting-state \cite{Lowe2000, doria2010, Bullmore2009}.
-%Resting state indicates that subjects are instructed to relax without thinking of anything in particular to stimulate spontaneous brain activity.
-%
-%\subsubsection{Structural connectivity}
-%Structural connectivity is defined as the mapping of anatomical - neural - paths in the brain between different brain regions \cite{friston1994}.
-%This is strongly related with functional connectivity: regions can only be functionally connected if there is a structural relation between them \cite{cabral2012}.
-%This intuitive relation can be demonstrated empirically \cite{vandenheuvel2009}.
-%Structural connectivity is less time dependent as it involves mappings of anatomical connections opposing temporal activity patterns.
-%
-%Hinne et al. \cite{hinne2013} proposed a Bayesian method for estimating structural networks based on Diffusion Weighted MRI (DWI) and probabilistic Tractography.
-%The location of white-matter tracts does not become immediately clear from imagery alone.
-%Other methods rely on thresholds to estimate location of said tracts.
-%The proposed method results in a measure of uncertainty about where a hypothesised connection will terminate and so provides a clearly interpretable network structure as result.
-%
-%\subsubsection{Effective connectivity}
-%In contrast to functional and structural connectivity, effective connectivity takes into account the cause and effect of relations.
-%It has been described as ``the influence one neural system exerts over another'' \cite{friston1994}.
-%Effective connectivity indicates which brain regions stimulate other regions.
-%Time series need to be analysed to infer effective connectivity as cause and effect can be deduced from which event precedes which. 
-%It is possible to infer effective connectivity from structural and functional connectivity \cite{mclntosh1994, harrison2003, friston2003, roebroeck2005}.
-%
-%Research has been done on inferring effective connectivity directly with several methods.
-%The most renowned methods are Granger causality \cite{roebroeck2005}, Structural Equation Modelling \cite{mclntosh1994}, Multivariate Autoregressive Modeling \cite{harrison2003} and Dynamic Causal Modelling \cite{friston2003}.
-%These are all methods dedicated to this problem.
-%These methods also suffer from similar problems of which perhaps the most important is scaling.
-%Most of these methods can only handle tens of nodes in reasonable time, which becomes problematic in realistic situations with up to tens of thousands of nodes, ideally.
+\subsection{Functional connectivity}
+Functional connectivity describes the statistical dependence of neuronal activity between different brain regions \cite{friston1993functional}.
+This gives an insight in the organisation of the brain.
+Functional connectivity is strongly time-dependent, as activity changes rapidly providing and fMRI has a low temporal resolution.
+This means measured dependencies can be the result of statistical noise.
+Functional connectivity can be deduced by fMRI measurement of brains in resting-state \cite{Lowe2000, doria2010, Bullmore2009}.
+Resting state indicates that subjects are instructed to relax without thinking of anything in particular to stimulate spontaneous brain activity.
 
-%A causal discovery method attempts at finding a real-world Bayesian network.
-%The human brain is immensely complex and contains a computationally intractable amount of neurons to model.
-%As such, we represent the underlying brain network with a much simpler model.
-%Such a model contains a reduced number of variables in order to remain tractable and to visually interpret model results.
+\subsubsection{Structural connectivity}
+Structural connectivity is defined as the mapping of anatomical - neural - paths in the brain between different brain regions \cite{friston1994}.
+This is strongly related with functional connectivity: regions can only be functionally connected if there is a structural relation between them \cite{cabral2012}.
+This intuitive relation can be demonstrated empirically \cite{vandenheuvel2009}.
+Structural connectivity is less time dependent as it involves mappings of anatomical connections opposing temporal activity patterns.
+
+Hinne et al. \cite{hinne2013} proposed a Bayesian method for estimating structural networks based on Diffusion Weighted MRI (DWI) and probabilistic Tractography.
+The location of white-matter tracts does not become immediately clear from imagery alone.
+Other methods rely on thresholds to estimate location of said tracts.
+The proposed method results in a measure of uncertainty about where a hypothesised connection will terminate and so provides a clearly interpretable network structure as result.
+
+\subsubsection{Effective connectivity}
+In contrast to functional and structural connectivity, effective connectivity takes into account the cause and effect of relations.
+It has been described as ``the influence one neural system exerts over another'' \cite{friston1994}.
+Effective connectivity indicates which brain regions stimulate other regions.
+Time series need to be analysed to infer effective connectivity as cause and effect can be deduced from which event precedes which. 
+It is possible to infer effective connectivity from structural and functional connectivity \cite{mclntosh1994, harrison2003, friston2003, roebroeck2005}.
+
+Research has been done on inferring effective connectivity directly with several methods.
+The most renowned methods are Granger causality \cite{roebroeck2005}, Structural Equation Modelling \cite{mclntosh1994}, Multivariate Autoregressive Modeling \cite{harrison2003} and Dynamic Causal Modelling \cite{friston2003}.
+These are all methods dedicated to this problem.
+These methods also suffer from similar problems of which perhaps the most important is scaling.
+Most of these methods can only handle tens of nodes in reasonable time, which becomes problematic in realistic situations with up to tens of thousands of nodes, ideally.
 
 \subsection{Causal inference}
 An approach for finding effective connectivity may be found in the domain of causal discovery.
