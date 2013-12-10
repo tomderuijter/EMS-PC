@@ -522,10 +522,9 @@ In this matrix, higher values represent strong certainties of the presence of a 
 \end{figure}
 
 
-One notable difference between the results found in Hinne et al. is the strong connections between homological areas, visible as two diagonal lines.
-This is a known shortcoming of diffusion weighted imaging, as these connections are typically too long to measure correctly.
-These connections most likely correspond to the corpus callosum, as each region is connected with its counterpart in the other hemisphere..
-Connections within the hemispheres are less clearly visible, as well as connections within the cerebellum.
+The connections between the homological areas are clearly visible as two diagonal lines.
+These connections most likely correspond to the corpus callosum, as each region is connected with its counterpart in the other hemisphere.
+Compared to the structure found by Hinne et al, connections within the hemispheres are less clearly visible, as well as connections within the cerebellum.
 
 The second step of the PC-algorithm finds directions based on this structure.
 In Figures ~\ref{fig:pdag_avg_mod} and ~\ref{fig:pdag_avg_ems}, the results for both modified PC and EMS-PC are presented.
@@ -573,15 +572,16 @@ These matrices have maximum values of 0,45 - 0,9, whereas the avarage of these m
 Also, based on physiology we expect causal relations within a homological area to be the same among the two hemispheres, but this is not the case in our results.
 
 \subsection{Execution time of the algorithm}
-To apply the algorithms on our data, we have used a Xeon E5-2670, running on 2,6GHz, using a single thread.
+To apply the algorithms on our data, we have used a Xeon E5-2670, running on 2,6GHz.
 To run one iteration of the PC algorithm for one subject, modified PC needed approximately one minute and EMS-PC needed approximately two minutes to find both structure and direction.
-Running multiple iterations lends itself for using multiple threads, as the iterations are fully independent, and only need to be avaraged out afterwards.
+Although PC is not designed to be multithreaded, running multiple iterations lends itself for using multiple threads, as the iterations are fully independent, and only need to be avaraged out afterwards.
 
 
 \section{Discussion}
 
 The structural part of PC adds interesting information with respect to existing methods such as DWI.
 Although DWI finds more structural data within homological areas, it does not find the corpus callosum, which is very clearly visible in the structure found with PC.
+This is a known shortcoming of diffusion weighted imaging, as these connections are typically too long to measure correctly.
 As such, causal discovery methods can contribute additional information to finding structural connectivity.
 
 Both modified PC and EMS-PC can add directional information.
