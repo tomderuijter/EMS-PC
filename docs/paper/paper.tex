@@ -287,9 +287,14 @@ Since we assumed Causal Markov Conditionality, no feedback loops exist and all b
 
 \subsection{PC Algorithm}
 % Introduction to PC
-PC algorithm is a so-called constraint based method.
-Starting from a fully connected undirected graph, PC algorithm first forms structure by cutting away edges of conditionally independent variables.
+The PC algorithm is a so-called constraint based method.
+Starting from a fully connected undirected graph, the PC algorithm first forms structure by cutting away edges of conditionally independent variables.
 In the second step, orientation rules are applied based on found separating sets and structure.
+The original PC algorithm assumes causal sufficiency, excluding the existence of common confounders between nodes.
+This seems unwanted when handling brain data, where one would expect a large amount of latent processes.
+Also measuring methods are not yet advanced enough to measure the full detail of the brain, thus skipping over details.
+In the perspective of causal inference, these missing areas can also appear as confounders.
+
 For the following experiments we have used the causal insufficient version of PC algorithm, modified to handle latent variable as described by Spirtes, Glymour and Scheines \cite[p.165-167]{spirtes2000}.
 Pseudocode for this method is shown in algorithm \ref{alg:pc_alg}.
 
@@ -356,25 +361,22 @@ If so, the triple is marked a V-structure.
 The PC-algorithm run-time is dependent on the number of dependency tests to be performed and thus it has a worst-case runtime complexity exponential in the maximal branching degree present in the graph.
 For a sparse graph, PC algorithm runs fast in practice and is able to perform well on hundreds of variables.
 
-% Soundness and Non-completeness of PC
+% Stability Soundness and Non-completeness of PC
+PC algorithm is not very stable, meaning it produces different output dependent on the order in which vertices are treated in the algorithm.
 PC algorithm is sound, meaning that all directionality found is also correct.
 However, PC algorithm is not complete, as not all types of causality can be detected.
 It is shown that in practice PC algorithm works quite well, as complete algorithms, such as FCI also from Spirtes et al., require additional statistical tests which are intractable to perform for more than tens of variables.
 
 \section{Material and Methods}
 % Different adaptations of PC
-The original PC algorithm assumes causal sufficiency, excluding the existence of common confounders between nodes.
-This seems unwanted when handling brain data, where one would expect a large amount of latent processes.
-Also measuring methods are not yet advanced enough to measure the full detail of the brain, thus skipping over details.
-In the perspective of causal inference, these missing areas can also appear as confounders.
 
 % Modified PC
-\paragraph{Modified PC}
-An adaptation of PC algorithm by Spirtes et al. assumes causal insufficiency and returns a Markov equivalence class, rather than one specific instance of it.
-In literature it is this algorithm that is usually cited under the name PC Algorithm.
-This also makes PC algorithm more stable as the number of Markov equivalence classes is less than the number of times data can be permuted.
-However the order of vertex removal still plays a key role in the end result.
-This causal-insufficient version is named Modified PC.
+%\paragraph{Modified PC}
+%An adaptation of PC algorithm by Spirtes et al. assumes causal insufficiency and returns a Markov equivalence class, rather than one specific instance of it.
+%In literature it is this algorithm that is usually cited under the name PC Algorithm.
+%This also makes PC algorithm more stable as the number of Markov equivalence classes is less than the number of times data can be permuted.
+%However the order of vertex removal still plays a key role in the end result.
+%This causal-insufficient version is named Modified PC.
 
 % Conservative PC
 \paragraph{Conservative PC}
