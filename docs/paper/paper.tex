@@ -4,6 +4,7 @@
 \usepackage[cm]{fullpage}
 \usepackage{cite}
 \usepackage{anysize}
+\usepackage{setspace}
 %\usepackage[compact]{titlesec}
 \usepackage{graphicx}
 \usepackage{stfloats}
@@ -89,7 +90,7 @@
 \def \oleftarrow {\leftarrow\hspace{-0.42em}\circ}
 \def \orightline {\circ\hspace{-0.16em}-}
 \def \oleftline {-\hspace{-0.16em}\circ}
-\def \oline {\circ\hspace{-0.38em}-\hspace{-0.4em}\circ}
+\def \oline {\circ\hspace{-0.38em}-\hspace{-0.2em}\circ}
 \def \srightarrow {\text{\textasteriskcentered}\hspace{-0.62em}\rightarrow}
 \def \sleftarrow {\leftarrow\hspace{-0.62em}\text{\textasteriskcentered}}
 \def \srightline {\text{\textasteriskcentered}\hspace{-0.16em}-}
@@ -100,6 +101,15 @@
 
 % ############## End Macros ##############
 
+
+% ### Paragraph Formatting ###
+\makeatletter
+\renewcommand{\paragraph}{%
+  \@startsection{paragraph}{4}%
+  {\z@}{0.5ex \@plus 1ex \@minus .2ex}{-1em}%
+  {\normalfont\normalsize\bfseries}%
+}
+\makeatother
 
 % Title
 \title{\fontfamily{phv}\selectfont{Causal Discovery methods for Effective Connectivity}}
@@ -118,7 +128,7 @@ Universiteit Nijmegen}}}\\[0.5cm]\rule{\linewidth}{0.3mm}}
 \maketitle
 
 \setlength{\parindent}{0.0cm}
-\setlength{\parskip}{0.25cm}
+\setlength{\parskip}{3mm plus2mm minus1.5mm}
 
 \begin{abstract}
 % TODO: Add abstract. Look at slides Peter to see what is asked.
@@ -169,8 +179,8 @@ Universiteit Nijmegen}}}\\[0.5cm]\rule{\linewidth}{0.3mm}}
 %As there is no standard baseline to compare results with, a measure of uncertainty would be highly preferable.
 %A framework for such a probabilistic approach is introduced in \cite{claassen2012}.
 %
-%We would like to know whether applying such methods, such as the approach introduced in \cite{claassen2012}, or a standard approach such as the PC-algorithm \cite{spirtes2000}, named after its authors \textbf{P}eter Spirtes and \textbf{C}lark Glymour, can solve some of the difficulties effective connectivity suffers from.
-%
+We would like to know whether applying such methods, such as the approach introduced in \cite{claassen2012}, or a standard approach such as the PC-algorithm \cite{spirtes2000}, named after its authors \textbf{P}eter Spirtes and \textbf{C}lark Glymour, can solve some of the difficulties effective connectivity suffers from.
+
 %% Structure of the rest of proposal
 %In the remainder of this proposal we briefly discuss some necessary background knowledge on connectivity and methods, we then discuss our strategy and finally we present a time-plan overview.
 
@@ -224,14 +234,12 @@ In our context, the causal discovery methods which have been used aim at inferri
 These can be interpreted from a probabilistic and a causal perspective.
 %In our case, we consider graphs that also include non-directed edges, a so called Partial DAG (PDAG).
 
-Under the causal interpretation for a DAG $G$, each variable is represented by a node and correlations between variables are represented by edges between those nodes.
-If such an edge exists between two variables $X$ and $Y$, this is denoted as $X - Y$.
-A causal relation is denoted with directed edges; $X \rightarrow Y$ implies that $X$ is a direct cause of $Y$.
+Under the causal interpretation for a DAG $G$ a causal relation is denoted with directed edges; $X \rightarrow Y$ implies that $X$ is a direct cause of $Y$.
 It is also said that $X$ is the parent of $Y$, and $Y$ is the child of $X$. 
 When there is a directed path $X \rightarrow Z_1 \rightarrow Z_2 \dots \rightarrow Y$, $X$ is said to be an ancestor of $Y$ and $Y$ is a descendant of $X$.
 An ancestor is an (possibly indirect) cause of its descendant.
 
-Under the probabilistic interpretation a PDAG $G$, also called a Bayesian network, represents a joint probability distribution over a set of variables $V$.
+Under the probabilistic interpretation a DAG $G$, also called a Bayesian network, represents a joint probability distribution over a set of variables $V$.
 Conditional dependencies are shown by arrows between vertices.
 Proportionality is shown by an undirected edge between vertices.
 A provable property of these networks is the \textit{Markov Property}: every variable in $G$ is independent of its non-descendants conditioned on its parents.
@@ -277,42 +285,81 @@ In the underlying process, there exist V-structures $\left <X,L,Z \right>$ in wh
 When sampling from the observed distribution, we would find a relation $X \leftrightarrow Z$.
 Since we assumed Causal Markov Conditionality, no feedback loops exist and all bi-directional arrows found must indicate existence of a latent confounder.
 
-\subsection{The PC-algorithm}
-% Soundness and Non-completeness of PC
+\subsection{PC Algorithm}
+% Introduction to PC
+PC algorithm is a so-called constraint based method.
+Starting from a fully connected undirected graph, PC algorithm first forms structure by cutting away edges of conditionally independent variables.
+In the second step, orientation rules are applied based on found separating sets and structure.
+For the following experiments we have used the causal insufficient version of PC algorithm, modified to handle latent variable as described by Spirtes, Glymour and Scheines \cite[p.165-167]{spirtes2000}.
+Pseudocode for this method is shown in algorithm \ref{alg:pc_alg}.
 
-\subsection{Informal description}
-The PC algorithm as used for these experiments is the version which is modified to handle latent variables, as also described by Spirtes, Glymour and Scheines \cite{spirtes2000}, pages 165-167.
-For finding directed edges, the PC-algorithm first finds the undirected structure.
-For each two nodes $X$ and $Y$ which are not neighbours in this structure, it also finds a minimal separating set, which is the smallest set acting as a separated set.
+\begin{algorithm}
+\caption{PC algorithm}
+\begin{spacing}{1.1}
+\begin{algorithmic}
+\Function{PC}{$data$}
+\State connect all pairs of point in undirected graph $G$.
+\Comment{Structural Part} 
+\State $n \gets 0$
+\While{there are connected pairs $X$, $Y$ such that $n < |\operatorname{Adjecencies}(X)\setminus\{Y\}| $}
+  \ForAll{such connected pairs $X$, $Y$}
+    \ForAll{subsets $S$ of $\operatorname{Adjacencies(X)}$ for which $|S| = n$}
+      \If{$X$ and $Y$ are independent given $S$}
+        \State remove edge $X - Y$ from G
+        \State record $S$ as separating set of $X, Y$
+        \State continue with the next pair $X$, $Y$
+      \EndIf
+    \EndFor
+  \EndFor
+  \State $n \gets n+1$
+\EndWhile
+\State $\text{PDAG} \gets G\text{, with all connections replaced by }\oline$
+\Comment{Directional Part}
+\ForAll{unshielded triples $\left <X, Y,Z \right> $ in $G$ }
+  \If{$Y$ is not in the separating set of $X$ and $Z$}
+    \State Orient $X \sline Y \sline Z$ as $X \srightarrow Y \sleftarrow Z$ in $\text{PDAG}$
+  \EndIf
+\EndFor
+\State Apply other directionality rules from Spirtes et al. \cite[p.165-167]{spirtes2000}
+\State \Return $G$ and the separating sets
+\EndFunction
+\end{algorithmic}
+\end{spacing}
+\label{alg:pc_alg}
+\end{algorithm}
+
+For finding directed edges, the PC-algorithm first finds undirected structure.
+For each two non-adjacent nodes $X$ and $Y$ it also finds a minimal separating set, which is the smallest set acting as a separating set.
 This is done by first assuming all nodes are connected, and then testing all pairs of nodes for independence.
 
-The independence of $X$ and $Y$ is tested given a subset of neighbours of $X$ or $Y$ (the number of neighbours decreases while edges are removed), using the fisher-Z-test.
+The independence of $X$ and $Y$ is tested given a subset of neighbours of $X$ or $Y$ using a statistical independence test such as the Chi-square or Fisher-Z independence tests.
 If such an independence is found, this subset is a separating set of $X$ and $Y$ and they are not connected.
 If no such an independence is found, they are connected.
 To find the minimal separating set, all subsets of neighbours are traversed in order of size; the first separating set which is found, is the minimal one.
 
-After the structure and separating sets have been found, the PC-algorithm attempts to orient the edges.
-After Spirtes et al, we use a star-symbol at the end of an edge to denote that any mark may be present: an arrowhead, an "o" or an empty mark.
+Next, PC algorithm attempts to orient these edges.
+The 'o' mark represents the entire Markov class in that edge of the graph.
+Like Spirtes et al, we use a star-symbol at the end of an edge to denote that any mark may be present: an arrowhead, an "o" or an empty mark.
 When an edge is oriented as an edge with a star, this denotes that this end is not changed.
-A set of rules for finding a causal relation between nodes, using the undirected graph, are used in the PC-algorithm. Multiple variations of this algorithm are described by Spirtes, Glymour and Scheines \ref{?}. For this analysis, we have used the "modified pc algorithm" which does not assume causal sufficiency, and thus is able to handle latent variables.
 
-The first of these rules attempts to find and orient unshielded triples.
-A triple $<X, Y, Z>$ is considered unshielded if $X \sline Z$, $Y \sline Z$ and in which $X$ and $Y$ are (possibly conditially) independent.
-As $X$ and $Y$ are independent, they have a separating set $S$ (if they are unconditially independent, $S$ is the empty set).
-If $Z$ is not in $S$, then the only possible causal relation within this structure can be that of a so-called V-structur; the edges can be oriented as $X \srightarrow Z \sleftarrow Y$.
+The first of the directionality rules attempts to orient unshielded triples.
+For a triple $\left < X,Y,Z, \right>$ to be oriented, $X$ and $Z$ should have a separating set $S$ not containing $Y$.
+If so, the triple is marked a V-structure.
 
-After this rule which finds V-structures, the other rules are applied in no particular order. These rules are based on arrows that have already been found.
-\begin{itemize}
-\item If there is an edge $X \sline Y$, and if there is a directed path from $X$ to $Y$, then $X \sline Y$ can be oriented as $X \srightarrow Y$.
-\item If there are edges $X \srightarrow Y$ and $Y \sleftline Z$, if the latter is not an edge $Y \sleftarrow Z$, and if $X$ and $Z$ are not connected, orient $Y \sline Z$ as $Y \rightarrow Z$. 
-\end{itemize}
+%After this rule which finds V-structures, the other rules are applied in no particular order.
+%These rules are based on arrows that have already been found.
+%\begin{itemize}
+%\item If there is an edge $X \sline Y$, and if there is a directed path from $X$ to $Y$, then $X \sline Y$ can be oriented as $X \srightarrow Y$.
+%\item If there are edges $X \srightarrow Y$ and $Y \sleftline Z$, if the latter is not an edge $Y \sleftarrow Z$, and if $X$ and $Z$ are not connected, orient $Y \sline Z$ as $Y \rightarrow Z$. 
+%\end{itemize}
 
-The PC-algorithm has a worst-case runtime complexity exponential in the number of vertices.
-However, the runtime strongly depends on the structure which is found.
-In the worst case, the structure is a full graph, and no edges can be removed.
-In this case, the conditional independence of each pair of vertices has to be tested for all subsets of other vertices.
-For a sparse graph, independencies might already be found for small subsets.
-This quickly reduces the number of pairs which have to be tested for independence, and it also reduces the maximum size of the subsets.
+The PC-algorithm run-time is dependent on the number of dependency tests to be performed and thus it has a worst-case runtime complexity exponential in the maximal branching degree present in the graph.
+For a sparse graph, PC algorithm runs fast in practice and is able to perform well on hundreds of variables.
+
+% Soundness and Non-completeness of PC
+PC algorithm is sound, meaning that all directionality found is also correct.
+However, PC algorithm is not complete, as not all types of causality can be detected.
+It is shown that in practice PC algorithm works quite well, as complete algorithms, such as FCI also from Spirtes et al., require additional statistical tests which are intractable to perform for more than tens of variables.
 
 \section{Material and Methods}
 % Different adaptations of PC
@@ -323,7 +370,7 @@ In the perspective of causal inference, these missing areas can also appear as c
 
 % Modified PC
 \paragraph{Modified PC}
-To compensate for this, an adaptation of PC algorithm by Spirtes et al. returns a Markov equivalence class, rather than one specific instance of it.
+An adaptation of PC algorithm by Spirtes et al. assumes causal insufficiency and returns a Markov equivalence class, rather than one specific instance of it.
 In literature it is this algorithm that is usually cited under the name PC Algorithm.
 This also makes PC algorithm more stable as the number of Markov equivalence classes is less than the number of times data can be permuted.
 However the order of vertex removal still plays a key role in the end result.
@@ -331,9 +378,9 @@ This causal-insufficient version is named Modified PC.
 
 % Conservative PC
 \paragraph{Conservative PC}
-Step x in PC algorithm assigns shielded triples based on a single separating set. % TODO: Add step
+The V-structure rule in PC algorithm orients unshielded triples based on a single separating set. 
 Simply put, it is assumed the single found separating set is enough to show conditional independence. 
-Ramsey et al. \cite{ramsey2012} introduce a weaker but still sufficient assumption for directing unshielded triples.
+Ramsey et al. \cite{ramsey2012} introduce a weaker but still sufficient assumption for finding V-structures.
 Through this weaker but still adjacency-faithful assumption, the method is more cautious than PC algorithm in drawing unambiguous conclusions on causal orientations.
 That is why this method is named Conservative PC (CPC).
 The resulting algorithmic changes provide better results and is able to mark incorrectly unshielded triples as unfaithful.
@@ -382,8 +429,10 @@ The second part orients edges in this graph $G$ based on the separating sets, as
 %\floatevery{algorithm}{\setlength\hsize{15cm}}
 %\floatevery{algorithmic}{\setlength\hsize{15cm}}
 %TODO: meer hspace geven aan algorithms, alles hierboven werkte niet
+
 \begin{algorithm}
-\caption{Structure EMS-PC}
+\caption{Structure part of EMS-PC}
+\begin{spacing}{1.1}
 \begin{algorithmic}
 \Function{Structure\_PC}{$data$}
 \State connect all pairs of point in undirected graph $G$.
@@ -400,16 +449,21 @@ The second part orients edges in this graph $G$ based on the separating sets, as
     \EndFor
   \EndFor
   \State $n \gets n+1$
+  
 \EndWhile
+
 \Return $G$ and the separating sets
 \EndFunction
 \end{algorithmic}
+\end{spacing}
 \label{code:emsstructure}
 \end{algorithm}
 
 
+
 \begin{algorithm}
-\caption{Directional EMS-PC}
+\caption{Directional part of EMS-PC}
+\begin{spacing}{1.1}
 \begin{algorithmic}
 \Function{Directional\_PC}{$G$, $sepsets$}
   \State $\text{PDAG} \gets G\text{, with all connections replaced by }\oline$
@@ -434,6 +488,7 @@ The second part orients edges in this graph $G$ based on the separating sets, as
   \State \Return PDAG
 \EndFunction
 \end{algorithmic}
+\end{spacing}
 \label{code:emsdirectional}
 \end{algorithm}
 
