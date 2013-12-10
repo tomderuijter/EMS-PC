@@ -216,7 +216,7 @@ Universiteit Nijmegen}}}\\[0.5cm]\rule{\linewidth}{0.3mm}}
 %As such, we represent the underlying brain network with a much simpler model.
 %Such a model contains a reduced number of variables in order to remain tractable and to visually interpret model results.
 
-\subsection{Causal discovery}
+\subsection{Causal inference}
 An approach for finding effective connectivity may be found in the domain of causal discovery.
 A causal discovery method uses data about events to determine which of these events are correlated, and additionally, it attempts to determine which events cause which.
 The definition of a causal relation is not trivial \cite[p.20]{spirtes2000} and the relevant principles will be covered in this section.
@@ -243,60 +243,39 @@ A set of variables represented by a causal DAG $G$ is probabilistically independ
 This means that there is some underlying causal process that can be represented as a DAG $G$, which is not necessarily observed.
 The Causal Markov Condition also has a converse principle we also use to reason with causality.
 It also means that in this process, there cannot be common causes of variables that are left out.
-However, in an observed subset of variables of $G$, there may be unobserved common causes.
 
 \paragraph{Causal Faithfulness Condition}
 A set of variables represented by a causal DAG $G$ does not have any conditional independencies unless entailed by the Causal Markov Condition.
 
 This second condition means the graph correctly portrays the underlying probability distribution.
-It enables us to reason about causality through reasoning with the graph through a phenomenon called directional separation, or \textit{d-separation}.
+It enables us to reason about causality through reasoning with the graph through a phenomenon called directional separation.
+
+\paragraph{d-separation}
 Two nodes $X$ and $Y$ are d-separated given nodes $S$ (with $X, Y \notin S$) if there is no path between $X,Y$ or a path from $X$ to $Y$ through $S$ for which at least one of the following holds:
 \begin{itemize}
 \item The path contains a structure $a \rightarrow b \rightarrow c$ such that $b$ is in $S$.
 \item The path contains a structure $a \leftarrow b \rightarrow c$ such that $b$ is in $S$.
 \item The path contains a structure $a \rightarrow b \leftarrow c$ (in which $b$ is called a collider) such that $b$ and its descendants are \textbf{not} in $S$.
 \end{itemize}
-If $X$ and $Y$ are d-separated, $S$ is called a separating set of $X$ and $Y$. Every two independent variables have a separating set; if they are unconditionally independent, this is the empty  set.
+If $X$ and $Y$ are d-separated, $S$ is called a separating set of $X$ and $Y$.
+Every two independent variables have a separating set; if they are unconditionally independent, this is the empty set.
 
-%An important principle for our approach is that of conditional dependence.
-%The dependency of two variables might depend on the value of a third variable (or possibly even more variables).
-%This principle is best demonstrated with an example.
-%When two variables, such as two switches being turned off or on, both cause a light bulb to glow, the two switches might not be dependent.
-%Whether one switch is turned on or off does not cause the other to switch on or off.
-%However, when the light bulb is glowing, the switches do become dependent.
-%If one switch is off, the other one is probably on.
-%Or in other words, one switch being turned on decreases the chance of the other switch being turned on.
-%In this case, we conclude that the switches are conditionally dependent given that the light bulb is turned on.
-%More generally, two variables $X$ and $Y$ can be conditionally dependent on a set of other variables $S$. % het juiste latex-symbooltje vinden :(
+As mentioned, assuming Causal Markov Conditionionality means the underlying process cannot contain unobserved common causes.
+However, we may additionally assume that observed variables are a subset of those in the underlying process, so we may have common causes.
+Models having this property are called \textit{Causal Insufficient}.
 
-%A similar principle is conditional independence.
-%If two variables are generally dependent, they can still be independent given a third variable.
-%An example of this is when a variable $X$ has two children $Y$ and $Z$.
-%$Y$ and $Z$ are generally dependent, as they share a common cause or \emph{confounder} or \emph{confounder} $X$;
-%When $X$ does not vary, $Y$ and $Z$ lose their confoundernd they lose their dependency.
-%As such, $Y$ and $Z$ are independent given \{$X$\}.
-%In real-world data, independence can be found with methods such as the Fisher-Z-test. 
+Call a triple of variables $\left < X,Y,Z \right >$ an \textit{unshielded triple} if $X$ and $Z$ are adjacent to Y, but not to each other.
 
-\subsection{Assumptions about the structure}
-In theory, every deterministic real-world situation must be described by some Bayesian model, as all situations conform to causality.
-But the underlying real-world data such as the measured brain activity used in this analysis usually does not conform to a simple model.
-Assumption can be made about the model to make it easier to infer it, but this increases the risk of drawing false conclusions.
+\paragraph{V-structure}
+An unshielded triple can be oriented $X \leftarrow Y \rightarrow Z$ if and only all sets that d-separate $X$ from $Z$ do not contain $Y$.
+This construction is named \textit{V-structure}.
 
-One assumption that can be made about the model is that of causal sufficiency. 
-When it is assumed that the model fully describes the real network, so-called V-structures can be concluded. 
-When there is a structure $X - Y - Z$, in which $X$ and $Z$ are not connected, the only possible orientation of the connections is $X \rightarrow Y \leftarrow Z$. % TODO: extra uitleg, d-separation?
-An approach to finding a model is therefore to find all V-structures and orient them in this way.
-
-However, it is very unlikely that all events which are relevant for the causal graph are measured; 
-even with high temporal and spatial resolutions, the entire fysiology of the brain is too complex to capture.
-Latent variables are nodes which are present in the underlying Bayesian graph, but which are not measured.
-The complex reality might be very similar to a simple model based on the measured data, but it might also be very different.
-This correctness of the data is called causal faithfulness.
-When there is a structure $X \leftarrow L \rightarrow Y$ in which $L$ is a latent variable, an edge between $X$ and $Y$ might be found while the these two nodes have no direct ancestor/descendant-relation between them;
-They might be related through a confounder, which is indicated as $X \leftrightarrow Y$.
-As such, for a V-structure for which the underlying Bayesian network has latent variables, a directed edge $X \rightarrow Y$ or $X \leftarrow Y$ would be erroneous. 
-As such, the way of describing V-structures might not draw false conclusions, depending on the causal faithfulness. 
-A weaker conclusion is that a V-structure should be oriented as $X \orightarrow Y \oleftarrow Z$, in which the circles at the end of an edge mean that the form of this end is not yet know; an arrow $\orightarrow$ might be a simple arrow $\rightarrow$ or a double arrow $\leftrightarrow$.
+It is very unlikely that all events which are relevant for the causal graph are measured on a neuronal level; 
+even with high temporal and spatial resolutions, the entire physiology of the brain is too complex to capture.
+Modelling with causal insufficiency would seem more accurate.
+In the underlying process, there exist V-structures $\left <X,L,Z \right>$ in which $L$ is latent.
+When sampling from the observed distribution, we would find a relation $X \leftrightarrow Z$.
+Since we assumed Causal Markov Conditionality, no feedback loops exist and all bi-directional arrows found must indicate existence of a latent confounder.
 
 \subsection{The PC-algorithm}
 % Soundness and Non-completeness of PC
@@ -520,7 +499,6 @@ In this matrix, higher values represent strong certainties of the presence of a 
   \caption{The avarage structure of all subjects, according to the DWI-measurements of Hinne et al.}
   \label{fig:struct_max}
 \end{figure}
-
 
 The connections between the homological areas are clearly visible as two diagonal lines.
 These connections most likely correspond to the corpus callosum, as each region is connected with its counterpart in the other hemisphere.
