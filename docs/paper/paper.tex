@@ -278,6 +278,12 @@ After this rule which finds V-structures, the other rules are applied in no part
 \item If there are edges $X \srightarrow Y$ and $Y \sleftline Z$, if the latter is not an edge $Y \sleftarrow Z$, and if $X$ and $Z$ are not connected, orient $Y \sline Z$ as $Y \rightarrow Z$. 
 \end{itemize}
 
+The PC-algorithm has a worst-case runtime complexity exponential in the number of vertices.
+However, the runtime strongly depends on the structure which is found.
+In the worst case, the structure is a full graph, and no edges can be removed.
+In this case, the conditional independence of each pair of vertices has to be tested for all subsets of other vertices.
+For a sparse graph, independencies might already be found for small subsets.
+This quickly reduces the number of pairs which have to be tested for independence, and it also reduces the maximum size of the subsets.
 
 \subsection{Brain Connectivity}
 
@@ -528,7 +534,7 @@ In terms of causality, this means that many latent sources are still present and
 
 Another representation of this data has been used to emphasize the assymetric parts of Figures ~\ref{fig:pdag_avg_mod} and ~\ref{fig:pdag_avg_ems}.
 To achieve this, the absolute difference between these matrices and their transpose has been calculated, lifting out those points for which there is an arrow in one direction, but not in the opposite direction.
-These results are presented in Figures ~\ref{fig:pdag_avg_antisymmetric_mod} and ~\ref{fig:pdag_avg_antisymmetric_ems}.
+These resulting antisymmetric matrices are presented in Figures ~\ref{fig:pdag_avg_antisymmetric_mod} and ~\ref{fig:pdag_avg_antisymmetric_ems}.
 
 \begin{figure}[h!]
   \centering
@@ -544,14 +550,38 @@ These results are presented in Figures ~\ref{fig:pdag_avg_antisymmetric_mod} and
   \label{fig:pdag_avg_antisymmetric_ems}
 \end{figure}
 
-% iets over:
-% hoogte van avg_antisymmetric, hoger bij EMS dus meer richting, maar bij beiden niet zo consistent over proefpersonen
-% verschillen tussen beide hemispheres: niet zo logisch lijkt me, hemisphers zouden intern ongeveer hetzelfde moeten functioneren
-% veel hoge waarden in 'blokjes' rond diagonaal, interessante dingen in de hemispheres?
-% per proefpersoon maxima van ~0.5, maar een veel lager avarage over proefpersonen dus weinig consistentie
+
+A notable difference between modified PC and EMS-PC is that the assymetric parts of the PDAG are about twice as high. %TODO histogrammetje
+This means that with our data, EMS-PC finds more arrows pointing in only one direction, and it finds them more consistently.
+However, none of these arrows are consistent among the six subjects.
+This can also be concluded from the maximum values of these matrices of the individual subjects.
+These matrices have maximum values of 0,45 - 0,9, whereas the avarage of these matrices has a maximum value of 0,25.
+Also, based on physiology we expect causal relations within a homological area to be the same among the two hemispheres, but this is not the case in our results.
+
+\subsection{Execution time of the algorithm}
+To apply the algorithms on our data, we have used a Xeon E5-2670, running on 2,6GHz, using a single thread.
+To run one iteration of the PC algorithm for one subject, modified PC needed approximately one minute and EMS-PC needed approximately two minutes to find both structure and direction.
+Running multiple iterations lends itself for using multiple threads, as the iterations are fully independent, and only need to be avaraged out afterwards.
+
 
 \section{Discussion}
+
+The structural part of PC adds interesting information with respect to existing methods such as DWI.
+Although DWI finds more structural data within homological areas, it does not find the corpus callosum, which is very clearly visible in the structure found with PC.
+As such, causal discovery methods can contribute additional information to finding structural connectivity.
+
+Both modified PC and EMS-PC can add directional information.
+Both algorithms find many bi-directional arrows, and also some one-directional arrows.
+There does not seem to be any consistency among these one-directional arrows  between different subjects, or between the two hemispeheres of the same subject.
+No clear conclusions can therefore be drawn yet about causality between different brain regions.
+
 % Further research
+This does not neccesarily imply that this data is noise, as communication between brain regions might actually differ per subject.
+Activity of a brain region varies strongly over time and even though the subject have attempted to be in resting state, any thought or movement may cause signals to be measured.
+This leads to inconsistant directional edges, even in an algorithm which finds causal relations correctly.
+Further research may be done to investigating whether any of these arrows have a physiological meaning.
+This can be done by repeating these experiment with more subjects to get a better view on the significance of the directional edges.
+
 A Bayesian network cannot contain cycles, as that would imply that a variable is it's own ancestor and thus it's own cause.
 The theory used here does not incorporate a temporal component and 
 Ideally, a causal discovery methods finds only directed edges, resulting in a directed acyclic graph (DAG).
@@ -559,9 +589,14 @@ Ideally, a causal discovery methods finds only directed edges, resulting in a di
 %As such, the result of a causal discovery method is a partially directed acyclic graph (PDAG).
 As contemporary measuring techniques are too coarse and slow to model a brain at one point in time, correctly modelling variables over multiple points in time - opposing the acyclic assumption - would provide an interesting direction of further research.
 
+It can also do this quite efficiently, as a few hundred iterations can be run in a matter of hours per subject.
+We have not performed a statistical analysis on the number of iterations needed to stabilize the results.
+It may be possible that a significant result can already be found with much less iterations.
+
 % TODO: Suggereren task based analysis ipv resting state voor beter causaal beeld. 
 
 \section{Conclusion}
+
 
 \section{Acknowledgements}
 We would like to thank Max Hinne and Tom Claassen, for without them this research would not have been viable.
