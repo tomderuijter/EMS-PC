@@ -248,7 +248,8 @@ However, in an observed subset of variables of $G$, there may be unobserved comm
 \paragraph{Causal Faithfulness Condition}
 A set of variables represented by a causal DAG $G$ does not have any conditional independencies unless entailed by the Causal Markov Condition.
 
-This second condition enables us to reason about causality through reasoning with the graph, through a phenomenon called directional separation, or \textit{d-separation}.
+This second condition means the graph correctly portrays the underlying probability distribution.
+It enables us to reason about causality through reasoning with the graph through a phenomenon called directional separation, or \textit{d-separation}.
 Two nodes $X$ and $Y$ are d-separated given nodes $S$ (with $X, Y \notin S$) if there is no path between $X,Y$ or a path from $X$ to $Y$ through $S$ for which at least one of the following holds:
 \begin{itemize}
 \item The path contains a structure $a \rightarrow b \rightarrow c$ such that $b$ is in $S$.
