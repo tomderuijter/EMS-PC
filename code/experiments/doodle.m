@@ -73,6 +73,50 @@ for i=1:6
 end
 close(h);
 
+
+% SOME EXTRA SCRIPT-LIKE THINGYS TO GENRATE IMAGES IN BLACK-WHITE
+%Plot PDAGs of all subjects
+h = figure; colormap ('gray');
+for i = 1 : 6
+    subplot(2,3,i);
+    imagesc(squeeze(PDAG_avg(i,:,:)/2));
+    axis square;
+    colorbar;
+end
+
+%Plot avg PDAG of all subjects
+h = figure; colormap('gray');
+imagesc(Subj_avg/2);
+axis square;
+colorbar;
+
+%Plot of antisymmetric of all subjects
+h = figure; colormap('gray');
+for i = 1:6
+    subplot(2,3,i);
+    imagesc((squeeze(PDAG_avg(i,:,:)) - squeeze(PDAG_avg(i,:,:))')/2);
+    axis square;
+    colorbar;
+end
+
+%Plot avg of antisymmetric of all subjects
+h = figure; colormap ('gray');
+imagesc(abs(antisym_subj_avg/2));
+axis square;
+colorbar;
+
+%Plot of a selection of antisymmetric of all subjects
+h = figure; colormap('gray');
+selectionIndices = [46:90];
+for i = 1:6
+    subplot(2,3,i);
+	res = (squeeze(PDAG_avg(i,:,:)) - squeeze(PDAG_avg(i,:,:))')/2;
+	res(res < 0) = 0;
+    imagesc(res(selectionIndices, selectionIndices));
+    axis square;
+    colorbar;
+end
+
 % Plot data of Max
 load('data.mat');
 G_max = squeeze(mean(Gs, 1));
