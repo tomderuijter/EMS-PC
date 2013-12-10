@@ -537,22 +537,28 @@ For strucural data, this matrix is therefore symmetrical.
 In the directional data, point $(n,m)$ denotes a directed edge from $n$ to $m$.
 In such a matrix, indices 1-45 represent the brain regions of the left hemisphere, regions 45-90 represent the right hemisphere, and regions 91-116 represent regions in the cerebellum. %TODO left or right hemisphere?
 Modified PC and EMS-PC do not differ in finding the structure.
-The results are presented in figure ~\ref{fig:struct_avg} as the avarage over all six subjects, with 300 iterations per subject.
-The results of Hinne et al. are shown in ~\ref{fig:struct_max} for comparison.
+The results are presented in figure ~\ref{fig:struct_avg} as the avarage over all six subjects, with 300 iterations per subject. Additionaly, separate parts of the two hemispheres, the inter-hemisphere, and the cerebellum are presented in Figure ~\ref{fig:struct_apart}
+The results of Hinne et al. are shown as well for comparison.
 
 \begin{figure}[h!]
   \centering
-  \includegraphics{images/struct_full_mean_gray}
-  \caption{The avarage structure of all subjects, found with the PC-algorithm}
+  \includegraphics[width=0.5\textwidth]{images/struct_full}
+  \includegraphics[width=0.5\textwidth]{images/structure_max}
+  \caption{The avarage structure of all subjects. The first structure is found with the PC-algorithm, and the second structure is found by Hinne et al.}
   \label{fig:struct_avg}
 \end{figure}
 In this matrix, higher values represent strong certainties of the presence of a connection.
 
+end{figure}
+
 \begin{figure}[h!]
   \centering
-  \includegraphics{images/structure_max}
-  \caption{The avarage structure of all subjects, according to the DWI-measurements of Hinne et al.}
-  \label{fig:struct_max}
+  \includegraphics[width=0.25\textwidth]{images/struct_hemisphere_1_45}
+  \includegraphics[width=0.25\textwidth]{images/struct_hemisphere_46_90}
+  \includegraphics[width=0.25\textwidth]{images/struct_inter_hemisphere}
+  \includegraphics[width=0.25\textwidth]{images/struct_cerebellum}  
+  \caption{The avarage structure of the left and right hemisphere, the inter-hemisphere, and the cerebellum of all subjects, as found with PC.}
+  \label{fig:struct_apart}
 \end{figure}
 
 The connections between the homological areas are clearly visible as two diagonal lines.
@@ -566,14 +572,14 @@ In terms of causality, this means that many latent sources are still present and
 
 \begin{figure}[h!]
   \centering
-  \includegraphics{images/PDAG_avg_mod}
+  \includegraphics{images/pdag_avg_colored_mod}
   \caption{The PDAG found with modified PC, in which a high value denotes a high certainty of an arrow. The avarage of all six subjects is taken.}
   \label{fig:pdag_avg_mod}
 \end{figure}
 
 \begin{figure}[h!]
   \centering
-  \includegraphics{images/PDAG_avg_expl}
+  \includegraphics{images/PDAG_avg_colored_expl}
   \caption{The PDAG found with EMS-PC, in which a high value denotes a high certainty of an arrow. The avarage of all six subjects is taken.}
   \label{fig:pdag_avg_ems}
 \end{figure}
@@ -584,20 +590,20 @@ These resulting antisymmetric matrices are presented in Figures ~\ref{fig:pdag_a
 
 \begin{figure}[h!]
   \centering
-  \includegraphics{images/PDAG_avg_antisymmetric_mod}
-  \caption{The assymetric parts of the PDAG found with modified PC, in which a high value denotes a high certainty of an one-directional arrow. The avarage of all six subjects is taken.}
+  \includegraphics{images/arrowheads_avg_mod}
+  \caption{The assymetric arrowheads of the PDAG found with modified PC, in which a high value denotes a high certainty of an one-directional arrow. The avarage of all six subjects is taken.}
   \label{fig:pdag_avg_antisymmetric_mod}
 \end{figure}
 
 \begin{figure}[h!]
   \centering
-  \includegraphics{images/PDAG_avg_antisymmetric_expl}
-  \caption{The assymetric parts of the PDAG found with EMS-PC, in which a high value denotes a high certainty of an one-directional arrow. The avarage of all six subjects is taken.}
+  \includegraphics{images/arrowheads_avg_expl}
+  \caption{The assymetric arrowheads of the PDAG found with EMS-PC, in which a high value denotes a high certainty of an one-directional arrow. The avarage of all six subjects is taken.}
   \label{fig:pdag_avg_antisymmetric_ems}
 \end{figure}
 
 
-A notable difference between modified PC and EMS-PC is that the assymetric parts of the PDAG are about twice as high. %TODO histogrammetje
+A notable difference between modified PC and EMS-PC is that the assymetric arrowheads of the PDAG are about twice as high. %TODO histogrammetje
 This means that with our data, EMS-PC finds more arrows pointing in only one direction, and it finds them more consistently.
 However, none of these arrows are consistent among the six subjects.
 This can also be concluded from the maximum values of these matrices of the individual subjects.
