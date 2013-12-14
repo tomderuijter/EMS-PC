@@ -4,6 +4,7 @@
 \usepackage[cm]{fullpage}
 \usepackage{cite}
 \usepackage{anysize}
+\usepackage{setspace}
 %\usepackage[compact]{titlesec}
 \usepackage{graphicx}
 \usepackage{stfloats}
@@ -89,7 +90,7 @@
 \def \oleftarrow {\leftarrow\hspace{-0.42em}\circ}
 \def \orightline {\circ\hspace{-0.16em}-}
 \def \oleftline {-\hspace{-0.16em}\circ}
-\def \oline {\circ\hspace{-0.38em}-\hspace{-0.4em}\circ}
+\def \oline {\circ\hspace{-0.38em}-\hspace{-0.2em}\circ}
 \def \srightarrow {\text{\textasteriskcentered}\hspace{-0.62em}\rightarrow}
 \def \sleftarrow {\leftarrow\hspace{-0.62em}\text{\textasteriskcentered}}
 \def \srightline {\text{\textasteriskcentered}\hspace{-0.16em}-}
@@ -100,6 +101,18 @@
 
 % ############## End Macros ##############
 
+% ### Section Formatting ###
+\usepackage[compact]{titlesec}
+\titlespacing*{\section}{4pt}{*0}{4pt}
+
+% ### Paragraph Formatting ###
+\makeatletter
+\renewcommand{\paragraph}{%
+  \@startsection{paragraph}{4}%
+  {\z@}{0.5ex \@plus 1ex \@minus .2ex}{-1em}%
+  {\normalfont\normalsize\bfseries}%
+}
+\makeatother
 
 % Title
 \title{\fontfamily{phv}\selectfont{Causal Discovery methods for Effective Connectivity}}
@@ -118,16 +131,16 @@ Universiteit Nijmegen}}}\\[0.5cm]\rule{\linewidth}{0.3mm}}
 \maketitle
 
 \setlength{\parindent}{0.0cm}
-\setlength{\parskip}{0.25cm}
+\setlength{\parskip}{3mm plus2mm minus1.5mm}
 
 \begin{abstract}
-% TODO: Add abstract. Look at slides Peter to see what is asked.
+In this work we applied PC algorithm on resting-state data of healthy human subjects.
+Additionally we propose a variant of PC algorithm that poses weaker assumptions on the model, better fitting the underlying model.
+We find that detecting structure homological areas in the brain works better with PC algorithm than most conventional diffusion weighted imaging techniques.
+In the area of directionality and causality, more research is needed.
 \end{abstract}
 
-
 \section{Introduction}
-
-\paragraph{Motivation}
 The brain and particularly the human brain have been studied for hundreds of years.
 Today, the secrets of our brains still are one of the most sought-after.
 The techniques however have changed.
@@ -149,8 +162,8 @@ Research regarding effective is relatively new and its application still faces m
 The directed character in effective connectivity seems similar to traditional causal relations.
 In what follows, we suggest to use causal discovery methods for deriving effective connectivity.
 
-\paragraph{Problem statement}
-This project seeks to utilise the strengths of current state-of-the-art causal discovery methods by applying them to resting state brain fMRI data in order to find new applicable methods for determining causal patterns in the human brain.
+\subsection{Problem statement}
+This work seeks to utilise the strengths of current state-of-the-art causal discovery methods by applying them to resting state brain fMRI data in order to find new applicable methods for determining causal patterns in the human brain.
 
 The work by \cite{ramsey2010} addresses several problems causal analysis in fMRI analysis suffers from.
 Methods in causal discovery have high computational costs, making it nearly impossible to calculate networks with more than hundreds of nodes.
@@ -169,126 +182,17 @@ This is inherent to the methods and the coarseness of the measurements.
 As there is no standard baseline to compare results with, a measure of uncertainty would be highly preferable.
 A framework for such a probabilistic approach is introduced in \cite{claassen2012}.
 
-We would like to know whether applying such methods, such as the approach introduced in \cite{claassen2012}, or a standard approach such as the PC-algorithm \cite{spirtes2000}, named after its authors \textbf{P}eter Spirtes and \textbf{C}lark Glymour, can solve some of the difficulties effective connectivity suffers from.
+We would like to know whether applying a standard approach such as the PC-algorithm \cite{spirtes2000}, named after its authors \textbf{P}eter Spirtes and \textbf{C}lark Glymour, can solve some of the difficulties effective connectivity suffers from.
 
-% Structure of the rest of proposal
-In the remainder of this proposal we briefly discuss some necessary background knowledge on connectivity and methods, we then discuss our strategy and finally we present a time-plan overview.
+%% Structure of the rest of proposal
+In the remainder of this work we discuss necessary knowledge on connectivity and causal inference.
+We then discuss our strategy and present and reflect on results.
 
-\section{Theory}
+\section{Brain Connectivity}
+The brain is connected in a way too complicated for contemporary measurement techniques to discover.
+That is why several kinds of connectivity are considered.
 
-\subsection{Causal discovery}
-An approach for finding effective connectivity may be found in the domain of causal discovery.
-A causal discovery method uses data about events to determine which of these events are correlated, and additionally, it attempts to determine which events cause which.
-The definition of a causal relation is not trivial \cite[p.20]{spirtes2000} and the relevant principles will be covered in this section.
-In our context, the causal discovery methods which have been used aim at inferring a Bayesian network or Directed Acyclic Graph (DAG).
-These can be interpreted from a probabilistic and a causal perspective.
-In our case, we consider graphs that also include non-directed edges, a so called Partial DAG (PDAG).
-
-Under the causal interpretation, a PDAG $G$ each variable is represented by a node and correlations between variables are represented by edges between those nodes.
-If such an edge exists between two variables $X$ and $Y$, this is denoted as $X - Y$.
-A causal relation is denoted with directed edges; $X \rightarrow Y$ implies that $X$ is a direct cause of $Y$.
-It is also said that $X$ is the parent of $Y$, and $Y$ is the child of $X$. 
-When there is a directed path $X \rightarrow Z_1 \rightarrow Z_2 \dots \rightarrow Y$, $X$ is said to be an ancestor of $Y$ and $Y$ is a descendant of $X$.
-An ancestor is an (possibly indirect) cause of its descendant.
-
-% TODO: Add example of a Bayesian network.
-%Image {plaatje!} shows an example of a Bayesian network.
-
-A causal discovery method attempts at finding a real-world Bayesian network.
-The human brain is immensely complex and contains a computationally intractable amount of neurons to model.
-As such, we represent our real-world, underlying Bayesian network with a much simpler model.
-Such a model contains a reduced number of variables in order to remain tractable and to visually interpret model results.
-
-An important principle for our approach is that of conditional dependence.
-The dependency of two variables might depend on the value of a third variable (or possibly even more variables).
-This principle is best demonstrated with an example.
-When two variables, such as two switches being turned off or on, both cause a light bulb to glow, the two switches might not be dependent.
-Whether one switch is turned on or off does not cause the other to switch on or off.
-However, when the light bulb is glowing, the switches do become dependent.
-If one switch is off, the other one is probably on.
-Or in other words, one switch being turned on decreases the chance of the other switch being turned on.
-In this case, we conclude that the switches are conditionally dependent given that the light bulb is turned on.
-More generally, two variables $X$ and $Y$ can be conditionally dependent on a set of other variables $S$. % het juiste latex-symbooltje vinden :(
-
-A similar principle is conditional independence.
-If two variables are generally dependent, they can still be independent given a third variable.
-An example of this is when a variable $X$ has two children $Y$ and $Z$.
-$Y$ and $Z$ are generally dependent, as they share a common cause or \emph{confounder} or \emph{confounder} $X$;
-When $X$ does not vary, $Y$ and $Z$ lose their confoundernd they lose their dependency.
-As such, $Y$ and $Z$ are independent given \{$X$\}.
-In real-world data, independence can be found with methods such as the Fisher-Z-test. 
-
-We define a trail as a set of edges which would make up a path if those edges would be undirected.
-We can now define directional separation, or d-separation.
-Two nodes $X$ and $Y$ are d-separated given a set of nodes $S$ (with $X, Y \notin S$) if there is a trail from $X$ to $Y$ for which at least one of the following holds:
-\begin{itemize}
-\item The trail contains a structure $a \rightarrow b \rightarrow c$ such that $b$ is in $S$.
-\item The trail contains a structure $a \leftarrow b \rightarrow c$ such that $b$ is in $S$.
-\item The trail contains a structure $a \rightarrow b \leftarrow c$ (in which $b$ is called a collider) such that $b$ and its descendants are not in $S$.
-\end{itemize}
-If $X$ and $Y$ are d-separated given $S$, $S$ is called a separating set of $X$ and $Y$. Every two independent variables have a separating set; if they are unconditionally independent, this is the empty  set.
-
-\subsection{Assumptions about the structure}
-In theory, every deterministic real-world situation must be described by some Bayesian model, as all situations conform to causality.
-But the underlying real-world data such as the measured brain activity used in this analysis usually does not conform to a simple model.
-Assumption can be made about the model to make it easier to infer it, but this increases the risk of drawing false conclusions.
-
-One assumption that can be made about the model is that of causal sufficiency. 
-When it is assumed that the model fully describes the real network, so-called V-structures can be concluded. 
-When there is a structure $X - Y - Z$, in which $X$ and $Z$ are not connected, the only possible orientation of the connections is $X \rightarrow Y \leftarrow Z$. % TODO: extra uitleg, d-separation?
-An approach to finding a model is therefore to find all V-structures and orient them in this way.
-
-However, it is very unlikely that all events which are relevant for the causal graph are measured; 
-even with high temporal and spatial resolutions, the entire fysiology of the brain is too complex to capture.
-Latent variables are nodes which are present in the underlying Bayesian graph, but which are not measured.
-The complex reality might be very similar to a simple model based on the measured data, but it might also be very different.
-This correctness of the data is called causal faithfulness.
-When there is a structure $X \leftarrow L \rightarrow Y$ in which $L$ is a latent variable, an edge between $X$ and $Y$ might be found while the these two nodes have no direct ancestor/descendant-relation between them;
-They might be related through a confounder, which is indicated as $X \leftrightarrow Y$.
-As such, for a V-structure for which the underlying Bayesian network has latent variables, a directed edge $X \rightarrow Y$ or $X \leftarrow Y$ would be erroneous. 
-As such, the way of describing V-structures might not draw false conclusions, depending on the causal faithfulness. 
-A weaker conclusion is that a V-structure should be oriented as $X \orightarrow Y \oleftarrow Z$, in which the circles at the end of an edge mean that the form of this end is not yet know; an arrow $\orightarrow$ might be a simple arrow $\rightarrow$ or a double arrow $\leftrightarrow$.
-
-\subsection{The PC-algorithm}
-
-\subsection{Informal description}
-The PC algorithm as used for these experiments is the version which is modified to handle latent variables, as also described by Spirtes, Glymour and Scheines \cite{spirtes2000}, pages 165-167.
-For finding directed edges, the PC-algorithm first finds the undirected structure.
-For each two nodes $X$ and $Y$ which are not neighbours in this structure, it also finds a minimal separating set, which is the smallest set acting as a separated set.
-This is done by first assuming all nodes are connected, and then testing all pairs of nodes for independence.
-
-The independence of $X$ and $Y$ is tested given a subset of neighbours of $X$ or $Y$ (the number of neighbours decreases while edges are removed), using the fisher-Z-test.
-If such an independence is found, this subset is a separating set of $X$ and $Y$ and they are not connected.
-If no such an independence is found, they are connected.
-To find the minimal separating set, all subsets of neighbours are traversed in order of size; the first separating set which is found, is the minimal one.
-
-After the structure and separating sets have been found, the PC-algorithm attempts to orient the edges.
-After Spirtes et al, we use a star-symbol at the end of an edge to denote that any mark may be present: an arrowhead, an "o" or an empty mark.
-When an edge is oriented as an edge with a star, this denotes that this end is not changed.
-A set of rules for finding a causal relation between nodes, using the undirected graph, are used in the PC-algorithm. Multiple variations of this algorithm are described by Spirtes, Glymour and Scheines \ref{?}. For this analysis, we have used the "modified pc algorithm" which does not assume causal sufficiency, and thus is able to handle latent variables.
-
-The first of these rules attempts to find and orient unshielded triples.
-A triple $<X, Y, Z>$ is considered unshielded if $X \sline Z$, $Y \sline Z$ and in which $X$ and $Y$ are (possibly conditially) independent.
-As $X$ and $Y$ are independent, they have a separating set $S$ (if they are unconditially independent, $S$ is the empty set).
-If $Z$ is not in $S$, then the only possible causal relation within this structure can be that of a so-called V-structur; the edges can be oriented as $X \srightarrow Z \sleftarrow Y$.
-
-After this rule which finds V-structures, the other rules are applied in no particular order. These rules are based on arrows that have already been found.
-\begin{itemize}
-\item If there is an edge $X \sline Y$, and if there is a directed path from $X$ to $Y$, then $X \sline Y$ can be oriented as $X \srightarrow Y$.
-\item If there are edges $X \srightarrow Y$ and $Y \sleftline Z$, if the latter is not an edge $Y \sleftarrow Z$, and if $X$ and $Z$ are not connected, orient $Y \sline Z$ as $Y \rightarrow Z$. 
-\end{itemize}
-
-The PC-algorithm has a worst-case runtime complexity exponential in the number of vertices.
-However, the runtime strongly depends on the structure which is found.
-In the worst case, the structure is a full graph, and no edges can be removed.
-In this case, the conditional independence of each pair of vertices has to be tested for all subsets of other vertices.
-For a sparse graph, independencies might already be found for small subsets.
-This quickly reduces the number of pairs which have to be tested for independence, and it also reduces the maximum size of the subsets.
-
-\subsection{Brain Connectivity}
-
-%Question: should this be included?
-\subsubsection{Functional connectivity}
+\subsection{Functional connectivity}
 Functional connectivity describes the statistical dependence of neuronal activity between different brain regions \cite{friston1993functional}.
 This gives an insight in the organisation of the brain.
 Functional connectivity is strongly time-dependent, as activity changes rapidly providing and fMRI has a low temporal resolution.
@@ -320,27 +224,163 @@ These are all methods dedicated to this problem.
 These methods also suffer from similar problems of which perhaps the most important is scaling.
 Most of these methods can only handle tens of nodes in reasonable time, which becomes problematic in realistic situations with up to tens of thousands of nodes, ideally.
 
+\subsection{Causal inference}
+An approach for finding effective connectivity may be found in the domain of causal discovery.
+A causal discovery method uses data about events to determine which of these events are correlated, and additionally, it attempts to determine which events cause which.
+The definition of a causal relation is not trivial \cite[p.20]{spirtes2000} and the relevant principles will be covered in this section.
+In our context, the causal discovery methods which have been used aim at inferring a Directed Acyclic Graph (DAG).
+These can be interpreted from a probabilistic and a causal perspective.
+%In our case, we consider graphs that also include non-directed edges, a so called Partial DAG (PDAG).
 
-\section{Material and Methods}
-% Different adaptations of PC
+Under the causal interpretation for a DAG $G$ a causal relation is denoted with directed edges; $X \rightarrow Y$ implies that $X$ is a direct cause of $Y$.
+It is also said that $X$ is the parent of $Y$, and $Y$ is the child of $X$. 
+When there is a directed path $X \rightarrow Z_1 \rightarrow Z_2 \dots \rightarrow Y$, $X$ is said to be an ancestor of $Y$ and $Y$ is a descendant of $X$.
+An ancestor is an (possibly indirect) cause of its descendant.
+
+Under the probabilistic interpretation a DAG $G$, also called a Bayesian network, represents a joint probability distribution over a set of variables $V$.
+Conditional dependencies are shown by arrows between vertices.
+Proportionality is shown by an undirected edge between vertices.
+A provable property of these networks is the \textit{Markov Property}: every variable in $G$ is independent of its non-descendants conditioned on its parents.
+This property enables us to link the field of Bayesian networks, for which useful mathematical properties exist, to the causal interpretation.
+
+\paragraph{Causal Markov Condition}
+A set of variables represented by a causal DAG $G$ is probabilistically independent of its non-descendants (non-effects), conditioned on its parents (direct causes).
+
+This means that there is some underlying causal process that can be represented as a DAG $G$, which is not necessarily observed.
+The Causal Markov Condition also has a converse principle we also use to reason with causality.
+It also means that in this process, there cannot be common causes of variables that are left out.
+
+\paragraph{Causal Faithfulness Condition}
+A set of variables represented by a causal DAG $G$ does not have any conditional independencies unless entailed by the Causal Markov Condition.
+
+This second condition means the graph correctly portrays the underlying probability distribution.
+It enables us to reason about causality through reasoning with the graph through a phenomenon called directional separation.
+
+\paragraph{d-separation}
+Two nodes $X$ and $Y$ are d-separated given nodes $S$ (with $X, Y \notin S$) if there is no path between $X,Y$ or a path from $X$ to $Y$ through $S$ for which at least one of the following holds:
+\begin{itemize}
+\item The path contains a structure $a \rightarrow b \rightarrow c$ such that $b$ is in $S$.
+\item The path contains a structure $a \leftarrow b \rightarrow c$ such that $b$ is in $S$.
+\item The path contains a structure $a \rightarrow b \leftarrow c$ (in which $b$ is called a collider) such that $b$ and its descendants are \textbf{not} in $S$.
+\end{itemize}
+If $X$ and $Y$ are d-separated, $S$ is called a separating set of $X$ and $Y$.
+Every two independent variables have a separating set; if they are unconditionally independent, this is the empty set.
+
+As mentioned, assuming Causal Markov Conditionionality means the underlying process cannot contain unobserved common causes.
+However, we may additionally assume that observed variables are a subset of those in the underlying process, so we may have common causes.
+Models having this property are called \textit{Causal Insufficient}.
+
+Call a triple of variables $\left < X,Y,Z \right >$ an \textit{unshielded triple} if $X$ and $Z$ are adjacent to Y, but not to each other.
+
+\paragraph{V-structure}
+An unshielded triple can be oriented $X \leftarrow Y \rightarrow Z$ if and only all sets that d-separate $X$ from $Z$ do not contain $Y$.
+This construction is named \textit{V-structure}.
+
+It is very unlikely that all events which are relevant for the causal graph are measured on a neuronal level; 
+even with high temporal and spatial resolutions, the entire physiology of the brain is too complex to capture.
+Modelling with causal insufficiency would seem more accurate.
+In the underlying process, there exist V-structures $\left <X,L,Z \right>$ in which $L$ is latent.
+When sampling from the observed distribution, we would find a relation $X \leftrightarrow Z$.
+Since we assumed Causal Markov Conditionality, no feedback loops exist and all bi-directional arrows found must indicate existence of a latent confounder.
+
+\subsection{PC Algorithm}
+% Introduction to PC
+The PC algorithm is a so-called constraint based method.
+Starting from a fully connected undirected graph, the PC algorithm first forms structure by cutting away edges of conditionally independent variables.
+In the second step, orientation rules are applied based on found separating sets and structure.
 The original PC algorithm assumes causal sufficiency, excluding the existence of common confounders between nodes.
 This seems unwanted when handling brain data, where one would expect a large amount of latent processes.
 Also measuring methods are not yet advanced enough to measure the full detail of the brain, thus skipping over details.
 In the perspective of causal inference, these missing areas can also appear as confounders.
 
+For the following experiments we have used the causal insufficient version of PC algorithm, modified to handle latent variable as described by Spirtes, Glymour and Scheines \cite[p.165-167]{spirtes2000}.
+Pseudocode for this method is shown in algorithm \ref{alg:pc_alg}.
+
+\begin{algorithm}
+\caption{PC algorithm}
+\begin{spacing}{1.1}
+\begin{algorithmic}
+\Function{PC}{$data$}
+\State connect all pairs of point in undirected graph $G$.
+\Comment{Structural Part} 
+\State $n \gets 0$
+\While{there are connected pairs $X$, $Y$ such that $n < |\operatorname{Adjecencies}(X)\setminus\{Y\}| $}
+  \ForAll{such connected pairs $X$, $Y$}
+    \ForAll{subsets $S$ of $\operatorname{Adjacencies(X)}$ for which $|S| = n$}
+      \If{$X$ and $Y$ are independent given $S$}
+        \State remove edge $X - Y$ from G
+        \State record $S$ as separating set of $X, Y$
+        \State continue with the next pair $X$, $Y$
+      \EndIf
+    \EndFor
+  \EndFor
+  \State $n \gets n+1$
+\EndWhile
+\State $\text{PDAG} \gets G\text{, with all connections replaced by }\oline$
+\Comment{Directional Part}
+\ForAll{unshielded triples $\left <X, Y,Z \right> $ in $G$ }
+  \If{$Y$ is not in the separating set of $X$ and $Z$}
+    \State Orient $X \sline Y \sline Z$ as $X \srightarrow Y \sleftarrow Z$ in $\text{PDAG}$
+  \EndIf
+\EndFor
+\State Apply other directionality rules from Spirtes et al. \cite[p.165-167]{spirtes2000}
+\State \Return $G$ and the separating sets
+\EndFunction
+\end{algorithmic}
+\end{spacing}
+\label{alg:pc_alg}
+\end{algorithm}
+
+For finding directed edges, the PC-algorithm first finds undirected structure.
+For each two non-adjacent nodes $X$ and $Y$ it also finds a minimal separating set, which is the smallest set acting as a separating set.
+This is done by first assuming all nodes are connected, and then testing all pairs of nodes for independence.
+
+The independence of $X$ and $Y$ is tested given a subset of neighbours of $X$ or $Y$ using a statistical independence test such as the Chi-square or Fisher-Z independence tests.
+If such an independence is found, this subset is a separating set of $X$ and $Y$ and they are not connected.
+If no such an independence is found, they are connected.
+To find the minimal separating set, all subsets of neighbours are traversed in order of size; the first separating set which is found, is the minimal one.
+
+Next, PC algorithm attempts to orient these edges.
+The 'o' mark represents the entire Markov class in that edge of the graph.
+Like Spirtes et al, we use a star-symbol at the end of an edge to denote that any mark may be present: an arrowhead, an "o" or an empty mark.
+When an edge is oriented as an edge with a star, this denotes that this end is not changed.
+
+The first of the directionality rules attempts to orient unshielded triples.
+For a triple $\left < X,Y,Z, \right>$ to be oriented, $X$ and $Z$ should have a separating set $S$ not containing $Y$.
+If so, the triple is marked a V-structure.
+
+%After this rule which finds V-structures, the other rules are applied in no particular order.
+%These rules are based on arrows that have already been found.
+%\begin{itemize}
+%\item If there is an edge $X \sline Y$, and if there is a directed path from $X$ to $Y$, then $X \sline Y$ can be oriented as $X \srightarrow Y$.
+%\item If there are edges $X \srightarrow Y$ and $Y \sleftline Z$, if the latter is not an edge $Y \sleftarrow Z$, and if $X$ and $Z$ are not connected, orient $Y \sline Z$ as $Y \rightarrow Z$. 
+%\end{itemize}
+
+The PC-algorithm run-time is dependent on the number of dependency tests to be performed and thus it has a worst-case runtime complexity exponential in the maximal branching degree present in the graph.
+For a sparse graph, PC algorithm runs fast in practice and is able to perform well on hundreds of variables.
+
+% Stability Soundness and Non-completeness of PC
+PC algorithm is not very stable, meaning it produces different output dependent on the order in which vertices are treated in the algorithm.
+PC algorithm is sound, meaning that all directionality found is also correct.
+However, PC algorithm is not complete, as not all types of causality can be detected.
+It is shown that in practice PC algorithm works quite well, as complete algorithms, such as FCI also from Spirtes et al., require additional statistical tests which are intractable to perform for more than tens of variables.
+
+\section{Material and Methods}
+% Different adaptations of PC
+
 % Modified PC
-\paragraph{Modified PC}
-To compensate for this, an adaptation of PC algorithm by Spirtes et al. returns a Markov equivalence class, rather than one specific instance of it.
-In literature it is this algorithm that is usually cited under the name PC Algorithm.
-This also makes PC algorithm more stable as the number of Markov equivalence classes is less than the number of times data can be permuted.
-However the order of vertex removal still plays a key role in the end result.
-This causal-insufficient version is named Modified PC.
+%\paragraph{Modified PC}
+%An adaptation of PC algorithm by Spirtes et al. assumes causal insufficiency and returns a Markov equivalence class, rather than one specific instance of it.
+%In literature it is this algorithm that is usually cited under the name PC Algorithm.
+%This also makes PC algorithm more stable as the number of Markov equivalence classes is less than the number of times data can be permuted.
+%However the order of vertex removal still plays a key role in the end result.
+%This causal-insufficient version is named Modified PC.
 
 % Conservative PC
 \paragraph{Conservative PC}
-Step x in PC algorithm assigns shielded triples based on a single separating set. % TODO: Add step
+The V-structure rule in PC algorithm orients unshielded triples based on a single separating set. 
 Simply put, it is assumed the single found separating set is enough to show conditional independence. 
-Ramsey et al. \cite{ramsey2012} introduce a weaker but still sufficient assumption for directing unshielded triples.
+Ramsey et al. \cite{ramsey2012} introduce a weaker but still sufficient assumption for finding V-structures.
 Through this weaker but still adjacency-faithful assumption, the method is more cautious than PC algorithm in drawing unambiguous conclusions on causal orientations.
 That is why this method is named Conservative PC (CPC).
 The resulting algorithmic changes provide better results and is able to mark incorrectly unshielded triples as unfaithful.
@@ -389,8 +429,10 @@ The second part orients edges in this graph $G$ based on the separating sets, as
 %\floatevery{algorithm}{\setlength\hsize{15cm}}
 %\floatevery{algorithmic}{\setlength\hsize{15cm}}
 %TODO: meer hspace geven aan algorithms, alles hierboven werkte niet
+
 \begin{algorithm}
-\caption{Structure EMS-PC}
+\caption{Structure part of EMS-PC}
+\begin{spacing}{1.1}
 \begin{algorithmic}
 \Function{Structure\_PC}{$data$}
 \State connect all pairs of point in undirected graph $G$.
@@ -407,16 +449,21 @@ The second part orients edges in this graph $G$ based on the separating sets, as
     \EndFor
   \EndFor
   \State $n \gets n+1$
+  
 \EndWhile
+
 \Return $G$ and the separating sets
 \EndFunction
 \end{algorithmic}
+\end{spacing}
 \label{code:emsstructure}
 \end{algorithm}
 
 
+
 \begin{algorithm}
-\caption{Directional EMS-PC}
+\caption{Directional part of EMS-PC}
+\begin{spacing}{1.1}
 \begin{algorithmic}
 \Function{Directional\_PC}{$G$, $sepsets$}
   \State $\text{PDAG} \gets G\text{, with all connections replaced by }\oline$
@@ -441,6 +488,7 @@ The second part orients edges in this graph $G$ based on the separating sets, as
   \State \Return PDAG
 \EndFunction
 \end{algorithmic}
+\end{spacing}
 \label{code:emsdirectional}
 \end{algorithm}
 
@@ -489,25 +537,39 @@ For strucural data, this matrix is therefore symmetrical.
 In the directional data, point $(n,m)$ denotes a directed edge from $n$ to $m$.
 In such a matrix, indices 1-45 represent the brain regions of the left hemisphere, regions 45-90 represent the right hemisphere, and regions 91-116 represent regions in the cerebellum. %TODO left or right hemisphere?
 Modified PC and EMS-PC do not differ in finding the structure.
+<<<<<<< HEAD
 The results are presented in figure ~\ref{fig:struct_avg} as the avarage over all six subjects, with 300 iterations per subject. Additionaly, separate parts of the two hemispheres, the inter-hemisphere, and the cerebellum are presented in Figures ~\ref{fig:struct_left}, ~\ref{fig:struct_right}, ~\ref{fig:struct_inter_hemisphere}, ~\ref{fig:struct_cerebellum}
+=======
+The results are presented in figure ~\ref{fig:struct_avg} as the avarage over all six subjects, with 300 iterations per subject. Additionaly, separate parts of the two hemispheres, the inter-hemisphere, and the cerebellum are presented in Figure ~\ref{fig:struct_apart}
+>>>>>>> 7f3b48e9516b036261fd5340b531fc5df30b6ba6
 The results of Hinne et al. are shown as well for comparison.
 
 \begin{figure}[h!]
   \centering
   \includegraphics[width=0.5\textwidth]{images/struct_full}
   \includegraphics[width=0.5\textwidth]{images/structure_max}
+<<<<<<< HEAD
   \caption{The avarage structure of all subjects. The structure on the left is found with the PC-algorithm, and the structure on the right is found by Hinne et al.}
+=======
+  \caption{The avarage structure of all subjects. The first structure is found with the PC-algorithm, and the second structure is found by Hinne et al.}
+>>>>>>> 7f3b48e9516b036261fd5340b531fc5df30b6ba6
   \label{fig:struct_avg}
 \end{figure}
 In this matrix, higher values represent strong certainties of the presence of a connection.
 
+end{figure}
+
 \begin{figure}[h!]
   \centering
-  \includegraphics{images/structure_max}
-  \caption{The avarage structure of all subjects, according to the DWI-measurements of Hinne et al.}
-  \label{fig:struct_max}
+  \includegraphics[width=0.25\textwidth]{images/struct_hemisphere_1_45}
+  \includegraphics[width=0.25\textwidth]{images/struct_hemisphere_46_90}
+  \includegraphics[width=0.25\textwidth]{images/struct_inter_hemisphere}
+  \includegraphics[width=0.25\textwidth]{images/struct_cerebellum}  
+  \caption{The avarage structure of the left and right hemisphere, the inter-hemisphere, and the cerebellum of all subjects, as found with PC.}
+  \label{fig:struct_apart}
 \end{figure}
 
+<<<<<<< HEAD
 
 \begin{figure}[h!]
   \centering
@@ -534,6 +596,8 @@ In this matrix, higher values represent strong certainties of the presence of a 
   \label{fig:struct_cerebellum}
 \end{figure}
 
+=======
+>>>>>>> 7f3b48e9516b036261fd5340b531fc5df30b6ba6
 The connections between the homological areas are clearly visible as two diagonal lines.
 These connections most likely correspond to the corpus callosum, as each region is connected with its counterpart in the other hemisphere.
 Compared to the structure found by Hinne et al, connections within the hemispheres are less clearly visible, as well as connections within the cerebellum.
@@ -621,8 +685,7 @@ It may be possible that a significant result can already be found with much less
 
 % TODO: Suggereren task based analysis ipv resting state voor beter causaal beeld. 
 
-\section{Conclusion}
-
+% TODO: Maak duidelijk welke aannames gedaan worden in welke PC variant en welke aannames verzwakt zouden kunnen worden.
 
 \section{Acknowledgements}
 We would like to thank Max Hinne and Tom Claassen, for without them this research would not have been viable.
