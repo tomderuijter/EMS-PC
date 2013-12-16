@@ -224,7 +224,7 @@ These are all methods dedicated to this problem.
 These methods also suffer from similar problems of which perhaps the most important is scaling.
 Most of these methods can only handle tens of nodes in reasonable time, which becomes problematic in realistic situations with up to tens of thousands of nodes, ideally.
 
-\subsection{Causal inference}
+\subsection{Causal Discovery}
 An approach for finding effective connectivity may be found in the domain of causal discovery.
 A causal discovery method uses data about events to determine which of these events are correlated, and additionally, it attempts to determine which events cause which.
 The definition of a causal relation is not trivial \cite[p.20]{spirtes2000} and the relevant principles will be covered in this section.
@@ -537,23 +537,15 @@ For strucural data, this matrix is therefore symmetrical.
 In the directional data, point $(n,m)$ denotes a directed edge from $n$ to $m$.
 In such a matrix, indices 1-45 represent the brain regions of the left hemisphere, regions 45-90 represent the right hemisphere, and regions 91-116 represent regions in the cerebellum. %TODO left or right hemisphere?
 Modified PC and EMS-PC do not differ in finding the structure.
-<<<<<<< HEAD
-The results are presented in figure ~\ref{fig:struct_avg} as the avarage over all six subjects, with 300 iterations per subject. Additionaly, separate parts of the two hemispheres, the inter-hemisphere, and the cerebellum are presented in Figures ~\ref{fig:struct_left}, ~\ref{fig:struct_right}, ~\ref{fig:struct_inter_hemisphere}, ~\ref{fig:struct_cerebellum}
-=======
-The results are presented in figure ~\ref{fig:struct_avg} as the avarage over all six subjects, with 300 iterations per subject. Additionaly, separate parts of the two hemispheres, the inter-hemisphere, and the cerebellum are presented in Figure ~\ref{fig:struct_apart}
->>>>>>> 7f3b48e9516b036261fd5340b531fc5df30b6ba6
+The results are presented in figure ~\ref{fig:struct_avg} as the avarage over all six subjects, with 300 iterations per subject. Additionaly, separate parts of the two hemispheres, the inter-hemisphere, and the cerebellum are presented in Figures \ref{fig:struct_left}, \ref{fig:struct_right}, \ref{fig:struct_inter_hemisphere}, \ref{fig:struct_cerebellum}, \ref{fig:struct_apart}
 The results of Hinne et al. are shown as well for comparison.
 
 \begin{figure}[h!]
   \centering
   \includegraphics[width=0.5\textwidth]{images/struct_full}
   \includegraphics[width=0.5\textwidth]{images/structure_max}
-<<<<<<< HEAD
   \caption{The avarage structure of all subjects. The structure on the left is found with the PC-algorithm, and the structure on the right is found by Hinne et al.}
-=======
-  \caption{The avarage structure of all subjects. The first structure is found with the PC-algorithm, and the second structure is found by Hinne et al.}
->>>>>>> 7f3b48e9516b036261fd5340b531fc5df30b6ba6
-  \label{fig:struct_avg}
+\label{fig:struct_avg}
 \end{figure}
 In this matrix, higher values represent strong certainties of the presence of a connection.
 
@@ -568,8 +560,6 @@ end{figure}
   \caption{The avarage structure of the left and right hemisphere, the inter-hemisphere, and the cerebellum of all subjects, as found with PC.}
   \label{fig:struct_apart}
 \end{figure}
-
-<<<<<<< HEAD
 
 \begin{figure}[h!]
   \centering
@@ -596,8 +586,6 @@ end{figure}
   \label{fig:struct_cerebellum}
 \end{figure}
 
-=======
->>>>>>> 7f3b48e9516b036261fd5340b531fc5df30b6ba6
 The connections between the homological areas are clearly visible as two diagonal lines.
 These connections most likely correspond to the corpus callosum, as each region is connected with its counterpart in the other hemisphere.
 Compared to the structure found by Hinne et al, connections within the hemispheres are less clearly visible, as well as connections within the cerebellum.
