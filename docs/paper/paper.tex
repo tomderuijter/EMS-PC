@@ -165,15 +165,27 @@ In what follows, we suggest to use causal discovery methods for deriving effecti
 \subsection{Problem statement}
 This work seeks to utilise the strengths of current state-of-the-art causal discovery methods by applying them to resting state brain fMRI data in order to find new applicable methods for determining causal patterns in the human brain.
 
+% BOLD Problem
 The work by \cite{ramsey2010} addresses several problems causal analysis in fMRI analysis suffers from.
 Methods in causal discovery have high computational costs, making it nearly impossible to calculate networks with more than hundreds of nodes.
-Another important fact is that fMRI Analysis indirectly measures brain activity.
-Brain models that do not account for possible latent - indirect - sources within the brain or the shortcomings of fMRI may suffer from noise, fail to capture underlying patterns or draw erroneous conclusions.
+Another important fact is that fMRI Analysis indirectly measures brain activity, through blood oxygenation.
+The measured response is correlated to true activity levels at some point in the last few seconds.
+Here lies another, perhaps the most important problem for causal discovery in brains.
+The temporal lag between brain activity and the measured response - also called the haemodynamic response -
+is not constant within a single subject.
+This means that activity in area $A$ causing activity in area $B$ might be measured the other way around.
+
+% Latent variable problems
+As the complexity of the brain exceeds contemporary measurement techniques, models should compensate for this.
+Brain models that do not account for possible latent - unmeasured - sources within the brain or other shortcomings of fMRI may suffer from noise, fail to capture underlying patterns or draw erroneous conclusions.
 Solutions to this particular problem have been proposed that do account for latent sources \cite{ramsey2010, waldorp2011}.
+
+% Multi subject problems
 Another problem is the strong diversity between subjects.
 Every brain is inherently different, making it non-trivial to combine subject data or even draw conclusions across subjects.
 Even within a single brain it changes how different areas react over time.
 
+% Other methods
 Several methods for finding effective connectivity already exist \cite{mclntosh1994, harrison2003, friston2003, roebroeck2005}.
 However, using more generally applicable causal discovery methods has not been elaborated on much.
 Also, none of these provide a measure of uncertainty.
@@ -181,10 +193,15 @@ It is a fact that there are errors in any graph produced.
 This is inherent to the methods and the coarseness of the measurements.
 As there is no standard baseline to compare results with, a measure of uncertainty would be highly preferable.
 A framework for such a probabilistic approach is introduced in \cite{claassen2012}.
+% TODO: Illustrate the challenges ahead based on these current methods; what problems do they suffer from? (HRF)
 
+% Problem statement
+% TODO: Specify problem statement. Right now it is too vague and our contribution through research is very much unclear.
+To our knowledge, there are not yet reliable analytical methods for causal discovery linking to true anatomical connections on a whole brain level.
+Furthermore there are few methods that overcome the fluctuations in Haemodynamic Response present in any brain when performing connectivity analysis. % TODO: Check this claim.
 We would like to know whether applying a standard approach such as the PC-algorithm \cite{spirtes2000}, named after its authors \textbf{P}eter Spirtes and \textbf{C}lark Glymour, can solve some of the difficulties effective connectivity suffers from.
 
-%% Structure of the rest of proposal
+% Structure of the rest of proposal
 In the remainder of this work we discuss necessary knowledge on connectivity and causal inference.
 We then discuss our strategy and present and reflect on results.
 
@@ -197,31 +214,39 @@ Functional connectivity describes the statistical dependence of neuronal activit
 This gives an insight in the organisation of the brain.
 Functional connectivity is strongly time-dependent, as activity changes rapidly providing and fMRI has a low temporal resolution.
 This means measured dependencies can be the result of statistical noise.
-Functional connectivity can be deduced by fMRI measurement of brains in resting-state \cite{Lowe2000, doria2010, Bullmore2009}.
-Resting state indicates that subjects are instructed to relax without thinking of anything in particular to stimulate spontaneous brain activity.
+Functional connectivity can be deduced by fMRI measurements of brains performing a certain cognitive task, or in so called resting-state.
+Resting-state indicates that subjects are instructed to relax without thinking of anything in particular to stimulate spontaneous brain activity.
+Neural activity does not stop when not doing anything in particular.
+Spontaneous behaviour induced during resting-state provide typical whole image behaviour, while performing cognitive tasks restricts activity to related areas.
+Measuring resting-state thus provides an advantage when analysing brain connectivity on a global, whole brain level.
+Resting-state measurements do have the disadvantage that it is difficult to check whether a subject truly is in a resting-state; it is often quite difficult not to think of anything in particular.
+In practice, resting state analysis appears to work quite well \cite{Lowe2000, doria2010, Bullmore2009}.
 
 \subsubsection{Structural connectivity}
 Structural connectivity is defined as the mapping of anatomical - neural - paths in the brain between different brain regions \cite{friston1994}.
 This is strongly related with functional connectivity: regions can only be functionally connected if there is a structural relation between them \cite{cabral2012}.
 This intuitive relation can be demonstrated empirically \cite{vandenheuvel2009}.
 Structural connectivity is less time dependent as it involves mappings of anatomical connections opposing temporal activity patterns.
+For all practical purposes it is time-independent - it changes over years, and still marginally during adulthood.
 
 Hinne et al. \cite{hinne2013} proposed a Bayesian method for estimating structural networks based on Diffusion Weighted MRI (DWI) and probabilistic Tractography.
-The location of white-matter tracts does not become immediately clear from imagery alone.
-Other methods rely on thresholds to estimate location of said tracts.
+The existence of white-matter tracts does not become immediately clear from imagery alone.
+Other methods rely on thresholds to estimate existence of said tracts.
 The proposed method results in a measure of uncertainty about where a hypothesised connection will terminate and so provides a clearly interpretable network structure as result.
 
 \subsubsection{Effective connectivity}
 In contrast to functional and structural connectivity, effective connectivity takes into account the cause and effect of relations.
 It has been described as ``the influence one neural system exerts over another'' \cite{friston1994}.
 Effective connectivity indicates which brain regions stimulate other regions.
-Time series need to be analysed to infer effective connectivity as cause and effect can be deduced from which event precedes which. 
-It is possible to infer effective connectivity from structural and functional connectivity \cite{mclntosh1994, harrison2003, friston2003, roebroeck2005}.
+Functional time series data needs to be analysed to infer effective connectivity as cause and effect can be deduced from which event precedes which.
+Granger causality is a method relying on this principle.
+In brain data, this principle might not necessarily hold due to the fluctuations in Haemodynamic Response.
+Nevertheless, in theory it is possible to infer effective connectivity from structural connectivity and functional data \cite{mclntosh1994, harrison2003, friston2003, roebroeck2005}.
 
 Research has been done on inferring effective connectivity directly with several methods.
-The most renowned methods are Granger causality \cite{roebroeck2005}, Structural Equation Modelling \cite{mclntosh1994}, Multivariate Autoregressive Modeling \cite{harrison2003} and Dynamic Causal Modelling \cite{friston2003}.
+The most renowned methods are the aforementioned Granger causality \cite{roebroeck2005}, Structural Equation Modelling \cite{mclntosh1994}, Multivariate Autoregressive Modeling \cite{harrison2003} and Dynamic Causal Modelling \cite{friston2003}.
 These are all methods dedicated to this problem.
-These methods also suffer from similar problems of which perhaps the most important is scaling.
+These methods also suffer from similar problems of which perhaps the most important are scaling behaviour and failure to cope with fluctuating Haemodynamic Responses.
 Most of these methods can only handle tens of nodes in reasonable time, which becomes problematic in realistic situations with up to tens of thousands of nodes, ideally.
 
 \subsection{Causal Discovery}
@@ -499,6 +524,8 @@ The second part orients edges in this graph $G$ based on the separating sets, as
 \subsection{Experimental validation}
 % Section on how we plan on demonstrating the empirical value of research.
 % Full description from step 1 to final data set
+% TODO: Max: You asked me about my opinion on the identified structure, there was hardly any formal comparison. You could easily quantify this!To keep your study reproducible, you should not base your study on an (anonymous!) 'expert' :)
+% TODO: ''dit product is dermatologisch getest' - en wat kwam UIT de test? Again, you should quantify this, and do not use an anonymous expert to prove the validity of  method. If you find this difficult (or impossible), try looking at things like consistency across permutations and/or subjects.'
 Our analysis consisted of two parts, corresponding to the structural and directional parts of PC algorithm.
 Firstly we discerned structure by using brain resting-state time series fMRI data with structure PC.
 The generated structure is the same for all variants of PC discussed and proposed, as only the first separating set is used in finding unshielded triples.
@@ -506,6 +533,7 @@ We compared the generated structure with a Bayesian inference approach on findin
 Comparison between structures is done visually with an expert on brain anatomy.
 To increase the stability of found structures within subjects, we apply stability selection for different node permutations by Meinshausen and B{\"u}hlmann \cite{meinshausen2010}.
 Multi-subject comparison was done by averaging and inspecting standard deviation over subjects.
+% TODO: Inspecting and concluding what?
 
 The second part of our analysis is about discerning orientation within the found structure.
 We applied the directionality rules of original PC, modified PC and EMS-PC as mentioned above.
@@ -513,15 +541,18 @@ Resulting connectivity patterns are visually compared by an expert for anatomica
 To compare between methods, we compare the consistency of methods to mark a specific connection as directional over permutations.
 Of specific interest here are non-symmetrical orientations.
 We again applied stability selection for a sufficiently large number of permutations per subject.
+% TODO: How do you determine 'sufficient' and what is this number?
 
 \subsection{Data acquisition}
 No explicit data acquisition was performed, instead we performed our analysis on the same data as treated by Hinne et al. in the aforementioned Bayesian structural analysis \cite{hinne2013, hinne2013structfunc}.
 
-Paraphrasing: ``six healthy volunteers were scanned for resting-state functional data and diffusion-weighted images using a Siemens Magnetom Trio 3 T system at the Donders Centre for Cognitive Neuroimaging at Radboud University in The Netherlands.
+% TODO: Paraphrase this, instead of quoting.
+Quoting: ``six healthy volunteers were scanned for resting-state functional data and diffusion-weighted images using a Siemens Magnetom Trio 3 T system at the Donders Centre for Cognitive Neuroimaging at Radboud University in The Netherlands.
 Resting-state fMRI data were acquired at 3 Tesla by using a multi-echo echo-planar imaging (ME-EPI) sequence (voxel size 3.5 mm isotropic, matrix size 64x64, TR=2000 ms, TEs=6.9, 16.2, 25, 35 and 45 ms, 39 slices, GRAPPA factor 3, 6/8 partial Fourier).
 A total of 1030 volumes were obtained.
 Diffusion weighted images were obtained by using the DWI protocol (voxel size 2.0 isotropic, matrix size 110x110, TR=13.00 ms, TE=101 ms, 70 slices, 256 directions at b=1500 s/mm$^2$).''
 
+% TODO: There was a lot (!) of pre-processing conducted after the data was collected. You should emphasize this and refer the reader to the original article so look these things up, if desired.
 We did not perform explicit (pre-)processing on the functional and diffusion imaging data.
 Instead, we used the six resulting resting-state functional time series data and connectivity matrices from the Bayesian analysis as (pre-)processed by Hinne et al. \cite{hinne2013}.
 % K is de MAP estimate uit een G-Wishart distributie. Dat wil zoveel zeggen als: een distributie over alle precisiematrices die nullen hebben op de plekken waar G een 0 heeft (Hastie, Trevor; Tibshirani, Robert; Friedman, J. (2009). The Elements of Statistical Learning, voor de ge�nteresseerden). 
@@ -586,8 +617,9 @@ end{figure}
   \label{fig:struct_cerebellum}
 \end{figure}
 
-The connections between the homological areas are clearly visible as two diagonal lines.
-These connections most likely correspond to the corpus callosum, as each region is connected with its counterpart in the other hemisphere.
+The connections between the homologuous areas are clearly visible as two diagonal lines.
+These connections might run through the corpus callosum, as each region is connected with its counterpart in the other hemisphere.
+However the matrix does not show concrete pathways so it is impossible to draw any definite conclusions on this based on just these figures.
 Compared to the structure found by Hinne et al, connections within the hemispheres are less clearly visible, as well as connections within the cerebellum.
 
 The second step of the PC-algorithm finds directions based on this structure.
@@ -627,13 +659,13 @@ These resulting antisymmetric matrices are presented in Figures ~\ref{fig:pdag_a
   \label{fig:pdag_avg_antisymmetric_ems}
 \end{figure}
 
-
-A notable difference between modified PC and EMS-PC is that the assymetric arrowheads of the PDAG are about twice as high. %TODO histogrammetje
+A notable difference between modified PC and EMS-PC is that the assymetric arrowheads of the PDAG are about twice as high. %TODO: histogram
 This means that with our data, EMS-PC finds more arrows pointing in only one direction, and it finds them more consistently.
 However, none of these arrows are consistent among the six subjects.
 This can also be concluded from the maximum values of these matrices of the individual subjects.
 These matrices have maximum values of 0,45 - 0,9, whereas the avarage of these matrices has a maximum value of 0,25.
-Also, based on physiology we expect causal relations within a homological area to be the same among the two hemispheres, but this is not the case in our results.
+% TODO: That is not too worrying for this type of data. There is probably no consistent cognitive process clearly visible in this timescale, during rest.
+Also, based on physiology we would expect causal relations within homologous areas to be roughly the same, but this is also cannot be concluded from our results.
 
 \subsection{Execution time of the algorithm}
 To apply the algorithms on our data, we have used a Xeon E5-2670, running on 2,6GHz.
