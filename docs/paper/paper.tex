@@ -229,7 +229,7 @@ This intuitive relation can be demonstrated empirically \cite{vandenheuvel2009}.
 Structural connectivity is less time dependent as it involves mappings of anatomical connections opposing temporal activity patterns.
 For all practical purposes it is time-independent - it changes over years, and still marginally during adulthood.
 
-Hinne et al. \cite{hinne2013} proposed a Bayesian method for estimating structural networks based on Diffusion Weighted MRI (DWI) and probabilistic Tractography.
+Hinne et al. \cite{hinne2013} proposed a Bayesian method for estimating structural networks based on Diffusion Weighted MRI (DWI) and probabilistic tractography.
 The existence of white-matter tracts does not become immediately clear from imagery alone.
 Other methods rely on thresholds to estimate existence of said tracts.
 The proposed method results in a measure of uncertainty about where a hypothesised connection will terminate and so provides a clearly interpretable network structure as result.
@@ -329,7 +329,7 @@ Pseudocode for this method is shown in algorithm \ref{alg:pc_alg}.
 \State connect all pairs of point in undirected graph $G$.
 \Comment{Structural Part} 
 \State $n \gets 0$
-\While{there are connected pairs $X$, $Y$ such that $n < |\operatorname{Adjecencies}(X)\setminus\{Y\}| $}
+\While{there are connected pairs $X$, $Y$ such that $n < |\operatorname{Adjacencies}(X)\setminus\{Y\}| $}
   \ForAll{such connected pairs $X$, $Y$}
     \ForAll{subsets $S$ of $\operatorname{Adjacencies(X)}$ for which $|S| = n$}
       \If{$X$ and $Y$ are independent given $S$}
@@ -462,7 +462,7 @@ The second part orients edges in this graph $G$ based on the separating sets, as
 \Function{Structure\_PC}{$data$}
 \State connect all pairs of point in undirected graph $G$.
 \State $n \gets 0$
-\While{there are connected pairs $X$, $Y$ such that $n < |\operatorname{Adjecencies}(X)\setminus\{Y\}| $}
+\While{there are connected pairs $X$, $Y$ such that $n < |\operatorname{Adjacencies}(X)\setminus\{Y\}| $}
   \ForAll{such connected pairs $X$, $Y$}
     \ForAll{subsets $S$ of $\operatorname{Adjacencies(X)}$ for which $|S| = n$}
       \State test whether $X$ and $Y$ are d-separated given $S$
@@ -552,7 +552,7 @@ Resting-state fMRI data were acquired at 3 Tesla by using a multi-echo echo-plan
 A total of 1030 volumes were obtained.
 Diffusion weighted images were obtained by using the DWI protocol (voxel size 2.0 isotropic, matrix size 110x110, TR=13.00 ms, TE=101 ms, 70 slices, 256 directions at b=1500 s/mm$^2$).''
 
-% TODO: There was a lot (!) of pre-processing conducted after the data was collected. You should emphasize this and refer the reader to the original article so look these things up, if desired.
+% TODO: There was a lot (!) of pre-processing conducted after the data was collected. You should emphasise this and refer the reader to the original article so look these things up, if desired.
 We did not perform explicit (pre-)processing on the functional and diffusion imaging data.
 Instead, we used the six resulting resting-state functional time series data and connectivity matrices from the Bayesian analysis as (pre-)processed by Hinne et al. \cite{hinne2013}.
 % K is de MAP estimate uit een G-Wishart distributie. Dat wil zoveel zeggen als: een distributie over alle precisiematrices die nullen hebben op de plekken waar G een 0 heeft (Hastie, Trevor; Tibshirani, Robert; Friedman, J. (2009). The Elements of Statistical Learning, voor de ge�nteresseerden). 
@@ -562,13 +562,13 @@ At first, we have applied modified PC on the structural connectivity data of six
 To achieve stability, we have run the algorithm multiple times, in which the data was permuted randomly in each iteration.
 The avarage of all iterations was used as a measure of certainty, i.e. how consistent the algorithm is for each point of data.
 
-The results from the altorithms are presented in the form of matrices.
+The results from the agorithms are presented in the form of matrices.
 A connection from region $n$ to region $m$ is represented by point $(n,m)$ or $n,m$ in the matrix.
-For strucural data, this matrix is therefore symmetrical.
+For structural data, this matrix is therefore symmetrical.
 In the directional data, point $(n,m)$ denotes a directed edge from $n$ to $m$.
 In such a matrix, indices 1-45 represent the brain regions of the left hemisphere, regions 45-90 represent the right hemisphere, and regions 91-116 represent regions in the cerebellum. %TODO left or right hemisphere?
 Modified PC and EMS-PC do not differ in finding the structure.
-The results are presented in figure ~\ref{fig:struct_avg} as the avarage over all six subjects, with 300 iterations per subject. Additionaly, separate parts of the two hemispheres, the inter-hemisphere, and the cerebellum are presented in Figures \ref{fig:struct_left}, \ref{fig:struct_right}, \ref{fig:struct_inter_hemisphere}, \ref{fig:struct_cerebellum}, \ref{fig:struct_apart}
+The results are presented in figure ~\ref{fig:struct_avg} as the average over all six subjects, with 300 iterations per subject. Additionally, separate parts of the two hemispheres, the inter-hemisphere, and the cerebellum are presented in Figures \ref{fig:struct_left}, \ref{fig:struct_right}, \ref{fig:struct_inter_hemisphere}, \ref{fig:struct_cerebellum}, \ref{fig:struct_apart}
 The results of Hinne et al. are shown as well for comparison.
 
 \begin{figure}[h!]
@@ -588,36 +588,36 @@ end{figure}
   \includegraphics[width=0.25\textwidth]{images/struct_hemisphere_46_90}
   \includegraphics[width=0.25\textwidth]{images/struct_inter_hemisphere}
   \includegraphics[width=0.25\textwidth]{images/struct_cerebellum}  
-  \caption{The avarage structure of the left and right hemisphere, the inter-hemisphere, and the cerebellum of all subjects, as found with PC.}
+  \caption{The average structure of the left and right hemisphere, the inter-hemisphere, and the cerebellum of all subjects, as found with PC.}
   \label{fig:struct_apart}
 \end{figure}
 
 \begin{figure}[h!]
   \centering
   \includegraphics{images/struct_hemisphere_1_45}
-  \caption{The avarage structure of the left hemisphere of all subjects, as found with PC.}
+  \caption{The average structure of the left hemisphere of all subjects, as found with PC.}
   \label{fig:struct_left}
 \end{figure}
 \begin{figure}[h!]
   \centering
   \includegraphics{images/struct_hemisphere_46_90}
-  \caption{The avarage structure of the right hemisphere of all subjects, as found with PC.}
+  \caption{The average structure of the right hemisphere of all subjects, as found with PC.}
   \label{fig:struct_right}
 \end{figure}
 \begin{figure}[h!]
   \centering
   \includegraphics{images/struct_inter_hemisphere}
-  \caption{The avarage structure between the two hemispheres of all subjects, as found with PC.}
+  \caption{The average structure between the two hemispheres of all subjects, as found with PC.}
   \label{fig:struct_inter_hemisphere}
 \end{figure}
 \begin{figure}[h!]
   \centering
   \includegraphics{images/struct_cerebellum}
-  \caption{The avarage structure of the cerebellum of all subjects, as found with PC.}
+  \caption{The average structure of the cerebellum of all subjects, as found with PC.}
   \label{fig:struct_cerebellum}
 \end{figure}
 
-The connections between the homologuous areas are clearly visible as two diagonal lines.
+The connections between the homologous areas are clearly visible as two diagonal lines.
 These connections might run through the corpus callosum, as each region is connected with its counterpart in the other hemisphere.
 However the matrix does not show concrete pathways so it is impossible to draw any definite conclusions on this based on just these figures.
 Compared to the structure found by Hinne et al, connections within the hemispheres are less clearly visible, as well as connections within the cerebellum.
@@ -641,36 +641,36 @@ In terms of causality, this means that many latent sources are still present and
   \label{fig:pdag_avg_ems}
 \end{figure}
 
-Another representation of this data has been used to emphasize the assymetric parts of Figures ~\ref{fig:pdag_avg_mod} and ~\ref{fig:pdag_avg_ems}.
+Another representation of this data has been used to emphasise the asymmetric parts of Figures ~\ref{fig:pdag_avg_mod} and ~\ref{fig:pdag_avg_ems}.
 To achieve this, the absolute difference between these matrices and their transpose has been calculated, lifting out those points for which there is an arrow in one direction, but not in the opposite direction.
 These resulting antisymmetric matrices are presented in Figures ~\ref{fig:pdag_avg_antisymmetric_mod} and ~\ref{fig:pdag_avg_antisymmetric_ems}.
 
 \begin{figure}[h!]
   \centering
   \includegraphics{images/arrowheads_avg_mod}
-  \caption{The assymetric arrowheads of the PDAG found with modified PC, in which a high value denotes a high certainty of an one-directional arrow. The avarage of all six subjects is taken.}
+  \caption{The asymmetric arrowheads of the PDAG found with modified PC, in which a high value denotes a high certainty of an one-directional arrow. The average of all six subjects is taken.}
   \label{fig:pdag_avg_antisymmetric_mod}
 \end{figure}
 
 \begin{figure}[h!]
   \centering
   \includegraphics{images/arrowheads_avg_expl}
-  \caption{The assymetric arrowheads of the PDAG found with EMS-PC, in which a high value denotes a high certainty of an one-directional arrow. The avarage of all six subjects is taken.}
+  \caption{The asymmetric arrowheads of the PDAG found with EMS-PC, in which a high value denotes a high certainty of an one-directional arrow. The average of all six subjects is taken.}
   \label{fig:pdag_avg_antisymmetric_ems}
 \end{figure}
 
-A notable difference between modified PC and EMS-PC is that the assymetric arrowheads of the PDAG are about twice as high. %TODO: histogram
+A notable difference between modified PC and EMS-PC is that the asymmetric arrowheads of the PDAG are about twice as high. %TODO: histogram
 This means that with our data, EMS-PC finds more arrows pointing in only one direction, and it finds them more consistently.
 However, none of these arrows are consistent among the six subjects.
 This can also be concluded from the maximum values of these matrices of the individual subjects.
-These matrices have maximum values of 0,45 - 0,9, whereas the avarage of these matrices has a maximum value of 0,25.
+These matrices have maximum values of 0,45 - 0,9, whereas the average of these matrices has a maximum value of 0,25.
 % TODO: That is not too worrying for this type of data. There is probably no consistent cognitive process clearly visible in this timescale, during rest.
 Also, based on physiology we would expect causal relations within homologous areas to be roughly the same, but this is also cannot be concluded from our results.
 
 \subsection{Execution time of the algorithm}
 To apply the algorithms on our data, we have used a Xeon E5-2670, running on 2,6GHz.
 To run one iteration of the PC algorithm for one subject, modified PC needed approximately one minute and EMS-PC needed approximately two minutes to find both structure and direction.
-Although PC is not designed to be multithreaded, running multiple iterations lends itself for using multiple threads, as the iterations are fully independent, and only need to be avaraged out afterwards.
+Although PC is not designed to be multithreaded, running multiple iterations lends itself for using multiple threads, as the iterations are fully independent, and only need to be averaged out afterwards.
 
 
 \section{Discussion}
@@ -682,13 +682,13 @@ As such, causal discovery methods can contribute additional information to findi
 
 Both modified PC and EMS-PC can add directional information.
 Both algorithms find many bi-directional arrows, and also some one-directional arrows.
-There does not seem to be any consistency among these one-directional arrows  between different subjects, or between the two hemispeheres of the same subject.
+There does not seem to be any consistency among these one-directional arrows  between different subjects, or between the two hemispheres of the same subject.
 No clear conclusions can therefore be drawn yet about causality between different brain regions.
 
 % Further research
-This does not neccesarily imply that this data is noise, as communication between brain regions might actually differ per subject.
+This does not necessarily imply that this data is noise, as communication between brain regions might actually differ per subject.
 Activity of a brain region varies strongly over time and even though the subject have attempted to be in resting state, any thought or movement may cause signals to be measured.
-This leads to inconsistant directional edges, even in an algorithm which finds causal relations correctly.
+This leads to inconsistent directional edges, even in an algorithm which finds causal relations correctly.
 Further research may be done to investigating whether any of these arrows have a physiological meaning.
 This can be done by repeating these experiment with more subjects to get a better view on the significance of the directional edges.
 
@@ -700,7 +700,7 @@ Ideally, a causal discovery methods finds only directed edges, resulting in a di
 As contemporary measuring techniques are too coarse and slow to model a brain at one point in time, correctly modelling variables over multiple points in time - opposing the acyclic assumption - would provide an interesting direction of further research.
 
 It can also do this quite efficiently, as a few hundred iterations can be run in a matter of hours per subject.
-We have not performed a statistical analysis on the number of iterations needed to stabilize the results.
+We have not performed a statistical analysis on the number of iterations needed to stabilise the results.
 It may be possible that a significant result can already be found with much less iterations.
 
 % TODO: Suggereren task based analysis ipv resting state voor beter causaal beeld. 
