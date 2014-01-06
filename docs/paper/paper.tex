@@ -115,7 +115,7 @@
 \makeatother
 
 % Title
-\title{\fontfamily{phv}\selectfont{Causal Discovery methods for Effective Connectivity}}
+\title{\fontfamily{phv}\selectfont{Causal Discovery methods for Effective Connectivity in Human Brains}}
 \author{
   \textbf{R. Janssen} - \href{mailto:ramon.janssen@student.ru.nl}{ramon.janssen@student.ru.nl} \\
   \textbf{T. de Ruijter} - \href{mailto:t.deruijter@student.ru.nl}{t.deruijter@student.ru.nl}\\
@@ -134,6 +134,7 @@ Universiteit Nijmegen}}}\\[0.5cm]\rule{\linewidth}{0.3mm}}
 \setlength{\parskip}{3mm plus2mm minus1.5mm}
 
 \begin{abstract}
+% TODO: first state what you try to do, then how you did it, then what it brought you
 In this work we applied PC algorithm on resting-state data of healthy human subjects.
 Additionally we propose a variant of PC algorithm that poses weaker assumptions on the model, better fitting the underlying model.
 We find that detecting structure homological areas in the brain works better with PC algorithm than most conventional diffusion weighted imaging techniques.
@@ -163,6 +164,7 @@ The directed character in effective connectivity seems similar to traditional ca
 In what follows, we suggest to use causal discovery methods for deriving effective connectivity.
 
 \subsection{Problem statement}
+% TODO: Tom: I am not a priori sure there are causal patterns in the human brain: what you try to do is see whether applying causal methods can help to bring new insights .. and perhaps to see if you can find evidence for the existence of such patterns.
 This work seeks to utilise the strengths of current state-of-the-art causal discovery methods by applying them to resting state brain fMRI data in order to find new applicable methods for determining causal patterns in the human brain.
 
 % BOLD Problem
@@ -252,6 +254,7 @@ Most of these methods can only handle tens of nodes in reasonable time, which be
 \subsection{Causal Discovery}
 An approach for finding effective connectivity may be found in the domain of causal discovery.
 A causal discovery method uses data about events to determine which of these events are correlated, and additionally, it attempts to determine which events cause which.
+% TODO: you say the definition of a causal relation is 'non-trivial' and that you will cover the 'relevant principles', but you don't actually say what you mean by 'a causal relation' (especially in the context of brain-connectivity)
 The definition of a causal relation is not trivial \cite[p.20]{spirtes2000} and the relevant principles will be covered in this section.
 In our context, the causal discovery methods which have been used aim at inferring a Directed Acyclic Graph (DAG).
 These can be interpreted from a probabilistic and a causal perspective.
@@ -268,18 +271,20 @@ Proportionality is shown by an undirected edge between vertices.
 A provable property of these networks is the \textit{Markov Property}: every variable in $G$ is independent of its non-descendants conditioned on its parents.
 This property enables us to link the field of Bayesian networks, for which useful mathematical properties exist, to the causal interpretation.
 
+% TODO: relation CMC <-> unobserved common causes <-> 'causally insufficient models': I probably know what you try to say here, but that is not what it says right now
 \paragraph{Causal Markov Condition}
 A set of variables represented by a causal DAG $G$ is probabilistically independent of its non-descendants (non-effects), conditioned on its parents (direct causes).
 
 This means that there is some underlying causal process that can be represented as a DAG $G$, which is not necessarily observed.
 The Causal Markov Condition also has a converse principle we also use to reason with causality.
-It also means that in this process, there cannot be common causes of variables that are left out.
+% TODO: Tom: what do you mean with the below?
+It also means that in this process there cannot be common causes of variables that are left out.
 
 \paragraph{Causal Faithfulness Condition}
 A set of variables represented by a causal DAG $G$ does not have any conditional independencies unless entailed by the Causal Markov Condition.
 
 This second condition means the graph correctly portrays the underlying probability distribution.
-It enables us to reason about causality through reasoning with the graph through a phenomenon called directional separation.
+It enables us to reason about causality through reasoning with the graph through the notion of directional separation.
 
 \paragraph{d-separation}
 Two nodes $X$ and $Y$ are d-separated given nodes $S$ (with $X, Y \notin S$) if there is no path between $X,Y$ or a path from $X$ to $Y$ through $S$ for which at least one of the following holds:
@@ -304,6 +309,9 @@ This construction is named \textit{V-structure}.
 It is very unlikely that all events which are relevant for the causal graph are measured on a neuronal level; 
 even with high temporal and spatial resolutions, the entire physiology of the brain is too complex to capture.
 Modelling with causal insufficiency would seem more accurate.
+% TODO: Tom: v-structures X -> L <- Z in which L is latent do not lead to X <-> Y.
+% Us: then what does it lead to??
+
 In the underlying process, there exist V-structures $\left <X,L,Z \right>$ in which $L$ is latent.
 When sampling from the observed distribution, we would find a relation $X \leftrightarrow Z$.
 Since we assumed Causal Markov Conditionality, no feedback loops exist and all bi-directional arrows found must indicate existence of a latent confounder.
@@ -321,6 +329,7 @@ In the perspective of causal inference, these missing areas can also appear as c
 For the following experiments we have used the causal insufficient version of PC algorithm, modified to handle latent variable as described by Spirtes, Glymour and Scheines \cite[p.165-167]{spirtes2000}.
 Pseudocode for this method is shown in algorithm \ref{alg:pc_alg}.
 
+%TODO: Add line numbers
 \begin{algorithm}
 \caption{PC algorithm}
 \begin{spacing}{1.1}
@@ -402,6 +411,7 @@ It is shown that in practice PC algorithm works quite well, as complete algorith
 %This causal-insufficient version is named Modified PC.
 
 % Conservative PC
+% TODO: Put conservative PC in the previous section and leave this section for our additions and ideas.
 \paragraph{Conservative PC}
 The V-structure rule in PC algorithm orients unshielded triples based on a single separating set. 
 Simply put, it is assumed the single found separating set is enough to show conditional independence. 
@@ -414,6 +424,7 @@ Sadly, CPC requires a significant amount of additional conditional independence 
 % Multiple sepsets
 \paragraph{Multiple Separating Sets}
 The idea of CPC, to make a weaker assumption on graph faithfulness, is very potential.
+% TODO: Is very potential??
 Instead of doing additional tests, one could attempt to determine causal unfaithfulness with less dependency tests.
 An adaptation to PC algorithm that would not increase the order of complexity is once a separating set is found, to test all other vertex subsets of the same order as well.
 This finds all separating sets of the lowest order without increasing complexity.
@@ -427,6 +438,7 @@ Apart from serving as a sanity check, this could serve as the basis of a repair 
 % Explicit test
 A more explicit way to decrease faulty orientation of an unshielded triple $\left<A,B,C\right>$ is to check whether adding $B$ to a separating set of $(A,C)$ makes the pair conditionally dependent.
 If so, the graph is likely to be more faithful to its modeled distribution.
+% TODO: What is meant with 'likely to be more fateful'? Quantify this.
 
 \paragraph{EMS-PC}
 We have combined the above ideas into an adaptation of PC, which we refer to as Explicit Multiple Separating Set PC (EMS-PC).
@@ -439,7 +451,7 @@ As multiple separating sets have been found instead of only one, it needs to be 
 Also, in addition to the original condition, $X$ and $Z$ are tested for d-separation given $\{Y\}$.
 If they are found to be conditionally dependent, the triple is oriented as as $X \srightarrow Y \sleftarrow Z$.
 As a final safe-guard, all unshielded triples are checked for unfaithfulness and marked as such if applicable using found separating sets. %TODO wat bedoel je hiermee?
-
+% TODO: How do you mark unfaithful triples? can you spot the impact in the output?
 \subsection{Pseudocode}
 \label{sec:pseudocode}
 
@@ -448,13 +460,8 @@ For each pair of points which are not connected in this graph, it also finds a s
 This graph changes during the algorithm and so does $\operatorname{Adjacencies} (X)$.
 The second part orients edges in this graph $G$ based on the separating sets, as described in Algorithm ~\ref{code:emsdirectional}.
 
-%\par\vfill\break % Omdat pseudocode veel hspace nodig heeft :(
-%\advance\hsize by 8cm % Advance page height
-%\advance\hoffset by -4cm % Shift top margin
-%\floatevery{algorithm}{\setlength\hsize{15cm}}
-%\floatevery{algorithmic}{\setlength\hsize{15cm}}
-%TODO: meer hspace geven aan algorithms, alles hierboven werkte niet
-
+% TODO: How is this different from the first part of algorithm 1?
+% TODO: Add line numbers
 \begin{algorithm}
 \caption{Structure part of EMS-PC}
 \begin{spacing}{1.1}
@@ -485,7 +492,7 @@ The second part orients edges in this graph $G$ based on the separating sets, as
 \end{algorithm}
 
 
-
+% TODO: Add line numbers
 \begin{algorithm}
 \caption{Directional part of EMS-PC}
 \begin{spacing}{1.1}
@@ -524,6 +531,7 @@ The second part orients edges in this graph $G$ based on the separating sets, as
 \subsection{Experimental validation}
 % Section on how we plan on demonstrating the empirical value of research.
 % Full description from step 1 to final data set
+% TODO: Tom: have you tested/verified whether or not your EMS-PC procedure is indeed 'more likely to be faithful'? (p6,l5)
 % TODO: Max: You asked me about my opinion on the identified structure, there was hardly any formal comparison. You could easily quantify this!To keep your study reproducible, you should not base your study on an (anonymous!) 'expert' :)
 % TODO: ''dit product is dermatologisch getest' - en wat kwam UIT de test? Again, you should quantify this, and do not use an anonymous expert to prove the validity of  method. If you find this difficult (or impossible), try looking at things like consistency across permutations and/or subjects.'
 Our analysis consisted of two parts, corresponding to the structural and directional parts of PC algorithm.
@@ -544,6 +552,7 @@ We again applied stability selection for a sufficiently large number of permutat
 % TODO: How do you determine 'sufficient' and what is this number?
 
 \subsection{Data acquisition}
+% TODO: Huh? No data acquisition? Where do you get your results from then?
 No explicit data acquisition was performed, instead we performed our analysis on the same data as treated by Hinne et al. in the aforementioned Bayesian structural analysis \cite{hinne2013, hinne2013structfunc}.
 
 % TODO: Paraphrase this, instead of quoting.
@@ -558,6 +567,7 @@ Instead, we used the six resulting resting-state functional time series data and
 % K is de MAP estimate uit een G-Wishart distributie. Dat wil zoveel zeggen als: een distributie over alle precisiematrices die nullen hebben op de plekken waar G een 0 heeft (Hastie, Trevor; Tibshirani, Robert; Friedman, J. (2009). The Elements of Statistical Learning, voor de ge�nteresseerden). 
 
 \section{Results}
+% TODO: I'm missing a clear answer to the question "did we manage to do what we set out to do"?
 At first, we have applied modified PC on the structural connectivity data of six subjects.
 To achieve stability, we have run the algorithm multiple times, in which the data was permuted randomly in each iteration.
 The avarage of all iterations was used as a measure of certainty, i.e. how consistent the algorithm is for each point of data.
@@ -571,6 +581,7 @@ Modified PC and EMS-PC do not differ in finding the structure.
 The results are presented in figure ~\ref{fig:struct_avg} as the average over all six subjects, with 300 iterations per subject. Additionally, separate parts of the two hemispheres, the inter-hemisphere, and the cerebellum are presented in Figures \ref{fig:struct_left}, \ref{fig:struct_right}, \ref{fig:struct_inter_hemisphere}, \ref{fig:struct_cerebellum}, \ref{fig:struct_apart}
 The results of Hinne et al. are shown as well for comparison.
 
+% TODO: Add in caption what the reader is supposed to be looking at.
 \begin{figure}[h!]
   \centering
   \includegraphics[width=0.5\textwidth]{images/struct_full}
@@ -592,6 +603,7 @@ end{figure}
   \label{fig:struct_apart}
 \end{figure}
 
+% TODO: hard to compare or see what to look for -> "does it make sense or not"?
 \begin{figure}[h!]
   \centering
   \includegraphics{images/struct_hemisphere_1_45}
@@ -674,7 +686,6 @@ Although PC is not designed to be multithreaded, running multiple iterations len
 
 
 \section{Discussion}
-
 The structural part of PC adds interesting information with respect to existing methods such as DWI.
 Although DWI finds more structural data within homological areas, it does not find the corpus callosum, which is very clearly visible in the structure found with PC.
 This is a known shortcoming of diffusion weighted imaging, as these connections are typically too long to measure correctly.
@@ -686,6 +697,7 @@ There does not seem to be any consistency among these one-directional arrows  be
 No clear conclusions can therefore be drawn yet about causality between different brain regions.
 
 % Further research
+% TODO: What do you mean with this is not necessarily noise?
 This does not necessarily imply that this data is noise, as communication between brain regions might actually differ per subject.
 Activity of a brain region varies strongly over time and even though the subject have attempted to be in resting state, any thought or movement may cause signals to be measured.
 This leads to inconsistent directional edges, even in an algorithm which finds causal relations correctly.
@@ -697,16 +709,18 @@ The theory used here does not incorporate a temporal component and
 Ideally, a causal discovery methods finds only directed edges, resulting in a directed acyclic graph (DAG).
 %In practice, however, often not all causal relations can be inferred and undirected edges are also used in a graph.
 %As such, the result of a causal discovery method is a partially directed acyclic graph (PDAG).
+% TODO: What do you mean with the below sentence?
 As contemporary measuring techniques are too coarse and slow to model a brain at one point in time, correctly modelling variables over multiple points in time - opposing the acyclic assumption - would provide an interesting direction of further research.
 
+% TODO: What do you mean with 'it can also do this'? What does 'this' refer to?
 It can also do this quite efficiently, as a few hundred iterations can be run in a matter of hours per subject.
 We have not performed a statistical analysis on the number of iterations needed to stabilise the results.
 It may be possible that a significant result can already be found with much less iterations.
 
 % TODO: Suggereren task based analysis ipv resting state voor beter causaal beeld. 
-
 % TODO: Maak duidelijk welke aannames gedaan worden in welke PC variant en welke aannames verzwakt zouden kunnen worden.
 
+% TODO: Tom suggereert dat dit te veel van het goede is.
 \section{Acknowledgements}
 We would like to thank Max Hinne and Tom Claassen, for without them this research would not have been viable.
 They have provided us with ideas, valuable discussion and the data to perform actual research.
