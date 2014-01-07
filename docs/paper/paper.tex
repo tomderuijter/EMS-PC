@@ -470,7 +470,7 @@ Diffusion weighted images were obtained by using the DWI protocol (voxel size 2.
 
 We did not perform explicit (pre-)processing on the functional and diffusion imaging data.
 Instead, we used the six resulting resting-state functional time series data and connectivity matrices from the Bayesian analysis as (pre-)processed by Hinne et al. \cite{hinne2013}.
-% K is de MAP estimate uit een G-Wishart distributie. Dat wil zoveel zeggen als: een distributie over alle precisiematrices die nullen hebben op de plekken waar G een 0 heeft (Hastie, Trevor; Tibshirani, Robert; Friedman, J. (2009). The Elements of Statistical Learning, voor de ge•nteresseerden). 
+% K is de MAP estimate uit een G-Wishart distributie. Dat wil zoveel zeggen als: een distributie over alle precisiematrices die nullen hebben op de plekken waar G een 0 heeft (Hastie, Trevor; Tibshirani, Robert; Friedman, J. (2009). The Elements of Statistical Learning, voor de geï¿½nteresseerden). 
 
 \section{Results}
 At first, we have applied modified PC on the structural connectivity data of six subjects.
@@ -482,14 +482,15 @@ A connection from region $n$ to region $m$ is represented by point $(n,m)$ or $n
 For strucural data, this matrix is therefore symmetrical.
 In the directional data, point $(n,m)$ denotes a directed edge from $n$ to $m$.
 In such a matrix, indices 1-45 represent the brain regions of the left hemisphere, regions 45-90 represent the right hemisphere, and regions 91-116 represent regions in the cerebellum. %TODO left or right hemisphere?
-
 Modified PC and EMS-PC do not differ in finding the structure.
-The results are presented in figure ~\ref{fig:struct_full_mean} as the avarage over all six subjects, with 300 iterations per subject.
+The results are presented in figure ~\ref{fig:struct_avg} as the avarage over all six subjects, with 300 iterations per subject.
+The results of Hinne et al. are shown in ~\ref{fig:struct_max} for comparison.
+
 \begin{figure}[h!]
   \centering
   \includegraphics{images/struct_full_mean_gray}
-  \caption{The avarage structure of all subjects}
-  \label{fig:struct_full_mean}
+  \caption{The avarage structure of all subjects, found with the PC-algorithm}
+  \label{fig:struct_avg}
 \end{figure}
 In this matrix, higher values represent strong certainties of the presence of a connection.
 
@@ -497,24 +498,50 @@ In this matrix, higher values represent strong certainties of the presence of a 
   \centering
   \includegraphics{images/structure_max}
   \caption{The avarage structure of all subjects, according to the DWI-measurements of Hinne et al.}
-  \label{fig:struct_mean_max}
+  \label{fig:struct_max}
 \end{figure}
 
-One notable difference between the results found in Hinne et al. are the strong connections between homological areas, visible as two diagonal lines.
+One notable difference between the results found in Hinne et al. is the strong connections between homological areas, visible as two diagonal lines.
 This is a known shortcoming of diffusion weighted imaging, as these connections are typically too long to measure correctly.
-These connections most likely correspond to the corpus callosum.
+These connections most likely correspond to the corpus callosum, as each region is connected with its counterpart in the other hemisphere.
 Connections within the hemispheres are less clearly visible, as well as connections within the cerebellum.
 
-% Mod-PC
+The second step of the PC-algorithm finds directions based on this structure.
+In Figures ~\ref{fig:pdag_avg_mod} and ~\ref{fig:pdag_avg_ems}, the results for both modified PC and EMS-PC are presented.
+The figures look very similar to the Figure ~\ref{fig:struct_full_mean}, and look strongly symmetric.
+In terms of causality, this means that many latent sources are still present and causal relations between the measured brain regions themselves are not clearly visible.
 
-%
+\begin{figure}[h!]
+  \centering
+  \includegraphics{images/PDAG_avg_mod}
+  \caption{The PDAG found with modified PC, in which a high value denotes a high certainty of an arrow. The avarage of all six subjects is taken.}
+  \label{fig:pdag_avg_mod}
+\end{figure}
 
-%
+\begin{figure}[h!]
+  \centering
+  \includegraphics{images/PDAG_avg_expl}
+  \caption{The PDAG found with EMS-PC, in which a high value denotes a high certainty of an arrow. The avarage of all six subjects is taken.}
+  \label{fig:pdag_avg_ems}
+\end{figure}
 
-%
+Another representation of this data has been used to emphasize the assymetric parts of Figures ~\ref{fig:pdag_avg_mod} and ~\ref{fig:pdag_avg_ems}.
+To achieve this, the absolute difference between these matrices and their transpose has been calculated, lifting out those points for which there is an arrow in one direction, but not in the opposite direction.
+These results are presented in Figures ~\ref{fig:pdag_avg_antisymmetric_mod} and ~\ref{fig:pdag_avg_antisymmetric_ems}.
 
-%
+\begin{figure}[h!]
+  \centering
+  \includegraphics{images/PDAG_avg_antisymmetric_mod}
+  \caption{The assymetric parts of the PDAG found with modified PC, in which a high value denotes a high certainty of an one-directional arrow. The avarage of all six subjects is taken.}
+  \label{fig:pdag_avg_antisymmetric_mod}
+\end{figure}
 
+\begin{figure}[h!]
+  \centering
+  \includegraphics{images/PDAG_avg_antisymmetric_expl}
+  \caption{The assymetric parts of the PDAG found with EMS-PC, in which a high value denotes a high certainty of an one-directional arrow. The avarage of all six subjects is taken.}
+  \label{fig:pdag_avg_antisymmetric_ems}
+\end{figure}
 
 \section{Discussion}
 % Further research
