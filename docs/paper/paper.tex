@@ -135,33 +135,33 @@ Universiteit Nijmegen}}}\\[0.5cm]\rule{\linewidth}{0.3mm}}
 
 \begin{abstract}
 % TODO: first state what you try to do, then how you did it, then what it brought you
-In this work we applied PC algorithm on resting-state data of healthy human subjects.
-Additionally we propose a variant of PC algorithm that poses weaker assumptions on the model, better fitting the underlying model.
-We find that detecting structure homological areas in the brain works better with PC algorithm than most conventional diffusion weighted imaging techniques.
-In the area of directionality and causality, more research is needed.
+%In this work we applied PC algorithm on resting-state data of healthy human subjects.
+%Additionally we propose a variant of PC algorithm that poses weaker assumptions on the model, better fitting the underlying model.
+%We find that detecting structure homological areas in the brain works better with PC algorithm than most conventional diffusion weighted imaging techniques.
+%In the area of directionality and causality, more research is needed.
 \end{abstract}
 
 \section{Introduction}
+% Petty introductory talk
 The brain and particularly the human brain have been studied for hundreds of years.
-Today, the secrets of our brains still are one of the most sought-after.
-The techniques however have changed.
+Today, the secrets of our brains still belong to the most sought-after.
+The techniques for studying it however have changed.
 We have come a long way since the time of Phrenology, the pseudoscience based attempting to derive cognitive ability and personality from measurements of the skull or, post-mortem, the brain.
 Advanced measurement methods exist that allow scientists to peek inside brains that give a coarse but broad overview without opening a single skull.
 
-Of particular interest are causal relations between brain regions and cognitive and bodily functions.
-The question if brain region X is functionally or structurally connected to brain region Y and whether these are causally related is still highly relevant; it is the main question of the present-day scientific field of brain connectivity.
-Understanding brain structure implies understanding more about the brain as a whole.
+% Motivation for brain connectomics
+The question how our brains are wired - brain connectomics - drives one of the leading fields of research in neuroscience.
+Our brains are in essence networks which can be analysed similarly to very large graphs.
+Neuro-degenerative diseases such as Alzheimer's disease, Parkinson's disease, dementia, Amyotrophic lateral sclerosis (ALS) have all been shown to severely alter brain connectivity \cite{Bullmore2009}.
+An application of connectivity analysis would be to provide markers to identify the disease and its severity, as well as another means of studying these diseases.
 
-Not surprisingly, brain connectivity also finds applications in medicine.
-Neuro-degenerative diseases such as Alzheimer's disease, Parkinson's disease, dementia, Amyotrophic lateral sclerosis (ALS) have all been shown to severely alter brain connectivity. %TODO: Citation needed.
-Better methods for analysing connectivity could lead to more insight in these diseases.
-
+% Causal discovery and brain networks
 The field of brain connectivity finds its roots in the early 1990s \cite{friston1993functional, friston1994}, though because of more recent developments in the field of Artificial Intelligence and Machine Learning it is possible to do more thorough analysis \cite{vandenheuvel2010}.
-One type of connectivity analysis involves finding how brain region X causes what region Y does. This is called \emph{effective connectivity}.
-More concretely: how does the measured fMRI signal, representing an underlying neuronal process, determine what other neuronal processes are activated.
-Research regarding effective is relatively new and its application still faces many challenges that require further research \cite{ramsey2010}.
-The directed character in effective connectivity seems similar to traditional causal relations.
-In what follows, we suggest to use causal discovery methods for deriving effective connectivity.
+Research regarding effective connectivity - causal relations in brain networks - is relatively new and its application still faces many challenges that require further research \cite{ramsey2010}.
+Similarly to how graph theory has been applied in functional and anatomical brain networks, it seems natural to apply methods from causal discovery to deduce effective brain networks.
+
+% TODO: Elaborate on the problems that exist within effective connectivity.
+% From there on, go towards the problem statement and the unique contributions of this work.
 
 \subsection{Problem statement}
 % TODO: Tom: I am not a priori sure there are causal patterns in the human brain: what you try to do is see whether applying causal methods can help to bring new insights .. and perhaps to see if you can find evidence for the existence of such patterns.
