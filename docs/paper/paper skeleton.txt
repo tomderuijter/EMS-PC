@@ -1,0 +1,86 @@
+= Introduction =
+% Subject introduction
+Effective connectivity resting state analysis in human brains
+Resting state
+Brains are networks; apply graphical models and causal discovery
+
+% Motivation for research
+Better understanding of brains
+Relatively new field - not yet an established analysis method
+Existing problems with current methods and applications, specifically [Tom: mention all, or just the relevant problems?]
+- Model selection
+- Indirect measurements
+- Modelling causal structure across individuals (varying responses to same stimuli)
+- Distinct but overlapping ROIs
+- Varying Haemodynamic response (HRF)
+- Equilibrium or time series [Tom: I'm not sure I understand 'equilibrium']
+
+% Problem statement
+See whether applying causal methods (PC and EMS-PC) can help bring new insights and whether we can find evidence for the existence of causal patterns on a whole brain level.
+
+% Previous research
+[Tom: we did not explicitly have this paragraph, so this is additional effort]
+
+% Research goal
+How does the standard causal discovery method PC-Algorithm behave regarding the aforementioned problems when applied to resting-state functional time-series data?
+
+How does the performance of EMS-PC relate to PC regarding the aforementioned problems when applied to the same resting-state functional time-series data?
+
+% Relevance of research
+If HRF can be avoided, causal patterns can be established with greater reliability
+Insight and diagnostics in neuro-degenerative diseases
+Any found evidence of causal patterns can give an impulse to further research
+
+% Structure of document
+
+
+= Background =
+% Types of brain connectivity [optional]
+Functional
+Structural
+Effective
+
+% Causal discovery theory
+Causal Markov Condition
+Causal faithfulness
+d-separation
+V-structure
+Causal sufficiency
+Latent variables
+
+% PC algorithm
+Algorithm, assumptions and explanation
+Performance
+Stability and faithfulness problems
+Conservative PC extension
+
+
+= Methods = (our contributions) [Tom: I'm not completely satisfied with this structure. It's too split and diverse to put everything under 'methods']
+% Improvements to PC
+Multiple separating sets
+Partial unfaithfulness check
+EMS-PC
+
+% Experimental validation
+Application of methods on data
+Comparison with previous research (due to lack of baseline)
+
+% Data acquisition
+Subject acquisition and instruction
+Used equipment and specs
+Experimental setup
+Scanner settings
+Preprocessing
+- Software
+- Scripts
+Resulting data specs
+
+
+= Results =
+
+
+= Discussion =
+
+
+= Conclusion =
+
