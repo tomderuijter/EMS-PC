@@ -339,12 +339,18 @@ All of these separating sets are recorded.
 
 Also, the condition on line \ref{alg:pc_alg:v_struct} to orient $X - Y - Z$ according to the V-structure-rule has been made more strict.
 As multiple separating sets have been found instead of only one, it needs to be checked whether $Y$ is in not in \emph{any} of those sets before the V-structure can be oriented.
-In addition to the original condition, $X$ and $Z$ are tested for \textit{d}-separation given $\{Y\}$.
-If they are found to be conditionally dependent, the triple is oriented as as $X \srightarrow Y \sleftarrow Z$.
-%As a final safe-guard, all unshielded triples are checked for unfaithfulness and marked as such if applicable using found separating sets. %TODO wat bedoel je hiermee?
-%TODO Willen we nog iets over unfaithful dingen zeggen? Zo ja, dan wel een antwoord op deze vragen...
-% TODO: How do you mark unfaithful triples? can you spot the impact in the output?
+In addition to this original condition, $X$ and $Z$ are \textit{explicitly} tested for \textit{d}-separation given $\{Y\}$.
+If they are found to be conditionally \textit{dependent}, the triple is oriented as as $X \srightarrow Y \sleftarrow Z$.
+Otherwise it is not oriented.
 
+Given the found separating sets, it is possible to test whether these sets provide a consistent answer to the question whether the unshielded triple $\left<X,Y,Z\right>$ is \textit{d}-separated by $Y$.
+It should be the case that $Y$ occurs in all found separating sets.
+If this is not the case, the triple is marked as unfaithful.
+This can be used as a diagnostic to judge initial reliability of results without almost any additional computational cost.
+The marked triples could be coloured differently in the resulting 
+The downside of this additional check is results are merely used as a diagnostic and thus the unshielded triple is oriented in a v-structure nevertheless.
+It is also not a complete check as this would require as many tests as in CPC and thus no positive conclusions can be drawn from it.
+Also if an unfaithful triple is detected, the impact on the final output is unclear as errors might have cascaded into further orientation steps.
 
 \subsection{Experimental validation}
 \paragraph{Experimental pipeline}
