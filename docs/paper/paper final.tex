@@ -140,15 +140,56 @@ Universiteit Nijmegen}}}\\[0.5cm]\rule{\linewidth}{0.3mm}}
 %We find that detecting structure homological areas in the brain works better with PC algorithm than most conventional diffusion weighted imaging techniques.
 %In the area of directionality and causality, more research is needed.
 \end{abstract}
+\section{Introduction}
+\subsection{Subject introduction}
+%Effective connectivity resting state analysis in human brains
+%Resting state
+%Brains are networks; apply graphical models and causal discovery
 
-\section{Background}% Types of brain connectivity [optional] [Ramon: lijkt me wel belangijk, geeft ook het belang aan van richting zoeken, hoeft niet lang]
-\subsection{Brain connectivity}
+\subsection{ Motivation for research}
+%Better understanding of brains
+%Relatively new field - not yet an established analysis method
+%Existing problems with current methods and applications, specifically [Tom: mention all, or just the relevant problems?]
+%- Model selection
+%- Indirect measurements
+%- Modelling causal structure across individuals (varying responses to same stimuli)
+%- Distinct but overlapping ROIs
+%- Varying Haemodynamic response (HRF)
+%Find shortcomings of PC and improve it (EMS-PC)
+
+\subsection{Problem statement}
+%See whether applying causal methods (PC and EMS-PC) can help bring new insights and whether we can find evidence for the existence of causal patterns on a whole brain level.
+
+\subsection{Previous research}
+%[Tom: we did not explicitly have this paragraph, so this is additional effort]
+%[Ramon]: Lijkt me vergelijkbaar met de verwijzingen naar literatuur die we al hebben? Met wat extra referenties naar wat Max zei: temporele methodes zijn onbetrouwbaar, dat hebben wij niet
+%[Ramon]: even een goede balans zoeken tussen dit en "Existing problems" in motivation
+
+\subsection{Research goal}
+%How does the standard causal discovery method PC-Algorithm behave regarding the aforementioned problems when applied to resting-state functional time-series data?
+%- Can we overcome the consistency problems of PC-algorithm applied on resting-state functional data?
+%- Does the PC algorithm applied on resting-state functional data provide consistent, specific and anatomically plausible connectivity?
+%- How does functional connectivity found by the first part of PC relate to other structural / functional methods applied on the same resting-state functional data regarding the aforementioned problems?
+%
+%How does the performance of EMS-PC relate to PC regarding the aforementioned problems when applied to the same resting-state functional time-series data?
+%- When would EMS-PC perform better than PC-algorithm regarding directionality results?
+%- Is EMS-PC more consistent in its results within a single subject than PC-algorithm on resting-state functional data, regarding the multiple separating set addition and the explicit v-structure test?
+%- Can we find unfaithfulness within our model without additional independence tests?
+
+
+\subsection{Relevance of research}
+%If HRF can be avoided, causal patterns can be established with greater reliability
+%Insight and diagnostics in neuro-degenerative diseases
+%Any found evidence of causal patterns can give an impulse to further research
+%[Ramon: is dit niet al duidelijk uit motivation? Lijkt me dubbelop]
+
+\section{Background}
+\subsection{Types of brain connectivity}% [optional] [Ramon: lijkt me wel belangijk, geeft ook het belang aan van richting zoeken, hoeft niet lang]
 %Functional
 %Structural
 %Effective
 
-\section{Causal inference}
-% Causal discovery theory
+\subsection{Causal discovery theory}
 %Causal Markov Condition
 %Causal faithfulness
 %d-separation
@@ -156,24 +197,49 @@ Universiteit Nijmegen}}}\\[0.5cm]\rule{\linewidth}{0.3mm}}
 %Causal sufficiency
 %Latent variables
 
-\section{PC algorithm}
-%Algorithm, assumptions and explanation [Ramon: standaard PC een naam geven en consistent gebruiken, bijv. classical PC?]
+\subsection{PC algorithm}
+%Algorithm, assumptions and explanation [Ramon: standaard PC een naam geven en consistent gebruiken, bijv. standard PC?]
+%Pseudocode
 %Performance
 %Stability and faithfulness problems
+%Soundness and non-completeness
 %Conservative PC extension
 
-\section{Methods}
-%= Methods = (our contributions) [Tom: I'm not completely satisfied with this structure. It's too split and diverse to put everything under 'methods']
-% Improvements to PC
-%Multiple separating sets
-%Partial unfaithfulness check
-%EMS-PC
+
+\section{Methods}% (our contributions) [Tom: I'm not completely satisfied with this structure. It's too split and diverse to put everything under 'methods']
+\subsection{Improvements to PC}
+%Motivation (refer to results-section)
+%Multiple separating sets and why it should be better / not worse (correctness, runtime)
+%Partial unfaithfulness check and why it should be better / not worse (correctness, runtime)
+%EMS-PC extension (no pseudo-code, but additions regarding standard PC)
 
 \subsection{Experimental validation}
-%Application of methods on data
-%Comparison with previous research (due to lack of baseline)
+\paragraph{Experimental pipeline}
+%- What data is needed
+%- Apply structure PC on resting-state functional time-series
+%- Apply directional PC
+%- Parameter optimisation (model selection)
+%
+\paragraph{Standard PC}
+%- Measuring whole-brain structural and directional consistency of PC - frequency of occurrences within subjects
+%- Markov equivalence class size (nr. of latent variables / bidirectional arrows) within subjects
+%- Markov class Asymmetry and certain asymmetry within subjects
+%- Consistency of structure across subjects when aggregating results (averaging and frequency of occurences)
+%- Consistency of directionality across subjects when aggregating results
+%
+\paragraph{EMS-PC}
+%- Measuring whole-brain structural and directional consistency of EMS-PC
+%- Markov equivalence class size (nr. of latent variables / bidirectional arrows) within subjects
+%- Markov class Asymmetry and certain asymmetry within subjects
+%- Unfaithfulness check with and without additional separating sets
+%
+\paragraph{Comparison}
+%- Comparison of directionality between standard PC and EMS-PC on consistency of results within subjects
+%- Comparison of ... of results across subjects
+%- Run-time of methods and comparison between run-times
+%- Comparison of structure (functional connectivity) of PC (both. they're identical in structure) with DWI results by Max et al.
 
-\section{Data acquisition}
+\subsection{Data acquisition}
 %Subject acquisition and instruction
 %Used equipment and specs
 %Experimental setup
@@ -185,26 +251,20 @@ Universiteit Nijmegen}}}\\[0.5cm]\rule{\linewidth}{0.3mm}}
 %[Ramon: tot hoeverre is dit in detail nodig? Enerzijds moeten we niet doen alsof het kant en klaar uit dat apparaat komt, maar anderzijds wordt het in Max' artikel beschreven. Zijn dingen als "settings" dan niet overkill?]
 
 \section{Results}
-\subsection{Structure}
-%structure per brain region
-%comparison with Max's results
-%certainty (plot of the distribution of certainties?)
-
-\subsection{Causal relations}
-%direction
-%direction per subject? To show that there is little consistency
-%certainty (plot)
-
-\subsection{Performance}
-%runtime
+%Answer all the questions as mentioned in methods, in the same order
+%No aggregation over direction, motivate this
 
 \section{Discussion}
-%structure is nice (inter-hemisphere connections)
-%direction is less nice, little consistency
-%better methods for direction (Tom's new algorithm)
-%performs well
+%Poor consistency between subjects
+%Good consistency of structure within and between subjects
+%inter-hemisphere connection
+%cause of poor consistency: inherent to our method or viable for further research?
+%data aquisition and noise, improvement in data -> improvement in causal inference
+%better methods for direction (Tom's new algorithm), and why that might solve causal inference problems
+%run-time is quick
+%HRF
 
-\section{Conclusion}
-%repeat everything in 1 paragraph, or leave away
+\subsection{Conclusion}
+%repeat everything in 1 paragraph, or leave away, whatever seems most fitting in the end. HRF makes us awesome
 
 \end{document}

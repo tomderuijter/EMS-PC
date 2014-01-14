@@ -13,7 +13,7 @@ Existing problems with current methods and applications, specifically [Tom: ment
 - Modelling causal structure across individuals (varying responses to same stimuli)
 - Distinct but overlapping ROIs
 - Varying Haemodynamic response (HRF)
-- Equilibrium or time series [Tom: I'm not sure I understand 'equilibrium']
+Find shortcomings of PC and improve it (EMS-PC)
 
 % Problem statement
 See whether applying causal methods (PC and EMS-PC) can help bring new insights and whether we can find evidence for the existence of causal patterns on a whole brain level.
@@ -25,8 +25,15 @@ See whether applying causal methods (PC and EMS-PC) can help bring new insights 
 
 % Research goal
 How does the standard causal discovery method PC-Algorithm behave regarding the aforementioned problems when applied to resting-state functional time-series data?
+- Can we overcome the consistency problems of PC-algorithm applied on resting-state functional data?
+- Does the PC algorithm applied on resting-state functional data provide consistent, specific and anatomically plausible connectivity?
+- How does functional connectivity found by the first part of PC relate to other structural / functional methods applied on the same resting-state functional data regarding the aforementioned problems?
 
 How does the performance of EMS-PC relate to PC regarding the aforementioned problems when applied to the same resting-state functional time-series data?
+- When would EMS-PC perform better than PC-algorithm regarding directionality results?
+- Is EMS-PC more consistent in its results within a single subject than PC-algorithm on resting-state functional data, regarding the multiple separating set addition and the explicit v-structure test?
+- Can we find unfaithfulness within our model without additional independence tests?
+
 
 % Relevance of research
 If HRF can be avoided, causal patterns can be established with greater reliability
@@ -52,21 +59,46 @@ Causal sufficiency
 Latent variables
 
 % PC algorithm
-Algorithm, assumptions and explanation [Ramon: standaard PC een naam geven en consistent gebruiken, bijv. classical PC?]
+Algorithm, assumptions and explanation [Ramon: standaard PC een naam geven en consistent gebruiken, bijv. standard PC?]
+Pseudocode
 Performance
 Stability and faithfulness problems
+Soundness and non-completeness
 Conservative PC extension
 
 
 = Methods = (our contributions) [Tom: I'm not completely satisfied with this structure. It's too split and diverse to put everything under 'methods']
 % Improvements to PC
-Multiple separating sets
-Partial unfaithfulness check
-EMS-PC
+Motivation (refer to results-section)
+Multiple separating sets and why it should be better / not worse (correctness, runtime)
+Partial unfaithfulness check and why it should be better / not worse (correctness, runtime)
+EMS-PC extension (no pseudo-code, but additions regarding standard PC)
 
 % Experimental validation
-Application of methods on data
-Comparison with previous research (due to lack of baseline)
+Experimental pipeline
+- What data is needed
+- Apply structure PC on resting-state functional time-series
+- Apply directional PC
+- Parameter optimisation (model selection)
+
+Standard PC
+- Measuring whole-brain structural and directional consistency of PC - frequency of occurrences within subjects
+- Markov equivalence class size (nr. of latent variables / bidirectional arrows) within subjects
+- Markov class Asymmetry and certain asymmetry within subjects
+- Consistency of structure across subjects when aggregating results (averaging and frequency of occurences)
+- Consistency of directionality across subjects when aggregating results
+
+EMS-PC
+- Measuring whole-brain structural and directional consistency of EMS-PC
+- Markov equivalence class size (nr. of latent variables / bidirectional arrows) within subjects
+- Markov class Asymmetry and certain asymmetry within subjects
+- Unfaithfulness check with and without additional separating sets
+
+Comparison
+- Comparison of directionality between standard PC and EMS-PC on consistency of results within subjects
+- Comparison of ... of results across subjects
+- Run-time of methods and comparison between run-times
+- Comparison of structure (functional connectivity) of PC (both. they're identical in structure) with DWI results by Max et al.
 
 % Data acquisition
 Subject acquisition and instruction
@@ -80,21 +112,18 @@ Resulting data specs
 [Ramon: tot hoeverre is dit in detail nodig? Enerzijds moeten we niet doen alsof het kant en klaar uit dat apparaat komt, maar anderzijds wordt het in Max' artikel beschreven. Zijn dingen als "settings" dan niet overkill?]
 
 = Results =
-structure per brain region
-comparison with Max's results
-certainty (plot of the distribution of certainties?)
-
-direction
-direction per subject? To show that there is little consistency
-certainty (plot)
-
-runtime
+Answer all the questions as mentioned in methods, in the same order
+No aggregation over direction, motivate this
 
 = Discussion =
-structure is nice (inter-hemisphere connections)
-direction is less nice, little consistency
-better methods for direction (Tom's new algorithm)
-performs well
+Poor consistency between subjects
+Good consistency of structure within and between subjects
+inter-hemisphere connection
+cause of poor consistency: inherent to our method or viable for further research?
+data aquisition and noise, improvement in data -> improvement in causal inference
+better methods for direction (Tom's new algorithm), and why that might solve causal inference problems
+run-time is quick
+HRF
 
 = Conclusion =
-repeat everything in 1 paragraph, or leave away
+repeat everything in 1 paragraph, or leave away, whatever seems most fitting in the end
