@@ -199,12 +199,96 @@ Universiteit Nijmegen}}}\\[0.5cm]\rule{\linewidth}{0.3mm}}
 
 \subsection{PC algorithm}
 %Algorithm, assumptions and explanation [Ramon: standaard PC een naam geven en consistent gebruiken, bijv. standard PC?]
-%Pseudocode
-%Performance
-%Stability and faithfulness problems
-%Soundness and non-completeness
-%Conservative PC extension
+\paragraph{Description}
+The PC algorithm is a so-called constraint based method.
+Starting from a fully connected undirected graph, the PC algorithm first forms structure by cutting away edges of conditionally independent variables.
+In the second step, orientation rules are applied based on found separating sets and structure.
+The original PC algorithm assumes causal sufficiency, excluding the existence of common confounders between nodes.
+This seems unwanted when handling brain data, where one would expect a large amount of latent processes.
+Also measuring methods are not yet advanced enough to measure the full detail of the brain, thus skipping over details.
+In the perspective of causal inference, these missing areas can also appear as confounders.
+For the following experiments we have used the causal insufficient version of PC algorithm, modified to handle latent variable as described by Spirtes, Glymour and Scheines \cite[p.165-167]{spirtes2000}.
+From now on, we will refer to this algorithm as ``standard PC''.
+Pseudocode for this method is shown in algorithm \ref{alg:pc_alg}.
 
+\begin{algorithm}
+\caption{Standard PC algorithm}
+\begin{spacing}{1.1}
+\begin{algorithmic}[1]
+\Function{PC}{$data$}
+\State connect all pairs of point in undirected graph $G$.
+\Comment{Structural Part} 
+\State $n \gets 0$
+\While{there are connected pairs ($X$, $Y$) such that $n < |\operatorname{Adjacencies}(X)\setminus\{Y\}| $}
+  \ForAll{such connected pairs ($X$, $Y$)}
+    \ForAll{subsets $S$ of $\operatorname{Adjacencies(X)}$ for which $|S| = n$}
+      \If{$X$ and $Y$ are independent given $S$}
+        \State remove edge $X - Y$ from G
+        \State record $S$ as separating set of ($X, Y$)
+        \State continue with the next pair ($X$, $Y$)
+      \EndIf
+    \EndFor
+  \EndFor
+  \State $n \gets n+1$
+\EndWhile
+\State $\text{PDAG} \gets G\text{, with all connections replaced by }\oline$
+\Comment{Directional Part}
+\ForAll{unshielded triples $\left <X, Y,Z \right> $ in $G$ }
+  \If{$Y$ is not in the separating set of $X$ and $Z$}
+    \State Orient $X \sline Y \sline Z$ as $X \srightarrow Y \sleftarrow Z$ in $\text{PDAG}$
+  \EndIf
+\EndFor
+\While{Edges can still be oriented}
+  \If{there is an edge $X \sline Y$, and there is a directed path from $X$ to $Y$}
+    \State orient $X \sline Y$ as $X \rightarrow Y$
+  \EndIf
+  \If{there are edges $X \srightarrow Y$ and $Y \sleftline Z$, the latter is not an edge $Y \sleftarrow Z$, and $X$ and $Z$ are not connected}
+    \State orient $Y \sline Z$ as $Y \rightarrow Z$
+  \EndIf
+\EndWhile
+\State Apply other directionality rules from Spirtes et al. \cite[p.165-167]{spirtes2000} %TODO uitschrijven?
+\State \Return $G$ and the separating sets
+\EndFunction
+\end{algorithmic}
+\end{spacing}
+\label{alg:pc_alg}
+\end{algorithm}
+
+For finding directed edges, the PC-algorithm first finds undirected structure.
+For each two non-adjacent nodes $X$ and $Y$ it also finds a minimal separating set, which is the smallest set acting as a separating set.
+This is done by first assuming all nodes are connected, and then testing all pairs of nodes for independence.
+
+The independence of $X$ and $Y$ is tested given a subset of neighbours of $X$ or $Y$ using a statistical independence test such as the Chi-square or Fisher-Z independence tests.
+If such an independence is found, this subset is a separating set of $X$ and $Y$ and they are not connected.
+If no such an independence is found, they are connected.
+To find the minimal separating set, all subsets of neighbours are traversed in order of size; the first separating set which is found, is the minimal one.
+
+Next, PC algorithm attempts to orient these edges.
+The 'o' mark represents the entire Markov class in that edge of the graph.
+Like Spirtes et al, we use a star-symbol at the end of an edge to denote that any mark may be present: an arrowhead, an "o" or an empty mark.
+When an edge is oriented as an edge with a star, this denotes that this end is not changed.
+
+The first of the directionality rules attempts to orient unshielded triples.
+For a triple $\left < X,Y,Z, \right>$ to be oriented, $X$ and $Z$ should have a separating set $S$ not containing $Y$.
+If so, the triple is marked a V-structure.
+
+After all V-structures have been found, the other rules are applied in no particular order.
+These rules are based on arrows that have already been found.
+
+\paragraph{Run-time performance}
+The PC-algorithm run-time is dependent on the number of dependency tests to be performed and thus it has a worst-case runtime complexity exponential in the maximal branching degree present in the graph.
+However, this worst-case scenario only happens when no edges can be removed; all subsets of the complete set of nodes have to be used to test d-separation of every pair of nodes.
+For a sparse graph, many edges might be removed for small separating sets, and the standard PC algorithm therefore often runs fast in practice and is able to perform well on hundreds of variables.
+
+\paragraph{Conservative PC extension}
+The V-structure rule in PC algorithm orients unshielded triples based on a single separating set. 
+Simply put, it is assumed the single found separating set is enough to show conditional independence. 
+Ramsey et al. \cite{ramsey2012} introduce a weaker but still sufficient assumption for finding V-structures.
+Through this weaker but still adjacency-faithful assumption, the method is more cautious than PC algorithm in drawing unambiguous conclusions on causal orientations.
+That is why this method is named Conservative PC (CPC).
+The resulting algorithmic changes provide better results and is able to mark incorrectly unshielded triples as unfaithful.
+Sadly, CPC requires a significant amount of additional conditional independence tests, exponential in the largest branching degree of the tested structure.
+Although the weaker assumptions made with conservative PC might be useful for this research, the run-time performance is not good enough to apply it on our dataset.
 
 \section{Methods}% (our contributions) [Tom: I'm not completely satisfied with this structure. It's too split and diverse to put everything under 'methods']
 \subsection{Improvements to PC}
