@@ -217,7 +217,7 @@ Pseudocode for this method is shown in algorithm \ref{alg:pc_alg}.
 \begin{algorithmic}[1]
 \Function{PC}{$data$}
 \State connect all pairs of point in undirected graph $G$.
-\Comment{Structural Part} 
+                                                                                                                                    \Comment{Structural Part} 
 \State $n \gets 0$
 \While{there are connected pairs ($X$, $Y$) such that $n < |\operatorname{Adjacencies}(X)\setminus\{Y\}| $}
   \ForAll{such connected pairs ($X$, $Y$)}
@@ -232,21 +232,24 @@ Pseudocode for this method is shown in algorithm \ref{alg:pc_alg}.
   \State $n \gets n+1$
 \EndWhile
 \State $\text{PDAG} \gets G\text{, with all connections replaced by }\oline$
-\Comment{Directional Part}
+                                                                                                                                    \Comment{Directional Part}
 \ForAll{unshielded triples $\left <X, Y,Z \right> $ in $G$ }
+                                                                                                                                    \Comment{Find V-structures}
   \If{$Y$ is not in the separating set of $X$ and $Z$}
     \State Orient $X \sline Y \sline Z$ as $X \srightarrow Y \sleftarrow Z$ in $\text{PDAG}$
   \EndIf
 \EndFor
 \While{Edges can still be oriented}
+                                                                                                                                    \Comment{Additional orientations}
   \If{there is an edge $X \sline Y$, and there is a directed path from $X$ to $Y$}
     \State orient $X \sline Y$ as $X \rightarrow Y$
   \EndIf
-  \If{there are edges $X \srightarrow Y$ and $Y \sleftline Z$, the latter is not an edge $Y \sleftarrow Z$, and $X$ and $Z$ are not connected}
-    \State orient $Y \sline Z$ as $Y \rightarrow Z$
+  \If{there are edges $X \srightarrow Y$ and $Y \sleftline Z$, the latter is not an edge $Y \sleftarrow Z$}
+    \If{$X$ and $Z$ are not connected}
+      \State orient $Y \sline Z$ as $Y \rightarrow Z$
+    \EndIf
   \EndIf
 \EndWhile
-\State Apply other directionality rules from Spirtes et al. \cite[p.165-167]{spirtes2000} %TODO uitschrijven?
 \State \Return $G$ and the separating sets
 \EndFunction
 \end{algorithmic}
@@ -297,6 +300,41 @@ Although the weaker assumptions made with conservative PC might be useful for th
 %Partial unfaithfulness check and why it should be better / not worse (correctness, runtime)
 %EMS-PC extension (no pseudo-code, but additions regarding standard PC)
 
+\paragraph{Multiple Separating Sets}
+As will be explained in section~\ref{sec:results}, standard PC does not seem to handle unfaithfulness well enough.
+The idea of CPC, to make a weaker assumption on graph faithfulness than standard PC, is potential as less erroneous arrows are found.
+Instead of doing additional tests as described in CPC, one could attempt to determine causal unfaithfulness with less dependency tests.
+An adaptation to PC algorithm that would not increase the order of complexity is once a separating set is found, to test all other vertex subsets of the same order as well.
+This finds all separating sets of the lowest order without increasing complexity.
+Orienting an unshielded triple $\left<A,B,C\right>$ requires $B$ not to occur in any separating set of $(A,C)$.
+By having more than one separating set, this constraint is strengthened is the data is not faithful.
+If it is, the results are not changed.
+This also does not change the run-time complexity.
+
+% Unfaithfulness test
+One could use these additional separating sets to test oriented unshielded triples for unfaithfulness, similar to CPC.
+Apart from serving as a sanity check, this could serve as the basis of a repair algorithm for errors made by PC.
+
+% Explicit test
+A more explicit way to decrease faulty orientation of an unshielded triple $\left<A,B,C\right>$ is to check whether adding $B$ to a separating set of $(A,C)$ makes the pair conditionally dependent.
+If so, the graph might become more faithful to its modeled distribution; If standard PC might orient a V-structure, whereas this condition does not hold, then the concluded V-structure might be erroneous.
+For faithful graphs, this extra condition should not change the result, as it will always hold.
+
+\paragraph{EMS-PC}
+We have combined the above ideas into an adaptation of PC, which we refer to as Explicit Multiple Separating Set PC (EMS-PC).
+The two changes described in the previous section have been made in this adaption with respect to standard PC as described in section ~\ref{sec:pseudocode}.
+At line 10, the search for a separating sets for $X$ and $Y$ stops when a separating set is found; instead, EMS continues the search for more separating sets of the same order.
+All of these separating sets are recorded.
+
+Also, the condition on line 14 to orient $X - Y - Z$ according to the V-structure-rule has been made more strict.
+As multiple separating sets have been found instead of only one, it needs to be checked whether $Y$ is in not in \emph{any} of those sets before the V-structure can be oriented.
+In addition to the original condition, $X$ and $Z$ are tested for d-separation given $\{Y\}$.
+If they are found to be conditionally dependent, the triple is oriented as as $X \srightarrow Y \sleftarrow Z$.
+%As a final safe-guard, all unshielded triples are checked for unfaithfulness and marked as such if applicable using found separating sets. %TODO wat bedoel je hiermee?
+%TODO Willen we nog iets over unfaithful dingen zeggen? Zo ja, dan wel een antwoord op deze vragen...
+% TODO: How do you mark unfaithful triples? can you spot the impact in the output?
+
+
 \subsection{Experimental validation}
 \paragraph{Experimental pipeline}
 %- What data is needed
@@ -334,7 +372,7 @@ Although the weaker assumptions made with conservative PC might be useful for th
 %Resulting data specs
 %[Ramon: tot hoeverre is dit in detail nodig? Enerzijds moeten we niet doen alsof het kant en klaar uit dat apparaat komt, maar anderzijds wordt het in Max' artikel beschreven. Zijn dingen als "settings" dan niet overkill?]
 
-\section{Results}
+\section{Results}\label{sec:results}
 %Answer all the questions as mentioned in methods, in the same order
 %No aggregation over direction, motivate this
 
@@ -350,5 +388,10 @@ Although the weaker assumptions made with conservative PC might be useful for th
 
 \subsection{Conclusion}
 %repeat everything in 1 paragraph, or leave away, whatever seems most fitting in the end. HRF makes us awesome
+
+
+\bibliography{references}{}
+\addcontentsline{toc}{section}{References}
+\bibliographystyle{plain}
 
 \end{document}
