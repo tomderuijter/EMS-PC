@@ -1,0 +1,210 @@
+% Needed packages
+\documentclass[a4paper, 10pt, english, onecolumn]{article}
+\usepackage[english]{babel}
+\usepackage[cm]{fullpage}
+\usepackage{cite}
+\usepackage{anysize}
+\usepackage{setspace}
+%\usepackage[compact]{titlesec}
+\usepackage{graphicx}
+\usepackage{stfloats}
+\usepackage{listings}
+\usepackage{hyperref}
+
+\usepackage{amssymb,amsmath}
+\usepackage{algorithmicx}
+%\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+
+% for coloring individual cells in a table
+\usepackage[table]{xcolor}
+%\usepackage{pgfgantt}
+
+%\newcommand{\keywords}[1]{\par\noindent 
+%{\bf Keywords\/}. #1}
+
+% Margins & Headers
+\marginsize{2.5cm}{2.5cm}{3.0cm}{2.0cm}
+\columnsep 0.4in
+\footskip 0.4in 
+\usepackage{changepage}
+
+% E-mail formatting
+\usepackage{color,hyperref}
+    \catcode`\_=11\relax
+    \newcommand\email[1]{\_email #1\q_nil}
+    \def\_email#1@#2\q_nil{
+      \href{mailto:#1@#2}{{\emailfont #1\emailampersat #2}}
+    }
+    \newcommand\emailfont{\sffamily}
+    \newcommand\emailampersat{{\color{red}\small@}}
+    \catcode`\_=8\relax 
+	
+% List modifications
+\newenvironment{packed_item}{
+\begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+}{\end{itemize}}
+
+\newenvironment{packed_enum}{
+\begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+}{\end{enumerate}}
+
+% ### Mathematics ###
+\newcommand{\bpm}{\begin{pmatrix}}
+\newcommand{\epm}{\end{pmatrix}}
+
+\newcommand{\bbm}{\begin{bmatrix}}
+\newcommand{\ebm}{\end{bmatrix}}
+
+\newcommand{\bsm}{\bigl( \begin{smallmatrix}}
+\newcommand{\esm}{ \end{smallmatrix} \bigl)} 
+
+\newcommand{\mbf}{\mathbf}
+
+% ### Matrices and Vectors ###
+\newcommand{\mtx}[1]{\ensuremath{\boldsymbol{#1}}}
+\newcommand*\Let[2]{\State #1 $\gets$ #2}
+
+% ### Sets ###
+\newcommand{\set}[1]{\ensuremath{\mathcal{#1}}}
+
+% ### Other ###
+
+\newcommand{\transpose}{^{T}}
+\newcommand{\inv}{^{-1}}
+\newcommand{\pseudoinv}{^{+}}
+
+% ### Hyphenation ###
+\hyphenation{a-na-ly-sis}
+
+% ### dots at the end of arrows and lines ###
+
+\def \orightarrow {\circ\hspace{-0.42em}\rightarrow}
+\def \oleftarrow {\leftarrow\hspace{-0.42em}\circ}
+\def \orightline {\circ\hspace{-0.16em}-}
+\def \oleftline {-\hspace{-0.16em}\circ}
+\def \oline {\circ\hspace{-0.38em}-\hspace{-0.2em}\circ}
+\def \srightarrow {\text{\textasteriskcentered}\hspace{-0.62em}\rightarrow}
+\def \sleftarrow {\leftarrow\hspace{-0.62em}\text{\textasteriskcentered}}
+\def \srightline {\text{\textasteriskcentered}\hspace{-0.16em}-}
+\def \sleftline {-\hspace{-0.40em}\text{\textasteriskcentered}}
+\def \sline {\text{\textasteriskcentered}\hspace{-0.38em}-\hspace{-0.4em}\text{\textasteriskcentered}}
+\def \soline {\text{\textasteriskcentered}\hspace{-0.16em}-\hspace{-0.4em}\circ}
+\def \osline {\circ\hspace{-0.38em}-\hspace{-0.16em}\text{\textasteriskcentered}}
+
+% ############## End Macros ##############
+
+% ### Section Formatting ###
+\usepackage[compact]{titlesec}
+\titlespacing*{\section}{4pt}{*0}{4pt}
+
+% ### Paragraph Formatting ###
+\makeatletter
+\renewcommand{\paragraph}{%
+  \@startsection{paragraph}{4}%
+  {\z@}{0.5ex \@plus 1ex \@minus .2ex}{-1em}%
+  {\normalfont\normalsize\bfseries}%
+}
+\makeatother
+
+% Title
+\title{\fontfamily{phv}\selectfont{Causal Discovery methods for Effective Connectivity in Human Brains}}
+\author{
+  \textbf{R. Janssen} - \href{mailto:ramon.janssen@student.ru.nl}{ramon.janssen@student.ru.nl} \\
+  \textbf{T. de Ruijter} - \href{mailto:t.deruijter@student.ru.nl}{t.deruijter@student.ru.nl}\\
+%  \textbf{T. Claassen} - \href{mailto:tomc@cs.ru.nl}{tomc@cs.ru.nl}\\
+%  \textbf{M. Hinne} - \href{mailto:mhinne@cs.ru.nl}{mhinne@cs.ru.nl}
+}
+
+\date{\fontfamily{ptm}\selectfont{\small{\bfseries{\today - Radboud
+Universiteit Nijmegen}}}\\[0.5cm]\rule{\linewidth}{0.3mm}}
+
+\begin{document}
+
+\maketitle
+
+\setlength{\parindent}{0.0cm}
+\setlength{\parskip}{3mm plus2mm minus1.5mm}
+
+\begin{abstract}
+% TODO: first state what you try to do, then how you did it, then what it brought you
+%In this work we applied PC algorithm on resting-state data of healthy human subjects.
+%Additionally we propose a variant of PC algorithm that poses weaker assumptions on the model, better fitting the underlying model.
+%We find that detecting structure homological areas in the brain works better with PC algorithm than most conventional diffusion weighted imaging techniques.
+%In the area of directionality and causality, more research is needed.
+\end{abstract}
+
+\section{Background}% Types of brain connectivity [optional] [Ramon: lijkt me wel belangijk, geeft ook het belang aan van richting zoeken, hoeft niet lang]
+\subsection{Brain connectivity}
+%Functional
+%Structural
+%Effective
+
+\section{Causal inference}
+% Causal discovery theory
+%Causal Markov Condition
+%Causal faithfulness
+%d-separation
+%V-structure
+%Causal sufficiency
+%Latent variables
+
+\section{PC algorithm}
+%Algorithm, assumptions and explanation [Ramon: standaard PC een naam geven en consistent gebruiken, bijv. classical PC?]
+%Performance
+%Stability and faithfulness problems
+%Conservative PC extension
+
+\section{Methods}
+%= Methods = (our contributions) [Tom: I'm not completely satisfied with this structure. It's too split and diverse to put everything under 'methods']
+% Improvements to PC
+%Multiple separating sets
+%Partial unfaithfulness check
+%EMS-PC
+
+\subsection{Experimental validation}
+%Application of methods on data
+%Comparison with previous research (due to lack of baseline)
+
+\section{Data acquisition}
+%Subject acquisition and instruction
+%Used equipment and specs
+%Experimental setup
+%Scanner settings
+%Preprocessing
+%- Software
+%- Scripts
+%Resulting data specs
+%[Ramon: tot hoeverre is dit in detail nodig? Enerzijds moeten we niet doen alsof het kant en klaar uit dat apparaat komt, maar anderzijds wordt het in Max' artikel beschreven. Zijn dingen als "settings" dan niet overkill?]
+
+\section{Results}
+\subsection{Structure}
+%structure per brain region
+%comparison with Max's results
+%certainty (plot of the distribution of certainties?)
+
+\subsection{Causal relations}
+%direction
+%direction per subject? To show that there is little consistency
+%certainty (plot)
+
+\subsection{Performance}
+%runtime
+
+\section{Discussion}
+%structure is nice (inter-hemisphere connections)
+%direction is less nice, little consistency
+%better methods for direction (Tom's new algorithm)
+%performs well
+
+\section{Conclusion}
+%repeat everything in 1 paragraph, or leave away
+
+\end{document}
