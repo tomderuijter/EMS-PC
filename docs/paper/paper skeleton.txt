@@ -20,6 +20,8 @@ See whether applying causal methods (PC and EMS-PC) can help bring new insights 
 
 % Previous research
 [Tom: we did not explicitly have this paragraph, so this is additional effort]
+[Ramon]: Lijkt me vergelijkbaar met de verwijzingen naar literatuur die we al hebben? Met wat extra referenties naar wat Max zei: temporele methodes zijn onbetrouwbaar, dat hebben wij niet
+[Ramon]: even een goede balans zoeken tussen dit en "Existing problems" in motivation
 
 % Research goal
 How does the standard causal discovery method PC-Algorithm behave regarding the aforementioned problems when applied to resting-state functional time-series data?
@@ -30,12 +32,13 @@ How does the performance of EMS-PC relate to PC regarding the aforementioned pro
 If HRF can be avoided, causal patterns can be established with greater reliability
 Insight and diagnostics in neuro-degenerative diseases
 Any found evidence of causal patterns can give an impulse to further research
+[Ramon: is dit niet al duidelijk uit motivation? Lijkt me dubbelop]
 
 % Structure of document
 
 
 = Background =
-% Types of brain connectivity [optional]
+% Types of brain connectivity [optional] [Ramon: lijkt me wel belangijk, geeft ook het belang aan van richting zoeken, hoeft niet lang]
 Functional
 Structural
 Effective
@@ -49,7 +52,7 @@ Causal sufficiency
 Latent variables
 
 % PC algorithm
-Algorithm, assumptions and explanation
+Algorithm, assumptions and explanation [Ramon: standaard PC een naam geven en consistent gebruiken, bijv. classical PC?]
 Performance
 Stability and faithfulness problems
 Conservative PC extension
@@ -74,13 +77,24 @@ Preprocessing
 - Software
 - Scripts
 Resulting data specs
-
+[Ramon: tot hoeverre is dit in detail nodig? Enerzijds moeten we niet doen alsof het kant en klaar uit dat apparaat komt, maar anderzijds wordt het in Max' artikel beschreven. Zijn dingen als "settings" dan niet overkill?]
 
 = Results =
+structure per brain region
+comparison with Max's results
+certainty (plot of the distribution of certainties?)
 
+direction
+direction per subject? To show that there is little consistency
+certainty (plot)
+
+runtime
 
 = Discussion =
-
+structure is nice (inter-hemisphere connections)
+direction is less nice, little consistency
+better methods for direction (Tom's new algorithm)
+performs well
 
 = Conclusion =
-
+repeat everything in 1 paragraph, or leave away
