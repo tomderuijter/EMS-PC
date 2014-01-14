@@ -200,15 +200,15 @@ Universiteit Nijmegen}}}\\[0.5cm]\rule{\linewidth}{0.3mm}}
 \subsection{PC algorithm}
 %Algorithm, assumptions and explanation [Ramon: standaard PC een naam geven en consistent gebruiken, bijv. standard PC?]
 \paragraph{Description}
-The PC algorithm is a so-called constraint based method.
-Starting from a fully connected undirected graph, the PC algorithm first forms structure by cutting away edges of conditionally independent variables.
+The PC algorithm is a so-called constraint based method, where solutions are found by incrementally leaving out or adding parts that do not violate a set of constraints.
+Starting from a fully connected undirected graph, the PC algorithm forms structure by cutting away edges between conditionally independent variables.
 In the second step, orientation rules are applied based on found separating sets and structure.
 The original PC algorithm assumes causal sufficiency, excluding the existence of common confounders between nodes.
 This seems unwanted when handling brain data, where one would expect a large amount of latent processes.
-Also measuring methods are not yet advanced enough to measure the full detail of the brain, thus skipping over details.
+Also measuring methods are not yet advanced enough to measure detailed neuronal processing of the brain, thus skipping over details.
 In the perspective of causal inference, these missing areas can also appear as confounders.
 For the following experiments we have used the causal insufficient version of PC algorithm, modified to handle latent variable as described by Spirtes, Glymour and Scheines \cite[p.165-167]{spirtes2000}.
-From now on, we will refer to this algorithm as ``standard PC''.
+From now on, we will refer to this algorithm as \textit{standard PC}.
 Pseudocode for this method is shown in algorithm \ref{alg:pc_alg}.
 
 \begin{algorithm}
@@ -216,7 +216,7 @@ Pseudocode for this method is shown in algorithm \ref{alg:pc_alg}.
 \begin{spacing}{1.1}
 \begin{algorithmic}[1]
 \Function{PC}{$data$}
-\State connect all pairs of point in undirected graph $G$.
+\State connect all pairs of point in undirected graph $G$. \label{alg:pc_alg:p1_start}
                                                                                                                                     \Comment{Structural Part} 
 \State $n \gets 0$
 \While{there are connected pairs ($X$, $Y$) such that $n < |\operatorname{Adjacencies}(X)\setminus\{Y\}| $}
@@ -225,17 +225,18 @@ Pseudocode for this method is shown in algorithm \ref{alg:pc_alg}.
       \If{$X$ and $Y$ are independent given $S$}
         \State remove edge $X - Y$ from G
         \State record $S$ as separating set of ($X, Y$)
-        \State continue with the next pair ($X$, $Y$)
+        \State continue with the next pair ($X$, $Y$) \label{alg:pc_alg:next_pair}
       \EndIf
     \EndFor
   \EndFor
-  \State $n \gets n+1$
+  \State $n \gets n+1$ \label{alg:pc_alg:p1_end}
 \EndWhile
-\State $\text{PDAG} \gets G\text{, with all connections replaced by }\oline$
+\\
+\State $\text{PDAG} \gets G\text{, with all connections replaced by }\oline$ \label{alg:pc_alg:p2_start}
                                                                                                                                     \Comment{Directional Part}
 \ForAll{unshielded triples $\left <X, Y,Z \right> $ in $G$ }
                                                                                                                                     \Comment{Find V-structures}
-  \If{$Y$ is not in the separating set of $X$ and $Z$}
+  \If{$Y$ is not in the separating set of $X$ and $Z$} \label{alg:pc_alg:v_struct}
     \State Orient $X \sline Y \sline Z$ as $X \srightarrow Y \sleftarrow Z$ in $\text{PDAG}$
   \EndIf
 \EndFor
@@ -250,38 +251,48 @@ Pseudocode for this method is shown in algorithm \ref{alg:pc_alg}.
     \EndIf
   \EndIf
 \EndWhile
-\State \Return $G$ and the separating sets
+\State \Return $G$ and the separating sets \label{alg:pc_alg:p2_end}
 \EndFunction
 \end{algorithmic}
 \end{spacing}
 \label{alg:pc_alg}
 \end{algorithm}
 
-For finding directed edges, the PC-algorithm first finds undirected structure.
-For each two non-adjacent nodes $X$ and $Y$ it also finds a minimal separating set, which is the smallest set acting as a separating set.
-This is done by first assuming all nodes are connected, and then testing all pairs of nodes for independence.
+%Before finding directed edges, the PC-algorithm first finds undirected structure.
+%For each two non-adjacent nodes $X$ and $Y$ standard PC finds a minimal separating set, which is the smallest set acting as a separating set.
+%This is done by first assuming all nodes are connected, and then testing all pairs of nodes for independence.
 
-The independence of $X$ and $Y$ is tested given a subset of neighbours of $X$ or $Y$ using a statistical independence test such as the Chi-square or Fisher-Z independence tests.
+Starting from a fully connected graph, standard PC finds a minimal separating set for every pair of non-adjacent nodes $X$ and $Y$.
+These are lines \ref{alg:pc_alg:p1_start} to \ref{alg:pc_alg:p1_end} in the pseudocode.
+The independence of $X$ and $Y$ is tested given a subset of neighbours of $X$ or $Y$ using a statistical independence test such as the Chi-square or Fisher-Z independence tests. %TODO: Add citation to these methods.
 If such an independence is found, this subset is a separating set of $X$ and $Y$ and they are not connected.
-If no such an independence is found, they are connected.
-To find the minimal separating set, all subsets of neighbours are traversed in order of size; the first separating set which is found, is the minimal one.
+If no such set can be found, the variables are assumed to be dependent and thus remain connected.
+To find a minimal separating set, all subsets of neighbours are traversed in order of size; the first separating set which is found, is the minimal one.
 
 Next, PC algorithm attempts to orient these edges.
-The 'o' mark represents the entire Markov class in that edge of the graph.
+These are lines \ref{alg:pc_alg:p2_start} to \ref{alg:pc_alg:p2_end} in the pseudocode.
+The 'o' mark represents that it is unknown what orientation the specific edge should have thus representing an entire Markov class of solutions rather than a specific instance.
 Like Spirtes et al, we use a star-symbol at the end of an edge to denote that any mark may be present: an arrowhead, an "o" or an empty mark.
 When an edge is oriented as an edge with a star, this denotes that this end is not changed.
-
 The first of the directionality rules attempts to orient unshielded triples.
 For a triple $\left < X,Y,Z, \right>$ to be oriented, $X$ and $Z$ should have a separating set $S$ not containing $Y$.
 If so, the triple is marked a V-structure.
-
 After all V-structures have been found, the other rules are applied in no particular order.
-These rules are based on arrows that have already been found.
+These rules are based on already found directionality.
 
 \paragraph{Run-time performance}
-The PC-algorithm run-time is dependent on the number of dependency tests to be performed and thus it has a worst-case runtime complexity exponential in the maximal branching degree present in the graph.
+The PC-algorithm run-time is in the order of the amount of dependency tests to be performed and thus it has a worst-case runtime complexity exponential in the maximal branching degree present in the graph.
 However, this worst-case scenario only happens when no edges can be removed; all subsets of the complete set of nodes have to be used to test d-separation of every pair of nodes.
-For a sparse graph, many edges might be removed for small separating sets, and the standard PC algorithm therefore often runs fast in practice and is able to perform well on hundreds of variables.
+For a sparse graph, many edges may be removed for small separating sets, and this enables the standard PC algorithm to often run fast in practice perform well on hundreds of variables. % TODO: add citation to example publication. Peter Lucas maybe or examples in the sprites book?
+
+\paragraph{Shortcomings}
+Although PC is proven correct, the version provided above as standard PC is not.
+It is also not complete.
+There is additional the number of possible graphs in the returned Markov class increasing exponentially with the amount of variables in the provided data, thus not always providing ample information.
+Also, standard PC is dependent on the order in which these variables are presented, as this is the same order in which edges between pairs of these variables are considered for removal\cite[p.88]{spirtes2000}.
+
+In practice, the lack of full correctness and completeness are of little concern as it involves only very specific and little occurring connectivity patterns\cite[p.127-130]{spirtes2000}.
+% TODO: Paragraph seems incomplete.
 
 \paragraph{Conservative PC extension}
 The V-structure rule in PC algorithm orients unshielded triples based on a single separating set. 
@@ -301,10 +312,10 @@ Although the weaker assumptions made with conservative PC might be useful for th
 %EMS-PC extension (no pseudo-code, but additions regarding standard PC)
 
 \paragraph{Multiple Separating Sets}
-As will be explained in section~\ref{sec:results}, standard PC does not seem to handle unfaithfulness well enough.
-The idea of CPC, to make a weaker assumption on graph faithfulness than standard PC, is potential as less erroneous arrows are found.
+As will be explained in the results section, standard PC is a bit hasty in assigning v-structures, resulting in many unnecessary and perhaps unfaithful directionality.
+The idea of CPC, to make a weaker assumption on graph faithfulness than standard PC is potential as less erroneous arrows are found.
 Instead of doing additional tests as described in CPC, one could attempt to determine causal unfaithfulness with less dependency tests.
-An adaptation to PC algorithm that would not increase the order of complexity is once a separating set is found, to test all other vertex subsets of the same order as well.
+An adaptation to PC algorithm that would not increase the order of complexity is once a separating set is found to test all other vertex subsets of the same order as well.
 This finds all separating sets of the lowest order without increasing complexity.
 Orienting an unshielded triple $\left<A,B,C\right>$ requires $B$ not to occur in any separating set of $(A,C)$.
 By having more than one separating set, this constraint is strengthened is the data is not faithful.
@@ -321,14 +332,14 @@ If so, the graph might become more faithful to its modeled distribution; If stan
 For faithful graphs, this extra condition should not change the result, as it will always hold.
 
 \paragraph{EMS-PC}
-We have combined the above ideas into an adaptation of PC, which we refer to as Explicit Multiple Separating Set PC (EMS-PC).
-The two changes described in the previous section have been made in this adaption with respect to standard PC as described in section ~\ref{sec:pseudocode}.
-At line 10, the search for a separating sets for $X$ and $Y$ stops when a separating set is found; instead, EMS continues the search for more separating sets of the same order.
+We have combined the above ideas - multiple separating sets, unfaithfulness check and explicit orientation check - into an adaptation of PC, which we refer to as Explicit Multiple Separating Set PC (EMS-PC).
+These three changes have been made in this adaption with respect to standard PC as described in algorithm \ref{alg:pc_alg}.
+At line \ref{alg:pc_alg:next_pair}, the search for separating sets for $X$ and $Y$ stops when a separating set is found; instead, EMS continues the search for more separating sets of the same order.
 All of these separating sets are recorded.
 
-Also, the condition on line 14 to orient $X - Y - Z$ according to the V-structure-rule has been made more strict.
+Also, the condition on line \ref{alg:pc_alg:v_struct} to orient $X - Y - Z$ according to the V-structure-rule has been made more strict.
 As multiple separating sets have been found instead of only one, it needs to be checked whether $Y$ is in not in \emph{any} of those sets before the V-structure can be oriented.
-In addition to the original condition, $X$ and $Z$ are tested for d-separation given $\{Y\}$.
+In addition to the original condition, $X$ and $Z$ are tested for \textit{d}-separation given $\{Y\}$.
 If they are found to be conditionally dependent, the triple is oriented as as $X \srightarrow Y \sleftarrow Z$.
 %As a final safe-guard, all unshielded triples are checked for unfaithfulness and marked as such if applicable using found separating sets. %TODO wat bedoel je hiermee?
 %TODO Willen we nog iets over unfaithful dingen zeggen? Zo ja, dan wel een antwoord op deze vragen...
@@ -341,20 +352,21 @@ If they are found to be conditionally dependent, the triple is oriented as as $X
 %- Apply structure PC on resting-state functional time-series
 %- Apply directional PC
 %- Parameter optimisation (model selection)
-%
+
 \paragraph{Standard PC}
 %- Measuring whole-brain structural and directional consistency of PC - frequency of occurrences within subjects
 %- Markov equivalence class size (nr. of latent variables / bidirectional arrows) within subjects
 %- Markov class Asymmetry and certain asymmetry within subjects
 %- Consistency of structure across subjects when aggregating results (averaging and frequency of occurences)
 %- Consistency of directionality across subjects when aggregating results
-%
+
 \paragraph{EMS-PC}
 %- Measuring whole-brain structural and directional consistency of EMS-PC
 %- Markov equivalence class size (nr. of latent variables / bidirectional arrows) within subjects
 %- Markov class Asymmetry and certain asymmetry within subjects
+%- Amount of separating sets found
 %- Unfaithfulness check with and without additional separating sets
-%
+
 \paragraph{Comparison}
 %- Comparison of directionality between standard PC and EMS-PC on consistency of results within subjects
 %- Comparison of ... of results across subjects
