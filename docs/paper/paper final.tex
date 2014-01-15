@@ -395,14 +395,51 @@ Also if an unfaithful triple is detected, the impact on the final output is uncl
 %No aggregation over direction, motivate this
 
 \section{Discussion}
-%Poor consistency between subjects
 %Good consistency of structure within and between subjects
-%inter-hemisphere connection
 %cause of poor consistency: inherent to our method or viable for further research?
 %data aquisition and noise, improvement in data -> improvement in causal inference
 %better methods for direction (Tom's new algorithm), and why that might solve causal inference problems
 %run-time is quick
 %HRF
+
+%Comparison with DWI inter-hemisphere connection
+Standard PC and particularly the first, structural part, definitely has similarity with respect to existing methods based on DWI.
+This is not completely surprising as standard PC yields a functional network and DWI based methods anatomical structural networks, two network types which are tightly related.
+A less apparent observation is the clear presence of correlation between homologous area's in the functional network, which lacks in the structural network.
+An explanation to this difference might be that these correlations respond to the long white-matter tracts connecting the two hemispheres through the corpus-callosum.
+It is known that DWI has difficulty in measuring such long tracts, while the presence of correlation between two connected ends cannot be argued against.
+As such, statistical baed causal discovery methods contribute additional information to finding structural connectivity.
+
+% Comparison standard PC and EMS-PC
+Both standard PC and EMS-PC find many bi-directional arrows, with some one-directional arrows.
+
+%Poor consistency of directionality between subjects
+There is some significant and consistent directionality within each of the subjects.
+However the variance of this directionality between subjects is so high, there is no significant consistent one-directionality between them.
+We were unable to find existing literature on connectivity methods regarding significant intra-subject one-directionality.
+
+%Lack of symmetry
+There is little to none symmetry in directionality between the two hemispheres within and across subjects.
+One would at least expect some symmetry to be found.
+This demonstrates that the gap between analytical methods for effective connectivity and anatomical correctness is still to wide.
+
+% Further research
+Further research may be done to investigating whether any of these arrows have a physiological meaning.
+This can be done by repeating these experiment with more subjects to get a better view on the significance of the directional edges.
+
+A Bayesian network cannot contain cycles, as that would imply that a variable is it's own ancestor and thus it's own cause.
+However, exclusion of cycles in brain networks has not been proven and also seems unlikely.
+We believe an interesting direction of further research would thus be to apply cyclical causal discovery.
+% TODO: Add citation to Joris Mooij.
+
+% TODO: What do you mean with 'it can also do this'? What does 'this' refer to?
+% Computational advantage
+%It can also do this quite efficiently, as a few hundred iterations can be run in a matter of hours per subject.
+%We have not performed a statistical analysis on the number of iterations needed to stabilise the results.
+%It may be possible that a significant result can already be found with much less iterations.
+
+% TODO: Suggereren task based analysis ipv resting state voor beter causaal beeld. 
+% TODO: Maak duidelijk welke aannames gedaan worden in welke PC variant en welke aannames verzwakt zouden kunnen worden.
 
 \subsection{Conclusion}
 %repeat everything in 1 paragraph, or leave away, whatever seems most fitting in the end. HRF makes us awesome
