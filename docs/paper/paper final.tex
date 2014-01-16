@@ -287,7 +287,7 @@ It is also not complete.
 There is additional the number of possible graphs in the returned Markov class increasing exponentially with the amount of variables in the provided data, thus not always providing ample information.
 Also, standard PC is dependent on the order in which these variables are presented, as this is the same order in which edges between pairs of these variables are considered for removal\cite[p.88]{spirtes2000}.
 
-In practice, the lack of full correctness and completeness are of little concern as it involves only very specific and little occurring connectivity patterns\cite[p.127-130]{spirtes2000}.
+In practice, the lack of full correctness and completeness are of little concern as these involve only very specific and little occurring connectivity patterns\cite[p.127-130]{spirtes2000}.
 % TODO: Paragraph seems incomplete and some sentences are weird.
 
 \paragraph{Conservative PC extension}
@@ -300,13 +300,13 @@ The resulting algorithmic changes provide better results and is able to mark inc
 Sadly, CPC requires a significant amount of additional conditional independence tests, exponential in the largest branching degree of the tested structure.
 Although the weaker assumptions made with conservative PC might be useful for this research, the run-time performance is not good enough to apply it on our dataset.
 
-\section{Methods}% (our contributions) [Tom: I'm not completely satisfied with this structure. It's too split and diverse to put everything under 'methods']
-\subsection{Improvements to PC}
-%Motivation (refer to results-section)
-%Multiple separating sets and why it should be better / not worse (correctness, runtime)
-%Partial unfaithfulness check and why it should be better / not worse (correctness, runtime)
-%EMS-PC extension (no pseudo-code, but additions regarding standard PC)
+\section{Methods}% (our contributions)
+Standard PC provides a good starting point for an exploratory point of view in causal discovery.
+Already with simple and small adjustments to standard PC with little increment in computational cost, standard PC can be made more reliable.
+In the rest of this section we describe our additions to this method, as well as an experimental setup
 
+\subsection{Improvements to PC}
+%Multiple separating sets and why it should be better / not worse (correctness, runtime)
 \paragraph{Multiple Separating Sets}
 As can be seen in the result in the next section, standard PC is a bit hasty in assigning v-structures, resulting in much unnecessary and perhaps unfaithful directionality.
 The idea of CPC, to rely less on graph faithfulness than standard PC is potential as less erroneous arrows are assigned in theory.
@@ -320,10 +320,12 @@ One could use these additional separating sets to test oriented unshielded tripl
 Apart from serving as a sanity check, this could serve as the basis of a repair algorithm for errors made by PC.
 
 % Explicit test
+\paragraph{Explicit V-structure test}
 A more \textit{explicit} way to decrease faulty orientation of an unshielded triple $\left<A,B,C\right>$ is to check whether adding $B$ to a separating set of $(A,C)$ makes the pair conditionally dependent.
 If so, the graph might become more faithful to its modeled distribution; If standard PC might orient a V-structure, whereas this condition does not hold, then the concluded V-structure might be erroneous.
 For faithful graphs, this extra condition should not change the result, as it will always hold.
 
+%EMS-PC extension (no pseudo-code, but additions regarding standard PC)
 \paragraph{EMS-PC}
 We have combined the above ideas - multiple separating sets, unfaithfulness check and explicit orientation check - into an adaptation of PC, which we refer to as Explicit Multiple Separating Set PC (EMS-PC).
 These three changes have been made in this adaption with respect to standard PC as described in algorithm~\ref{alg:pc_alg}.
