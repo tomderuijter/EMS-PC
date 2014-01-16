@@ -209,7 +209,7 @@ Also measuring methods are not yet advanced enough to measure detailed neuronal 
 In the perspective of causal inference, these missing areas can also appear as confounders.
 For the following experiments we have used the causal insufficient version of PC algorithm, modified to handle latent variable as described by Spirtes, Glymour and Scheines \cite[p.165-167]{spirtes2000}.
 From now on, we will refer to this algorithm as \textit{standard PC}.
-Pseudocode for this method is shown in algorithm \ref{alg:pc_alg}.
+Pseudocode for this method is shown in algorithm~\ref{alg:pc_alg}.
 
 \begin{algorithm}
 \caption{Standard PC algorithm}
@@ -259,14 +259,14 @@ Pseudocode for this method is shown in algorithm \ref{alg:pc_alg}.
 \end{algorithm}
 
 Starting from a fully connected graph, standard PC finds a minimal separating set for every pair of non-adjacent nodes $X$ and $Y$.
-These are lines \ref{alg:pc_alg:p1_start} to \ref{alg:pc_alg:p1_end} in the pseudocode.
+These are lines~\ref{alg:pc_alg:p1_start} to \ref{alg:pc_alg:p1_end} in the pseudocode.
 The independence of $X$ and $Y$ is tested given a subset of neighbours of $X$ or $Y$ using a statistical independence test such as the Chi-square or Fisher-Z independence tests. %TODO: Add citation to these methods.
 If such an independence is found, this subset is a separating set of $X$ and $Y$ and they are not connected.
 If no such set can be found, the variables are assumed to be dependent and thus remain connected.
 To find a minimal separating set, all subsets of neighbours are traversed in order of size; the first separating set which is found, is the minimal one.
 
 Next, PC algorithm attempts to orient these edges.
-These are lines \ref{alg:pc_alg:p2_start} to \ref{alg:pc_alg:p2_end} in the pseudocode.
+These are lines~\ref{alg:pc_alg:p2_start} to \ref{alg:pc_alg:p2_end} in the pseudocode.
 The 'o' mark represents that it is unknown what orientation the specific edge should have thus representing an entire Markov class of solutions rather than a specific instance.
 Like Spirtes et al, we use a star-symbol at the end of an edge to denote that any mark may be present: an arrowhead, an "o" or an empty mark.
 When an edge is oriented as an edge with a star, this denotes that this end is not changed.
@@ -326,11 +326,11 @@ For faithful graphs, this extra condition should not change the result, as it wi
 
 \paragraph{EMS-PC}
 We have combined the above ideas - multiple separating sets, unfaithfulness check and explicit orientation check - into an adaptation of PC, which we refer to as Explicit Multiple Separating Set PC (EMS-PC).
-These three changes have been made in this adaption with respect to standard PC as described in algorithm \ref{alg:pc_alg}.
-At line \ref{alg:pc_alg:next_pair}, the search for separating sets for $X$ and $Y$ stops when a separating set is found; instead, EMS continues the search for more separating sets of the same order.
+These three changes have been made in this adaption with respect to standard PC as described in algorithm~\ref{alg:pc_alg}.
+At line~\ref{alg:pc_alg:next_pair}, the search for separating sets for $X$ and $Y$ stops when a separating set is found; instead, EMS continues the search for more separating sets of the same order.
 All of these separating sets are recorded.
 
-Also, the condition on line \ref{alg:pc_alg:v_struct} to orient $X - Y - Z$ according to the V-structure-rule has been made more strict.
+Also, the condition on line~\ref{alg:pc_alg:v_struct} to orient $X - Y - Z$ according to the V-structure-rule has been made more strict.
 As multiple separating sets have been found instead of only one, it needs to be checked whether $Y$ is in not in \emph{any} of those sets before the V-structure can be oriented.
 In addition to this original condition, $X$ and $Z$ are \textit{explicitly} tested for \textit{d}-separation given $\{Y\}$.
 If they are found to be conditionally \textit{dependent}, the triple is oriented as as $X \srightarrow Y \sleftarrow Z$.
@@ -357,7 +357,7 @@ Nevertheless it is most likely not a fully correct modelling assumption, though 
 We applied standard PC and EMS-PC on functional resting-state time-series data of six healthy individuals, also previously used by Hinne et al\cite{hinne2013}.
 1030 volumes were obtained per subject.
 After preprocessing the fMRI data was parcellated according to the Automated Anatomical Labeling (AAL) atlas in 116 regions of interest.
-The exact procedure of subject acquisition, used scanner properties and parameters and data preprocessing is provided in appendix \ref{sec:data}.
+The exact procedure of subject acquisition, used scanner properties and parameters and data preprocessing is provided in appendix~\ref{sec:data}.
 We use Fisher's z-test for conditional independence to match the continuous nature of the data.
 
 % Implementation
@@ -412,37 +412,38 @@ As we cannot verify this directly, we compare the total count, consistency and s
 We also compare run-time per iteration between both.
 
 \section{Results}\label{sec:results}
-The results from the algorithms are presented in the form of matrices.
+Due to the size of the resulting graphs, we represent them in the form of connectivity matrices for convenience.
 A connection from region $n$ to region $m$ is represented by point $(n,m)$ in the matrix.
-Higher values represent strong certainties of the presence of a connection.
-In such a matrix, indices 1-45 represent the brain regions of the left hemisphere, regions 45-90 represent the right hemisphere, and regions 91-116 represent regions in the cerebellum.
+Higher values represent higher frequencies of a connection over all permutations.
+In all matrices, indices 1-45 represent the brain regions of the left hemisphere, indices 45-90 represent the right hemisphere, and indices 91-116 represent regions in the cerebellum.
+% For clarification, these are also plotted separately.
 
-\subsection{The structural graph}
+\subsection{Structural graph}
 %- Measuring whole-brain structural and directional consistency of PC - frequency of occurrences within subjects
 %Applying the standard PC algorithm yields an undirected graph, in which each edge has a certainty.
 %This is done both per subject, and as an avarage over all subjects.
 %We compared the generated structure with a Bayesian inference approach on finding structural connectivity from diffusion weighted imaging, as described in Hinne et al.\cite{hinne2013}.
 Modified PC and EMS-PC do not differ in finding the structure.
 As edges found with the structural part of PC are undirected, the found matrices are symmetrical.
-The results are presented per subject in Figure~\ref{} and as an avarage across all subjects iin Figure ~\ref{fig:struct_avg}. %TODO figure fixen per subjects
+The results are presented per subject in figure~\ref{} and as an avarage across all subjects in figure~\ref{fig:struct_avg}. %TODO: figure fixen per subjects
 For comparison, the structural connectivity as found by Hinne et al.\cite{hinne2013} are also show. 
 
 \begin{figure}[h!]
   \centering
   \includegraphics[width=0.5\textwidth]{images/struct_full}
   \includegraphics[width=0.5\textwidth]{images/structure_max}
-  \caption{The avarage structure of all subjects. The structure on the left is found with the PC-algorithm, and the structure on the right is found with DWI-measurements by Hinne et al. Note that these matrices are subdivided into blocks corresponding with the subdivision of indices as described in Section~\ref{sec:results}}. The two diagonal lines represent connections between the two hemispheres.
+  \caption{The avarage structure of all subjects. The structure on the left is found with the PC-algorithm, and the structure on the right is found with DWI-measurements by Hinne et al. Note that these matrices are subdivided into blocks corresponding with the subdivision of indices as described in section~\ref{sec:results}. The two diagonal lines represent connections between the two hemispheres.}
 \label{fig:struct_avg}
 \end{figure}
 
-\subsection{The directed graph}
+\subsection{Causal graph}
 This structural graph has been used as a basis for a directed graph, for both standard PC and EMS-PC.
-The results for standard PC are shown per subject in Figure~\ref{} and in as an avarage across subjects in Figure~\ref{fig:pdag_avg_mod}.
-Additionally, a histogram showing the frequencies of the values in the avarage matrix is presented in Figure~\ref{}.
+The results for standard PC are shown per subject in Figure~\ref{} and in as an avarage across subjects in figure~\ref{fig:pdag_avg_mod}.
+Additionally, a histogram showing the frequencies of the values in the avarage matrix is presented in figure~\ref{}.
 Although many arrowheads are found with probabilities above 0.9, the graph looks strongly symmetric.
 In terms of causality, this means that many latent sources are still present and causal relations between the measured brain regions themselves are not clearly visible.
 
-The results for EMS-PC are presented in a similar way. The results per subjects are shown in Figure~\ref{} and the avarage across subjects in Figure~\ref{fig:pdag_avg_ems}. A histogram of the avarage is presented in Figure~\ref{}. Again, the image looks strongly symmetric.
+The results for EMS-PC are presented in a similar way. The results per subjects are shown in figure~\ref{} and the avarage across subjects in figure~\ref{fig:pdag_avg_ems}. A histogram of the average is presented in figure~\ref{}. Again, the image looks strongly symmetric.
 
 \begin{figure}[h!]
   \centering
@@ -504,12 +505,6 @@ These resulting antisymmetric matrices are presented in Figures ~\ref{fig:pdag_a
 %- Run-time of methods and comparison between run-times
 %The run-time of both methods will be compared.
 %- Comparison of structure (functional connectivity) of PC (both. they're identical in structure) with DWI results by Max et al. -> verplaatst naar het stukje aan het begin, over structure PC
-
-
-
-
-
-
 
 %Answer all the questions as mentioned in methods, in the same order
 %No aggregation over direction, motivate this
