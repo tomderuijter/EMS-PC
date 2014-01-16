@@ -318,9 +318,7 @@ Instead of doing additional tests as described in CPC, one could attempt to dete
 An adaptation to PC algorithm that would not increase the order of complexity is once a separating set is found to test all other vertex subsets of the same order as well.
 This finds all separating sets of the lowest order without increasing complexity.
 Orienting an unshielded triple $\left<A,B,C\right>$ requires $B$ not to occur in any separating set of $(A,C)$.
-By having more than one separating set, this constraint is strengthened if the data is not faithful.
-If it is, then the results are not changed.
-This also does not change the run-time complexity.
+By having more than one separating set, this constraint is strengthened in case of noisy data.
 
 % Unfaithfulness test
 One could use these additional separating sets to test oriented unshielded triples for unfaithfulness, similar to CPC.
@@ -352,14 +350,6 @@ The downside of this additional check is results are merely used as a diagnostic
 It is also not a complete check as this would require as many tests as in CPC and thus no positive conclusions can be drawn from it.
 Also if an unfaithful triple is detected, the impact on the final output is unclear as errors might have cascaded into further orientation steps.
 
-%stability and iterations TODO: right place for this? I think it is, as it can be seen as a simple extension to naive PC
-\paragraph{Stability}
-The graph resulting from the PC algorithm depends on the order of the nodes\cite[p.120-122]{spirtes2000}.
-It is therefore questionable whether strong conclusions about individual edges can be drawn from the output, as such an edge might not have appeared if the input was ordered differently.
-As such, it seems useful to calculate a chance of a connection appearing.
-When running the experiments, we have applied the algorithms multiple times using random permutations of the nodes to obtain stability selection as described by Meinshausen and B{\"u}hlmann \cite{meinshausen2010}.
-These results have been avaraged to conclude the certainty of the found edges.
-
 \subsection{Experimental validation}
 \paragraph{Experimental pipeline}{sec:pipeline}
 %- What data is needed
@@ -368,27 +358,35 @@ These results have been avaraged to conclude the certainty of the found edges.
 Both standard PC and EMS-pc have been used to find brain connectivity.
 The data which is used is functional time-series data, and it is the same as the data used in Hinne et al.\cite{hinne2013}, as described in Section~\ref{sec:data}.
 This data is obtained from six subject.
-From this data, covariance between regions can be determined, so that regions can be tested for \emph{d}-separation with the Fisher's conditional independence test.
+From this data, covariance between regions can be determined, so that regions can be tested for \textit{d}-separation with the Fisher's conditional independence test.
 This is required to use the PC algorithm.
 First, the strucural part of the PC algorithm will be applied on the data.
 This will result in a graph describing undirected connections between regions.
 There is no difference between standard PC and EMS-PC in this result.
 After that, the second part of the PC algorithm is run to orient edges in this graph.
 This is different for standard PC and EMS-PC and a result will therefore be obtained for both algorithms.
+
+\paragraph{Stability}
+Standard PC depends on the ordering of variables in the provided data\cite[p.120-122]{spirtes2000}.
+It is therefore questionable whether strong conclusions about individual edges can be drawn from the output, as such an edge might not have appeared if the input was ordered differently.
+To correct for this in results, we have randomly permuted our data for a large amount of iterations and counted the frequencies of occurring edges.
+This is in accordance with the stability selection method for graphs as described by Meinshausen and B{\"u}hlmann\cite{meinshausen2010}.
+
 %- Parameter optimisation (model selection)
 The experiments were run using an alpha-value of 0.01 for the independence test, and using 300 random permutations of the nodes per subject.
+% TODO: Onvoldoende.
 
 \paragraph{Concluding connectivity from PC}
 %- Measuring whole-brain structural and directional consistency of PC - frequency of occurrences within subjects
 Applying the standard PC algorithm yields an undirected graph, in which each edge has a certainty.
-This is done both per subject, and as an avarage over all subjects.
+This is done both per subject, and as an average over all subjects.
 We compared the generated structure with a Bayesian inference approach on finding structural connectivity from diffusion weighted imaging, as described in Hinne et al.\cite{hinne2013}.
 
 In the second stage of PC, a directed graph is found.
 Again, a certainty of each individual arrowhead may be found by applying stability selection.
 %- Markov equivalence class size (nr. of latent variables / bidirectional arrows) within subjects
 Different permutations of nodes may yield different directionalities for the same edge, and bi-directional arrows may be found.
-Of specific interest here are consistent non-symmetrical orientations, as one-directional arrows imlpy a causal relation.
+Of specific interest here are consistent non-symmetrical orientations, as one-directional arrows imply a causal relation.
 Edges of two arrowhead imply a common confounder.
 %- Markov class Asymmetry and certain asymmetry within subjects
 %- Consistency of structure across subjects when aggregating results (averaging and frequency of occurences)
@@ -414,7 +412,6 @@ Again, this is both done per-subject and on the average across subjects.
 The run-time of both methods will be compared.
 %- Comparison of structure (functional connectivity) of PC (both. they're identical in structure) with DWI results by Max et al. -> verplaatst naar het stukje aan het begin, over structure PC
 
-
 \subsection{Data acquisition}\label{sec:data}
 %Subject acquisition and instruction
 %Used equipment and specs
@@ -428,7 +425,7 @@ The run-time of both methods will be compared.
 We performed our analysis on the same data as treated by Hinne et al. in the aforementioned Bayesian structural analysis \cite{hinne2013, hinne2013structfunc}.
 This article describes how resting-state functional data of six subjects was measured at the Donders Centre for Cognitive Neuroimaging at the Radboud University.
 This functional data is divided in 116 nodes and 1029 time-series per subject.
-Additionaly, diffusion-weighted images of these subjects have been obtained.
+Additionally, diffusion-weighted images of these subjects have been obtained.
 Based on these DWI-measurements, a structural connectivity matrix has been inferred with a technique described by Hinne et al.
 We used the six resulting resting-state functional time series data and connectivity matrices from the Bayesian analysis as pre-processed by Hinne et al.
 
