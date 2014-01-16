@@ -164,6 +164,10 @@ Universiteit Nijmegen}}}\\[0.5cm]\rule{\linewidth}{0.3mm}}
 %[Tom: we did not explicitly have this paragraph, so this is additional effort]
 %[Ramon]: Lijkt me vergelijkbaar met de verwijzingen naar literatuur die we al hebben? Met wat extra referenties naar wat Max zei: temporele methodes zijn onbetrouwbaar, dat hebben wij niet
 %[Ramon]: even een goede balans zoeken tussen dit en "Existing problems" in motivation
+% Previous work
+Previous work on effective connectivity include the aforementioned Granger causality \cite{roebroeck2005}, Structural Equation Modelling \cite{mclntosh1994}, Multivariate Autoregressive Modelling \cite{harrison2003} and Dynamic Causal Modelling \cite{friston2003}.
+All of these methods fail to cope with the problems mentioned in the introduction.
+Most of these methods can only handle tens of variables in reasonable time, which becomes problematic in realistic situations with up to tens of thousands of variables.
 
 \subsection{Research goal}
 %How does the standard causal discovery method PC Algorithm behave regarding the aforementioned problems when applied to resting-state functional time-series data?
@@ -184,18 +188,39 @@ Universiteit Nijmegen}}}\\[0.5cm]\rule{\linewidth}{0.3mm}}
 %[Ramon: is dit niet al duidelijk uit motivation? Lijkt me dubbelop]
 
 \section{Background}
-\subsection{Types of brain connectivity}% [optional] [Ramon: lijkt me wel belangijk, geeft ook het belang aan van richting zoeken, hoeft niet lang]
-%Functional
-%Structural
-%Effective
+\subsection{Types of brain connectivity}
+Work on brain connectivity theory discerns three types of brain connectivity.
+
+\paragraph{Functional connectivity}
+Functional connectivity describes the statistical dependence of neuronal activity between different brain regions \cite{friston1993functional}.
+Functional connectivity can be deduced through correlation of Functional Magnetic Resonance Imaging (fMRI) measurements of oxygen saturation  in blood - the BOLD response - while performing a certain cognitive task, or in so called resting-state.
+
+\paragraph{Resting-state}
+Resting-state indicates that subjects are instructed to relax without thinking of anything in particular to stimulate spontaneous brain activity; neural activity does not stop when not doing anything in particular.
+Resting-state provides a typical whole brain behaviour with a low frequency ( < .1 Hz) that is reliable, robust, unique to a subject and task-independent.
+Measuring resting-state thus provides an advantage when analysing brain connectivity on a global, whole brain level.
+Resting-state measurements have the disadvantage that it is difficult to check whether a subject truly is in a resting-state; it is often quite difficult not to think of anything in particular.
+Resting-state analysis has been shown to work well in practice \cite{Lowe2000, doria2010, Bullmore2009}.
+
+\paragraph{Structural connectivity}
+Structural connectivity is defined as the mapping of white-matter tracts in the brain between different regions \cite{friston1994}.
+It is strongly related with functional connectivity: regions can only be functionally connected if there is a structural relation between them \cite{cabral2012}.
+This intuitive relation can also be demonstrated empirically \cite{vandenheuvel2009}.
+MRI scanners can be used to measure white-matter tracts directly.
+As water is most concentrated in these regions, these tracts can be detected by measuring the diffusion of water in the brain.
+This process is named Diffusion Weighted MRI (DWI).
+For all practical purposes structural connectivity is time-independent - it changes over years, and still marginally during adulthood.
+
+\paragraph{Effective connectivity}
+In contrast to functional and structural connectivity, effective connectivity takes into account the cause and effect of connectivity relations.
+It has been described as ``the influence one neural system exerts over another'' \cite{friston1994}.
+Functional time series data needs to be analysed to infer effective connectivity as cause and effect can be deduced from which event precedes which.
+Granger causality is a method relying on this temporal principle.
+In brain data, this principle might not necessarily hold due to the fluctuations in haemodynamic response, the lag between neuronal activity and the measured BOLD response.
+Nevertheless, in theory it is possible to infer effective connectivity from structural connectivity and functional data \cite{mclntosh1994, harrison2003, friston2003, roebroeck2005}.
+An established relation of effective connectivity to actual anatomical brain relations has yet to be established.
 
 \subsection{Causal discovery theory}
-%Causal Markov Condition
-%Causal faithfulness
-%d-separation
-%V-structure
-%Causal sufficiency
-%Latent variables
 An approach for finding analysing effective connectivity may be found in the domain of causal discovery.
 A causal discovery method uses data of observed events to determine which of these events are correlated and additionally attempts to determine which events cause which.
 We can define a causal relation as follows.
