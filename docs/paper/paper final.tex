@@ -292,7 +292,7 @@ There is additional the number of possible graphs in the returned Markov class i
 Also, standard PC is dependent on the order in which these variables are presented, as this is the same order in which edges between pairs of these variables are considered for removal\cite[p.88]{spirtes2000}.
 
 In practice, the lack of full correctness and completeness are of little concern as it involves only very specific and little occurring connectivity patterns\cite[p.127-130]{spirtes2000}.
-% TODO: Paragraph seems incomplete.
+% TODO: Paragraph seems incomplete and some sentences are weird.
 
 \paragraph{Conservative PC extension}
 The V-structure rule in PC algorithm orients unshielded triples based on a single separating set. 
@@ -352,7 +352,6 @@ The downside of this additional check is results are merely used as a diagnostic
 It is also not a complete check as this would require as many tests as in CPC and thus no positive conclusions can be drawn from it.
 Also if an unfaithful triple is detected, the impact on the final output is unclear as errors might have cascaded into further orientation steps.
 
-%stability and iterations TODO: right place for this? I think it is, as it can be seen as a simple extension to naive PC
 \paragraph{Stability}
 The graph resulting from the PC algorithm depends on the order of the nodes\cite[p.120-122]{spirtes2000}.
 It is therefore questionable whether strong conclusions about individual edges can be drawn from the output, as such an edge might not have appeared if the input was ordered differently.
@@ -376,7 +375,7 @@ There is no difference between standard PC and EMS-PC in this result.
 After that, the second part of the PC algorithm is run to orient edges in this graph.
 This is different for standard PC and EMS-PC and a result will therefore be obtained for both algorithms.
 %- Parameter optimisation (model selection)
-The experiments were run using an alpha-value of 0.01 for the independence test, and using 300 random permutations of the nodes per subject.
+The experiments were run using an alpha-value of 0.01 for the independence test, and using 300 random permutations of the nodes per subject for stability selection.
 
 \paragraph{Concluding connectivity from PC}
 %- Measuring whole-brain structural and directional consistency of PC - frequency of occurrences within subjects
@@ -395,7 +394,7 @@ Edges of two arrowhead imply a common confounder.
 The results will again be analyses per subject, and as an avarage over all subjects; Causal relations appearing in specific subjects will, or in general.
 %- Consistency of directionality across subjects when aggregating results
 The functioning of the brain will not completely differ between different subjects and therefore some consistency across subjects is expected.
-Consistency between the two hemispheres is also expected.
+Consistency between the two hemispheres is also expected, as they are anatomically symmetrical.
 
 %\paragraph{EMS-PC}   Er werd veel herhaald t.o.v. standard PC, dus ik heb ze samen genomen. amount of sepsets en faithfulness is niet dubbel, maar hebben we deze resultaten opgeslagen en kunnen we er iets nuttigs over zeggen?
 %- Measuring whole-brain structural and directional consistency of EMS-PC
@@ -436,6 +435,107 @@ No additional pre-processing has been done in our research in order to apply the
 
 
 \section{Results}\label{sec:results}
+
+
+The results from the agorithms are presented in the form of matrices.
+A connection from region $n$ to region $m$ is represented by point $(n,m)$ in the matrix.
+Higher values represent strong certainties of the presence of a connection.
+In such a matrix, indices 1-45 represent the brain regions of the left hemisphere, regions 45-90 represent the right hemisphere, and regions 91-116 represent regions in the cerebellum.
+
+\subsection{The structural graph}
+%- Measuring whole-brain structural and directional consistency of PC - frequency of occurrences within subjects
+%Applying the standard PC algorithm yields an undirected graph, in which each edge has a certainty.
+%This is done both per subject, and as an avarage over all subjects.
+%We compared the generated structure with a Bayesian inference approach on finding structural connectivity from diffusion weighted imaging, as described in Hinne et al.\cite{hinne2013}.
+Modified PC and EMS-PC do not differ in finding the structure.
+As edges found with the structural part of PC are undirected, the found matrices are symmetrical.
+The results are presented per subject in Figure~\ref{} and as an avarage across all subjects iin Figure ~\ref{fig:struct_avg}. %TODO figure fixen per subjects
+For comparison, the structural connectivity as found by Hinne et al.\cite{hinne2013} are also show. 
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.5\textwidth]{images/struct_full}
+  \includegraphics[width=0.5\textwidth]{images/structure_max}
+  \caption{The avarage structure of all subjects. The structure on the left is found with the PC-algorithm, and the structure on the right is found with DWI-measurements by Hinne et al. Note that these matrices are subdivided into blocks corresponding with the subdivision of indices as described in Section~\ref{sec:results}}. The two diagonal lines represent connections between the two hemispheres.
+\label{fig:struct_avg}
+\end{figure}
+
+\subsection{The directed graph}
+This structural graph has been used as a basis for a directed graph, for both standard PC and EMS-PC.
+The results for standard PC are shown per subject in Figure~\ref{} and in as an avarage across subjects in Figure~\ref{fig:pdag_avg_mod}.
+Additionally, a histogram showing the frequencies of the values in the avarage matrix is presented in Figure~\ref{}.
+Although many arrowheads are found with probabilities above 0.9, the graph looks strongly symmetric.
+In terms of causality, this means that many latent sources are still present and causal relations between the measured brain regions themselves are not clearly visible.
+
+The results for EMS-PC are presented in a similar way. The results per subjects are shown in Figure~\ref{} and the avarage across subjects in Figure~\ref{fig:pdag_avg_ems}. A histogram of the avarage is presented in Figure~\ref{}. Again, the image looks strongly symmetric.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics{images/pdag_avg_colored_mod}
+  \caption{The PDAG found with standard PC, in which a high value denotes a high certainty of an arrowhead. The avarage of all six subjects is taken.}
+  \label{fig:pdag_avg_mod}
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics{images/PDAG_avg_colored_expl}
+  \caption{The PDAG found with EMS-PC, in which a high value denotes a high certainty of an arrowhead. The avarage of all six subjects is taken.}
+  \label{fig:pdag_avg_ems}
+\end{figure}
+
+Another representation of this data has been used to emphasise the asymmetric parts of Figures ~\ref{fig:pdag_avg_mod} and ~\ref{fig:pdag_avg_ems}.
+To achieve this, the absolute difference between these matrices and their transpose has been calculated, lifting out those points for which there is an arrow in one direction, but not in the opposite direction.
+These resulting antisymmetric matrices are presented in Figures ~\ref{fig:pdag_avg_antisymmetric_mod} and ~\ref{fig:pdag_avg_antisymmetric_ems}.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics{images/arrowheads_avg_mod}
+  \caption{The asymmetric arrowheads of the PDAG found with standard PC, in which a high value denotes a high certainty of an one-directional arrow. The average of all six subjects is taken.}
+  \label{fig:pdag_avg_antisymmetric_mod}
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics{images/PDAG_avg_antisymmetric_expl}
+  \caption{The assymetric parts of the PDAG found with EMS-PC, in which a high value denotes a high certainty of an one-directional arrow. The avarage of all six subjects is taken.}
+  \label{fig:pdag_avg_antisymmetric_ems}
+\end{figure}
+
+%Again, a certainty of each individual arrowhead may be found by applying stability selection.
+%- Markov equivalence class size (nr. of latent variables / bidirectional arrows) within subjects
+%Different permutations of nodes may yield different directionalities for the same edge, and bi-directional arrows may be found.
+%Of specific interest here are consistent non-symmetrical orientations, as one-directional arrows imlpy a causal relation.
+%Edges of two arrowhead imply a common confounder.
+%- Markov class Asymmetry and certain asymmetry within subjects
+%- Consistency of structure across subjects when aggregating results (averaging and frequency of occurences)
+%The results will again be analyses per subject, and as an avarage over all subjects; Causal relations appearing in specific subjects will, or in general.
+%- Consistency of directionality across subjects when aggregating results
+%The functioning of the brain will not completely differ between different subjects and therefore some consistency across subjects is expected.
+%Consistency between the two hemispheres is also expected, as they are anatomically symmetrical.
+
+%\paragraph{EMS-PC}   Er werd veel herhaald t.o.v. standard PC, dus ik heb ze samen genomen. amount of sepsets en faithfulness is niet dubbel, maar hebben we deze resultaten opgeslagen en kunnen we er iets nuttigs over zeggen?
+%- Measuring whole-brain structural and directional consistency of EMS-PC
+%- Markov equivalence class size (nr. of latent variables / bidirectional arrows) within subjects
+%- Markov class Asymmetry and certain asymmetry within subjects
+%- Amount of separating sets found
+%- Unfaithfulness check with and without additional separating sets
+
+%\paragraph{Comparison between standard PC and EMS-PC}
+%- Comparison of directionality between standard PC and EMS-PC on consistency of results within subjects
+%As EMS-PC is more constrained in concluding directionality, it may find less erroneous arrows than standard PC.
+%To verify this, the number and consistency of one-directional arrows is compared.
+%- Comparison of ... of results across subjects
+%Again, this is both done per-subject and on the average across subjects.
+%- Run-time of methods and comparison between run-times
+%The run-time of both methods will be compared.
+%- Comparison of structure (functional connectivity) of PC (both. they're identical in structure) with DWI results by Max et al. -> verplaatst naar het stukje aan het begin, over structure PC
+
+
+
+
+
+
+
 %Answer all the questions as mentioned in methods, in the same order
 %No aggregation over direction, motivate this
 
@@ -453,8 +553,8 @@ Further speed increments can be achieved by coding the algorithm in a low overhe
 
 %Comparison with DWI inter-hemisphere connection
 Standard PC and particularly the first, structural part, definitely has similarity with respect to existing methods based on DWI.
-This is not completely surprising as standard PC yields a functional network and DWI based methods anatomical structural networks, two network types which are tightly related.
-A less apparent observation is the clear presence of correlation between homologous area's in the functional network, which lacks in the structural network.
+This is not completely surprising as standard PC yields a functional network and DWI based methods yield anatomical structural networks, two network types which are tightly related.
+A less apparent observation is the clear presence of correlation between homologous area's in the functional network, which lacks in the structural network as found with DWI.
 An explanation to this difference might be that these correlations respond to the long white-matter tracts connecting the two hemispheres through the corpus-callosum.
 It is known that DWI has difficulty in measuring such long tracts, while the presence of correlation between two connected ends cannot be argued against.
 As such, statistical baed causal discovery methods contribute additional information to finding structural connectivity.
