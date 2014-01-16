@@ -198,7 +198,7 @@ Universiteit Nijmegen}}}\\[0.5cm]\rule{\linewidth}{0.3mm}}
 %Latent variables
 
 \subsection{PC algorithm}
-%Algorithm, assumptions and explanation [Ramon: standaard PC een naam geven en consistent gebruiken, bijv. standard PC?]
+%Algorithm, assumptions and explanation
 \paragraph{Description}
 The PC algorithm is a so-called constraint based method, where solutions are found by incrementally leaving out or adding parts that do not violate a set of constraints.
 Starting from a fully connected undirected graph, the PC algorithm forms structure by cutting away edges between conditionally independent variables.
@@ -258,10 +258,6 @@ Pseudocode for this method is shown in algorithm \ref{alg:pc_alg}.
 \label{alg:pc_alg}
 \end{algorithm}
 
-%Before finding directed edges, the PC algorithm first finds undirected structure.
-%For each two non-adjacent nodes $X$ and $Y$ standard PC finds a minimal separating set, which is the smallest set acting as a separating set.
-%This is done by first assuming all nodes are connected, and then testing all pairs of nodes for independence.
-
 Starting from a fully connected graph, standard PC finds a minimal separating set for every pair of non-adjacent nodes $X$ and $Y$.
 These are lines \ref{alg:pc_alg:p1_start} to \ref{alg:pc_alg:p1_end} in the pseudocode.
 The independence of $X$ and $Y$ is tested given a subset of neighbours of $X$ or $Y$ using a statistical independence test such as the Chi-square or Fisher-Z independence tests. %TODO: Add citation to these methods.
@@ -312,22 +308,19 @@ Although the weaker assumptions made with conservative PC might be useful for th
 %EMS-PC extension (no pseudo-code, but additions regarding standard PC)
 
 \paragraph{Multiple Separating Sets}
-As will be explained in the results section, standard PC is a bit hasty in assigning v-structures, resulting in much unnecessary and perhaps unfaithful directionality.
-The idea of CPC, to make a weaker assumption on graph faithfulness than standard PC is potential as less erroneous arrows are found.
+As can be seen in the result in the next section, standard PC is a bit hasty in assigning v-structures, resulting in much unnecessary and perhaps unfaithful directionality.
+The idea of CPC, to rely less on graph faithfulness than standard PC is potential as less erroneous arrows are assigned in theory.
 Instead of doing additional tests as described in CPC, one could attempt to determine causal unfaithfulness with less dependency tests.
 An adaptation to PC algorithm that would not increase the order of complexity is once a separating set is found to test all other vertex subsets of the same order as well.
 This finds all separating sets of the lowest order without increasing complexity.
 Orienting an unshielded triple $\left<A,B,C\right>$ requires $B$ not to occur in any separating set of $(A,C)$.
-By having more than one separating set, this constraint is strengthened if the data is not faithful.
-If it is, then the results are not changed.
-This also does not change the run-time complexity.
-
+By having more than one separating set, this constraint is strengthened in case of noisy data.
 % Unfaithfulness test
 One could use these additional separating sets to test oriented unshielded triples for unfaithfulness, similar to CPC.
 Apart from serving as a sanity check, this could serve as the basis of a repair algorithm for errors made by PC.
 
 % Explicit test
-A more explicit way to decrease faulty orientation of an unshielded triple $\left<A,B,C\right>$ is to check whether adding $B$ to a separating set of $(A,C)$ makes the pair conditionally dependent.
+A more \textit{explicit} way to decrease faulty orientation of an unshielded triple $\left<A,B,C\right>$ is to check whether adding $B$ to a separating set of $(A,C)$ makes the pair conditionally dependent.
 If so, the graph might become more faithful to its modeled distribution; If standard PC might orient a V-structure, whereas this condition does not hold, then the concluded V-structure might be erroneous.
 For faithful graphs, this extra condition should not change the result, as it will always hold.
 
@@ -362,32 +355,46 @@ These results have been avaraged to conclude the certainty of the found edges.
 \subsection{Experimental validation}
 \paragraph{Experimental pipeline}{sec:pipeline}
 %- What data is needed
+PC algorithm requires observational data where each instance is a vector of single observations per variable.
+We can model functional resting-state time-series as coming from some stable underlying mechanism that is largely time-independent.
+Resting-state data can be intuitively thought of being more time independent than task-influenced data due to the emergent character of activity pattens that occur when in resting-state.
+Nevertheless it is most likely not a fully correct modelling assumption, though enables straightforward application of standard and EMS-PC to functional data without the problem of HRF.
+
 %- Apply structure PC on resting-state functional time-series
 %- Apply directional PC
-Both standard PC and EMS-pc have been used to find brain connectivity.
-The data which is used is functional time-series data, and it is the same as the data used in Hinne et al.\cite{hinne2013}, as described in Section~\ref{sec:data}.
-This data is obtained from six subject.
-From this data, covariance between regions can be determined, so that regions can be tested for \emph{d}-separation with the Fisher's conditional independence test.
-This is required to use the PC algorithm.
-First, the strucural part of the PC algorithm will be applied on the data.
+We applied standard PC and EMS-PC on functional resting-state time-series data of six healthy individuals, also previously used by Hinne et al\cite{hinne2013}.
+1030 volumes were obtained per subject.
+After preprocessing the fMRI data was parcellated according to the Automated Anatomical Labeling (AAL) atlas in 116 regions of interest.
+The exact procedure of subject acquisition, used scanner properties and parameters and data preprocessing is provided in appendix \ref{sec:data}.
+We use Fisher's z-test for conditional independence to match the continuous nature of the data.
+
+For all experiments we first apply part 1 of standard PC and EMS-PC on the data.
 This will result in a graph describing undirected connections between regions.
-There is no difference between standard PC and EMS-PC in this result.
-After that, the second part of the PC algorithm is run to orient edges in this graph.
-This is different for standard PC and EMS-PC and a result will therefore be obtained for both algorithms.
-%- Parameter optimisation (model selection)
+For structure only the first found separating set is relevant, thus EMS-PC and standard PC return identical graph structure.
+This structure is then oriented with part 2 of standard PC and EMS-PC given earlier found separating sets.
+This procedure yields different orientations in theory.
+
+\paragraph{Stability}
+Standard PC depends on the ordering of variables in the provided data\cite[p.120-122]{spirtes2000}.
+It is therefore questionable whether strong conclusions about individual edges can be drawn from the output, as such an edge might not have appeared if the input was ordered differently.
+To correct for this in results, we have randomly permuted our data for a large amount of iterations and counted the frequencies of occurring edges.
+This is in accordance with the stability selection method for graphs as described by Meinshausen and B{\"u}hlmann\cite{meinshausen2010}.
+
+\paragraph{Parameter optimisation}
 The experiments were run using an alpha-value of 0.01 for the independence test, and using 300 random permutations of the nodes per subject for stability selection.
+% TODO: Onvoldoende.
 
 \paragraph{Concluding connectivity from PC}
 %- Measuring whole-brain structural and directional consistency of PC - frequency of occurrences within subjects
 Applying the standard PC algorithm yields an undirected graph, in which each edge has a certainty.
-This is done both per subject, and as an avarage over all subjects.
+This is done both per subject, and as an average over all subjects.
 We compared the generated structure with a Bayesian inference approach on finding structural connectivity from diffusion weighted imaging, as described in Hinne et al.\cite{hinne2013}.
 
 In the second stage of PC, a directed graph is found.
 Again, a certainty of each individual arrowhead may be found by applying stability selection.
 %- Markov equivalence class size (nr. of latent variables / bidirectional arrows) within subjects
 Different permutations of nodes may yield different directionalities for the same edge, and bi-directional arrows may be found.
-Of specific interest here are consistent non-symmetrical orientations, as one-directional arrows imlpy a causal relation.
+Of specific interest here are consistent non-symmetrical orientations, as one-directional arrows imply a causal relation.
 Edges of two arrowhead imply a common confounder.
 %- Markov class Asymmetry and certain asymmetry within subjects
 %- Consistency of structure across subjects when aggregating results (averaging and frequency of occurences)
@@ -412,26 +419,6 @@ Again, this is both done per-subject and on the average across subjects.
 %- Run-time of methods and comparison between run-times
 The run-time of both methods will be compared.
 %- Comparison of structure (functional connectivity) of PC (both. they're identical in structure) with DWI results by Max et al. -> verplaatst naar het stukje aan het begin, over structure PC
-
-
-\subsection{Data acquisition}\label{sec:data}
-%Subject acquisition and instruction
-%Used equipment and specs
-%Experimental setup
-%Scanner settings
-%Preprocessing
-%- Software
-%- Scripts
-%Resulting data specs
-%TODO niet helemaal happy, hoe zeg je dit zonder steeds "as described by Hinne et al." te zeggen? "This research" kan ook naar ons eigen werk verwijzen en is verwarrend, het moet duidelijk zijn dat dit alles niet door ons gedaan is.
-We performed our analysis on the same data as treated by Hinne et al. in the aforementioned Bayesian structural analysis \cite{hinne2013, hinne2013structfunc}.
-This article describes how resting-state functional data of six subjects was measured at the Donders Centre for Cognitive Neuroimaging at the Radboud University.
-This functional data is divided in 116 nodes and 1029 time-series per subject.
-Additionaly, diffusion-weighted images of these subjects have been obtained.
-Based on these DWI-measurements, a structural connectivity matrix has been inferred with a technique described by Hinne et al.
-We used the six resulting resting-state functional time series data and connectivity matrices from the Bayesian analysis as pre-processed by Hinne et al.
-
-No additional pre-processing has been done in our research in order to apply the PC algorithm on this data.
 
 
 \section{Results}\label{sec:results}
@@ -598,5 +585,26 @@ This in turn might leverage development of better and faster data driven methods
 \bibliography{references}{}
 \addcontentsline{toc}{section}{References}
 \bibliographystyle{plain}
+
+\appendix
+\section{Data acquisition}\label{sec:data}
+%Subject acquisition and instruction
+%Used equipment and specs
+%Experimental setup
+%Scanner settings
+%Preprocessing
+%- Software
+%- Scripts
+%Resulting data specs
+%TODO niet helemaal happy, hoe zeg je dit zonder steeds "as described by Hinne et al." te zeggen? "This research" kan ook naar ons eigen werk verwijzen en is verwarrend, het moet duidelijk zijn dat dit alles niet door ons gedaan is.
+We performed our analysis on the same data as treated by Hinne et al. in the aforementioned Bayesian structural analysis \cite{hinne2013, hinne2013structfunc}.
+This article describes how resting-state functional data of six subjects was measured at the Donders Centre for Cognitive Neuroimaging at the Radboud University.
+This functional data is divided in 116 nodes and 1029 time-series per subject.
+Additionally, diffusion-weighted images of these subjects have been obtained.
+Based on these DWI-measurements, a structural connectivity matrix has been inferred with a technique described by Hinne et al.
+We used the six resulting resting-state functional time series data and connectivity matrices from the Bayesian analysis as pre-processed by Hinne et al.
+
+No additional pre-processing has been done in our research in order to apply the PC algorithm on this data.
+
 
 \end{document}
