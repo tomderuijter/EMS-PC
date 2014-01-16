@@ -196,10 +196,71 @@ Universiteit Nijmegen}}}\\[0.5cm]\rule{\linewidth}{0.3mm}}
 %V-structure
 %Causal sufficiency
 %Latent variables
+An approach for finding analysing effective connectivity may be found in the domain of causal discovery.
+A causal discovery method uses data of observed events to determine which of these events are correlated and additionally attempts to determine which events cause which.
+We can define a causal relation as follows.
+
+% Causal relation
+\paragraph{Causal relation}
+For a specific system $S$, a variable $Q$ causes variable $R$ in $S$ if there is at least one value $q$ and at least one value $r$ that during a specific event in which $Q=q$ causes a \textit{different} event such that $R = r$ in $S$\cite[p.21]{spirtes2000}.
+
+In the context of brain connectivity, variables correspond to regions of interest, events correspond to moments in time after a specific stimulus or in resting state, and values correspond to the measured BOLD response related to this event in that specific region.
+By modelling these variables and the causal relationships between them in a Directed Acyclic Graph (DAG), we can make use of the existing theory of Bayesian Networks to infer underlying causal models.
+
+Under the causal interpretation of a DAG $G$, a causal relation is denoted with directed edges; $X \rightarrow Y$ implies that $X$ is a direct cause of $Y$.
+In terms of the graph, $X$ is the causal parent of $Y$, and $Y$ is the child of $X$. 
+When there is a directed path $X \rightarrow Z_1 \rightarrow Z_2 \dots \rightarrow Y$, $X$ is said to be an ancestor of $Y$ and $Y$ is a descendant of $X$.
+An ancestor is a (possibly indirect) cause of its descendant.
+The graph $G$ is also referred to as a causal graph.
+
+Under the probabilistic interpretation a DAG $G$, also called a Bayesian network, represents a joint probability distribution over a set of variables $V$.
+Conditional dependencies are shown by arrows between vertices.
+Proportionality is shown by an undirected edge between vertices.
+A provable property of these networks is the \textit{Markov Property}: every variable in $G$ is independent of its non-descendants conditioned on its parents.
+This property enables us to link the field of Bayesian networks, for which useful mathematical properties exist, to the causal interpretation.
+
+\paragraph{Causal Markov Condition}
+A set of variables represented by a causal DAG $G$ is probabilistically independent of its non-descendants (non-effects), conditioned on its parents (direct causes).
+
+This allows reasoning of causality based on probability.
+The Causal Markov Condition also has a converse principle allowing us to reason with graph structure and directionality.
+
+\paragraph{Causal Faithfulness Condition}
+A set of variables represented by a causal DAG $G$ does not have any conditional independencies unless entailed by the Causal Markov Condition.
+
+This second condition implies the graph correctly portrays the underlying probability distribution.
+In a Bayesian network, edges between vertices denote a conditional dependency.
+By instantiating certain variables, other variables can become independent or dependent.
+With the above two properties on underlying causal mechanisms and their graph, causal mechanisms and causal dependencies can graphically be determined through the notion of \textit{d}-separation.
+
+\paragraph{\textit{d}-separation}
+Two nodes $X$ and $Y$ are \textit{d}-separated given a node set $S$ (with $X, Y \notin S$) if there is no path between $X,Y$ or a path from $X$ to $Y$ through $S$ for which at least one of the following holds:
+\begin{itemize}
+\item The path contains a structure $a \rightarrow b \rightarrow c$ such that $b$ is in $S$.
+\item The path contains a structure $a \leftarrow b \rightarrow c$ such that $b$ is in $S$.
+\item The path contains a structure $a \rightarrow b \leftarrow c$ (in which $b$ is called a collider) such that $b$ and its descendants are \textbf{not} in $S$.
+\end{itemize}
+If $X$ and $Y$ are \textit{d}-separated, $S$ is called a separating set of $X$ and $Y$.
+Every two independent variables have a separating set; if they are unconditionally independent, this is the empty set.
+
+In the context of brain connectivity, it is doubtable that measurements and underlying mechanisms are not cyclical or are fully true to the Causal Markov condition or to Causal faithfulness.
+However as there is no true baseline to compare with, this is difficult to determine analytically.
+If it is the case that graphs generated with functional data are not true to the above properties in specific parts of the graph, these parts are said to be \textit{unfaithful} to the underlying causal mechanism.
+
+Call a triple of variables $\left < X,Y,Z \right >$ an \textit{unshielded triple} if $X$ and $Z$ are adjacent to Y, but not to each other.
+
+\paragraph{V-structure}
+An unshielded triple can be oriented $X \rightarrow Y \leftarrow Z$ if and only all sets that \textit{d}-separate $X$ from $Z$ do not contain $Y$.
+This structure is named \textit{V-structure}.
+
+It is a certainty we cannot observe the full causal process in the human brain.
+We may additionally assume that observed variables are a subset of those in the underlying causal mechanism.
+Models having this Open World property are called \textit{Causal Insufficient}.
+When sampling from the observed distribution, we would find a relation $X \leftrightarrow Z$.
+Since we assumed Causal Markov Conditionality, no feedback loops exist and all bi-directional arrows found must indicate existence of a latent confounder $Y$ where $X \leftarrow Y \rightarrow Z$.
 
 \subsection{PC algorithm}
-%Algorithm, assumptions and explanation
-\paragraph{Description}
+% Algorithm description
 The PC algorithm is a so-called constraint based method, where solutions are found by incrementally leaving out or adding parts that do not violate a set of constraints.
 Starting from a fully connected undirected graph, the PC algorithm forms structure by cutting away edges between conditionally independent variables.
 In the second step, orientation rules are applied based on found separating sets and structure.
