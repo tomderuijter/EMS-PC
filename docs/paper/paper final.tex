@@ -346,71 +346,71 @@ It is also not a complete check as this would require as many tests as in CPC an
 Also if an unfaithful triple is detected, the impact on the final output is unclear as errors might have cascaded into further orientation steps.
 
 \subsection{Experimental validation}
-\paragraph{Experimental pipeline}{sec:pipeline}
-%- What data is needed
+\paragraph{Experimental pipeline}\label{sec:pipeline}
+%- What type of data is needed
 PC algorithm requires observational data where each instance is a vector of single observations per variable.
 We can model functional resting-state time-series as coming from some stable underlying mechanism that is largely time-independent.
 Resting-state data can be intuitively thought of being more time independent than task-influenced data due to the emergent character of activity pattens that occur when in resting-state.
 Nevertheless it is most likely not a fully correct modelling assumption, though enables straightforward application of standard and EMS-PC to functional data without the problem of HRF.
 
-%- Apply structure PC on resting-state functional time-series
-%- Apply directional PC
+% Application to data
 We applied standard PC and EMS-PC on functional resting-state time-series data of six healthy individuals, also previously used by Hinne et al\cite{hinne2013}.
 1030 volumes were obtained per subject.
 After preprocessing the fMRI data was parcellated according to the Automated Anatomical Labeling (AAL) atlas in 116 regions of interest.
 The exact procedure of subject acquisition, used scanner properties and parameters and data preprocessing is provided in appendix \ref{sec:data}.
 We use Fisher's z-test for conditional independence to match the continuous nature of the data.
 
+% Implementation
+We have implemented standard PC and EMS-PC in Matlab using the Bayesian Network Toolbox for Matlab.
+% TODO: Finish this.
+
+% Pipeline
 For all experiments we first apply part 1 of standard PC and EMS-PC on the data.
-This will result in a graph describing undirected connections between regions.
+This results in a graph describing undirected functional connections between regions.
 For structure only the first found separating set is relevant, thus EMS-PC and standard PC return identical graph structure.
 This structure is then oriented with part 2 of standard PC and EMS-PC given earlier found separating sets.
 This procedure yields different orientations in theory.
 
-\paragraph{Stability}
+% Stability selection
 Standard PC depends on the ordering of variables in the provided data\cite[p.120-122]{spirtes2000}.
 It is therefore questionable whether strong conclusions about individual edges can be drawn from the output, as such an edge might not have appeared if the input was ordered differently.
 To correct for this in results, we have randomly permuted our data for a large amount of iterations and counted the frequencies of occurring edges.
 This is in accordance with the stability selection method for graphs as described by Meinshausen and B{\"u}hlmann\cite{meinshausen2010}.
 
-\paragraph{Parameter optimisation}
-The experiments were run using an alpha-value of 0.01 for the independence test, and using 300 random permutations of the nodes per subject.
-% TODO: Onvoldoende.
+% Parameter selection
+Due to the lack of a baseline to compare results with, dependency thresholds were chosen by hand.
+All experiments listed here were run with an alpha value of 0.01 for the independence test.
+The number of random permutations was set on 1000 per subject, which was found to be enough to determine statistical significance for 99\% of the found edges with a binomial statistical test.
 
-\paragraph{Concluding connectivity from PC}
 %- Measuring whole-brain structural and directional consistency of PC - frequency of occurrences within subjects
-Applying the standard PC algorithm yields an undirected graph, in which each edge has a certainty.
-This is done both per subject, and as an average over all subjects.
-We compared the generated structure with a Bayesian inference approach on finding structural connectivity from diffusion weighted imaging, as described in Hinne et al.\cite{hinne2013}.
+We obtained structure and causal graphs for each subject with the previous procedure.
+For each graph, we express the level of consistency of an edge in the frequency of occurrence of that type of edge over all permutations.
+The frequency ratio per is then used to create the whole brain image for structure and directionality.
+We compared the generated functional graph with the Bayesian inference approach on finding structural connectivity from Diffusion Weighted Imaging (DWI) proposed by Hinne et al.\cite{hinne2013} on the same data using edge consistency.
 
-In the second stage of PC, a directed graph is found.
-Again, a certainty of each individual arrowhead may be found by applying stability selection.
-%- Markov equivalence class size (nr. of latent variables / bidirectional arrows) within subjects
-Different permutations of nodes may yield different directionalities for the same edge, and bi-directional arrows may be found.
-Of specific interest here are consistent non-symmetrical orientations, as one-directional arrows imply a causal relation.
-Edges of two arrowhead imply a common confounder.
-%- Markov class Asymmetry and certain asymmetry within subjects
-%- Consistency of structure across subjects when aggregating results (averaging and frequency of occurences)
-The results will again be analyses per subject, and as an avarage over all subjects; Causal relations appearing in specific subjects will, or in general.
-%- Consistency of directionality across subjects when aggregating results
-The functioning of the brain will not completely differ between different subjects and therefore some consistency across subjects is expected.
-Consistency between the two hemispheres is also expected.
+%Markov equivalence class size (nr. of latent variables / bidirectional arrows) within subjects and Markov class Asymmetry
+Since standard PC and EMS-PC return Markov equivalence classes, we record the size of the solution space per subject.
+Different permutations of nodes may yield different directionality for the same edge, including bi-directional relationships.
+Of specific interest are consistent non-symmetrical orientations, as one-directional arrows imply a high-confidence causal relation.
+Bi-directional edges imply an unseen common confounder.
+We obtain uni-directional edges by subtracting the symmetrical bi-directional components from the causal graph.
 
-%\paragraph{EMS-PC}   Er werd veel herhaald t.o.v. standard PC, dus ik heb ze samen genomen. amount of sepsets en faithfulness is niet dubbel, maar hebben we deze resultaten opgeslagen en kunnen we er iets nuttigs over zeggen?
-%- Measuring whole-brain structural and directional consistency of EMS-PC
-%- Markov equivalence class size (nr. of latent variables / bidirectional arrows) within subjects
-%- Markov class Asymmetry and certain asymmetry within subjects
-%- Amount of separating sets found
-%- Unfaithfulness check with and without additional separating sets
+% Multi-subject experiments
+To aggregate results over multiple subjects, we sum frequencies per found edge type for structure and directionality to obtain consistency of edges and directionality.
+We expected brain functioning to not completely differ between subjects.
 
-\paragraph{Comparison between standard PC and EMS-PC}
-%- Comparison of directionality between standard PC and EMS-PC on consistency of results within subjects
-As EMS-PC is more constrained in concluding directionality, it may find less erroneous arrows than standard PC.
-To verify this, the number and consistency of one-directional arrows is compared.
-%- Comparison of ... of results across subjects
-Again, this is both done per-subject and on the average across subjects.
+% EMS-PC
+For results on EMS-PC, we record the size of the separating sets found per edge as well as the amount of unfaithful marked v-structures.
+
+% Comparison standard PC and EMS-PC
+We compare standard PC and EMS-PC on their causal graph.
+As EMS-PC is more constrained in concluding directionality, it may find less erroneous edges than standard PC.
+As we cannot verify this directly, we compare the total count, consistency and standard-deviation of one-directional arrows.
+We also compare run-time per iteration between both
+
 %- Run-time of methods and comparison between run-times
 The run-time of both methods will be compared.
+
 %- Comparison of structure (functional connectivity) of PC (both. they're identical in structure) with DWI results by Max et al. -> verplaatst naar het stukje aan het begin, over structure PC
 
 
