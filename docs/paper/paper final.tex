@@ -345,13 +345,6 @@ The downside of this additional check is results are merely used as a diagnostic
 It is also not a complete check as this would require as many tests as in CPC and thus no positive conclusions can be drawn from it.
 Also if an unfaithful triple is detected, the impact on the final output is unclear as errors might have cascaded into further orientation steps.
 
-\paragraph{Stability}
-The graph resulting from the PC algorithm depends on the order of the nodes\cite[p.120-122]{spirtes2000}.
-It is therefore questionable whether strong conclusions about individual edges can be drawn from the output, as such an edge might not have appeared if the input was ordered differently.
-As such, it seems useful to calculate a chance of a connection appearing.
-When running the experiments, we have applied the algorithms multiple times using random permutations of the nodes to obtain stability selection as described by Meinshausen and B{\"u}hlmann \cite{meinshausen2010}.
-These results have been avaraged to conclude the certainty of the found edges.
-
 \subsection{Experimental validation}
 \paragraph{Experimental pipeline}\label{sec:pipeline}
 %- What type of data is needed
@@ -368,8 +361,9 @@ The exact procedure of subject acquisition, used scanner properties and paramete
 We use Fisher's z-test for conditional independence to match the continuous nature of the data.
 
 % Implementation
-We have implemented standard PC and EMS-PC in Matlab using the Bayesian Network Toolbox for Matlab.
-% TODO: Finish this.
+We have implemented standard PC and EMS-PC in Matlab using statistical tests and ideas from the Bayesian Network Toolbox for Matlab.\footnote{Bayesian Network Toolbox for Matlab: https://github.com/bayesnet/bnt}
+This toolbox also includes an implementation for standard PC, however to gain better insight in the workings and to have greater flexibility in application, we have implemented standard PC separately.
+The Matlab scripts used for the results are made freely available online.\footnote{Matlab implementation of EMS-PC: https://github.com/tomderuijter/EMS-PC}
 
 % Pipeline
 For all experiments we first apply part 1 of standard PC and EMS-PC on the data.
@@ -389,14 +383,14 @@ Due to the lack of a baseline to compare results with, dependency thresholds wer
 All experiments listed here were run with an alpha value of 0.01 for the independence test.
 The number of random permutations was set on 1000 per subject, which was found to be enough to determine statistical significance for 99\% of the found edges with a binomial statistical test.
 
-%- Measuring whole-brain structural and directional consistency of PC - frequency of occurrences within subjects
-
+% Structural and Directional Consistency
+% DWI Comparison
 We obtained structure and causal graphs for each subject with the previous procedure.
 For each graph, we express the level of consistency of an edge in the frequency of occurrence of that type of edge over all permutations.
 The frequency ratio per is then used to create the whole brain image for structure and directionality.
 We compared the generated functional graph with the Bayesian inference approach on finding structural connectivity from Diffusion Weighted Imaging (DWI) proposed by Hinne et al.\cite{hinne2013} on the same data using edge consistency.
 
-%Markov equivalence class size (nr. of latent variables / bidirectional arrows) within subjects and Markov class Asymmetry
+%Markov equivalence class size and asymmetry
 Since standard PC and EMS-PC return Markov equivalence classes, we record the size of the solution space per subject.
 Different permutations of nodes may yield different directionality for the same edge, including bi-directional relationships.
 Of specific interest are consistent non-symmetrical orientations, as one-directional arrows imply a high-confidence causal relation.
@@ -417,14 +411,8 @@ As we cannot verify this directly, we compare the total count, consistency and s
 %- Run-time of methods and comparison between run-times
 We also compare run-time per iteration between both.
 
-
-%- Comparison of structure (functional connectivity) of PC (both. they're identical in structure) with DWI results by Max et al. -> verplaatst naar het stukje aan het begin, over structure PC
-
-
 \section{Results}\label{sec:results}
-
-
-The results from the agorithms are presented in the form of matrices.
+The results from the algorithms are presented in the form of matrices.
 A connection from region $n$ to region $m$ is represented by point $(n,m)$ in the matrix.
 Higher values represent strong certainties of the presence of a connection.
 In such a matrix, indices 1-45 represent the brain regions of the left hemisphere, regions 45-90 represent the right hemisphere, and regions 91-116 represent regions in the cerebellum.
