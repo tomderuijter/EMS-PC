@@ -355,16 +355,17 @@ Nevertheless it is most likely not a fully correct modelling assumption, though 
 
 %- Apply structure PC on resting-state functional time-series
 %- Apply directional PC
-Both standard PC and EMS-pc have been used to find brain connectivity.
-The data which is used is functional time-series data, and it is the same as the data used in Hinne et al.\cite{hinne2013}, as described in Section~\ref{sec:data}.
-This data is obtained from six subject.
-From this data, covariance between regions can be determined, so that regions can be tested for \textit{d}-separation with the Fisher's conditional independence test.
-This is required to use the PC algorithm.
-First, the strucural part of the PC algorithm will be applied on the data.
+We applied standard PC and EMS-PC on functional resting-state time-series data of six healthy individuals, also previously used by Hinne et al\cite{hinne2013}.
+1030 volumes were obtained per subject.
+After preprocessing the fMRI data was parcellated according to the Automated Anatomical Labeling (AAL) atlas in 116 regions of interest.
+The exact procedure of subject acquisition, used scanner properties and parameters and data preprocessing is provided in appendix \ref{sec:data}.
+We use Fisher's z-test for conditional independence to match the continuous nature of the data.
+
+For all experiments we first apply part 1 of standard PC and EMS-PC on the data.
 This will result in a graph describing undirected connections between regions.
-There is no difference between standard PC and EMS-PC in this result.
-After that, the second part of the PC algorithm is run to orient edges in this graph.
-This is different for standard PC and EMS-PC and a result will therefore be obtained for both algorithms.
+For structure only the first found separating set is relevant, thus EMS-PC and standard PC return identical graph structure.
+This structure is then oriented with part 2 of standard PC and EMS-PC given earlier found separating sets.
+This procedure yields different orientations in theory.
 
 \paragraph{Stability}
 Standard PC depends on the ordering of variables in the provided data\cite[p.120-122]{spirtes2000}.
@@ -372,7 +373,7 @@ It is therefore questionable whether strong conclusions about individual edges c
 To correct for this in results, we have randomly permuted our data for a large amount of iterations and counted the frequencies of occurring edges.
 This is in accordance with the stability selection method for graphs as described by Meinshausen and B{\"u}hlmann\cite{meinshausen2010}.
 
-%- Parameter optimisation (model selection)
+\paragraph{Parameter optimisation}
 The experiments were run using an alpha-value of 0.01 for the independence test, and using 300 random permutations of the nodes per subject.
 % TODO: Onvoldoende.
 
@@ -411,26 +412,6 @@ Again, this is both done per-subject and on the average across subjects.
 %- Run-time of methods and comparison between run-times
 The run-time of both methods will be compared.
 %- Comparison of structure (functional connectivity) of PC (both. they're identical in structure) with DWI results by Max et al. -> verplaatst naar het stukje aan het begin, over structure PC
-
-% TODO: Move to appendix?
-\subsection{Data acquisition}\label{sec:data}
-%Subject acquisition and instruction
-%Used equipment and specs
-%Experimental setup
-%Scanner settings
-%Preprocessing
-%- Software
-%- Scripts
-%Resulting data specs
-%TODO niet helemaal happy, hoe zeg je dit zonder steeds "as described by Hinne et al." te zeggen? "This research" kan ook naar ons eigen werk verwijzen en is verwarrend, het moet duidelijk zijn dat dit alles niet door ons gedaan is.
-We performed our analysis on the same data as treated by Hinne et al. in the aforementioned Bayesian structural analysis \cite{hinne2013, hinne2013structfunc}.
-This article describes how resting-state functional data of six subjects was measured at the Donders Centre for Cognitive Neuroimaging at the Radboud University.
-This functional data is divided in 116 nodes and 1029 time-series per subject.
-Additionally, diffusion-weighted images of these subjects have been obtained.
-Based on these DWI-measurements, a structural connectivity matrix has been inferred with a technique described by Hinne et al.
-We used the six resulting resting-state functional time series data and connectivity matrices from the Bayesian analysis as pre-processed by Hinne et al.
-
-No additional pre-processing has been done in our research in order to apply the PC algorithm on this data.
 
 
 \section{Results}\label{sec:results}
@@ -496,5 +477,26 @@ This in turn might leverage development of better and faster data driven methods
 \bibliography{references}{}
 \addcontentsline{toc}{section}{References}
 \bibliographystyle{plain}
+
+\appendix
+\section{Data acquisition}\label{sec:data}
+%Subject acquisition and instruction
+%Used equipment and specs
+%Experimental setup
+%Scanner settings
+%Preprocessing
+%- Software
+%- Scripts
+%Resulting data specs
+%TODO niet helemaal happy, hoe zeg je dit zonder steeds "as described by Hinne et al." te zeggen? "This research" kan ook naar ons eigen werk verwijzen en is verwarrend, het moet duidelijk zijn dat dit alles niet door ons gedaan is.
+We performed our analysis on the same data as treated by Hinne et al. in the aforementioned Bayesian structural analysis \cite{hinne2013, hinne2013structfunc}.
+This article describes how resting-state functional data of six subjects was measured at the Donders Centre for Cognitive Neuroimaging at the Radboud University.
+This functional data is divided in 116 nodes and 1029 time-series per subject.
+Additionally, diffusion-weighted images of these subjects have been obtained.
+Based on these DWI-measurements, a structural connectivity matrix has been inferred with a technique described by Hinne et al.
+We used the six resulting resting-state functional time series data and connectivity matrices from the Bayesian analysis as pre-processed by Hinne et al.
+
+No additional pre-processing has been done in our research in order to apply the PC algorithm on this data.
+
 
 \end{document}
