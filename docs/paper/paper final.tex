@@ -512,96 +512,87 @@ Due to the size of the resulting graphs, we represent them in the form of connec
 A connection from region $n$ to region $m$ is represented by point $(n,m)$ in the matrix.
 Higher values represent higher frequencies of a connection over all permutations.
 In all matrices, indices 1-45 represent the brain regions of the left hemisphere, indices 45-90 represent the right hemisphere, and indices 91-116 represent regions in the cerebellum.
+As such, the matrices are divided into blocks: the top left corner represents the connections within the left hemisphere, the bottom left corner represents the connections between the left hemisphere and the cerebellum, etc.
 % For clarification, these are also plotted separately.
 
-\subsection{Structural graph}
+\subsection{Structural graphs}
 %- Measuring whole-brain structural and directional consistency of PC - frequency of occurrences within subjects
 %Applying the standard PC algorithm yields an undirected graph, in which each edge has a certainty.
 %This is done both per subject, and as an avarage over all subjects.
 %We compared the generated structure with a Bayesian inference approach on finding structural connectivity from diffusion weighted imaging, as described in Hinne et al.\cite{hinne2013}.
 Modified PC and EMS-PC do not differ in finding the structure.
 As edges found with the structural part of PC are undirected, the found matrices are symmetrical.
-The results are presented per subject in figure~\ref{} and as an avarage across all subjects in figure~\ref{fig:struct_avg}. %TODO: figure fixen per subjects
+The results are presented per subject in figure~\ref{fig:struct_subjects} and as an avarage across all subjects in figure~\ref{fig:struct_avg}.
 For comparison, the structural connectivity as found by Hinne et al.\cite{hinne2013} are also show. 
 
 \begin{figure}[h!]
   \centering
-  \includegraphics[width=0.5\textwidth]{images/struct_full}
-  \includegraphics[width=0.5\textwidth]{images/structure_max}
-  \caption{The avarage structure of all subjects. The structure on the left is found with the PC-algorithm, and the structure on the right is found with DWI-measurements by Hinne et al. Note that these matrices are subdivided into blocks corresponding with the subdivision of indices as described in section~\ref{sec:results}. The two diagonal lines represent connections between the two hemispheres.}
+  \includegraphics[height=0.28\textwidth]{images/new/struct_subj1-crop} % TODO remove colorbar, why is it even there
+  \includegraphics[height=0.28\textwidth]{images/new/struct_subj2-crop}
+  \includegraphics[height=0.28\textwidth]{images/new/struct_subj3_colorbar-crop} % one colorbar at the top right of the figure
+  \includegraphics[height=0.28\textwidth]{images/new/struct_subj4-crop}
+  \includegraphics[height=0.28\textwidth]{images/new/struct_subj5-crop}
+  \includegraphics[height=0.28\textwidth]{images/new/struct_subj6-crop}
+  \caption{The structure of all six subjects as found with the PC algorithm. The two diagonal lines represent connections between the two hemispheres.}
+\label{fig:struct_subjects}
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.49\textwidth]{images/struct_full}
+  \includegraphics[width=0.49\textwidth]{images/structure_max}
+  \caption{The avarage structure of all subjects. The structure on the left is found with the PC-algorithm, and the structure on the right is found with DWI-measurements by Hinne et al. The two diagonal lines represent connections between the two hemispheres.}
 \label{fig:struct_avg}
 \end{figure}
 
-\subsection{Causal graph}
+\subsection{Directed graphs}
 This structural graph has been used as a basis for a directed graph, for both standard PC and EMS-PC.
-The results for standard PC are shown per subject in Figure~\ref{} and in as an avarage across subjects in figure~\ref{fig:pdag_avg_mod}.
-Additionally, a histogram showing the frequencies of the values in the avarage matrix is presented in figure~\ref{}.
-Although many arrowheads are found with probabilities above 0.9, the graph looks strongly symmetric.
+As there were no notable differences between different subjects, only the avarage PDAG across all subjects is presented.
+The results for standard PC and EMS-PC are shown in figure~\ref{fig:pdag_avg}.
+Although many arrowheads are found with probabilities above 0.9 for both variants of the algorithm, the graph looks strongly symmetric.
 In terms of causality, this means that many latent sources are still present and causal relations between the measured brain regions themselves are not clearly visible.
 
-The results for EMS-PC are presented in a similar way. The results per subjects are shown in figure~\ref{} and the avarage across subjects in figure~\ref{fig:pdag_avg_ems}. A histogram of the average is presented in figure~\ref{}. Again, the image looks strongly symmetric.
-
 \begin{figure}[h!]
   \centering
-  \includegraphics{images/pdag_avg_colored_mod}
-  \caption{The PDAG found with standard PC, in which a high value denotes a high certainty of an arrowhead. The avarage of all six subjects is taken.}
-  \label{fig:pdag_avg_mod}
+  \includegraphics[width=0.49\textwidth]{images/new/PDAG_avg_mod-crop}
+  \includegraphics[width=0.49\textwidth]{images/new/PDAG_avg_expl-crop}
+  \caption{The PDAG found standard PC at the left, and EMS-PC at the right. A high value denotes a high certainty of an arrowhead. The avarage of all six subjects is taken.}
+  \label{fig:pdag_avg}
 \end{figure}
 
-\begin{figure}[h!]
-  \centering
-  \includegraphics{images/PDAG_avg_colored_expl}
-  \caption{The PDAG found with EMS-PC, in which a high value denotes a high certainty of an arrowhead. The avarage of all six subjects is taken.}
-  \label{fig:pdag_avg_ems}
-\end{figure}
-
-Another representation of this data has been used to emphasise the asymmetric parts of Figures ~\ref{fig:pdag_avg_mod} and ~\ref{fig:pdag_avg_ems}.
+Another representation of this data has been used to emphasise the asymmetric parts of the directed graphs.
 To achieve this, the absolute difference between these matrices and their transpose has been calculated, lifting out those points for which there is an arrow in one direction, but not in the opposite direction.
-These resulting antisymmetric matrices are presented in Figures ~\ref{fig:pdag_avg_antisymmetric_mod} and ~\ref{fig:pdag_avg_antisymmetric_ems}.
+These resulting antisymmetric matrices are presented per subject for EMS-PC in figure~\ref{fig:assym_subjects}. The avarage across all subjects for both variants of the PC algorithm are presented in figure~\ref{fig:assym_avg}.
 
 \begin{figure}[h!]
   \centering
-  \includegraphics{images/arrowheads_avg_mod}
-  \caption{The asymmetric arrowheads of the PDAG found with standard PC, in which a high value denotes a high certainty of an one-directional arrow. The average of all six subjects is taken.}
-  \label{fig:pdag_avg_antisymmetric_mod}
+  \includegraphics[height=0.25\textwidth]{images/new/assym_subj1_expl-crop}
+  \includegraphics[height=0.25\textwidth]{images/new/assym_subj2_expl-crop}
+  \includegraphics[height=0.25\textwidth]{images/new/assym_subj3_expl-crop}
+  \includegraphics[height=0.25\textwidth]{images/new/assym_subj4_expl-crop}
+  \includegraphics[height=0.25\textwidth]{images/new/assym_subj5_expl-crop}
+  \includegraphics[height=0.25\textwidth]{images/new/assym_subj6_expl-crop}
+  \caption{The assymetric parts of the PDAG found with EMS-PC for all six subjects, in which a high value denotes a high certainty of a one-directional arrow.}
+\label{fig:assym_subjects}
 \end{figure}
 
 \begin{figure}[h!]
   \centering
-  \includegraphics{images/PDAG_avg_antisymmetric_expl}
-  \caption{The assymetric parts of the PDAG found with EMS-PC, in which a high value denotes a high certainty of an one-directional arrow. The avarage of all six subjects is taken.}
-  \label{fig:pdag_avg_antisymmetric_ems}
+  \includegraphics[width=0.49\textwidth]{images/new/assym_avg_mod-crop}
+  \includegraphics[width=0.49\textwidth]{images/new/assym_avg_expl-crop}
+  \caption{The assymetric parts of the PDAG found with standard PC on the left, and EMS-PC on the right. A high value denotes a high certainty of an one-directional arrow. The avarage of all six subjects is taken.}
+  \label{fig:assym_avg}
 \end{figure}
 
-%Again, a certainty of each individual arrowhead may be found by applying stability selection.
-%- Markov equivalence class size (nr. of latent variables / bidirectional arrows) within subjects
-%Different permutations of nodes may yield different directionalities for the same edge, and bi-directional arrows may be found.
-%Of specific interest here are consistent non-symmetrical orientations, as one-directional arrows imlpy a causal relation.
-%Edges of two arrowhead imply a common confounder.
-%- Markov class Asymmetry and certain asymmetry within subjects
-%- Consistency of structure across subjects when aggregating results (averaging and frequency of occurences)
-%The results will again be analyses per subject, and as an avarage over all subjects; Causal relations appearing in specific subjects will, or in general.
-%- Consistency of directionality across subjects when aggregating results
-%The functioning of the brain will not completely differ between different subjects and therefore some consistency across subjects is expected.
-%Consistency between the two hemispheres is also expected, as they are anatomically symmetrical.
-
-%\paragraph{EMS-PC}   Er werd veel herhaald t.o.v. standard PC, dus ik heb ze samen genomen. amount of sepsets en faithfulness is niet dubbel, maar hebben we deze resultaten opgeslagen en kunnen we er iets nuttigs over zeggen?
-%- Measuring whole-brain structural and directional consistency of EMS-PC
-%- Markov equivalence class size (nr. of latent variables / bidirectional arrows) within subjects
-%- Markov class Asymmetry and certain asymmetry within subjects
-%- Amount of separating sets found
-%- Unfaithfulness check with and without additional separating sets
-
-%\paragraph{Comparison between standard PC and EMS-PC}
-%- Comparison of directionality between standard PC and EMS-PC on consistency of results within subjects
-%As EMS-PC is more constrained in concluding directionality, it may find less erroneous arrows than standard PC.
-%To verify this, the number and consistency of one-directional arrows is compared.
-%- Comparison of ... of results across subjects
-%Again, this is both done per-subject and on the average across subjects.
-%- Run-time of methods and comparison between run-times
-%The run-time of both methods will be compared.
-%- Comparison of structure (functional connectivity) of PC (both. they're identical in structure) with DWI results by Max et al. -> verplaatst naar het stukje aan het begin, over structure PC
-
+As can be seen in figures~\ref{assym_subjects} and~\ref{assym_avg}, the certainties of one-directional arrows are very low compared to the certainties of the bi-directional arrows. Also, the certainties of one-directional arrows are somewhat higher in EMS-PC than in standard PC. To illustrate this, the distribution of these values are presented in figure~\ref{fig:distributions}
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.49\textwidth]{images/new/dist_all_mod_blackstruct_reddir_blueantisym-crop}
+  \includegraphics[width=0.49\textwidth]{images/new/dist_all_expl_blackstruct_reddir_blueantisym-crop}
+  \caption{The distribution of values, for standard PC at the left, and EMS-PC at the right. The horizontal axis shows the relative number of occurences in the graph. The black line represent the distribution of results of the structural part of PC, and is equal for both variants. The red and the blue line represent the distribution of values of arrowheads and one-directional arrows, respectively.}
+  \label{fig:assym_avg}
+\end{figure}
+ 
 %Answer all the questions as mentioned in methods, in the same order
 %No aggregation over direction, motivate this
 
