@@ -148,94 +148,63 @@ Causal relations have only be found with very low certainty.
 \end{abstract}
 
 \section{Introduction}
-%Effective connectivity resting state analysis in human brains
-%Resting state
-%Brains are networks; apply graphical models and causal discovery
-
-% Petty introductory talk
+% Subject introduction
 The brain and particularly the human brain have been studied for hundreds of years.
 Today, brain research is still one of the thriving fields of research.
 A lot has changed since the time of Phrenology, the pseudoscience attempting to derive cognitive ability and personality from measurements of the skull or, post-mortem, the brain.
-Advanced and non-intrusive measurement methods exist that allow scientists to peek inside brains that give a coarse but broad overview with widespread clinical and research purposes.
-
-
-\subsection{ Motivation for research}
-%Better understanding of brains
-%Relatively new field - not yet an established analysis method
+Advanced and non-intrusive measurement methods exist that allow scientists to peek inside brains that give a coarse but broad overview, with widespread established clinical and research purposes.
 
 % Motivation for brain connectomics
-The question how our brains are wired - brain connectomics - drives one of the leading fields of research in neuroscience.
+The question how our brains are wired - brain connectomics - drives one of the main fields of research in neuroscience.
 Our brains are in essence networks which can be analysed similarly to very large graphs.
+That is why it is almost natural to apply graphical modelling methods to brain data.
+The field of brain connectivity finds its roots in the early 1990s \cite{friston1993functional, friston1994}, though because of more recent developments in the field of Artificial Intelligence and Machine Learning it is possible to do more thorough analysis \cite{vandenheuvel2010}.
 Neuro-degenerative diseases such as Alzheimer's disease, Parkinson's disease, dementia, Amyotrophic lateral sclerosis (ALS) have all been shown to severely alter brain connectivity \cite{Bullmore2009}.
 An application of connectivity analysis would be to provide markers to identify the disease and its severity, as well as another means of studying these diseases.
+A helpful analysis tool for finding such markers would be to find which brain areas exert influence on other areas leading  to the unwanted effects.
 
-% Causal discovery and brain networks
-The field of brain connectivity finds its roots in the early 1990s \cite{friston1993functional, friston1994}, though because of more recent developments in the field of Artificial Intelligence and Machine Learning it is possible to do more thorough analysis \cite{vandenheuvel2010}.
-Research regarding effective connectivity - causal relations in brain networks - is relatively new and its application still faces many challenges that require further research \cite{ramsey2010}.
-
-
-%Existing problems with current methods and applications, specifically [Tom: mention all, or just the relevant problems?][Ramon: de relevante nu benoemd]
-%- Model selection
-
-Ramsey et al. lists several problems in inferring brain connectivity.
-%- Indirect measurements
-One of these problems is that many interesting brain-data is measured indirectly; a measured variable is an effect of the cause we want to know.
+% Problems with current methods
+Research regarding effective connectivity - causal relations in brain networks - is still new and its application still faces many challenges that require further research \cite{ramsey2010}.
+% Model selection
+Methods are unable to fine-tune their results for more than tens of variables, while in practice systems have thousands of variables.
+% Indirect measurements
+Brain data on which these methods are applied are indirect measurements of underlying neuronal activity through blood oxygen levels, water diffusion or magnetic and electrical fields.
 This makes inference hard in practical models: many latent variables may be present, influencing this cause-effect relation.
-%- Distinct but overlapping ROIs
-%- Varying Haemodynamic response (HRF)
-Related is the problem of haemodynamic response fluctuations (HRF).
-In functional MRI-measurements, the delay between brain activity and the indirect measurement of that activity is unknown. %TODO moest MRI nou helemaal uitgeschreven of niet? Ik vind zelf van niet.
-Any form of causal inference based on sequence in time might therefore be incorrect; A cause may be measured after its effects, if it has a larger delay.
-%- Modelling causal structure across individuals (varying responses to same stimuli)
-Also, brain-data is not always consistent, both over time and across different persons. This makes it hard to get significant results.
-%Find shortcomings of PC and improve it (EMS-PC)
-
-Similarly to how graph theory has been applied in functional and anatomical brain networks, it seems natural to apply methods from causal discovery to deduce effective brain networks.
-Such an approach can deduce causal relations without depending on sequence in time, negating the problem of HRF.
-
-\subsection{Previous research}
-Previous work on effective connectivity include the aforementioned Granger causality \cite{roebroeck2005}, Structural Equation Modelling \cite{mclntosh1994}, Multivariate Autoregressive Modelling \cite{harrison2003} and Dynamic Causal Modelling \cite{friston2003}.
-All of these methods fail to cope with the problems mentioned in the introduction.
-Most of these methods can only handle tens of variables in reasonable time, which becomes problematic in realistic situations with up to tens of thousands of variables.
-
-In the field of causality, Spirtes et al.\cite{spirtes2000} have described several methods of inferring causal relations.
-Notable is the PC algorithm, named after its authors \textbf{P}eter Spirtes and \textbf{C}lark Glymour.
-Several adaptions of this algorithm have been described, for different assumptions about the input data.
-The PC algorithm runs in two stages; the first stage finds undirected connections between nodes, and the second stage uses these connections to infer causal relations.
-%TODO nog meer previous research over causal discovery? Bayesian approaches?
+% Modelling causal structure across individuals
+It is also hard to model connectivity across individuals.
+Up to some extent brain anatomy is similar for multiple subjects, but in modelling tasks the differences are too large to accurately aggregate data.
+% Varying Haemodynamic Response (HRF)
+Even a single brain reacts different over time.
+In functional Magnetic Resonance Imaging (fMRI) the delay between brain activity and the Haemodynamic Response Fluctuates (HRF) over time, blurring temporal relations between cause and effect; a cause may be measured after its effects.
 
 \subsection{Problem statement}
 %See whether applying causal methods (PC and EMS-PC) can help bring new insights and whether we can find evidence for the existence of causal patterns on a whole brain level.
-This work seeks to utilise the strengths of a current state-of-the-art causal discovery method, namely the PC algorithm, by applying it to resting state brain fMRI data.
-As such methods negate the HRF, and generally have a good run-time performance, this may lead to new applicable methods for determining causal patterns in the human brain.
+This work seeks to utilise the strengths of an established causal discovery method, namely the PC algorithm, by applying it to resting-state brain fMRI data of the human brain.
+The PC algorithm can cope with hundreds of variables while remaining tractable.
+We evade the problem of HRF by assuming our data comes from a distribution in a state of equilibrium, where temporal components are less strong.
 
-\subsection{Research goal}
-%How does the standard causal discovery method PC Algorithm behave regarding the aforementioned problems when applied to resting-state functional time-series data?
-With this research, we want to find out to what extend the PC algorithm can solve the mentioned problems, when applied on resting-state functional time-series data. 
-%- Does the PC algorithm applied on resting-state functional data provide consistent, specific and anatomically plausible connectivity?
-After the algorithm has been applied on this data, the resulting model can be analysed.
-From this it can be concluded whether the PC algorithm provides a way of finding consistent, specific and anatomically plausible connectivity.
-%- How does functional connectivity found by the first part of PC relate to other structural / functional methods applied on the same resting-state functional data regarding the aforementioned problems?
-As the PC algorithm runs in two stages, two results will also be found.
-The first result is a network of correlated brain regions, comparable to a functional connectivity network.
-The second stage finds causal relations, comparable with effective connectivity.
+We introduce an adaptation to the PC algorithm named EMS-PC that is also theoretically sound and performs at least as good as PC without additional run-time complexity.
+We wonder whether application of both methods provides a means of finding consistent, specific and anatomically plausible connectivity.
+As there is no baseline to compare results with, we compare these methods with another method for finding structural connectivity applied on the same resting-state data.
 
-%How does the performance of EMS-PC relate to PC regarding the aforementioned problems when applied to the same resting-state functional time-series data?
-The PC algorithm makes some strong assumptions about the data.
-Brain data generally contains much noise and latent variables, and these assumptions might not hold.
-We have therefore attempted to make the PC algorithm more robust, and we will analyse whether these changes have an impact on the results.
+% Resting-state
+Resting-state indicates that subjects are instructed to relax without thinking of anything in particular to stimulate spontaneous brain activity; neural activity does not stop when not doing anything in particular.
+Resting-state provides a typical whole brain behaviour that is reliable, robust, unique to a subject and task-independent.
+Measuring resting-state thus provides an advantage when analysing brain connectivity on a global, whole brain level.
+Resting-state analysis has been shown to work well in practice \cite{Lowe2000, doria2010, Bullmore2009}.
 
-Connectivity may differ per person, but many connections are also present in every person. These analyses will therefore be applied both on measurements of individual brains, and on cross-subject aggregations.
-%- When would EMS-PC perform better than PC algorithm regarding directionality results? [Ramon: lijkt me meer iets voor validation]
-%- Is EMS-PC more consistent in its results within a single subject than PC algorithm on resting-state functional data, regarding the multiple separating set addition and the explicit v-structure test?
-%- Can we find unfaithfulness within our model without additional independence tests?
+% Previous research
+Previous work on causal methods that have been applied on brain data include Granger causality \cite{roebroeck2005}, Structural Equation Modelling \cite{mclntosh1994}, Multivariate Autoregressive Modelling \cite{harrison2003} and Dynamic Causal Modelling \cite{friston2003}.
+All of these methods fail to cope with the problems mentioned in the introduction.
+Most of these methods can only handle tens of variables in reasonable time even though they are data driven methods.
+This is problematic in realistic situations with up to tens of thousands of variables.
+Some of these methods rely too much on the temporal component, so that application on brain data may not be very reliable.
 
-
-%\subsection{Relevance of research}
-%If HRF can be avoided, causal patterns can be established with greater reliability
-%Insight and diagnostics in neuro-degenerative diseases
-%Any found evidence of causal patterns can give an impulse to further research
-%[Ramon: is dit niet al duidelijk uit motivation? Lijkt me dubbelop]
+% Structure of the rest of the paper
+In the next section we cover necessary background details on brain connectivity, causal discovery and the PC algorithm.
+In section~\ref{sec:methods} we introduce the EMS-PC method and our experimental approach.
+We then present our results.
+We close with a discussion on the covered material.
 
 \section{Background}
 \subsection{Types of brain connectivity}
@@ -243,14 +212,7 @@ Work on brain connectivity theory discerns three types of brain connectivity.
 
 \paragraph{Functional connectivity}
 Functional connectivity describes the statistical dependence of neuronal activity between different brain regions \cite{friston1993functional}.
-Functional connectivity can be deduced through correlation of Functional Magnetic Resonance Imaging (fMRI) measurements of oxygen saturation  in blood - the BOLD response - while performing a certain cognitive task, or in so called resting-state.
-
-\paragraph{Resting-state}
-Resting-state indicates that subjects are instructed to relax without thinking of anything in particular to stimulate spontaneous brain activity; neural activity does not stop when not doing anything in particular.
-Resting-state provides a typical whole brain behaviour with a low frequency ( < .1 Hz) that is reliable, robust, unique to a subject and task-independent.
-Measuring resting-state thus provides an advantage when analysing brain connectivity on a global, whole brain level.
-Resting-state measurements have the disadvantage that it is difficult to check whether a subject truly is in a resting-state; it is often quite difficult not to think of anything in particular.
-Resting-state analysis has been shown to work well in practice \cite{Lowe2000, doria2010, Bullmore2009}.
+Functional connectivity can be deduced through correlation of fMRI measurements of oxygen saturation  in blood - the BOLD response - while performing a certain cognitive task in resting-state.
 
 \paragraph{Structural connectivity}
 Structural connectivity is defined as the mapping of white-matter tracts in the brain between different regions \cite{friston1994}.
@@ -272,6 +234,7 @@ An established relation of effective connectivity to actual anatomical brain rel
 
 \subsection{Causal discovery theory}
 An approach for finding analysing effective connectivity may be found in the domain of causal discovery.
+Pearl\cite{pearl2000causality} and Spirtes, Glymour and Scheines\cite{spirtes2000} have described the theoretical basis of causal inference methods.
 A causal discovery method uses data of observed events to determine which of these events are correlated and additionally attempts to determine which events cause which.
 We can define a causal relation as follows.
 
@@ -335,6 +298,7 @@ Since we assumed Causal Markov Conditionality, no feedback loops exist and all b
 
 \subsection{PC algorithm}
 The PC algorithm is a so-called constraint based method, where solutions are found by incrementally leaving out or adding parts that do not violate a set of constraints.
+It is named after its authors \textbf{P}eter Spirtes and \textbf{C}lark Glymour.
 Starting from a fully connected undirected graph, the PC algorithm forms structure by cutting away edges between conditionally independent variables.
 In the second step, orientation rules are applied based on found separating sets and structure.
 The original PC algorithm assumes causal sufficiency, excluding the existence of common confounders between nodes.
@@ -394,7 +358,7 @@ Pseudocode for this method is shown in algorithm~\ref{alg:pc_alg}.
 
 Starting from a fully connected graph, standard PC finds a minimal separating set for every pair of non-adjacent nodes $X$ and $Y$.
 These are lines~\ref{alg:pc_alg:p1_start} to \ref{alg:pc_alg:p1_end} in the pseudocode.
-The independence of $X$ and $Y$ is tested given a subset of neighbours of $X$ or $Y$ using a statistical independence test such as the Chi-square or Fisher-Z independence tests. %TODO: Add citation to these methods.
+The independence of $X$ and $Y$ is tested given a subset of neighbours of $X$ or $Y$ using a statistical independence test such as the Chi-square or Fisher-Z independence tests.
 If such an independence is found, this subset is a separating set of $X$ and $Y$ and they are not connected.
 If no such set can be found, the variables are assumed to be dependent and thus remain connected.
 To find a minimal separating set, all subsets of neighbours are traversed in order of size; the first separating set which is found, is the minimal one.
@@ -402,7 +366,7 @@ To find a minimal separating set, all subsets of neighbours are traversed in ord
 Next, PC algorithm attempts to orient these edges.
 These are lines~\ref{alg:pc_alg:p2_start} to \ref{alg:pc_alg:p2_end} in the pseudocode.
 The 'o' mark represents that it is unknown what orientation the specific edge should have thus representing an entire Markov class of solutions rather than a specific instance.
-Like Spirtes et al, we use a star-symbol at the end of an edge to denote that any mark may be present: an arrowhead, an "o" or an empty mark.
+Like Spirtes, Glymour and Scheines, we use a star-symbol at the end of an edge to denote that any mark may be present: an arrowhead, an "o" or an empty mark.
 When an edge is oriented as an edge with a star, this denotes that this end is not changed.
 The first of the directionality rules attempts to orient unshielded triples.
 For a triple $\left < X,Y,Z, \right>$ to be oriented, $X$ and $Z$ should have a separating set $S$ not containing $Y$.
@@ -413,7 +377,7 @@ These rules are based on already found directionality.
 \paragraph{Run-time performance}
 The PC algorithm run-time is in the order of the amount of dependency tests to be performed and thus it has a worst-case runtime complexity exponential in the maximal branching degree present in the graph.
 However, this worst-case scenario only happens when no edges can be removed; all subsets of the complete set of nodes have to be used to test d-separation of every pair of nodes.
-For a sparse graph, many edges may be removed for small separating sets, and this enables the standard PC algorithm to often run fast in practice perform well on hundreds of variables. % TODO: add citation to example publication. Peter Lucas maybe or examples in the sprites book?
+For a sparse graph, many edges may be removed for small separating sets, and this enables the standard PC algorithm to often run fast in practice perform well on hundreds of variables.
 
 \paragraph{Shortcomings}
 Although PC is proven correct, the version provided above as standard PC is not.
@@ -434,7 +398,7 @@ The resulting algorithmic changes provide better results and is able to mark inc
 Sadly, CPC requires a significant amount of additional conditional independence tests, exponential in the largest branching degree of the tested structure.
 Although the weaker assumptions made with conservative PC might be useful for this research, the run-time performance is not good enough to apply it on our dataset.
 
-\section{Methods}% (our contributions)
+\section{Methods}\label{sec:methods}% (our contributions)
 Standard PC provides a good starting point for an exploratory point of view in causal discovery.
 Already with simple and small adjustments to standard PC with little increment in computational cost, standard PC can be made more reliable.
 In the rest of this section we describe our additions to this method, as well as an experimental setup
@@ -490,7 +454,7 @@ Resting-state data can be intuitively thought of being more time independent tha
 Nevertheless it is most likely not a fully correct modelling assumption, though enables straightforward application of standard and EMS-PC to functional data without the problem of HRF.
 
 % Application to data
-We applied standard PC and EMS-PC on functional resting-state time-series data of six healthy individuals, also previously used by Hinne et al\cite{hinne2013}.
+We applied standard PC and EMS-PC on functional resting-state time-series data of six healthy individuals, also previously used by Hinne et al.\cite{hinne2013}.
 1030 volumes were obtained per subject.
 After preprocessing the fMRI data was parcellated according to the Automated Anatomical Labeling (AAL) atlas in 116 regions of interest.
 The exact procedure of subject acquisition, used scanner properties and parameters and data preprocessing is provided in appendix~\ref{sec:data}.
@@ -601,7 +565,7 @@ In terms of causality, this means that many latent sources are still present and
 
 Another representation of this data has been used to emphasise the asymmetric parts of the directed graphs.
 To achieve this, the absolute difference between these matrices and their transpose has been calculated, lifting out those points for which there is an arrow in one direction, but not in the opposite direction.
-These resulting antisymmetric matrices are presented per subject for EMS-PC in figure~\ref{fig:assym_subjects}. The avarage across all subjects for both variants of the PC algorithm are presented in figure~\ref{fig:assym_avg}.
+These resulting antisymmetric matrices are presented per subject for EMS-PC in figure~\ref{fig:asym_subjects}. The avarage across all subjects for both variants of the PC algorithm are presented in figure~\ref{fig:asym_avg}.
 
 \begin{figure}[h!]
   \centering
@@ -612,7 +576,7 @@ These resulting antisymmetric matrices are presented per subject for EMS-PC in f
   \includegraphics[height=0.25\textwidth]{images/new/assym_subj5_expl-crop}
   \includegraphics[height=0.25\textwidth]{images/new/assym_subj6_expl-crop}
   \caption{The assymetric parts of the PDAG found with EMS-PC for all six subjects, in which a high value denotes a high certainty of a one-directional arrow.}
-\label{fig:assym_subjects}
+\label{fig:asym_subjects}
 \end{figure}
 
 \begin{figure}[h!]
@@ -620,10 +584,10 @@ These resulting antisymmetric matrices are presented per subject for EMS-PC in f
   \includegraphics[width=0.49\textwidth]{images/new/assym_avg_mod-crop}
   \includegraphics[width=0.49\textwidth]{images/new/assym_avg_expl-crop}
   \caption{The assymetric parts of the PDAG found with standard PC on the left, and EMS-PC on the right. A high value denotes a high certainty of an one-directional arrow. The avarage of all six subjects is taken.}
-  \label{fig:assym_avg}
+  \label{fig:asym_avg}
 \end{figure}
 
-As can be seen in figures~\ref{assym_subjects} and~\ref{assym_avg}, the certainties of one-directional arrows are very low compared to the certainties of the bi-directional arrows. Also, the certainties of one-directional arrows are somewhat higher in EMS-PC than in standard PC.
+As can be seen in figures~\ref{fig:asym_subjects} and~\ref{fig:asym_avg}, the certainties of one-directional arrows are very low compared to the certainties of the bi-directional arrows. Also, the certainties of one-directional arrows are somewhat higher in EMS-PC than in standard PC.
 For EMS-PC, the highest certainties found for one-directional edges per subject are in the range of 0.45 to 0.9, whereas the avarage across subjects has a maximum value of 0.3.
 The few one-directional arrows found in idividual subjects therefore do not seem to be consistent across different subjects.
 
