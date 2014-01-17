@@ -134,6 +134,12 @@ Universiteit Nijmegen}}}\\[0.5cm]\rule{\linewidth}{0.3mm}}
 \setlength{\parskip}{3mm plus2mm minus1.5mm}
 
 \begin{abstract}
+Many different approaches have been used to infer brain connectivity.
+But few general causal discovery methods have yet been used to find effective connectivity.
+In this article, we describe how the PC algorithm is used on functional brain-data.
+This approach results in connectivity matrices which clearly show some well-known brain connections.
+Some disadvantages of the PC algorithm for this use are discussed, and an attempt is made to decrease these disadvantages by making adjustments to the algorithm.
+Causal relations have only be found with very low certainty. 
 % TODO: first state what you try to do, then how you did it, then what it brought you
 %In this work we applied PC algorithm on resting-state data of healthy human subjects.
 %Additionally we propose a variant of PC algorithm that poses weaker assumptions on the model, better fitting the underlying model.
@@ -142,7 +148,6 @@ Universiteit Nijmegen}}}\\[0.5cm]\rule{\linewidth}{0.3mm}}
 \end{abstract}
 
 \section{Introduction}
-\subsection{Subject introduction}
 %Effective connectivity resting state analysis in human brains
 %Resting state
 %Brains are networks; apply graphical models and causal discovery
@@ -157,39 +162,76 @@ Advanced and non-intrusive measurement methods exist that allow scientists to pe
 \subsection{ Motivation for research}
 %Better understanding of brains
 %Relatively new field - not yet an established analysis method
-%Existing problems with current methods and applications, specifically [Tom: mention all, or just the relevant problems?]
+
+% Motivation for brain connectomics
+The question how our brains are wired - brain connectomics - drives one of the leading fields of research in neuroscience.
+Our brains are in essence networks which can be analysed similarly to very large graphs.
+Neuro-degenerative diseases such as Alzheimer's disease, Parkinson's disease, dementia, Amyotrophic lateral sclerosis (ALS) have all been shown to severely alter brain connectivity \cite{Bullmore2009}.
+An application of connectivity analysis would be to provide markers to identify the disease and its severity, as well as another means of studying these diseases.
+
+% Causal discovery and brain networks
+The field of brain connectivity finds its roots in the early 1990s \cite{friston1993functional, friston1994}, though because of more recent developments in the field of Artificial Intelligence and Machine Learning it is possible to do more thorough analysis \cite{vandenheuvel2010}.
+Research regarding effective connectivity - causal relations in brain networks - is relatively new and its application still faces many challenges that require further research \cite{ramsey2010}.
+
+
+%Existing problems with current methods and applications, specifically [Tom: mention all, or just the relevant problems?][Ramon: de relevante nu benoemd]
 %- Model selection
+
+Ramsey et al. lists several problems in inferring brain connectivity.
 %- Indirect measurements
-%- Modelling causal structure across individuals (varying responses to same stimuli)
+One of these problems is that many interesting brain-data is measured indirectly; a measured variable is an effect of the cause we want to know.
+This makes inference hard in practical models: many latent variables may be present, influencing this cause-effect relation.
 %- Distinct but overlapping ROIs
 %- Varying Haemodynamic response (HRF)
+Related is the problem of haemodynamic response fluctuations (HRF).
+In functional MRI-measurements, the delay between brain activity and the indirect measurement of that activity is unknown. %TODO moest MRI nou helemaal uitgeschreven of niet? Ik vind zelf van niet.
+Any form of causal inference based on sequence in time might therefore be incorrect; A cause may be measured after its effects, if it has a larger delay.
+%- Modelling causal structure across individuals (varying responses to same stimuli)
+Also, brain-data is not always consistent, both over time and across different persons. This makes it hard to get significant results.
 %Find shortcomings of PC and improve it (EMS-PC)
 
-\subsection{Problem statement}
-%See whether applying causal methods (PC and EMS-PC) can help bring new insights and whether we can find evidence for the existence of causal patterns on a whole brain level.
+Similarly to how graph theory has been applied in functional and anatomical brain networks, it seems natural to apply methods from causal discovery to deduce effective brain networks.
+Such an approach can deduce causal relations without depending on sequence in time, negating the problem of HRF.
 
 \subsection{Previous research}
-%[Tom: we did not explicitly have this paragraph, so this is additional effort]
-%[Ramon]: Lijkt me vergelijkbaar met de verwijzingen naar literatuur die we al hebben? Met wat extra referenties naar wat Max zei: temporele methodes zijn onbetrouwbaar, dat hebben wij niet
-%[Ramon]: even een goede balans zoeken tussen dit en "Existing problems" in motivation
-% Previous work
 Previous work on effective connectivity include the aforementioned Granger causality \cite{roebroeck2005}, Structural Equation Modelling \cite{mclntosh1994}, Multivariate Autoregressive Modelling \cite{harrison2003} and Dynamic Causal Modelling \cite{friston2003}.
 All of these methods fail to cope with the problems mentioned in the introduction.
 Most of these methods can only handle tens of variables in reasonable time, which becomes problematic in realistic situations with up to tens of thousands of variables.
 
+In the field of causality, Spirtes et al.\cite{spirtes2000} have described several methods of inferring causal relations.
+Notable is the PC algorithm, named after its authors \textbf{P}eter Spirtes and \textbf{C}lark Glymour.
+Several adaptions of this algorithm have been described, for different assumptions about the input data.
+The PC algorithm runs in two stages; the first stage finds undirected connections between nodes, and the second stage uses these connections to infer causal relations.
+%TODO nog meer previous research over causal discovery? Bayesian approaches?
+
+\subsection{Problem statement}
+%See whether applying causal methods (PC and EMS-PC) can help bring new insights and whether we can find evidence for the existence of causal patterns on a whole brain level.
+This work seeks to utilise the strengths of a current state-of-the-art causal discovery method, namely the PC algorithm, by applying it to resting state brain fMRI data.
+As such methods negate the HRF, and generally have a good run-time performance, this may lead to new applicable methods for determining causal patterns in the human brain.
+
 \subsection{Research goal}
 %How does the standard causal discovery method PC Algorithm behave regarding the aforementioned problems when applied to resting-state functional time-series data?
-%- Can we overcome the consistency problems of PC algorithm applied on resting-state functional data?
+With this research, we want to find out to what extend the PC algorithm can solve the mentioned problems, when applied on resting-state functional time-series data. 
 %- Does the PC algorithm applied on resting-state functional data provide consistent, specific and anatomically plausible connectivity?
+After the algorithm has been applied on this data, the resulting model can be analysed.
+From this it can be concluded whether the PC algorithm provides a way of finding consistent, specific and anatomically plausible connectivity.
 %- How does functional connectivity found by the first part of PC relate to other structural / functional methods applied on the same resting-state functional data regarding the aforementioned problems?
-%
+As the PC algorithm runs in two stages, two results will also be found.
+The first result is a network of correlated brain regions, comparable to a functional connectivity network.
+The second stage finds causal relations, comparable with effective connectivity.
+
 %How does the performance of EMS-PC relate to PC regarding the aforementioned problems when applied to the same resting-state functional time-series data?
-%- When would EMS-PC perform better than PC algorithm regarding directionality results?
+The PC algorithm makes some strong assumptions about the data.
+Brain data generally contains much noise and latent variables, and these assumptions might not hold.
+We have therefore attempted to make the PC algorithm more robust, and we will analyse whether these changes have an impact on the results.
+
+Connectivity may differ per person, but many connections are also present in every person. These analyses will therefore be applied both on measurements of individual brains, and on cross-subject aggregations.
+%- When would EMS-PC perform better than PC algorithm regarding directionality results? [Ramon: lijkt me meer iets voor validation]
 %- Is EMS-PC more consistent in its results within a single subject than PC algorithm on resting-state functional data, regarding the multiple separating set addition and the explicit v-structure test?
 %- Can we find unfaithfulness within our model without additional independence tests?
 
 
-\subsection{Relevance of research}
+%\subsection{Relevance of research}
 %If HRF can be avoided, causal patterns can be established with greater reliability
 %Insight and diagnostics in neuro-degenerative diseases
 %Any found evidence of causal patterns can give an impulse to further research
@@ -233,7 +275,6 @@ An approach for finding analysing effective connectivity may be found in the dom
 A causal discovery method uses data of observed events to determine which of these events are correlated and additionally attempts to determine which events cause which.
 We can define a causal relation as follows.
 
-% Causal relation
 \paragraph{Causal relation}
 For a specific system $S$, a variable $Q$ causes variable $R$ in $S$ if there is at least one value $q$ and at least one value $r$ that during a specific event in which $Q=q$ causes a \textit{different} event such that $R = r$ in $S$\cite[p.21]{spirtes2000}.
 
@@ -293,7 +334,6 @@ When sampling from the observed distribution, we would find a relation $X \leftr
 Since we assumed Causal Markov Conditionality, no feedback loops exist and all bi-directional arrows found must indicate existence of a latent confounder $Y$ where $X \leftarrow Y \rightarrow Z$.
 
 \subsection{PC algorithm}
-% Algorithm description
 The PC algorithm is a so-called constraint based method, where solutions are found by incrementally leaving out or adding parts that do not violate a set of constraints.
 Starting from a fully connected undirected graph, the PC algorithm forms structure by cutting away edges between conditionally independent variables.
 In the second step, orientation rules are applied based on found separating sets and structure.
@@ -513,7 +553,6 @@ A connection from region $n$ to region $m$ is represented by point $(n,m)$ in th
 Higher values represent higher frequencies of a connection over all permutations.
 In all matrices, indices 1-45 represent the brain regions of the left hemisphere, indices 45-90 represent the right hemisphere, and indices 91-116 represent regions in the cerebellum.
 As such, the matrices are divided into blocks: the top left corner represents the connections within the left hemisphere, the bottom left corner represents the connections between the left hemisphere and the cerebellum, etc.
-% For clarification, these are also plotted separately.
 
 \subsection{Structural graphs}
 %- Measuring whole-brain structural and directional consistency of PC - frequency of occurrences within subjects
@@ -584,7 +623,11 @@ These resulting antisymmetric matrices are presented per subject for EMS-PC in f
   \label{fig:assym_avg}
 \end{figure}
 
-As can be seen in figures~\ref{assym_subjects} and~\ref{assym_avg}, the certainties of one-directional arrows are very low compared to the certainties of the bi-directional arrows. Also, the certainties of one-directional arrows are somewhat higher in EMS-PC than in standard PC. To illustrate this, the distribution of these values are presented in figure~\ref{fig:distributions}
+As can be seen in figures~\ref{assym_subjects} and~\ref{assym_avg}, the certainties of one-directional arrows are very low compared to the certainties of the bi-directional arrows. Also, the certainties of one-directional arrows are somewhat higher in EMS-PC than in standard PC.
+For EMS-PC, the highest certainties found for one-directional edges per subject are in the range of 0.45 to 0.9, whereas the avarage across subjects has a maximum value of 0.3.
+The few one-directional arrows found in idividual subjects therefore do not seem to be consistent across different subjects.
+
+To illustrate the difference in certainties between bi-directional and one-directional edges, the distributions of these values are presented in figure~\ref{fig:distributions}.
 \begin{figure}[h!]
   \centering
   \includegraphics[width=0.49\textwidth]{images/new/dist_all_mod_blackstruct_reddir_blueantisym-crop}
@@ -593,18 +636,18 @@ As can be seen in figures~\ref{assym_subjects} and~\ref{assym_avg}, the certaint
   \label{fig:distributions}
 \end{figure}
  
-%Answer all the questions as mentioned in methods, in the same order
-%No aggregation over direction, motivate this
+\subsection{Execution time of the algorithm}
+To apply the algorithms on our data, we have used a Xeon E5-2670, running on 2,6GHz.
+To run one iteration of the PC algorithm for one subject, modified PC needed approximately one minute and EMS-PC needed approximately two minutes to find both structure and direction.
+Although PC is not designed to be multithreaded, running multiple iterations lends itself for using multiple threads, as the iterations are fully independent, and only need to be averaged out afterwards.
 
 \section{Discussion}
 %Good consistency of structure within and between subjects
 Many structural connections found by the PC algorithm are found consistently, both within one subject and also across multiple subjects.
 The connections between the two hemispheres can clearly be seen in all subjects, as well as many connections in the corpus collosum.
-The consistency can also be seen in the distribution of values in figure~\ref{distributions}.
+The consistency can also be seen in the distribution of values in figure~\ref{fig:distributions}.
 Non-zero values make up approximately 16 percentage points of the graph, of which 3 percentage points show a certainty larger than 0.5.
 Approximately 1 percentage point even shows a certainty of 1.
-
-%HRF
 
 % TODO: Maak duidelijk welke aannames gedaan worden in welke PC variant en welke aannames verzwakt zouden kunnen worden.
 
@@ -623,22 +666,26 @@ As such, statistical baed causal discovery methods contribute additional informa
 
 % Comparison Markov class standard PC and EMS-PC
 Both standard PC and EMS-PC find many bi-directional arrows, with some one-directional arrows.
-As can be seen in the distribution of values in figure~\ref{distributions}, nearly all found edges are oriented as bi-directional arrows.
-For EMS-PC, this number is somewhat lower but there are still few one-directional arrows, and they do not have certainties higher than 0.15. 
+As can be seen in the distribution of values in figure~\ref{fig:distributions}, nearly all found edges are oriented as bi-directional arrows.
+For EMS-PC, this number is somewhat lower but there are still few one-directional arrows, and they do not have certainties higher than 0.15.
+These certainties are not high enough to conclude any causal relations.
 
 %Poor consistency of directionality between subjects
 There is some significant and consistent directionality within each of the subjects.
 However the variance of this directionality between subjects is so high, there is no significant consistent one-directionality between them.
 We were unable to find existing literature on connectivity methods regarding significant intra-subject one-directionality.
-
 %Lack of symmetry
-There is little to none symmetry in directionality between the two hemispheres within and across subjects.
+There is also little to none symmetry in directionality between the two hemispheres within and across subjects.
 One would at least expect some symmetry to be found.
-This demonstrates that the gap between analytical methods for effective connectivity and anatomical correctness is still to wide.
+This demonstrates that the gap between analytical methods for effective connectivity and anatomical correctness is still too wide.
 
 % Further research
 Further research may be done to investigating whether any of these arrows have a physiological meaning.
 This can be done by repeating these experiment with more subjects to get a better view on the significance of the directional edges.
+
+%HRF
+One main strength of a general causal discovery method is that fluctuations in haemodynamic respons do not pose a problem.
+To continue this type of research, other causal discovery methods might be also be applied, and attempts can be made to negate the disadvantages of the PC algorithm.
 
 A causal network or Bayesian network cannot contain cycles by definition.
 However, exclusion of cycles in brain networks has not been proven and also seems unlikely.
@@ -648,7 +695,8 @@ We believe application of a Bayesian approach will provide a better insight.
 Standard PC and EMS-PC lack a robust measure of uncertainty.
 There is no baseline or correctness measure to compare results or data with
 A Bayesian approach such as proposed by Claassen and Heskes will provide more slack and insight in results \cite{claassen2012}.
-This in turn might leverage development of better and faster data driven methods.
+This in turn will leverage development of better and faster data driven methods.
+
 
 % TODO: Suggereren task based analysis ipv resting state voor beter causaal beeld. 
 
