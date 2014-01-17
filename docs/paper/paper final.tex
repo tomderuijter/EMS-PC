@@ -1,22 +1,20 @@
 % Needed packages
-\documentclass[a4paper, 10pt, english, onecolumn]{article}
+\documentclass[a4paper, english]{article}
 \usepackage[english]{babel}
-\usepackage[cm]{fullpage}
+%\usepackage[cm]{fullpage}
 \usepackage{cite}
-\usepackage{anysize}
+%\usepackage{anysize} <- this makes the article much wider
 \usepackage{setspace}
 %\usepackage[compact]{titlesec}
 \usepackage{graphicx}
 \usepackage{stfloats}
 \usepackage{listings}
 \usepackage{hyperref}
-
 \usepackage{amssymb,amsmath}
 \usepackage{algorithmicx}
 %\usepackage{algorithmic}
 \usepackage{algorithm}
 \usepackage[noend]{algpseudocode}
-
 % for coloring individual cells in a table
 \usepackage[table]{xcolor}
 %\usepackage{pgfgantt}
@@ -529,6 +527,8 @@ The results are presented per subject in figure~\ref{fig:struct_subjects} and as
 For comparison, the structural connectivity as found by Hinne et al.\cite{hinne2013} are also show. 
 
 \begin{figure}[h!]
+\hspace{-0.5in}
+\begin{minipage}[t]{1.2\textwidth}
   \centering
   \includegraphics[height=0.29\textheight]{images/new/struct_subj1-crop}
   \includegraphics[height=0.29\textheight]{images/new/struct_subj2_colorbar-crop} % one colorbar at the top right of the figure
@@ -536,7 +536,9 @@ For comparison, the structural connectivity as found by Hinne et al.\cite{hinne2
   \includegraphics[height=0.29\textheight]{images/new/struct_subj4-crop}
   \includegraphics[height=0.29\textheight]{images/new/struct_subj5-crop}
   \includegraphics[height=0.29\textheight]{images/new/struct_subj6-crop}
-  \caption{The structure of all six subjects as found with the PC algorithm. The two diagonal lines represent connections between the two hemispheres.}
+  \end{minipage}
+\caption{The structure of all six subjects as found with the PC algorithm. The two diagonal lines represent connections between the two hemispheres.}
+
 \label{fig:struct_subjects}
 \end{figure}
 
@@ -544,7 +546,7 @@ For comparison, the structural connectivity as found by Hinne et al.\cite{hinne2
   \centering
   \includegraphics[width=0.49\textwidth]{images/struct_full}
   \includegraphics[width=0.49\textwidth]{images/structure_max}
-  \caption{The avarage structure of all subjects. The structure on the left is found with the PC-algorithm, and the structure on the right is found with DWI-measurements by Hinne et al. The two diagonal lines represent connections between the two hemispheres.}
+  \caption{The avarage structure of all subjects. The structure on the left is found with the PC algorithm, and the structure on the right is found with DWI-measurements by Hinne et al. The two diagonal lines represent connections between the two hemispheres.}
 \label{fig:struct_avg}
 \end{figure}
 
@@ -568,6 +570,8 @@ To achieve this, the absolute difference between these matrices and their transp
 The resulting antisymmetric matrices are presented per subject for EMS-PC in figure~\ref{fig:asym_subjects}. The average across all subjects for both variants of the PC algorithm are presented in figure~\ref{fig:asym_avg}.
 
 \begin{figure}[h!]
+\hspace{-0.4in}
+\begin{minipage}[t]{1.2\textwidth}
   \centering
   \includegraphics[height=0.26\textheight]{images/new/assym_subj1_expl-crop}
   \includegraphics[height=0.26\textheight]{images/new/assym_subj2_expl-crop}
@@ -575,8 +579,9 @@ The resulting antisymmetric matrices are presented per subject for EMS-PC in fig
   \includegraphics[height=0.26\textheight]{images/new/assym_subj4_expl-crop}
   \includegraphics[height=0.26\textheight]{images/new/assym_subj5_expl-crop}
   \includegraphics[height=0.26\textheight]{images/new/assym_subj6_expl-crop}
-  \caption{The assymetric parts of the PDAG found with EMS-PC for all six subjects, in which a high value denotes a high certainty of a one-directional arrow.}
-label{fig:asym_subjects}
+\end{minipage}
+  \caption{The asymetric parts of the partial DAG found with EMS-PC for all six subjects, in which a high value denotes a high certainty of a one-directional arrow.}
+\label{fig:asym_subjects}
 \end{figure}
 
 \begin{figure}[h!]
@@ -594,9 +599,9 @@ The few one-directional arrows found in idividual subjects therefore do not seem
 To illustrate the difference in certainties between bi-directional and one-directional edges, the distributions of these values are presented in figure~\ref{fig:distributions}.
 \begin{figure}[h!]
   \centering
-  \includegraphics[width=0.49\textwidth]{images/new/dist_all_mod_blackstruct_reddir_blueantisym-crop}
-  \includegraphics[width=0.49\textwidth]{images/new/dist_all_expl_blackstruct_reddir_blueantisym-crop}
-  \caption{The distribution of values, for standard PC at the left, and EMS-PC at the right. The horizontal axis shows the relative number of occurences in the graph. Zero-values make up more than 84\% of the graph, these are not shown in this distribution. The black line represent the distribution of results of the structural part of PC, and is equal for both variants. The red and the blue line represent the distribution of values of arrowheads and one-directional arrows, respectively.}
+  \includegraphics[width=0.49\textwidth]{images/new/dist_all_mod_legend-crop}
+  \includegraphics[width=0.49\textwidth]{images/new/dist_all_expl_legend-crop}
+  \caption{The distribution of values, for standard PC at the left, and EMS-PC at the right. Zero-values make up more than 84\% of the graph, these are not shown in this distribution. The black line represent the distribution of results of the structural part of PC, and is equal for both variants. The red and the blue line represent the distribution of values of arrowheads and one-directional arrows, respectively.}
   \label{fig:distributions}
 \end{figure}
 
