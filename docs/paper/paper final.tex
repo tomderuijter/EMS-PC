@@ -589,8 +589,8 @@ As can be seen in figures~\ref{assym_subjects} and~\ref{assym_avg}, the certaint
   \centering
   \includegraphics[width=0.49\textwidth]{images/new/dist_all_mod_blackstruct_reddir_blueantisym-crop}
   \includegraphics[width=0.49\textwidth]{images/new/dist_all_expl_blackstruct_reddir_blueantisym-crop}
-  \caption{The distribution of values, for standard PC at the left, and EMS-PC at the right. The horizontal axis shows the relative number of occurences in the graph. The black line represent the distribution of results of the structural part of PC, and is equal for both variants. The red and the blue line represent the distribution of values of arrowheads and one-directional arrows, respectively.}
-  \label{fig:assym_avg}
+  \caption{The distribution of values, for standard PC at the left, and EMS-PC at the right. The horizontal axis shows the relative number of occurences in the graph. Zero-values make up more than 84\% of the graph, these are not shown in this distribution. The black line represent the distribution of results of the structural part of PC, and is equal for both variants. The red and the blue line represent the distribution of values of arrowheads and one-directional arrows, respectively.}
+  \label{fig:distributions}
 \end{figure}
  
 %Answer all the questions as mentioned in methods, in the same order
@@ -598,6 +598,11 @@ As can be seen in figures~\ref{assym_subjects} and~\ref{assym_avg}, the certaint
 
 \section{Discussion}
 %Good consistency of structure within and between subjects
+Many structural connections found by the PC algorithm are found consistently, both within one subject and also across multiple subjects.
+The connections between the two hemispheres can clearly be seen in all subjects, as well as many connections in the corpus collosum.
+The consistency can also be seen in the distribution of values in figure~\ref{distributions}.
+Non-zero values make up approximately 16 percentage points of the graph, of which 3 percentage points show a certainty larger than 0.5.
+Approximately 1 percentage point even shows a certainty of 1.
 
 %HRF
 
@@ -618,7 +623,8 @@ As such, statistical baed causal discovery methods contribute additional informa
 
 % Comparison Markov class standard PC and EMS-PC
 Both standard PC and EMS-PC find many bi-directional arrows, with some one-directional arrows.
-% TODO: find out how large these groups are.
+As can be seen in the distribution of values in figure~\ref{distributions}, nearly all found edges are oriented as bi-directional arrows.
+For EMS-PC, this number is somewhat lower but there are still few one-directional arrows, and they do not have certainties higher than 0.15. 
 
 %Poor consistency of directionality between subjects
 There is some significant and consistent directionality within each of the subjects.
