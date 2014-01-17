@@ -375,7 +375,7 @@ These rules are based on already found directionality.
 
 \paragraph{Run-time performance}
 The PC algorithm run-time is in the order of the amount of dependency tests to be performed and thus it has a worst-case runtime complexity exponential in the maximal branching degree present in the graph.
-However, this worst-case scenario only happens when no edges can be removed; all subsets of the complete set of nodes have to be used to test d-separation of every pair of nodes.
+However, this worst-case scenario only happens when no edges can be removed; all subsets of the complete set of nodes have to be used to test \textit{d}-separation of every pair of nodes.
 For a sparse graph, many edges may be removed for small separating sets, and this enables the standard PC algorithm to often run fast in practice perform well on hundreds of variables.
 
 \paragraph{Shortcomings}
@@ -422,7 +422,7 @@ If so, the graph might become more faithful to its modeled distribution; If stan
 For faithful graphs, this extra condition should not change the result, as it will always hold.
 
 %EMS-PC extension
-\paragraph{EMS-PC}
+\subsection{EMS-PC}
 We have combined the above ideas - multiple separating sets, unfaithfulness check and explicit orientation check - into an adaptation of PC, which we refer to as Explicit Multiple Separating Set PC (EMS-PC).
 These three changes have been made in this adaption with respect to standard PC as described in algorithm~\ref{alg:pc_alg}.
 At line~\ref{alg:pc_alg:next_pair}, the search for separating sets for $X$ and $Y$ stops when a separating set is found; instead, EMS continues the search for more separating sets of the same order.
@@ -444,21 +444,23 @@ It is also not a complete check as this would require as many tests as in CPC an
 Also if an unfaithful triple is detected, the impact on the final output is unclear as errors might have cascaded into further orientation steps.
 
 \subsection{Experimental validation}
-\paragraph{Experimental pipeline}\label{sec:pipeline}
 % What type of data is needed
 PC algorithm requires observational data where each instance is a vector of single observations per variable.
 We can model functional resting-state time-series as coming from some stable underlying mechanism that is largely time-independent.
 Resting-state data can be intuitively thought of being more time independent than task-influenced data due to the emergent character of activity pattens that occur when in resting-state.
 Nevertheless it is most likely not a fully correct modelling assumption, though enables straightforward application of standard and EMS-PC to functional data without the problem of HRF.
 
-% Application to data
+\paragraph{Data acquisition}
 We applied standard PC and EMS-PC on functional resting-state time-series data of six healthy individuals, also previously used by Hinne et al.\cite{hinne2013}.
-1030 volumes were obtained per subject.
 After preprocessing the fMRI data was parcellated according to the Automated Anatomical Labeling (AAL) atlas in 116 regions of interest.
-The exact procedure of subject acquisition, used scanner properties and parameters and data preprocessing is provided in appendix~\ref{sec:data}.
+This provides 1029 samples with 116 standard-normally distributed variables.
+For the exact procedure of subject acquisition, used scanner properties and parameters and data preprocessing we refer to the paper by Hinne et al. 
+Additionally, diffusion-weighted images of these subjects have been obtained from the same study.
+These were provided as six $116 \times 116$ binary connectivity matrices.
+No additional preprocessing was needed for application of our methods.
 We use Fisher's z-test for conditional independence to match the continuous nature of the data.
 
-% Implementation
+\paragraph{Implementation}
 We have implemented standard PC and EMS-PC in Matlab using statistical tests and ideas from the Bayesian Network Toolbox for Matlab.\footnote{Bayesian Network Toolbox for Matlab: https://github.com/bayesnet/bnt}
 This toolbox also includes an implementation for standard PC, however to gain better insight in the workings and to have greater flexibility in application, we have implemented standard PC separately.
 The Matlab scripts used for the results are made freely available online.\footnote{Matlab implementation of EMS-PC: https://github.com/tomderuijter/EMS-PC}
@@ -476,7 +478,7 @@ It is therefore questionable whether strong conclusions about individual edges c
 To correct for this in results, we have randomly permuted our data for a large amount of iterations and counted the frequencies of occurring edges.
 This is in accordance with the stability selection method for graphs as described by Meinshausen and B{\"u}hlmann\cite{meinshausen2010}.
 
-% Parameter selection
+\paragraph{Parameter selection}
 Due to the lack of a baseline to compare results with, dependency thresholds were chosen by hand.
 All experiments listed here were run with an alpha value of 0.01 for the independence test.
 The number of random permutations was set on 1000 per subject, which was found to be enough to determine statistical significance for 99\% of the found edges with a binomial statistical test.
@@ -509,37 +511,19 @@ As we cannot verify this directly, we compare the total count, consistency and s
 % Run-time of methods and comparison between run-times
 We also compare run-time per iteration between both.
 
-\section{Data acquisition}\label{sec:data}
-%Subject acquisition and instruction
-%Used equipment and specs
-%Experimental setup
-%Scanner settings
-%Preprocessing
-%- Software
-%- Scripts
-%Resulting data specs
-We performed our analysis on the same data as treated by Hinne et al. in the aforementioned Bayesian structural analysis \cite{hinne2013, hinne2013structfunc}.
-This article describes how resting-state functional data of six subjects was measured at the Donders Centre for Cognitive Neuroimaging at the Radboud University.
-This functional data is divided in 116 nodes and 1029 time-series per subject.
-Additionally, diffusion-weighted images of these subjects have been obtained.
-Based on these DWI-measurements, a structural connectivity matrix has been inferred with a technique described by Hinne et al.
-We used the six resulting resting-state functional time series data and connectivity matrices from this Bayesian analysis.
-
-All measurements and pre-processing as described in this section has been done during previous research. No additional pre-processing was needed in our research in order to apply the PC algorithm on this data.
-
 \section{Results}\label{sec:results}
 Due to the size of the resulting graphs, we represent them in the form of connectivity matrices for convenience.
 A connection from region $n$ to region $m$ is represented by point $(n,m)$ in the matrix.
 Higher values represent higher frequencies of a connection over all permutations.
 In all matrices, indices 1-45 represent the brain regions of the left hemisphere, indices 45-90 represent the right hemisphere, and indices 91-116 represent regions in the cerebellum.
-As such, the matrices are divided into blocks: the top left corner represents the connections within the left hemisphere, the bottom left corner represents the connections between the left hemisphere and the cerebellum, etc.
+As such, the matrices are divided into blocks: the top left corner represents the connections within the left hemisphere, the bottom left corner represents the connections between the left hemisphere and the cerebellum, and so on.
 
 \subsection{Structural graphs}
 % Measuring whole-brain structural and directional consistency of PC - frequency of occurrences within subjects
 % Applying the standard PC algorithm yields an undirected graph, in which each edge has a certainty.
 % This is done both per subject, and as an avarage over all subjects.
 % We compared the generated structure with a Bayesian inference approach on finding structural connectivity from diffusion weighted imaging, as described in Hinne et al.\cite{hinne2013}.
-Modified PC and EMS-PC do not differ in finding the structure.
+Modified PC and EMS-PC do not differ in finding functional connectivity.
 As edges found with the structural part of PC are undirected, the found matrices are symmetrical.
 The results are presented per subject in figure~\ref{fig:struct_subjects} and as an average across all subjects in figure~\ref{fig:struct_avg}.
 For comparison, the structural connectivity as found by Hinne et al.\cite{hinne2013} are also show. 
@@ -566,22 +550,22 @@ For comparison, the structural connectivity as found by Hinne et al.\cite{hinne2
 
 \subsection{Directed graphs}
 This structural graph has been used as a basis for a directed graph, for both standard PC and EMS-PC.
-As there were no notable differences between different subjects, only the average PDAG across all subjects is presented.
+As there were little to none notable differences between different subjects, only the average DAG across all subjects is presented.
 The results for standard PC and EMS-PC are shown in figure~\ref{fig:pdag_avg}.
-Although many arrowheads are found with probabilities above 0.9 for both variants of the algorithm, the graph looks strongly symmetric.
+Although many arrowheads are found with frequency ratio above 0.9 for both variants of the algorithm, the graph looks strongly symmetric.
 In terms of causality, this means that many latent sources are still present and causal relations between the measured brain regions themselves are not clearly visible.
 
 \begin{figure}[h!]
   \centering
   \includegraphics[width=0.49\textwidth]{images/new/PDAG_avg_mod-crop}
   \includegraphics[width=0.49\textwidth]{images/new/PDAG_avg_expl-crop}
-  \caption{The PDAG found standard PC at the left, and EMS-PC at the right. A high value denotes a high certainty of an arrowhead. The average of all six subjects is taken.}
+  \caption{The partially DAG found by standard PC on the left, and EMS-PC on the right. A high value denotes a high certainty of an arrowhead. The sum of edge frequencies of all six subjects is taken.}
   \label{fig:pdag_avg}
 \end{figure}
 
 Another representation of this data has been used to emphasise the asymmetric parts of the directed graphs.
 To achieve this, the absolute difference between these matrices and their transpose has been calculated, lifting out those points for which there is an arrow in one direction, but not in the opposite direction.
-These resulting antisymmetric matrices are presented per subject for EMS-PC in figure~\ref{fig:asym_subjects}. The average across all subjects for both variants of the PC algorithm are presented in figure~\ref{fig:asym_avg}.
+The resulting antisymmetric matrices are presented per subject for EMS-PC in figure~\ref{fig:asym_subjects}. The average across all subjects for both variants of the PC algorithm are presented in figure~\ref{fig:asym_avg}.
 
 \begin{figure}[h!]
   \centering
@@ -592,14 +576,14 @@ These resulting antisymmetric matrices are presented per subject for EMS-PC in f
   \includegraphics[height=0.26\textheight]{images/new/assym_subj5_expl-crop}
   \includegraphics[height=0.26\textheight]{images/new/assym_subj6_expl-crop}
   \caption{The assymetric parts of the PDAG found with EMS-PC for all six subjects, in which a high value denotes a high certainty of a one-directional arrow.}
-\label{fig:asym_subjects}
+label{fig:asym_subjects}
 \end{figure}
 
 \begin{figure}[h!]
   \centering
   \includegraphics[width=0.49\textwidth]{images/new/assym_avg_mod-crop}
   \includegraphics[width=0.49\textwidth]{images/new/assym_avg_expl-crop}
-  \caption{The asymmetric parts of the PDAG found with standard PC on the left, and EMS-PC on the right. A high value denotes a high certainty of an one-directional arrow. The average of all six subjects is taken.}
+  \caption{The asymmetric parts of the partial DAG found with standard PC on the left, and EMS-PC on the right. A high value denotes a high certainty of an one-directional arrow. The average of all six subjects is taken.}
   \label{fig:asym_avg}
 \end{figure}
 
@@ -615,6 +599,8 @@ To illustrate the difference in certainties between bi-directional and one-direc
   \caption{The distribution of values, for standard PC at the left, and EMS-PC at the right. The horizontal axis shows the relative number of occurences in the graph. Zero-values make up more than 84\% of the graph, these are not shown in this distribution. The black line represent the distribution of results of the structural part of PC, and is equal for both variants. The red and the blue line represent the distribution of values of arrowheads and one-directional arrows, respectively.}
   \label{fig:distributions}
 \end{figure}
+
+Our additional unfaithfulness check without additional independence tests were unable to detect any unfaithful v-structures.
  
 \subsection{Execution time of the algorithm}
 To apply the algorithms on our data, we have used a Xeon E5-2670, running on 2,6GHz.
@@ -649,6 +635,8 @@ Both standard PC and EMS-PC find many bi-directional arrows, with some one-direc
 As can be seen in the distribution of values in figure~\ref{fig:distributions}, nearly all found edges are oriented as bi-directional arrows.
 For EMS-PC, this number is somewhat lower but there are still few one-directional arrows, and they do not have certainties higher than 0.15.
 These certainties are not high enough to conclude any causal relations.
+The additional unfaithfulness test proved inconclusive, as no unfaithful v-structures were found.
+This is not bad news, but it does suggest there are methodological details being skipped over.
 
 %Poor consistency of directionality between subjects
 There is some significant and consistent directionality within each of the subjects.
@@ -667,6 +655,10 @@ This can be done by repeating these experiment with more subjects to get a bette
 One main strength of a general causal discovery method is that fluctuations in haemodynamic respons do not pose a problem.
 To continue this type of research, other causal discovery methods might be also be applied, and attempts can be made to negate the disadvantages of the PC algorithm.
 
+Instead of targeting the brain as a whole in resting-state, one could focus more on specific parts to increase the modelling detail.
+In such a case task-based data would work well.
+An area corresponding to a specific task, for instance the motor cortex, could be inspected in relationship with itself and other areas.
+
 A causal network or Bayesian network cannot contain cycles by definition.
 However, exclusion of cycles in brain networks has not been proven and also seems unlikely.
 We believe an interesting direction of further research would be to apply cyclical causal methods, such as the method proposed by Mooij and Heskes\cite{Mooij20013}.
@@ -677,18 +669,8 @@ There is no baseline or correctness measure to compare results or data with
 A Bayesian approach such as proposed by Claassen and Heskes will provide more slack and insight in results \cite{claassen2012}.
 This in turn will leverage development of better and faster data driven methods.
 
-
-% TODO: Suggereren task based analysis ipv resting state voor beter causaal beeld. 
-
-%cause of poor consistency: inherent to our method or viable for further research?
-
-% \section{Conclusion}
-%repeat everything in 1 paragraph, or leave away, whatever seems most fitting in the end. HRF makes us awesome
-
-
 \bibliography{references}{}
 \addcontentsline{toc}{section}{References}
 \bibliographystyle{plain}
-
 
 \end{document}
