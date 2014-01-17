@@ -117,8 +117,9 @@
 \author{
   \textbf{R. Janssen} - \href{mailto:ramon.janssen@student.ru.nl}{ramon.janssen@student.ru.nl} \\
   \textbf{T. de Ruijter} - \href{mailto:t.deruijter@student.ru.nl}{t.deruijter@student.ru.nl}\\
-%  \textbf{T. Claassen} - \href{mailto:tomc@cs.ru.nl}{tomc@cs.ru.nl}\\
-%  \textbf{M. Hinne} - \href{mailto:mhinne@cs.ru.nl}{mhinne@cs.ru.nl}
+  \small Supervised by\\
+  \small T. Claassen - \href{mailto:tomc@cs.ru.nl}{tomc@cs.ru.nl}\\
+  \small M. Hinne - \href{mailto:mhinne@cs.ru.nl}{mhinne@cs.ru.nl}
 }
 
 \date{\fontfamily{ptm}\selectfont{\small{\bfseries{\today - Radboud
@@ -134,10 +135,10 @@ Universiteit Nijmegen}}}\\[0.5cm]\rule{\linewidth}{0.3mm}}
 \begin{abstract}
 Many different approaches have been used to infer brain connectivity.
 But few general causal discovery methods have yet been used to find effective connectivity.
-In this article, we describe how the PC algorithm is used on functional brain-data.
+In this article, we describe how the PC (Peter-Clark) algorithm is used on functional brain-data.
 This approach results in connectivity matrices which clearly show some well-known brain connections.
 Some disadvantages of the PC algorithm for this use are discussed, and an attempt is made to decrease these disadvantages by making adjustments to the algorithm.
-Causal relations have only be found with very low certainty. 
+Causal relations have only been found with very low certainty. 
 %In this work we applied PC algorithm on resting-state data of healthy human subjects.
 %Additionally we propose a variant of PC algorithm that poses weaker assumptions on the model, better fitting the underlying model.
 %We find that detecting structure homological areas in the brain works better with PC algorithm than most conventional diffusion weighted imaging techniques.
@@ -149,7 +150,7 @@ Causal relations have only be found with very low certainty.
 The brain and particularly the human brain have been studied for hundreds of years.
 Today, brain research is still one of the thriving fields of research.
 A lot has changed since the time of Phrenology, the pseudoscience attempting to derive cognitive ability and personality from measurements of the skull or, post-mortem, the brain.
-Advanced and non-intrusive measurement methods exist that allow scientists to peek inside brains that give a coarse but broad overview, with widespread established clinical and research purposes.
+Advanced and non-intrusive measurement methods exist that allow scientists to peek inside brains, giving a coarse but broad overview, with widespread established clinical and research purposes.
 
 % Motivation for brain connectomics
 The question how our brains are wired - brain connectomics - drives one of the main fields of research in neuroscience.
@@ -176,13 +177,14 @@ In functional Magnetic Resonance Imaging (fMRI) the delay between brain activity
 
 \subsection{Problem statement}
 %See whether applying causal methods (PC and EMS-PC) can help bring new insights and whether we can find evidence for the existence of causal patterns on a whole brain level.
-This work seeks to utilise the strengths of an established causal discovery method, namely the PC algorithm, by applying it to resting-state brain fMRI data of the human brain.
+This work seeks to utilise the strengths of an established causal discovery method, by applying it to resting-state brain fMRI data of the human brain.
+The algorithm to be used is the the PC algorithm, named after \textbf{P}eter Spirtes and \textbf{C}larck Glymour, who developed it.
 The PC algorithm can cope with hundreds of variables while remaining tractable.
 We evade the problem of HRF by assuming our data comes from a distribution in a state of equilibrium, where temporal components are less strong.
 
-We introduce an adaptation to the PC algorithm named EMS-PC that is also theoretically sound and performs at least as good as PC without additional run-time complexity.
+We introduce an adaptation of the PC algorithm named EMS-PC that is also theoretically sound and performs at least as good as PC without additional run-time complexity.
 We wonder whether application of both methods provides a means of finding consistent, specific and anatomically plausible connectivity.
-As there is no baseline to compare results with, we compare these methods with another method for finding structural connectivity applied on the same resting-state data.
+As there is no baseline to compare results with, we compare these methods with DWI-measurements found by Hinne et al.\cite{hinne2013} for finding structural connectivity applied on the same resting-state data.
 
 % Resting-state
 Resting-state indicates that subjects are instructed to relax without thinking of anything in particular to stimulate spontaneous brain activity; neural activity does not stop when not doing anything in particular.
@@ -608,7 +610,7 @@ To illustrate the difference in certainties between bi-directional and one-direc
 Our additional unfaithfulness check without additional independence tests were unable to detect any unfaithful v-structures.
  
 \subsection{Execution time of the algorithm}
-To apply the algorithms on our data, we have used a Xeon E5-2670, running on 2,6GHz.
+To apply the algorithms on our data, we have used a Xeon E5-2670, running on 2,6\emph{GHz}.
 To run one iteration of the PC algorithm for one subject, modified PC needed approximately one minute and EMS-PC needed approximately two minutes to find both structure and direction.
 Although PC is not designed to be multithreaded, running multiple iterations lends itself for using multiple threads, as the iterations are fully independent, and only need to be averaged out afterwards.
 
