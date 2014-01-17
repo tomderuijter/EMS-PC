@@ -423,7 +423,7 @@ A more \textit{explicit} way to decrease faulty orientation of an unshielded tri
 If so, the graph might become more faithful to its modeled distribution; If standard PC might orient a V-structure, whereas this condition does not hold, then the concluded V-structure might be erroneous.
 For faithful graphs, this extra condition should not change the result, as it will always hold.
 
-%EMS-PC extension (no pseudo-code, but additions regarding standard PC)
+%EMS-PC extension
 \paragraph{EMS-PC}
 We have combined the above ideas - multiple separating sets, unfaithfulness check and explicit orientation check - into an adaptation of PC, which we refer to as Explicit Multiple Separating Set PC (EMS-PC).
 These three changes have been made in this adaption with respect to standard PC as described in algorithm~\ref{alg:pc_alg}.
@@ -447,7 +447,7 @@ Also if an unfaithful triple is detected, the impact on the final output is uncl
 
 \subsection{Experimental validation}
 \paragraph{Experimental pipeline}\label{sec:pipeline}
-%- What type of data is needed
+% What type of data is needed
 PC algorithm requires observational data where each instance is a vector of single observations per variable.
 We can model functional resting-state time-series as coming from some stable underlying mechanism that is largely time-independent.
 Resting-state data can be intuitively thought of being more time independent than task-influenced data due to the emergent character of activity pattens that occur when in resting-state.
@@ -508,7 +508,7 @@ For results on EMS-PC, we record the size of the separating sets found per edge 
 We compare standard PC and EMS-PC on their causal graph.
 As EMS-PC is more constrained in concluding directionality, it may find less erroneous edges than standard PC.
 As we cannot verify this directly, we compare the total count, consistency and standard-deviation of one-directional arrows.
-%- Run-time of methods and comparison between run-times
+% Run-time of methods and comparison between run-times
 We also compare run-time per iteration between both.
 
 \section{Results}\label{sec:results}
@@ -519,10 +519,10 @@ In all matrices, indices 1-45 represent the brain regions of the left hemisphere
 As such, the matrices are divided into blocks: the top left corner represents the connections within the left hemisphere, the bottom left corner represents the connections between the left hemisphere and the cerebellum, etc.
 
 \subsection{Structural graphs}
-%- Measuring whole-brain structural and directional consistency of PC - frequency of occurrences within subjects
-%Applying the standard PC algorithm yields an undirected graph, in which each edge has a certainty.
-%This is done both per subject, and as an avarage over all subjects.
-%We compared the generated structure with a Bayesian inference approach on finding structural connectivity from diffusion weighted imaging, as described in Hinne et al.\cite{hinne2013}.
+% Measuring whole-brain structural and directional consistency of PC - frequency of occurrences within subjects
+% Applying the standard PC algorithm yields an undirected graph, in which each edge has a certainty.
+% This is done both per subject, and as an avarage over all subjects.
+% We compared the generated structure with a Bayesian inference approach on finding structural connectivity from diffusion weighted imaging, as described in Hinne et al.\cite{hinne2013}.
 Modified PC and EMS-PC do not differ in finding the structure.
 As edges found with the structural part of PC are undirected, the found matrices are symmetrical.
 The results are presented per subject in figure~\ref{fig:struct_subjects} and as an avarage across all subjects in figure~\ref{fig:struct_avg}.
