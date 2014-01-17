@@ -140,7 +140,6 @@ In this article, we describe how the PC algorithm is used on functional brain-da
 This approach results in connectivity matrices which clearly show some well-known brain connections.
 Some disadvantages of the PC algorithm for this use are discussed, and an attempt is made to decrease these disadvantages by making adjustments to the algorithm.
 Causal relations have only be found with very low certainty. 
-% TODO: first state what you try to do, then how you did it, then what it brought you
 %In this work we applied PC algorithm on resting-state data of healthy human subjects.
 %Additionally we propose a variant of PC algorithm that poses weaker assumptions on the model, better fitting the underlying model.
 %We find that detecting structure homological areas in the brain works better with PC algorithm than most conventional diffusion weighted imaging techniques.
@@ -184,7 +183,7 @@ This makes inference hard in practical models: many latent variables may be pres
 %- Distinct but overlapping ROIs
 %- Varying Haemodynamic response (HRF)
 Related is the problem of haemodynamic response fluctuations (HRF).
-In functional MRI-measurements, the delay between brain activity and the indirect measurement of that activity is unknown. %TODO moest MRI nou helemaal uitgeschreven of niet? Ik vind zelf van niet.
+In functional MRI-measurements, the delay between brain activity and the indirect measurement of that activity is unknown.
 Any form of causal inference based on sequence in time might therefore be incorrect; A cause may be measured after its effects, if it has a larger delay.
 %- Modelling causal structure across individuals (varying responses to same stimuli)
 Also, brain-data is not always consistent, both over time and across different persons. This makes it hard to get significant results.
@@ -418,11 +417,10 @@ For a sparse graph, many edges may be removed for small separating sets, and thi
 \paragraph{Shortcomings}
 Although PC is proven correct, the version provided above as standard PC is not.
 It is also not complete.
-There is additional the number of possible graphs in the returned Markov class increasing exponentially with the amount of variables in the provided data, thus not always providing ample information.
+The number of possible graphs in the returned Markov class increases exponentially with the amount of variables in the provided data, thus the network resulting from PC might not be sufficient to describe the underlying structure.
 Also, standard PC is dependent on the order in which these variables are presented, as this is the same order in which edges between pairs of these variables are considered for removal\cite[p.88]{spirtes2000}.
 
 In practice, the lack of full correctness and completeness are of little concern as these involve only very specific and little occurring connectivity patterns\cite[p.127-130]{spirtes2000}.
-% TODO: Paragraph seems incomplete and some sentences are weird.
 
 \paragraph{Conservative PC extension}
 The V-structure rule in PC algorithm orients unshielded triples based on a single separating set. 
@@ -547,6 +545,24 @@ As we cannot verify this directly, we compare the total count, consistency and s
 %- Run-time of methods and comparison between run-times
 We also compare run-time per iteration between both.
 
+\section{Data acquisition}\label{sec:data}
+%Subject acquisition and instruction
+%Used equipment and specs
+%Experimental setup
+%Scanner settings
+%Preprocessing
+%- Software
+%- Scripts
+%Resulting data specs
+We performed our analysis on the same data as treated by Hinne et al. in the aforementioned Bayesian structural analysis \cite{hinne2013, hinne2013structfunc}.
+This article describes how resting-state functional data of six subjects was measured at the Donders Centre for Cognitive Neuroimaging at the Radboud University.
+This functional data is divided in 116 nodes and 1029 time-series per subject.
+Additionally, diffusion-weighted images of these subjects have been obtained.
+Based on these DWI-measurements, a structural connectivity matrix has been inferred with a technique described by Hinne et al.
+We used the six resulting resting-state functional time series data and connectivity matrices from this Bayesian analysis.
+
+All measurements and pre-processing as described in this section has been done during previous research. Noadditional pre-processing was needed in our research in order to apply the PC algorithm on this data.
+
 \section{Results}\label{sec:results}
 Due to the size of the resulting graphs, we represent them in the form of connectivity matrices for convenience.
 A connection from region $n$ to region $m$ is represented by point $(n,m)$ in the matrix.
@@ -566,7 +582,7 @@ For comparison, the structural connectivity as found by Hinne et al.\cite{hinne2
 
 \begin{figure}[h!]
   \centering
-  \includegraphics[height=0.28\textwidth]{images/new/struct_subj1-crop} % TODO remove colorbar, why is it even there
+  \includegraphics[height=0.28\textwidth]{images/new/struct_subj1-crop}
   \includegraphics[height=0.28\textwidth]{images/new/struct_subj2-crop}
   \includegraphics[height=0.28\textwidth]{images/new/struct_subj3_colorbar-crop} % one colorbar at the top right of the figure
   \includegraphics[height=0.28\textwidth]{images/new/struct_subj4-crop}
@@ -623,7 +639,7 @@ These resulting antisymmetric matrices are presented per subject for EMS-PC in f
   \label{fig:assym_avg}
 \end{figure}
 
-As can be seen in figures~\ref{assym_subjects} and~\ref{assym_avg}, the certainties of one-directional arrows are very low compared to the certainties of the bi-directional arrows. Also, the certainties of one-directional arrows are somewhat higher in EMS-PC than in standard PC.
+As can be seen in figures~\ref{fig:assym_subjects} and~\ref{fig:assym_avg}, the certainties of one-directional arrows are very low compared to the certainties of the bi-directional arrows. Also, the certainties of one-directional arrows are somewhat higher in EMS-PC than in standard PC.
 For EMS-PC, the highest certainties found for one-directional edges per subject are in the range of 0.45 to 0.9, whereas the avarage across subjects has a maximum value of 0.3.
 The few one-directional arrows found in idividual subjects therefore do not seem to be consistent across different subjects.
 
@@ -709,26 +725,6 @@ This in turn will leverage development of better and faster data driven methods.
 \bibliography{references}{}
 \addcontentsline{toc}{section}{References}
 \bibliographystyle{plain}
-
-\appendix
-\section{Data acquisition}\label{sec:data}
-%Subject acquisition and instruction
-%Used equipment and specs
-%Experimental setup
-%Scanner settings
-%Preprocessing
-%- Software
-%- Scripts
-%Resulting data specs
-%TODO niet helemaal happy, hoe zeg je dit zonder steeds "as described by Hinne et al." te zeggen? "This research" kan ook naar ons eigen werk verwijzen en is verwarrend, het moet duidelijk zijn dat dit alles niet door ons gedaan is.
-We performed our analysis on the same data as treated by Hinne et al. in the aforementioned Bayesian structural analysis \cite{hinne2013, hinne2013structfunc}.
-This article describes how resting-state functional data of six subjects was measured at the Donders Centre for Cognitive Neuroimaging at the Radboud University.
-This functional data is divided in 116 nodes and 1029 time-series per subject.
-Additionally, diffusion-weighted images of these subjects have been obtained.
-Based on these DWI-measurements, a structural connectivity matrix has been inferred with a technique described by Hinne et al.
-We used the six resulting resting-state functional time series data and connectivity matrices from the Bayesian analysis as pre-processed by Hinne et al.
-
-No additional pre-processing has been done in our research in order to apply the PC algorithm on this data.
 
 
 \end{document}
