@@ -140,7 +140,6 @@ In this article, we describe how the PC algorithm is used on functional brain-da
 This approach results in connectivity matrices which clearly show some well-known brain connections.
 Some disadvantages of the PC algorithm for this use are discussed, and an attempt is made to decrease these disadvantages by making adjustments to the algorithm.
 Causal relations have only be found with very low certainty. 
-% TODO: first state what you try to do, then how you did it, then what it brought you
 %In this work we applied PC algorithm on resting-state data of healthy human subjects.
 %Additionally we propose a variant of PC algorithm that poses weaker assumptions on the model, better fitting the underlying model.
 %We find that detecting structure homological areas in the brain works better with PC algorithm than most conventional diffusion weighted imaging techniques.
@@ -382,11 +381,10 @@ For a sparse graph, many edges may be removed for small separating sets, and thi
 \paragraph{Shortcomings}
 Although PC is proven correct, the version provided above as standard PC is not.
 It is also not complete.
-There is additional the number of possible graphs in the returned Markov class increasing exponentially with the amount of variables in the provided data, thus not always providing ample information.
+The number of possible graphs in the returned Markov class increases exponentially with the amount of variables in the provided data, thus the network resulting from PC might not be sufficient to describe the underlying structure.
 Also, standard PC is dependent on the order in which these variables are presented, as this is the same order in which edges between pairs of these variables are considered for removal\cite[p.88]{spirtes2000}.
 
 In practice, the lack of full correctness and completeness are of little concern as these involve only very specific and little occurring connectivity patterns\cite[p.127-130]{spirtes2000}.
-% TODO: Paragraph seems incomplete and some sentences are weird.
 
 \paragraph{Conservative PC extension}
 The V-structure rule in PC algorithm orients unshielded triples based on a single separating set. 
@@ -511,6 +509,24 @@ As we cannot verify this directly, we compare the total count, consistency and s
 % Run-time of methods and comparison between run-times
 We also compare run-time per iteration between both.
 
+\section{Data acquisition}\label{sec:data}
+%Subject acquisition and instruction
+%Used equipment and specs
+%Experimental setup
+%Scanner settings
+%Preprocessing
+%- Software
+%- Scripts
+%Resulting data specs
+We performed our analysis on the same data as treated by Hinne et al. in the aforementioned Bayesian structural analysis \cite{hinne2013, hinne2013structfunc}.
+This article describes how resting-state functional data of six subjects was measured at the Donders Centre for Cognitive Neuroimaging at the Radboud University.
+This functional data is divided in 116 nodes and 1029 time-series per subject.
+Additionally, diffusion-weighted images of these subjects have been obtained.
+Based on these DWI-measurements, a structural connectivity matrix has been inferred with a technique described by Hinne et al.
+We used the six resulting resting-state functional time series data and connectivity matrices from this Bayesian analysis.
+
+All measurements and pre-processing as described in this section has been done during previous research. No additional pre-processing was needed in our research in order to apply the PC algorithm on this data.
+
 \section{Results}\label{sec:results}
 Due to the size of the resulting graphs, we represent them in the form of connectivity matrices for convenience.
 A connection from region $n$ to region $m$ is represented by point $(n,m)$ in the matrix.
@@ -525,12 +541,12 @@ As such, the matrices are divided into blocks: the top left corner represents th
 % We compared the generated structure with a Bayesian inference approach on finding structural connectivity from diffusion weighted imaging, as described in Hinne et al.\cite{hinne2013}.
 Modified PC and EMS-PC do not differ in finding the structure.
 As edges found with the structural part of PC are undirected, the found matrices are symmetrical.
-The results are presented per subject in figure~\ref{fig:struct_subjects} and as an avarage across all subjects in figure~\ref{fig:struct_avg}.
+The results are presented per subject in figure~\ref{fig:struct_subjects} and as an average across all subjects in figure~\ref{fig:struct_avg}.
 For comparison, the structural connectivity as found by Hinne et al.\cite{hinne2013} are also show. 
 
 \begin{figure}[h!]
   \centering
-  \includegraphics[height=0.28\textwidth]{images/new/struct_subj1-crop} % TODO remove colorbar, why is it even there
+  \includegraphics[height=0.28\textwidth]{images/new/struct_subj1-crop}
   \includegraphics[height=0.28\textwidth]{images/new/struct_subj2-crop}
   \includegraphics[height=0.28\textwidth]{images/new/struct_subj3_colorbar-crop} % one colorbar at the top right of the figure
   \includegraphics[height=0.28\textwidth]{images/new/struct_subj4-crop}
@@ -550,7 +566,7 @@ For comparison, the structural connectivity as found by Hinne et al.\cite{hinne2
 
 \subsection{Directed graphs}
 This structural graph has been used as a basis for a directed graph, for both standard PC and EMS-PC.
-As there were no notable differences between different subjects, only the avarage PDAG across all subjects is presented.
+As there were no notable differences between different subjects, only the average PDAG across all subjects is presented.
 The results for standard PC and EMS-PC are shown in figure~\ref{fig:pdag_avg}.
 Although many arrowheads are found with probabilities above 0.9 for both variants of the algorithm, the graph looks strongly symmetric.
 In terms of causality, this means that many latent sources are still present and causal relations between the measured brain regions themselves are not clearly visible.
@@ -559,13 +575,13 @@ In terms of causality, this means that many latent sources are still present and
   \centering
   \includegraphics[width=0.49\textwidth]{images/new/PDAG_avg_mod-crop}
   \includegraphics[width=0.49\textwidth]{images/new/PDAG_avg_expl-crop}
-  \caption{The PDAG found standard PC at the left, and EMS-PC at the right. A high value denotes a high certainty of an arrowhead. The avarage of all six subjects is taken.}
+  \caption{The PDAG found standard PC at the left, and EMS-PC at the right. A high value denotes a high certainty of an arrowhead. The average of all six subjects is taken.}
   \label{fig:pdag_avg}
 \end{figure}
 
 Another representation of this data has been used to emphasise the asymmetric parts of the directed graphs.
 To achieve this, the absolute difference between these matrices and their transpose has been calculated, lifting out those points for which there is an arrow in one direction, but not in the opposite direction.
-These resulting antisymmetric matrices are presented per subject for EMS-PC in figure~\ref{fig:asym_subjects}. The avarage across all subjects for both variants of the PC algorithm are presented in figure~\ref{fig:asym_avg}.
+These resulting antisymmetric matrices are presented per subject for EMS-PC in figure~\ref{fig:asym_subjects}. The average across all subjects for both variants of the PC algorithm are presented in figure~\ref{fig:asym_avg}.
 
 \begin{figure}[h!]
   \centering
@@ -583,7 +599,7 @@ These resulting antisymmetric matrices are presented per subject for EMS-PC in f
   \centering
   \includegraphics[width=0.49\textwidth]{images/new/assym_avg_mod-crop}
   \includegraphics[width=0.49\textwidth]{images/new/assym_avg_expl-crop}
-  \caption{The assymetric parts of the PDAG found with standard PC on the left, and EMS-PC on the right. A high value denotes a high certainty of an one-directional arrow. The avarage of all six subjects is taken.}
+  \caption{The asymmetric parts of the PDAG found with standard PC on the left, and EMS-PC on the right. A high value denotes a high certainty of an one-directional arrow. The average of all six subjects is taken.}
   \label{fig:asym_avg}
 \end{figure}
 
@@ -608,7 +624,7 @@ Although PC is not designed to be multithreaded, running multiple iterations len
 \section{Discussion}
 %Good consistency of structure within and between subjects
 Many structural connections found by the PC algorithm are found consistently, both within one subject and also across multiple subjects.
-The connections between the two hemispheres can clearly be seen in all subjects, as well as many connections in the corpus collosum.
+The connections between the two hemispheres can clearly be seen in all subjects, as well as many connections in the corpus callosum.
 The consistency can also be seen in the distribution of values in figure~\ref{fig:distributions}.
 Non-zero values make up approximately 16 percentage points of the graph, of which 3 percentage points show a certainty larger than 0.5.
 Approximately 1 percentage point even shows a certainty of 1.
@@ -673,26 +689,6 @@ This in turn will leverage development of better and faster data driven methods.
 \bibliography{references}{}
 \addcontentsline{toc}{section}{References}
 \bibliographystyle{plain}
-
-\appendix
-\section{Data acquisition}\label{sec:data}
-%Subject acquisition and instruction
-%Used equipment and specs
-%Experimental setup
-%Scanner settings
-%Preprocessing
-%- Software
-%- Scripts
-%Resulting data specs
-%TODO niet helemaal happy, hoe zeg je dit zonder steeds "as described by Hinne et al." te zeggen? "This research" kan ook naar ons eigen werk verwijzen en is verwarrend, het moet duidelijk zijn dat dit alles niet door ons gedaan is.
-We performed our analysis on the same data as treated by Hinne et al. in the aforementioned Bayesian structural analysis \cite{hinne2013, hinne2013structfunc}.
-This article describes how resting-state functional data of six subjects was measured at the Donders Centre for Cognitive Neuroimaging at the Radboud University.
-This functional data is divided in 116 nodes and 1029 time-series per subject.
-Additionally, diffusion-weighted images of these subjects have been obtained.
-Based on these DWI-measurements, a structural connectivity matrix has been inferred with a technique described by Hinne et al.
-We used the six resulting resting-state functional time series data and connectivity matrices from the Bayesian analysis as pre-processed by Hinne et al.
-
-No additional pre-processing has been done in our research in order to apply the PC algorithm on this data.
 
 
 \end{document}
