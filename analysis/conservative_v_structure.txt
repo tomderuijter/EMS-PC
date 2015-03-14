@@ -1,0 +1,12 @@
+For all X,Y,Z, s.t. adj(X,Y) and adj(Z,Y) and NOT adj(X,Z): (all unshielded triples)
+    For all subsets S1 of adj(X) and all subsets S2 of adj(Z): (subsets of all potential parents of X and Z)
+        (a) If Y is NOT in any set S1,S2 s.t. independent(X,Z|S1) or independent(X,Z|S2)
+            Orient X->Y<-Z.
+        
+        (b) If Y is in ALL sets S1,S2 s.t. independent(X,Z|S1) or independent(X,Z|S2)
+            Orient X-Y-Z.
+            
+        (c) If (a) or (b) does not apply
+            Mark X-Y-Z unfaithful
+            
+            

@@ -1,0 +1,9 @@
+- Number of iterations required to ensure threshold levels.
+    - Structure and directions
+
+- Find measure for consistency
+    
+- Consistency levels between subjects
+    - Explicit PC vs. Modified PC vs. original
+    - Multiple sepsets vs. Single sepsets
+    - Various values for alpha
